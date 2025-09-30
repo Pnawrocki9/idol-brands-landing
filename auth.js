@@ -58,5 +58,35 @@ function updateNav() {
     }
 }
 
+// Attach click handlers to nav links once. These handlers ensure navigation works
+// even if CSS layering or other scripts prevent the default <a> element
+// behaviour. The handler is attached only once per element using a dataset flag.
+function attachNavHandlers() {
+  const calcLink = document.getElementById('nav-calculator');
+  if (calcLink && !calcLink.dataset.handler) {
+    calcLink.dataset.handler = 'true';
+    calcLink.addEventListener('click', function (e) {
+      const href = calcLink.getAttribute('href');
+      // If href is an in-page anchor (starts with '#'), allow default behaviour
+      if (href && !href.startsWith('#')) {
+        e.preventDefault();
+        window.location.href = href;
+      }
+    });
+  }
+  const loginLink = document.getElementById('nav-login');
+  if (loginLink && !loginLink.dataset.handler) {
+    loginLink.dataset.handler = 'true';
+    loginLink.addEventListener('click', function (e) {
+      // Always navigate to the login page via assignment to avoid prevented default
+      e.preventDefault();
+      window.location.href = 'login.html';
+    });
+  }
+}
+
 // Run on every page load to adjust navigation and calculator state.
-document.addEventListener('DOMContentLoaded', updateNav);
+document.addEventListener('DOMContentLoaded', function () {
+  updateNav();
+  attachNavHandlers();
+});
