@@ -31,17 +31,33 @@
     </div>
 
     <script>
-    // Attach handler after DOM load
+    // Attach handler after DOM load.  This login form checks the list of
+    // registered users in localStorage under the key "users".  Only users
+    // with status "active" can log in.  The admin account is handled
+    // separately via admin-login.html.
     document.getElementById('login-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
-        // Hardcoded credentials for demo purposes. In a real application these
-        // would be validated on the server.
-        const VALID_USER = 'influencer';
-        const VALID_PASS = 'idol2025';
-        if (username === VALID_USER && password === VALID_PASS) {
+        // Load users from localStorage.  If none exist, there are no
+        // registered users yet and login will fail.
+        let users = [];
+        try {
+            const stored = localStorage.getItem('users');
+            if (stored) users = JSON.parse(stored);
+        } catch (err) {
+            users = [];
+        }
+        // Look for a user with matching login & password and active status
+        const match = users.find(function(u) {
+            return u.login === username && u.password === password && u.status === 'active';
+        });
+        if (match) {
+            // Successful login – set loggedIn flag and clear any admin flag
             localStorage.setItem('loggedIn', 'true');
+            localStorage.removeItem('adminLoggedIn');
+            // Optionally store current user info
+            localStorage.setItem('currentUser', match.login);
             window.location.href = 'index.html';
         } else {
             const error = document.getElementById('error-message');

@@ -31,18 +31,41 @@
     </div>
 
     <script>
-    // Handle admin login submission.  Admin credentials are hard‑coded for this demo.
+    // Handle admin login submission.  Administrators are stored in localStorage under the key
+    // "admins".  Each admin record has { username, password, status }.  We ensure a default
+    // admin account exists if none have been created yet (username: "admin", password: "idoladmin2025").
     document.getElementById('admin-login-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const username = document.getElementById('admin-username').value.trim();
         const password = document.getElementById('admin-password').value.trim();
-        // Demo admin credentials.  In a production environment, this would be secure and server‑side.
-        const ADMIN_USER = 'admin';
-        const ADMIN_PASS = 'idoladmin2025';
-        if (username === ADMIN_USER && password === ADMIN_PASS) {
-            // Set both loggedIn and adminLoggedIn flags
+        // Ensure there is at least one administrator defined.  If the "admins" key is not
+        // present in localStorage, initialize it with the built‑in super admin.
+        try {
+            const storedAdmins = localStorage.getItem('admins');
+            if (!storedAdmins) {
+                const defaultAdmins = [{ username: 'admin', password: 'idoladmin2025', status: 'active' }];
+                localStorage.setItem('admins', JSON.stringify(defaultAdmins));
+            }
+        } catch (err) {
+            const defaultAdmins = [{ username: 'admin', password: 'idoladmin2025', status: 'active' }];
+            localStorage.setItem('admins', JSON.stringify(defaultAdmins));
+        }
+        let adminsList = [];
+        try {
+            const parsed = JSON.parse(localStorage.getItem('admins') || '[]');
+            if (Array.isArray(parsed)) adminsList = parsed;
+        } catch (err) {
+            adminsList = [];
+        }
+        // Find an active admin with matching credentials
+        const found = adminsList.find(function(a) {
+            return a.username === username && a.password === password && a.status === 'active';
+        });
+        if (found) {
+            // Successful login – mark both flags and optionally store current admin
             localStorage.setItem('loggedIn', 'true');
             localStorage.setItem('adminLoggedIn', 'true');
+            localStorage.setItem('currentAdmin', found.username);
             window.location.href = 'admin.html';
         } else {
             const error = document.getElementById('admin-error-message');

@@ -430,6 +430,32 @@
             </div>
             <p id="users-msg" class="text-green-600 text-sm mt-3 hidden">User updated.</p>
         </section>
+
+        <!-- Administrators management -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Administrators</h2>
+            <p class="text-sm text-gray-600 mb-4">Manage admin accounts. Only active admins can log in. You can add, edit or deactivate administrators and export the list.</p>
+            <div class="flex flex-wrap items-center space-x-4 mb-4">
+                <input type="text" id="admin-add-username" placeholder="Username" class="border border-gray-300 rounded-lg px-3 py-2 w-40" />
+                <input type="text" id="admin-add-password" placeholder="Password" class="border border-gray-300 rounded-lg px-3 py-2 w-40" />
+                <button id="add-admin-btn" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Add Admin</button>
+            </div>
+            <button id="export-admins" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mb-4">Export Admins to CSV</button>
+            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Username</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Password</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Status</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admins-table-body" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <p id="admins-msg" class="text-green-600 text-sm mt-3 hidden">Admin updated.</p>
+        </section>
     </div>
 
     <script>
@@ -1256,5 +1282,7 @@
         }
     });
     </script>
+    <!-- Load separate admin management script for managing administrator accounts -->
+    <script src="admin-manage.js"></script>
 </body>
 </html>
