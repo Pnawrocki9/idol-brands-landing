@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Stories - Idol Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --secondary-gray: #f5f5f5;
+            --accent-gray: #e5e5e5;
+            --text-gray: #666666;
+            --border-gray: #333333;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-white);
+            color: var(--primary-black);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .story-card {
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-gray);
+        }
+        
+        .story-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: white;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .quote-mark {
+            font-size: 4rem;
+            line-height: 1;
+            color: #000000;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <!-- Hidden admin link will appear when admin is logged in -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <!-- Language switcher (English Success Stories page) -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <span class="text-black font-semibold">EN</span>
+                        <span class="text-black">|</span>
+                        <a href="success-stories-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+                    </div>
+                    <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
+                </div>
+                <!-- Mobile hamburger toggler for small screens -->
+                <div class="md:hidden">
+                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu: replicated nav links for small screens -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+        <div class="px-4 py-4 space-y-4">
+            <a href="index.html" class="block text-black font-medium">Home</a>
+            <a href="about.html" class="block text-black font-medium">About</a>
+            <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
+            <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
+            <a href="blog.html" class="block text-black font-medium">Blog</a>
+            <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+            <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
+            <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+            <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
+            <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
+            <a href="index.html#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in">
+                <h1 id="success-title" class="text-6xl font-display font-bold text-black mb-6">Success Stories</h1>
+                <p id="success-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Real influencers, real results. See how we've transformed their influence 
+                    into thriving fashion brands with our proven system.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center fade-in">
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="text-4xl font-bold mb-2">500+</div>
+                    <p class="text-gray-300">Brands Launched</p>
+                </div>
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="text-4xl font-bold mb-2">92%</div>
+                    <p class="text-gray-300">Success Rate</p>
+                </div>
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="text-4xl font-bold mb-2">$2.5M+</div>
+                    <p class="text-gray-300">Revenue Generated</p>
+                </div>
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="text-4xl font-bold mb-2">8</div>
+                    <p class="text-gray-300">Weeks to Launch</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Story 1: Fashion Lifestyle Influencer -->
+            <div class="mb-20 fade-in">
+                <div class="story-card bg-white p-8 rounded-3xl shadow-lg">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-user text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-black">@StyleByEmma</h3>
+                                    <p class="text-gray-600">Fashion & Lifestyle Influencer</p>
+                                </div>
+                            </div>
+                            <div class="quote-mark">"</div>
+                            <blockquote class="text-xl text-gray-700 mb-6 italic">
+                                Idol Brands turned my fashion dreams into reality. In just 8 weeks, 
+                                I went from influencer to fashion brand owner. The process was seamless 
+                                and the results exceeded my expectations.
+                            </blockquote>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-black">250K</div>
+                                    <div class="text-sm text-gray-600">Followers</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-black">$180K</div>
+                                    <div class="text-sm text-gray-600">First Year Revenue</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl">
+                                <h4 class="text-xl font-bold text-black mb-4">Brand: "Minimalist Chic"</h4>
+                                <p class="text-gray-600 mb-4">
+                                    Emma's brand focuses on sustainable, minimalist fashion for young professionals. 
+                                    Her audience loves the clean aesthetic and ethical production.
+                                </p>
+                                <div class="grid grid-cols-3 gap-4 text-center">
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">$85</div>
+                                        <div class="text-sm text-gray-600">Avg. Price</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">4.2%</div>
+                                        <div class="text-sm text-gray-600">Conversion</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">65%</div>
+                                        <div class="text-sm text-gray-600">Profit Margin</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-black text-white p-6 rounded-2xl">
+                                <h4 class="text-lg font-bold mb-3">Key Success Factors:</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Leveraged existing audience trust</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Perfect product-market fit</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Consistent brand messaging</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Quality product photography</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 2: Fitness Influencer -->
+            <div class="mb-20 fade-in">
+                <div class="story-card bg-white p-8 rounded-3xl shadow-lg">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="order-2 lg:order-1 space-y-6">
+                            <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl">
+                                <h4 class="text-xl font-bold text-black mb-4">Brand: "FitFlex Apparel"</h4>
+                                <p class="text-gray-600 mb-4">
+                                    Marcus launched a premium activewear line targeting fitness enthusiasts. 
+                                    The brand emphasizes performance, style, and durability.
+                                </p>
+                                <div class="grid grid-cols-3 gap-4 text-center">
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">$95</div>
+                                        <div class="text-sm text-gray-600">Avg. Price</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">3.8%</div>
+                                        <div class="text-sm text-gray-600">Conversion</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">58%</div>
+                                        <div class="text-sm text-gray-600">Profit Margin</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-black text-white p-6 rounded-2xl">
+                                <h4 class="text-lg font-bold mb-3">Growth Strategy:</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Launched with limited edition drops</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Created exclusive workout content</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Built community around brand</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Partnered with other fitness influencers</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-dumbbell text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-black">@FitWithMarcus</h3>
+                                    <p class="text-gray-600">Fitness & Wellness Influencer</p>
+                                </div>
+                            </div>
+                            <div class="quote-mark">"</div>
+                            <blockquote class="text-xl text-gray-700 mb-6 italic">
+                                The team at Idol Brands understood my vision perfectly. They created 
+                                activewear that my audience actually wanted to wear. The launch was 
+                                incredible - we sold out in 48 hours!
+                            </blockquote>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-black">180K</div>
+                                    <div class="text-sm text-gray-600">Followers</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-black">$220K</div>
+                                    <div class="text-sm text-gray-600">First Year Revenue</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 3: Beauty Influencer -->
+            <div class="fade-in">
+                <div class="story-card bg-white p-8 rounded-3xl shadow-lg">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-palette text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-black">@GlowWithSofia</h3>
+                                    <p class="text-gray-600">Beauty & Lifestyle Influencer</p>
+                                </div>
+                            </div>
+                            <div class="quote-mark">"</div>
+                            <blockquote class="text-xl text-gray-700 mb-6 italic">
+                                I wanted to create something different in the beauty space. Idol Brands 
+                                helped me launch a sustainable beauty brand that aligns perfectly with 
+                                my values and resonates with my audience.
+                            </blockquote>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-black">320K</div>
+                                    <div class="text-sm text-gray-600">Followers</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-black">$280K</div>
+                                    <div class="text-sm text-gray-600">First Year Revenue</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl">
+                                <h4 class="text-xl font-bold text-black mb-4">Brand: "EcoGlow Beauty"</h4>
+                                <p class="text-gray-600 mb-4">
+                                    Sofia's sustainable beauty brand offers eco-friendly, cruelty-free products 
+                                    with clean ingredients and recyclable packaging.
+                                </p>
+                                <div class="grid grid-cols-3 gap-4 text-center">
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">$45</div>
+                                        <div class="text-sm text-gray-600">Avg. Price</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">5.1%</div>
+                                        <div class="text-sm text-gray-600">Conversion</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-black">72%</div>
+                                        <div class="text-sm text-gray-600">Profit Margin</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-black text-white p-6 rounded-2xl">
+                                <h4 class="text-lg font-bold mb-3">Unique Approach:</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Zero-waste packaging</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Refillable product system</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Educational content strategy</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Community-driven product development</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in">
+                <h2 class="text-5xl font-display font-bold text-black mb-6">Your Success Story Starts Here</h2>
+                <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Join these successful influencers who transformed their passion into profitable fashion brands. 
+                    Your journey to fashion entrepreneurship begins now.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-calendar-check text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-black mb-2">Free Consultation</h3>
+                        <p class="text-gray-600">60-minute strategy session</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-black mb-2">Custom Strategy</h3>
+                        <p class="text-gray-600">Tailored to your audience</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-black mb-2">8-Week Launch</h3>
+                        <p class="text-gray-600">From idea to live brand</p>
+                    </div>
+                </div>
+                <button class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
+                    Start Your Fashion Brand
+                </button>
+                <p class="text-gray-500 text-sm mt-4">
+                    Join 500+ successful influencers • No commitment required • Results in 8 weeks
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. All rights reserved.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Button click handler
+        document.querySelector('button').addEventListener('click', function() {
+            alert('Brand consultation booking - coming soon! Please contact us directly.');
+        });
+    </script>
+    <!-- Authentication helper to control login state and nav -->
+    <script src="auth.js"></script>
+    <!-- Apply admin-defined hero content for Success Stories page -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const successTitleElem = document.getElementById('success-title');
+        const successSubtitleElem = document.getElementById('success-subtitle');
+        const storedSuccessTitle = localStorage.getItem('successTitle');
+        const storedSuccessSubtitle = localStorage.getItem('successSubtitle');
+        if (storedSuccessTitle) successTitleElem.textContent = storedSuccessTitle;
+        if (storedSuccessSubtitle) successSubtitleElem.textContent = storedSuccessSubtitle;
+    });
+    </script>
+</body>
+</html>

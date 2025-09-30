@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard – Idol Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Authentication helper provides isLoggedIn, isAdmin and navigation toggling -->
+    <script src="auth.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation: reuse same structure as other pages.  updateNav() will show/hide links appropriately. -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <!-- Admin link itself is visible because we are on the admin page.  updateNav() may hide it on other pages. -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" onclick="logout()">Logout</a>
+                    <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-display font-bold mb-8">Admin Dashboard</h1>
+        <!-- Hero content editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Home Page Hero</h2>
+            <p class="text-sm text-gray-600 mb-4">You can customise the hero heading and subtitle on the home page.  Use simple HTML (e.g. &lt;span class=&quot;text-gradient&quot;&gt;) to style parts of the heading.</p>
+            <div class="mb-4">
+                <label for="admin-hero-title" class="block text-sm font-medium text-gray-700 mb-1">Hero Title (HTML allowed)</label>
+                <textarea id="admin-hero-title" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" rows="4"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-hero-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle</label>
+                <input type="text" id="admin-hero-subtitle" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-hero" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Hero Content</button>
+            <p id="hero-save-msg" class="text-green-600 text-sm mt-3 hidden">Hero content saved.</p>
+        </section>
+
+        <!-- About page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit About Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Customise the hero and first sections of the About page.  These values will replace the default headings and paragraphs when the page loads.</p>
+            <div class="mb-4">
+                <label for="admin-about-hero-title" class="block text-sm font-medium text-gray-700 mb-1">About Hero Title</label>
+                <input id="admin-about-hero-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-hero-subtitle" class="block text-sm font-medium text-gray-700 mb-1">About Hero Subtitle</label>
+                <input id="admin-about-hero-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-story" class="block text-sm font-medium text-gray-700 mb-1">Our Story (one paragraph per line)</label>
+                <textarea id="admin-about-story" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" rows="6"></textarea>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-mission-title" class="block text-sm font-medium text-gray-700 mb-1">Mission Section Title</label>
+                    <input id="admin-mission-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc1" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Mission Description Line 1</label>
+                    <input id="admin-mission-desc1" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc2" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Mission Description Line 2</label>
+                    <input id="admin-mission-desc2" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-vision-title" class="block text-sm font-medium text-gray-700 mb-1">Vision Section Title</label>
+                    <input id="admin-vision-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc1" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Vision Description Line 1</label>
+                    <input id="admin-vision-desc1" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc2" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Vision Description Line 2</label>
+                    <input id="admin-vision-desc2" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-team-title" class="block text-sm font-medium text-gray-700 mb-1">Team Section Title</label>
+                    <input id="admin-team-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-team-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Team Section Subtitle</label>
+                    <input id="admin-team-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-impact-title" class="block text-sm font-medium text-gray-700 mb-1">Impact Section Title</label>
+                    <input id="admin-impact-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-impact-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Impact Section Subtitle</label>
+                    <input id="admin-impact-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-about" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save About Content</button>
+            <p id="about-save-msg" class="text-green-600 text-sm mt-3 hidden">About page content saved.</p>
+        </section>
+
+        <!-- How It Works page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit How It Works Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Modify the main headings on the How It Works page.  Steps themselves remain static.</p>
+            <div class="mb-4">
+                <label for="admin-how-title" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Title</label>
+                <input id="admin-how-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Subtitle</label>
+                <input id="admin-how-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-ready-title" class="block text-sm font-medium text-gray-700 mb-1">Ready Section Title</label>
+                <input id="admin-ready-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-how" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save How It Works Content</button>
+            <p id="how-save-msg" class="text-green-600 text-sm mt-3 hidden">How It Works page content saved.</p>
+        </section>
+
+        <!-- Success Stories page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Success Stories Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Adjust the hero heading and subtitle for the Success Stories page.</p>
+            <div class="mb-4">
+                <label for="admin-success-title" class="block text-sm font-medium text-gray-700 mb-1">Success Stories Title</label>
+                <input id="admin-success-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Success Stories Subtitle</label>
+                <input id="admin-success-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-success" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Success Content</button>
+            <p id="success-save-msg" class="text-green-600 text-sm mt-3 hidden">Success Stories content saved.</p>
+        </section>
+
+        <!-- ROI Calculator assumptions editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit ROI Calculator Assumptions</h2>
+            <p class="text-sm text-gray-600 mb-4">Configure the default assumptions used by the ROI calculator.  Percentages should be entered as numbers (e.g. enter <code>5</code> for 5%).</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-followers-conv" class="block text-sm font-medium text-gray-700 mb-1">Followers → Live Conversion (%)</label>
+                    <input id="calc-followers-conv" type="number" step="0.1" min="0" max="100" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-live-purchase-conv" class="block text-sm font-medium text-gray-700 mb-1">Live → Purchase Conversion (%)</label>
+                    <input id="calc-live-purchase-conv" type="number" step="0.1" min="0" max="100" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-profit-margin" class="block text-sm font-medium text-gray-700 mb-1">Profit Margin / Commission (%)</label>
+                    <input id="calc-profit-margin" type="number" step="0.1" min="0" max="100" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- AOV by niche -->
+            <h3 class="text-lg font-semibold mt-6 mb-2">Average Order Value (AOV) by Niche</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-aov-fashion" class="block text-sm font-medium text-gray-700 mb-1">Fashion AOV ($)</label>
+                    <input id="calc-aov-fashion" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-aov-streetwear" class="block text-sm font-medium text-gray-700 mb-1">Streetwear AOV ($)</label>
+                    <input id="calc-aov-streetwear" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-aov-luxury" class="block text-sm font-medium text-gray-700 mb-1">Luxury AOV ($)</label>
+                    <input id="calc-aov-luxury" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-aov-accessories" class="block text-sm font-medium text-gray-700 mb-1">Accessories AOV ($)</label>
+                    <input id="calc-aov-accessories" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Collection multipliers -->
+            <h3 class="text-lg font-semibold mt-6 mb-2">Collection Type Multipliers</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-multiplier-basic" class="block text-sm font-medium text-gray-700 mb-1">Basic</label>
+                    <input id="calc-multiplier-basic" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-multiplier-seasonal" class="block text-sm font-medium text-gray-700 mb-1">Seasonal</label>
+                    <input id="calc-multiplier-seasonal" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-multiplier-limited" class="block text-sm font-medium text-gray-700 mb-1">Limited</label>
+                    <input id="calc-multiplier-limited" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-multiplier-premium" class="block text-sm font-medium text-gray-700 mb-1">Premium</label>
+                    <input id="calc-multiplier-premium" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Niche engagement multipliers -->
+            <h3 class="text-lg font-semibold mt-6 mb-2">Niche Engagement Multipliers</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-niche-multiplier-fashion" class="block text-sm font-medium text-gray-700 mb-1">Fashion</label>
+                    <input id="calc-niche-multiplier-fashion" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-niche-multiplier-streetwear" class="block text-sm font-medium text-gray-700 mb-1">Streetwear</label>
+                    <input id="calc-niche-multiplier-streetwear" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-niche-multiplier-luxury" class="block text-sm font-medium text-gray-700 mb-1">Luxury</label>
+                    <input id="calc-niche-multiplier-luxury" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-niche-multiplier-accessories" class="block text-sm font-medium text-gray-700 mb-1">Accessories</label>
+                    <input id="calc-niche-multiplier-accessories" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-calc" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Calculator Settings</button>
+            <p id="calc-save-msg" class="text-green-600 text-sm mt-3 hidden">Calculator settings saved.</p>
+        </section>
+
+        <!-- Blog management editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Manage Blog Posts</h2>
+            <p class="text-sm text-gray-600 mb-4">Create new blog posts or edit existing ones.  Posts are stored locally and shown on the home page.</p>
+            <!-- Blog post image upload -->
+            <div class="mb-4">
+                <label for="blog-image" class="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
+                <!--
+                  The admin should upload an image first.  The image will be shown at the top of the blog card and full post.  It is stored as a Base64 data URL in localStorage.
+                -->
+                <input id="blog-image" type="file" accept="image/*" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                <div id="blog-image-preview" class="mt-2"></div>
+            </div>
+            <!-- Blog post title -->
+            <div class="mb-4">
+                <label for="blog-title" class="block text-sm font-medium text-gray-700 mb-1">Post Title</label>
+                <input id="blog-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <!-- Blog post content -->
+            <div class="mb-4">
+                <label for="blog-content" class="block text-sm font-medium text-gray-700 mb-1">Content</label>
+                <textarea id="blog-content" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="blog-save" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Blog Post</button>
+            <p id="blog-save-msg" class="text-green-600 text-sm mt-3 hidden">Blog post saved.</p>
+            <hr class="my-6">
+            <h3 class="text-xl font-semibold mb-2">Existing Posts</h3>
+            <ul id="blog-posts-list" class="space-y-4"></ul>
+        </section>
+
+        <!-- Home page content editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Home Page Content</h2>
+            <p class="text-sm text-gray-600 mb-4">Customize the key messages and feature section on the home page.</p>
+            <!-- Metrics inputs -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="home-metric-market-value" class="block text-sm font-medium text-gray-700 mb-1">Market Size Value</label>
+                    <input id="home-metric-market-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-market-label" class="block text-sm font-medium text-gray-700 mb-1">Market Size Label</label>
+                    <input id="home-metric-market-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-value" class="block text-sm font-medium text-gray-700 mb-1">Growth Rate Value</label>
+                    <input id="home-metric-growth-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-label" class="block text-sm font-medium text-gray-700 mb-1">Growth Rate Label</label>
+                    <input id="home-metric-growth-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-value" class="block text-sm font-medium text-gray-700 mb-1">Fail Rate Value</label>
+                    <input id="home-metric-fail-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-label" class="block text-sm font-medium text-gray-700 mb-1">Fail Rate Label</label>
+                    <input id="home-metric-fail-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div class="md:col-span-2">
+                    <label for="home-metric-tagline" class="block text-sm font-medium text-gray-700 mb-1">Metrics Tagline</label>
+                    <input id="home-metric-tagline" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Start section inputs -->
+            <div class="mb-6">
+                <label for="home-start-title-field" class="block text-sm font-medium text-gray-700 mb-1">Start Section Title</label>
+                <input id="home-start-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-6">
+                <label for="home-start-subtitle-field" class="block text-sm font-medium text-gray-700 mb-1">Start Section Subtitle</label>
+                <textarea id="home-start-subtitle-field" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <!-- Feature card inputs -->
+            <h3 class="text-xl font-semibold mb-2">Feature Cards</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="home-feature1-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 1 Title</label>
+                    <input id="home-feature1-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature1-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 1 Description</label>
+                    <input id="home-feature1-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature2-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 2 Title</label>
+                    <input id="home-feature2-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature2-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 2 Description</label>
+                    <input id="home-feature2-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature3-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 3 Title</label>
+                    <input id="home-feature3-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature3-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 3 Description</label>
+                    <input id="home-feature3-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+
+            <!-- CTA button text input -->
+            <div class="mb-6 mt-6 md:col-span-2">
+                <label for="home-cta-field" class="block text-sm font-medium text-gray-700 mb-1">Home Page CTA Text</label>
+                <input id="home-cta-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Text for 'See How It Works' button" />
+            </div>
+            <button id="save-home" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Home Settings</button>
+            <p id="home-save-msg" class="text-green-600 text-sm mt-3 hidden">Home page settings saved.</p>
+        </section>
+
+        <!-- Polish translations editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edytuj treść stron (PL)</h2>
+            <p class="text-sm text-gray-600 mb-6">Niniejsze pola pozwalają zarządzać tłumaczeniami na język polski. Zmiany zapisują się osobno, nie nadpisując wersji angielskiej.</p>
+            <!-- Home hero (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Hero Strony Głównej</h3>
+            <div class="mb-4">
+                <label for="admin-hero-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Hero Title (PL)</label>
+                <textarea id="admin-hero-title-pl" rows="4" data-default="<span class=\"text-gradient\">Zamień swój</span><br><span class=\"text-black\">wpływ</span><br><span class=\"text-gradient\">w modowe imperium</span>" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle (PL)</label>
+                <!-- Use a textarea instead of input so longer subtitles with line breaks can be edited -->
+                <textarea id="admin-hero-subtitle-pl" rows="4" data-default="Zajmujemy się wszystkim od projektu po dostawę, abyś Ty mógł skupić się na swojej historii. Jedyna platforma, która zamienia influencerów w właścicieli marek modowych." class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-hero-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz Hero (PL)</button>
+            <p id="hero-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treść hero (PL) została zapisana.</p>
+            <hr class="my-6" />
+            <!-- Home page content (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona Główna – treść</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia sekcji statystyk, sekcji startowej i kart funkcjonalnych.</p>
+            <!-- Metrics inputs (PL) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="home-metric-market-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość rynku (PL)</label>
+                    <input id="home-metric-market-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-market-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta rynku (PL)</label>
+                    <input id="home-metric-market-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość wzrostu (PL)</label>
+                    <input id="home-metric-growth-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta wzrostu (PL)</label>
+                    <input id="home-metric-growth-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość niepowodzeń (PL)</label>
+                    <input id="home-metric-fail-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta niepowodzeń (PL)</label>
+                    <input id="home-metric-fail-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div class="md:col-span-2">
+                    <label for="home-metric-tagline-pl" class="block text-sm font-medium text-gray-700 mb-1">Slogan pod statystykami (PL)</label>
+                    <input id="home-metric-tagline-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Start section inputs (PL) -->
+            <div class="mb-6">
+                <label for="home-start-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji startowej (PL)</label>
+                <input id="home-start-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-6">
+                <label for="home-start-subtitle-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji startowej (PL)</label>
+                <textarea id="home-start-subtitle-field-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <!-- Feature card inputs (PL) -->
+            <h4 class="text-lg font-semibold mb-2">Karty funkcjonalne (PL)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="home-feature1-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 1 (PL)</label>
+                    <input id="home-feature1-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature1-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 1 (PL)</label>
+                    <input id="home-feature1-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature2-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 2 (PL)</label>
+                    <input id="home-feature2-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature2-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 2 (PL)</label>
+                    <input id="home-feature2-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature3-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 3 (PL)</label>
+                    <input id="home-feature3-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature3-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 3 (PL)</label>
+                    <input id="home-feature3-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- CTA text (PL) -->
+            <div class="mb-6 mt-6 md:col-span-2">
+                <label for="home-cta-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku CTA (PL)</label>
+                <input id="home-cta-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Tekst przycisku 'Zobacz, jak to działa'" />
+            </div>
+            <button id="save-home-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Zapisz ustawienia strony głównej (PL)</button>
+            <p id="home-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Ustawienia strony głównej (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- About page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'O nas' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-about-hero-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł hero (PL)</label>
+                <input id="admin-about-hero-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="O Idol Brands" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł hero (PL)</label>
+                <input id="admin-about-hero-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Stworzona przez weteranów branży mody. Zaprojektowana dla nowej generacji marek opartych na influencerach." />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-story-pl" class="block text-sm font-medium text-gray-700 mb-1">Nasza historia (PL) – jeden akapit w linii</label>
+                <textarea id="admin-about-story-pl" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Idol Brands został założony w 2024 roku przez zespół weteranów branży mody, którzy obserwowali, jak wielu influencerów zmaga się z uruchomieniem własnych marek modowych. Widzieliśmy, jak historia powtarza się: pasjonujący twórcy z niesamowitymi pomysłami, którzy upadali przez złożoność operacyjną.&#10;&#10;Po dekadach w produkcji odzieży, logistyce i sprzedaży detalicznej zdaliśmy sobie sprawę, że tradycyjny model branży mody jest nieprzystosowany do nowej generacji marek budowanych na wpływie. Influencerzy potrzebowali podejścia, które pozwala im skupić się na kreatywności i społeczności, podczas gdy eksperci zajmą się operacjami.&#10;&#10;Połączyliśmy naszą głęboką wiedzę branżową z nowoczesną technologią live‑commerce, tworząc pierwszą platformę zaprojektowaną specjalnie dla marek modowych influencerów. Dziś Idol Brands to nie tylko usługa – to ruch, który demokratyzuje przedsiębiorczość modową." ></textarea>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-mission-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Misja (PL)</label>
+                    <input id="admin-mission-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Nasza misja" />
+                    <label for="admin-mission-desc1-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis misji – linia 1 (PL)</label>
+                    <input id="admin-mission-desc1-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Demokratyzujemy przedsiębiorczość modową, dostarczając influencerom narzędzia, wiedzę i platformę do budowy odnoszących sukces marek modowych." />
+                    <label for="admin-mission-desc2-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis misji – linia 2 (PL)</label>
+                    <input id="admin-mission-desc2-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Wierzymy, że każdy influencer z zaangażowaną społecznością zasługuje na szansę, by przekształcić swoją pasję w dochód, bez przeszkód operacyjnych." />
+                </div>
+                <div>
+                    <label for="admin-vision-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Wizja (PL)</label>
+                    <input id="admin-vision-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Nasza wizja" />
+                    <label for="admin-vision-desc1-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis wizji – linia 1 (PL)</label>
+                    <input id="admin-vision-desc1-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Stać się wiodącym na świecie marketplace’em live‑sellingowym dla marek modowych tworzonych przez influencerów, gdzie kreatywność spotyka się z handlem w czasie rzeczywistym." />
+                    <label for="admin-vision-desc2-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis wizji – linia 2 (PL)</label>
+                    <input id="admin-vision-desc2-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Budujemy przyszłość, w której marki modowe rodzą się z autentycznych społeczności, a nie z sal konferencyjnych — gdzie wpływ napędza innowacje, a pasja generuje zysk." />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-team-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Zespół (PL)</label>
+                    <input id="admin-team-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Weterani branży mody" />
+                </div>
+                <div>
+                    <label for="admin-team-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji Zespół (PL)</label>
+                    <input id="admin-team-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Nasz zespół łączy dekady doświadczenia w produkcji mody, logistyce, sprzedaży detalicznej i technologii, aby wspierać sukces Twojej marki." />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-impact-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Wpływ (PL)</label>
+                    <input id="admin-impact-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Nasz wpływ" />
+                </div>
+                <div>
+                    <label for="admin-impact-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji Wpływ (PL)</label>
+                    <input id="admin-impact-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Prawdziwe wyniki od influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe." />
+                </div>
+            </div>
+            <button id="save-about-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'O nas' (PL)</button>
+            <p id="about-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści strony 'O nas' (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- How It Works (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Jak to działa' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-how-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji live-selling (PL)</label>
+                <input id="admin-how-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Doświadcz live‑selling" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji live-selling (PL)</label>
+                <input id="admin-how-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Zobacz, jak nasza platforma pomaga tworzyć i prowadzić markę modową." />
+            </div>
+            <div class="mb-4">
+                <label for="admin-ready-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji 'Gotowi?' (PL)</label>
+                <input id="admin-ready-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Gotowy, aby rozpocząć sprzedaż na żywo?" />
+            </div>
+            <button id="save-how-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'Jak to działa' (PL)</button>
+            <p id="how-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści 'Jak to działa' (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- Success Stories (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Historie sukcesu' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-success-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł hero (PL)</label>
+                <input id="admin-success-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Historie sukcesu" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł hero (PL)</label>
+                <input id="admin-success-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" data-default="Zobacz, jak influencerzy zamienili swoją kreatywność w dochody." />
+            </div>
+            <button id="save-success-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'Historie sukcesu' (PL)</button>
+            <p id="success-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści 'Historie sukcesu' (PL) zapisane.</p>
+            <hr class="my-6" />
+
+            <!-- Login page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona logowania (PL)</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia pól formularza logowania dla influencerów.</p>
+            <div class="mb-4">
+                <label for="admin-login-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł logowania (PL)</label>
+                <input id="admin-login-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-login-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł logowania (PL)</label>
+                <textarea id="admin-login-subtitle-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-login-username-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta pola użytkownik (PL)</label>
+                    <input id="admin-login-username-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-login-password-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta pola hasło (PL)</label>
+                    <input id="admin-login-password-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 mt-4">
+                <label for="admin-login-button-text-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku logowania (PL)</label>
+                <input id="admin-login-button-text-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-login-error-pl" class="block text-sm font-medium text-gray-700 mb-1">Komunikat błędu logowania (PL)</label>
+                <input id="admin-login-error-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-login-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści logowania (PL)</button>
+            <p id="login-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści logowania (PL) zapisane.</p>
+            <hr class="my-6" />
+
+            <!-- Documents page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Twoje dokumenty' (PL)</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia nagłówka i treści sekcji dokumentów.</p>
+            <div class="mb-4">
+                <label for="admin-documents-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji dokumentów (PL)</label>
+                <input id="admin-documents-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-documents-message-pl" class="block text-sm font-medium text-gray-700 mb-1">Komunikat o braku dokumentów (PL)</label>
+                <textarea id="admin-documents-message-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-documents-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści dokumentów (PL)</button>
+            <p id="documents-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści dokumentów (PL) zapisane.</p>
+            <hr class="my-6" />
+
+            <!-- Blog page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona bloga (PL)</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia nagłówka bloga i wiadomości o braku postów.</p>
+            <div class="mb-4">
+                <label for="admin-blog-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł bloga (PL)</label>
+                <input id="admin-blog-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-blog-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł bloga (PL)</label>
+                <textarea id="admin-blog-subtitle-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-blog-noposts-pl" class="block text-sm font-medium text-gray-700 mb-1">Komunikat o braku postów (PL)</label>
+                <input id="admin-blog-noposts-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-blog-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści bloga (PL)</button>
+            <p id="blog-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści bloga (PL) zapisane.</p>
+        </section>
+
+        <!-- Document manager -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
+            <p class="text-sm text-gray-600 mb-4">Upload files here to share them with approved influencers.  Files are stored in the browser and will persist across sessions on this device.  Each upload will appear below with a link and a delete button.</p>
+            <input type="file" id="document-upload" multiple class="mb-4" />
+            <ul id="admin-doc-list" class="space-y-2"></ul>
+        </section>
+
+        <!-- Footer editor -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Footer Details</h2>
+            <p class="text-sm text-gray-600 mb-4">Update the company information and social links shown in the site footer.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="footer-company-field" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                    <input id="footer-company-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-address-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Address</label>
+                    <input id="footer-address-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-reg-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Registration / Tax Info</label>
+                    <input id="footer-reg-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-email-field" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input id="footer-email-field" type="email" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-phone-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Phone</label>
+                    <input id="footer-phone-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-extra-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Footer Tagline</label>
+                    <input id="footer-extra-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Social links -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div>
+                    <label for="footer-instagram-field" class="block text-sm font-medium text-gray-700 mb-1">Instagram URL</label>
+                    <input id="footer-instagram-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-tiktok-field" class="block text-sm font-medium text-gray-700 mb-1">TikTok URL</label>
+                    <input id="footer-tiktok-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-youtube-field" class="block text-sm font-medium text-gray-700 mb-1">YouTube URL</label>
+                    <input id="footer-youtube-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-footer" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Footer</button>
+            <p id="footer-save-msg" class="text-green-600 text-sm mt-3 hidden">Footer details saved.</p>
+        </section>
+
+        <!-- Legal pages editor -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Legal Pages</h2>
+            <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages.  Use basic HTML for formatting (e.g. &lt;h2&gt;,&lt;p&gt;,&lt;ul&gt;).</p>
+            <div class="mb-6">
+                <label for="legal-terms-field" class="block text-sm font-medium text-gray-700 mb-1">Terms &amp; Conditions</label>
+                <textarea id="legal-terms-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="legal-cookies-field" class="block text-sm font-medium text-gray-700 mb-1">Cookies Policy</label>
+                <textarea id="legal-cookies-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="legal-gdpr-field" class="block text-sm font-medium text-gray-700 mb-1">Privacy / GDPR</label>
+                <textarea id="legal-gdpr-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-legal" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Legal Pages</button>
+            <p id="legal-save-msg" class="text-green-600 text-sm mt-3 hidden">Legal pages saved.</p>
+        </section>
+
+        <!-- Registered users management -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Registered Users</h2>
+            <p class="text-sm text-gray-600 mb-4">Here are the sign-ups from the waiting list. Activate users to assign them login credentials and manage their access.  You can also export the list to a CSV file for further processing.</p>
+            <button id="export-users" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mb-4">Export to CSV</button>
+            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Name</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Email</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Followers</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Niche</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Instagram</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Newsletter</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Status</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Login</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Password</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <p id="users-msg" class="text-green-600 text-sm mt-3 hidden">User updated.</p>
+        </section>
+
+        <!-- Administrators management -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Administrators</h2>
+            <p class="text-sm text-gray-600 mb-4">Manage admin accounts. Only active admins can log in. You can add, edit or deactivate administrators and export the list.</p>
+            <div class="flex flex-wrap items-center space-x-4 mb-4">
+                <input type="text" id="admin-add-username" placeholder="Username" class="border border-gray-300 rounded-lg px-3 py-2 w-40" />
+                <input type="text" id="admin-add-password" placeholder="Password" class="border border-gray-300 rounded-lg px-3 py-2 w-40" />
+                <button id="add-admin-btn" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Add Admin</button>
+            </div>
+            <button id="export-admins" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mb-4">Export Admins to CSV</button>
+            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Username</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Password</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Status</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admins-table-body" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <p id="admins-msg" class="text-green-600 text-sm mt-3 hidden">Admin updated.</p>
+        </section>
+    </div>
+
+    <script>
+    // Admin page script.  Only administrators should access this page; redirect others.
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verify admin credentials.  If not, send to admin login.
+        if (!isAdmin()) {
+            window.location.href = 'admin-login.html';
+            return;
+        }
+        // Ensure loggedIn flag is set so nav shows appropriate options
+        updateNav();
+        // Populate hero fields for home page
+        const heroTitleField = document.getElementById('admin-hero-title');
+        const heroSubtitleField = document.getElementById('admin-hero-subtitle');
+        const defaultHeroTitle = '<span class="text-gradient">Turn Your</span><br><span class="text-black">Influence</span><br><span class="text-gradient">Into Fashion</span>';
+        const defaultHeroSubtitle = 'We handle everything from design to delivery so you can focus on your story. The only platform that transforms influencers into fashion brand owners.';
+        heroTitleField.value = localStorage.getItem('heroTitle') || defaultHeroTitle;
+        heroSubtitleField.value = localStorage.getItem('heroSubtitle') || defaultHeroSubtitle;
+        document.getElementById('save-hero').addEventListener('click', function() {
+            localStorage.setItem('heroTitle', heroTitleField.value);
+            localStorage.setItem('heroSubtitle', heroSubtitleField.value);
+            const msg = document.getElementById('hero-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate About page fields
+        const aboutHeroTitleField = document.getElementById('admin-about-hero-title');
+        const aboutHeroSubtitleField = document.getElementById('admin-about-hero-subtitle');
+        const aboutStoryField = document.getElementById('admin-about-story');
+        const missionTitleField = document.getElementById('admin-mission-title');
+        const missionDesc1Field = document.getElementById('admin-mission-desc1');
+        const missionDesc2Field = document.getElementById('admin-mission-desc2');
+        const visionTitleField = document.getElementById('admin-vision-title');
+        const visionDesc1Field = document.getElementById('admin-vision-desc1');
+        const visionDesc2Field = document.getElementById('admin-vision-desc2');
+        const teamTitleField = document.getElementById('admin-team-title');
+        const teamSubtitleField = document.getElementById('admin-team-subtitle');
+        const impactTitleField = document.getElementById('admin-impact-title');
+        const impactSubtitleField = document.getElementById('admin-impact-subtitle');
+        // Set defaults based on current hard-coded content
+        aboutHeroTitleField.value = localStorage.getItem('aboutHeroTitle') || 'About Idol Brands';
+        aboutHeroSubtitleField.value = localStorage.getItem('aboutHeroSubtitle') || 'Built by fashion industry veterans. Designed for the new generation of influence-driven brands.';
+        // Our Story paragraphs stored as newline separated string
+        const defaultAboutStory = [
+            'Idol Brands was founded in 2024 by a team of fashion industry veterans who watched countless influencers struggle to launch their own fashion brands. We saw the same story repeat itself: passionate creators with amazing ideas who failed because they couldn\'t handle the operational complexity.',
+            'After decades in fashion manufacturing, logistics, and retail, we realized that the traditional fashion industry model was broken for the new generation of influence-driven brands. Influencers needed a different approach - one that let them focus on creativity and community while experts handled the operations.',
+            'We combined our deep fashion industry expertise with cutting-edge live-commerce technology to create the first platform specifically designed for influencer fashion brands. Today, Idol Brands is more than just a service - we\'re a movement to democratize fashion entrepreneurship.'
+        ].join('\n\n');
+        aboutStoryField.value = localStorage.getItem('aboutStory') || defaultAboutStory;
+        missionTitleField.value = localStorage.getItem('missionTitle') || 'Our Mission';
+        missionDesc1Field.value = localStorage.getItem('missionDesc1') || 'To democratize fashion entrepreneurship by providing influencers with the tools, expertise, and platform they need to build successful fashion brands.';
+        missionDesc2Field.value = localStorage.getItem('missionDesc2') || 'We believe that every influencer with a passionate community deserves the opportunity to turn their influence into a thriving business, without being held back by operational complexity.';
+        visionTitleField.value = localStorage.getItem('visionTitle') || 'Our Vision';
+        visionDesc1Field.value = localStorage.getItem('visionDesc1') || 'To become the world\'s leading live-selling marketplace for influencer fashion brands, where creativity meets commerce in real-time.';
+        visionDesc2Field.value = localStorage.getItem('visionDesc2') || 'We\'re building a future where fashion brands are born from authentic communities, not boardrooms - where influence drives innovation and passion creates profit.';
+        teamTitleField.value = localStorage.getItem('teamTitle') || 'Fashion Industry Veterans';
+        teamSubtitleField.value = localStorage.getItem('teamSubtitle') || 'Our team combines decades of experience in fashion manufacturing, logistics, retail, and technology to support your brand\'s success.';
+        impactTitleField.value = localStorage.getItem('impactTitle') || 'Our Impact';
+        impactSubtitleField.value = localStorage.getItem('impactSubtitle') || 'Real results from real influencers who\'ve transformed their passion into profitable fashion brands.';
+        document.getElementById('save-about').addEventListener('click', function() {
+            localStorage.setItem('aboutHeroTitle', aboutHeroTitleField.value);
+            localStorage.setItem('aboutHeroSubtitle', aboutHeroSubtitleField.value);
+            localStorage.setItem('aboutStory', aboutStoryField.value);
+            localStorage.setItem('missionTitle', missionTitleField.value);
+            localStorage.setItem('missionDesc1', missionDesc1Field.value);
+            localStorage.setItem('missionDesc2', missionDesc2Field.value);
+            localStorage.setItem('visionTitle', visionTitleField.value);
+            localStorage.setItem('visionDesc1', visionDesc1Field.value);
+            localStorage.setItem('visionDesc2', visionDesc2Field.value);
+            localStorage.setItem('teamTitle', teamTitleField.value);
+            localStorage.setItem('teamSubtitle', teamSubtitleField.value);
+            localStorage.setItem('impactTitle', impactTitleField.value);
+            localStorage.setItem('impactSubtitle', impactSubtitleField.value);
+            const msg = document.getElementById('about-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate How It Works page fields
+        const howTitleField = document.getElementById('admin-how-title');
+        const howSubtitleField = document.getElementById('admin-how-subtitle');
+        const readyTitleField = document.getElementById('admin-ready-title');
+        howTitleField.value = localStorage.getItem('howTitle') || 'Experience Live-Selling';
+        howSubtitleField.value = localStorage.getItem('howSubtitle') || 'See how our live-selling platform transforms your fashion shows into sales events.';
+        readyTitleField.value = localStorage.getItem('readyTitle') || 'Ready to Start Live-Selling?';
+        document.getElementById('save-how').addEventListener('click', function() {
+            localStorage.setItem('howTitle', howTitleField.value);
+            localStorage.setItem('howSubtitle', howSubtitleField.value);
+            localStorage.setItem('readyTitle', readyTitleField.value);
+            const msg = document.getElementById('how-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate Success Stories page fields
+        const successTitleField = document.getElementById('admin-success-title');
+        const successSubtitleField = document.getElementById('admin-success-subtitle');
+        successTitleField.value = localStorage.getItem('successTitle') || 'Success Stories';
+        successSubtitleField.value = localStorage.getItem('successSubtitle') || 'Real influencers, real results. See how we\'ve transformed their influence into thriving fashion brands with our proven system.';
+        document.getElementById('save-success').addEventListener('click', function() {
+            localStorage.setItem('successTitle', successTitleField.value);
+            localStorage.setItem('successSubtitle', successSubtitleField.value);
+            const msg = document.getElementById('success-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // ===== ROI Calculator assumptions =====
+        // Get references to calculator inputs
+        const followersConvField = document.getElementById('calc-followers-conv');
+        const livePurchaseConvField = document.getElementById('calc-live-purchase-conv');
+        const profitMarginField = document.getElementById('calc-profit-margin');
+        const aovFashionField = document.getElementById('calc-aov-fashion');
+        const aovStreetwearField = document.getElementById('calc-aov-streetwear');
+        const aovLuxuryField = document.getElementById('calc-aov-luxury');
+        const aovAccessoriesField = document.getElementById('calc-aov-accessories');
+        const multiBasicField = document.getElementById('calc-multiplier-basic');
+        const multiSeasonalField = document.getElementById('calc-multiplier-seasonal');
+        const multiLimitedField = document.getElementById('calc-multiplier-limited');
+        const multiPremiumField = document.getElementById('calc-multiplier-premium');
+        const nicheMultiFashionField = document.getElementById('calc-niche-multiplier-fashion');
+        const nicheMultiStreetwearField = document.getElementById('calc-niche-multiplier-streetwear');
+        const nicheMultiLuxuryField = document.getElementById('calc-niche-multiplier-luxury');
+        const nicheMultiAccessoriesField = document.getElementById('calc-niche-multiplier-accessories');
+        // Set defaults from localStorage or fallback values (convert decimals to percentages for display)
+        const storedFollowersConv = parseFloat(localStorage.getItem('followersToLiveConversion'));
+        followersConvField.value = isNaN(storedFollowersConv) ? 5 : (storedFollowersConv * 100);
+        const storedLiveConv = parseFloat(localStorage.getItem('liveToPurchaseConversion'));
+        livePurchaseConvField.value = isNaN(storedLiveConv) ? 15 : (storedLiveConv * 100);
+        const storedProfit = parseFloat(localStorage.getItem('profitMargin'));
+        profitMarginField.value = isNaN(storedProfit) ? 20 : (storedProfit * 100);
+        // AOV by niche
+        let storedNicheAOV;
+        try {
+            storedNicheAOV = JSON.parse(localStorage.getItem('nicheAOV'));
+        } catch (e) {
+            storedNicheAOV = null;
+        }
+        aovFashionField.value = storedNicheAOV && storedNicheAOV.fashion ? storedNicheAOV.fashion : 100;
+        aovStreetwearField.value = storedNicheAOV && storedNicheAOV.streetwear ? storedNicheAOV.streetwear : 120;
+        aovLuxuryField.value = storedNicheAOV && storedNicheAOV.luxury ? storedNicheAOV.luxury : 250;
+        aovAccessoriesField.value = storedNicheAOV && storedNicheAOV.accessories ? storedNicheAOV.accessories : 80;
+        // Collection multipliers
+        let storedCollectionMult;
+        try {
+            storedCollectionMult = JSON.parse(localStorage.getItem('collectionMultipliers'));
+        } catch (e) {
+            storedCollectionMult = null;
+        }
+        multiBasicField.value = storedCollectionMult && storedCollectionMult.basic ? storedCollectionMult.basic : 1.0;
+        multiSeasonalField.value = storedCollectionMult && storedCollectionMult.seasonal ? storedCollectionMult.seasonal : 1.2;
+        multiLimitedField.value = storedCollectionMult && storedCollectionMult.limited ? storedCollectionMult.limited : 1.5;
+        multiPremiumField.value = storedCollectionMult && storedCollectionMult.premium ? storedCollectionMult.premium : 1.8;
+        // Niche multipliers
+        let storedNicheMult;
+        try {
+            storedNicheMult = JSON.parse(localStorage.getItem('nicheMultipliers'));
+        } catch (e) {
+            storedNicheMult = null;
+        }
+        nicheMultiFashionField.value = storedNicheMult && storedNicheMult.fashion ? storedNicheMult.fashion : 1.0;
+        nicheMultiStreetwearField.value = storedNicheMult && storedNicheMult.streetwear ? storedNicheMult.streetwear : 1.1;
+        nicheMultiLuxuryField.value = storedNicheMult && storedNicheMult.luxury ? storedNicheMult.luxury : 0.8;
+        nicheMultiAccessoriesField.value = storedNicheMult && storedNicheMult.accessories ? storedNicheMult.accessories : 1.3;
+        // Save handler
+        document.getElementById('save-calc').addEventListener('click', function() {
+            // Parse percentages into decimals
+            const followersConvDec = parseFloat(followersConvField.value) / 100;
+            const liveConvDec = parseFloat(livePurchaseConvField.value) / 100;
+            const profitMarginDec = parseFloat(profitMarginField.value) / 100;
+            if (!isNaN(followersConvDec)) localStorage.setItem('followersToLiveConversion', followersConvDec);
+            if (!isNaN(liveConvDec)) localStorage.setItem('liveToPurchaseConversion', liveConvDec);
+            if (!isNaN(profitMarginDec)) localStorage.setItem('profitMargin', profitMarginDec);
+            // Compose objects for AOV and multipliers
+            const aovObj = {
+                fashion: parseFloat(aovFashionField.value) || 100,
+                streetwear: parseFloat(aovStreetwearField.value) || 120,
+                luxury: parseFloat(aovLuxuryField.value) || 250,
+                accessories: parseFloat(aovAccessoriesField.value) || 80
+            };
+            localStorage.setItem('nicheAOV', JSON.stringify(aovObj));
+            const collectionObj = {
+                basic: parseFloat(multiBasicField.value) || 1.0,
+                seasonal: parseFloat(multiSeasonalField.value) || 1.2,
+                limited: parseFloat(multiLimitedField.value) || 1.5,
+                premium: parseFloat(multiPremiumField.value) || 1.8
+            };
+            localStorage.setItem('collectionMultipliers', JSON.stringify(collectionObj));
+            const nicheObj = {
+                fashion: parseFloat(nicheMultiFashionField.value) || 1.0,
+                streetwear: parseFloat(nicheMultiStreetwearField.value) || 1.1,
+                luxury: parseFloat(nicheMultiLuxuryField.value) || 0.8,
+                accessories: parseFloat(nicheMultiAccessoriesField.value) || 1.3
+            };
+            localStorage.setItem('nicheMultipliers', JSON.stringify(nicheObj));
+            const msg = document.getElementById('calc-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // ===== Blog management =====
+        let editingPostIndex = -1;
+        const blogTitleField = document.getElementById('blog-title');
+        const blogContentField = document.getElementById('blog-content');
+        const blogImageField = document.getElementById('blog-image');
+        const blogImagePreview = document.getElementById('blog-image-preview');
+        const blogListElem = document.getElementById('blog-posts-list');
+        const blogSaveBtn = document.getElementById('blog-save');
+
+        // When the admin selects an image file, display a preview of the uploaded image
+        blogImageField.addEventListener('change', function() {
+            blogImagePreview.innerHTML = '';
+            const file = this.files && this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Preview';
+                    img.className = 'w-full mb-2 rounded';
+                    blogImagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function loadBlogPosts() {
+            let posts = [];
+            try {
+                const stored = localStorage.getItem('blogPosts');
+                if (stored) posts = JSON.parse(stored);
+            } catch (e) {
+                posts = [];
+            }
+            // Reset input fields when reloading the list
+            blogTitleField.value = '';
+            blogContentField.value = '';
+            blogImageField.value = '';
+            blogImagePreview.innerHTML = '';
+            blogSaveBtn.textContent = 'Save Blog Post';
+            blogListElem.innerHTML = '';
+            if (!posts || posts.length === 0) {
+                const li = document.createElement('li');
+                li.className = 'text-gray-500';
+                li.textContent = 'No posts yet.';
+                blogListElem.appendChild(li);
+                return;
+            }
+            posts.forEach(function(post, index) {
+                const li = document.createElement('li');
+                li.className = 'bg-white p-4 rounded-lg shadow';
+                const title = document.createElement('h4');
+                title.className = 'font-semibold text-black';
+                title.textContent = post.title || 'Untitled';
+                const date = document.createElement('p');
+                date.className = 'text-xs text-gray-500 mb-2';
+                date.textContent = post.date || '';
+                // Optionally display a small thumbnail in the admin list
+                if (post.img) {
+                    const thumb = document.createElement('img');
+                    thumb.src = post.img;
+                    thumb.alt = post.title || '';
+                    thumb.className = 'w-full mb-2 rounded';
+                    li.appendChild(thumb);
+                }
+                const actions = document.createElement('div');
+                actions.className = 'mt-2';
+                const editBtn = document.createElement('button');
+                editBtn.textContent = 'Edit';
+                editBtn.className = 'text-blue-600 hover:underline mr-4 text-sm';
+                editBtn.addEventListener('click', function() {
+                    editingPostIndex = index;
+                    blogTitleField.value = post.title;
+                    blogContentField.value = post.content;
+                    // Clear file input when editing to avoid confusion
+                    blogImageField.value = '';
+                    blogImagePreview.innerHTML = '';
+                    if (post.img) {
+                        const imgPrev = document.createElement('img');
+                        imgPrev.src = post.img;
+                        imgPrev.alt = post.title || '';
+                        imgPrev.className = 'w-full mb-2 rounded';
+                        blogImagePreview.appendChild(imgPrev);
+                    }
+                    blogSaveBtn.textContent = 'Update Blog Post';
+                });
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'text-red-600 hover:underline text-sm';
+                deleteBtn.addEventListener('click', function() {
+                    posts.splice(index, 1);
+                    localStorage.setItem('blogPosts', JSON.stringify(posts));
+                    editingPostIndex = -1;
+                    blogTitleField.value = '';
+                    blogContentField.value = '';
+                    blogImageField.value = '';
+                    blogImagePreview.innerHTML = '';
+                    blogSaveBtn.textContent = 'Save Blog Post';
+                    loadBlogPosts();
+                });
+                actions.appendChild(editBtn);
+                actions.appendChild(deleteBtn);
+                li.appendChild(title);
+                li.appendChild(date);
+                li.appendChild(actions);
+                blogListElem.appendChild(li);
+            });
+        }
+
+        // Initial load of blog posts
+        loadBlogPosts();
+
+        blogSaveBtn.addEventListener('click', function() {
+            // Retrieve existing posts from storage
+            let posts = [];
+            try {
+                const stored = localStorage.getItem('blogPosts');
+                if (stored) posts = JSON.parse(stored);
+            } catch (e) {
+                posts = [];
+            }
+            const title = blogTitleField.value.trim();
+            const content = blogContentField.value.trim();
+            if (!title || !content) return; // require both fields
+            const now = new Date();
+            const dateStr = now.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            // Helper to finalize saving after image reading completes
+            function finalizeSave(imgDataUrl) {
+                if (editingPostIndex >= 0 && editingPostIndex < posts.length) {
+                    // update existing post, preserving old image if new one not provided
+                    const existing = posts[editingPostIndex] || {};
+                    posts[editingPostIndex] = {
+                        title: title,
+                        content: content,
+                        date: dateStr,
+                        img: imgDataUrl || existing.img || null
+                    };
+                    editingPostIndex = -1;
+                    blogSaveBtn.textContent = 'Save Blog Post';
+                } else {
+                    posts.push({
+                        title: title,
+                        content: content,
+                        date: dateStr,
+                        img: imgDataUrl || null
+                    });
+                }
+                localStorage.setItem('blogPosts', JSON.stringify(posts));
+                blogTitleField.value = '';
+                blogContentField.value = '';
+                blogImageField.value = '';
+                blogImagePreview.innerHTML = '';
+                const msg = document.getElementById('blog-save-msg');
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 2000);
+                loadBlogPosts();
+            }
+            // If a new image file is selected, read it; otherwise save immediately
+            const file = blogImageField.files && blogImageField.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgDataUrl = e.target.result;
+                    finalizeSave(imgDataUrl);
+                };
+                reader.onerror = function() {
+                    // If reading fails, proceed without image
+                    finalizeSave(null);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                finalizeSave(null);
+            }
+        });
+
+        // ===== Home page content management =====
+        const homeMarketValueField = document.getElementById('home-metric-market-value');
+        const homeMarketLabelField = document.getElementById('home-metric-market-label');
+        const homeGrowthValueField = document.getElementById('home-metric-growth-value');
+        const homeGrowthLabelField = document.getElementById('home-metric-growth-label');
+        const homeFailValueField = document.getElementById('home-metric-fail-value');
+        const homeFailLabelField = document.getElementById('home-metric-fail-label');
+        const homeTaglineField = document.getElementById('home-metric-tagline');
+        const homeStartTitleField = document.getElementById('home-start-title-field');
+        const homeStartSubtitleField = document.getElementById('home-start-subtitle-field');
+        const homeFeature1TitleField = document.getElementById('home-feature1-title-field');
+        const homeFeature1DescField = document.getElementById('home-feature1-desc-field');
+        const homeFeature2TitleField = document.getElementById('home-feature2-title-field');
+        const homeFeature2DescField = document.getElementById('home-feature2-desc-field');
+        const homeFeature3TitleField = document.getElementById('home-feature3-title-field');
+        const homeFeature3DescField = document.getElementById('home-feature3-desc-field');
+        // CTA text field for home page
+        const homeCtaField = document.getElementById('home-cta-field');
+        const saveHomeBtn = document.getElementById('save-home');
+
+        function loadHomeSettings() {
+            // Load or set defaults
+            homeMarketValueField.value = localStorage.getItem('metricMarketSizeValue') || document.getElementById('metric-market-size-value')?.textContent || '27B';
+            homeMarketLabelField.value = localStorage.getItem('metricMarketSizeLabel') || document.getElementById('metric-market-size-label')?.textContent || 'Market Size';
+            homeGrowthValueField.value = localStorage.getItem('metricGrowthRateValue') || document.getElementById('metric-growth-rate-value')?.textContent || '39.9%';
+            homeGrowthLabelField.value = localStorage.getItem('metricGrowthRateLabel') || document.getElementById('metric-growth-rate-label')?.textContent || 'Growth Rate';
+            homeFailValueField.value = localStorage.getItem('metricFailRateValue') || document.getElementById('metric-fail-rate-value')?.textContent || '90%';
+            homeFailLabelField.value = localStorage.getItem('metricFailRateLabel') || document.getElementById('metric-fail-rate-label')?.textContent || 'Brands Fail';
+            homeTaglineField.value = localStorage.getItem('metricTagline') || document.getElementById('metric-tagline')?.textContent || 'Unlock a $27B market growing 39.9% annually—be among the 10% who succeed.';
+            homeStartTitleField.value = localStorage.getItem('homeStartTitle') || document.getElementById('home-start-title')?.textContent || 'Ready to Start Your Fashion Empire?';
+            homeStartSubtitleField.value = localStorage.getItem('homeStartSubtitle') || document.getElementById('home-start-subtitle')?.textContent || "Join hundreds of successful influencers who've transformed their influence into thriving fashion brands. Your journey starts here.";
+            homeFeature1TitleField.value = localStorage.getItem('homeFeature1Title') || document.getElementById('home-feature1-title')?.textContent || 'Fast Launch';
+            homeFeature1DescField.value = localStorage.getItem('homeFeature1Desc') || document.getElementById('home-feature1-desc')?.textContent || 'Get your brand live in just 8 weeks';
+            homeFeature2TitleField.value = localStorage.getItem('homeFeature2Title') || document.getElementById('home-feature2-title')?.textContent || 'Done For You';
+            homeFeature2DescField.value = localStorage.getItem('homeFeature2Desc') || document.getElementById('home-feature2-desc')?.textContent || 'We handle everything, you focus on content';
+            homeFeature3TitleField.value = localStorage.getItem('homeFeature3Title') || document.getElementById('home-feature3-title')?.textContent || 'Proven Results';
+            homeFeature3DescField.value = localStorage.getItem('homeFeature3Desc') || document.getElementById('home-feature3-desc')?.textContent || 'Join the 10% who succeed';
+            // CTA button text default
+            homeCtaField.value = localStorage.getItem('homeCtaText') || document.getElementById('home-cta-text')?.textContent || 'See How It Works';
+        }
+
+        loadHomeSettings();
+
+        saveHomeBtn.addEventListener('click', function() {
+            // Save metrics
+            localStorage.setItem('metricMarketSizeValue', homeMarketValueField.value);
+            localStorage.setItem('metricMarketSizeLabel', homeMarketLabelField.value);
+            localStorage.setItem('metricGrowthRateValue', homeGrowthValueField.value);
+            localStorage.setItem('metricGrowthRateLabel', homeGrowthLabelField.value);
+            localStorage.setItem('metricFailRateValue', homeFailValueField.value);
+            localStorage.setItem('metricFailRateLabel', homeFailLabelField.value);
+            localStorage.setItem('metricTagline', homeTaglineField.value);
+            // Save start section
+            localStorage.setItem('homeStartTitle', homeStartTitleField.value);
+            localStorage.setItem('homeStartSubtitle', homeStartSubtitleField.value);
+            // Save feature cards
+            localStorage.setItem('homeFeature1Title', homeFeature1TitleField.value);
+            localStorage.setItem('homeFeature1Desc', homeFeature1DescField.value);
+            localStorage.setItem('homeFeature2Title', homeFeature2TitleField.value);
+            localStorage.setItem('homeFeature2Desc', homeFeature2DescField.value);
+            localStorage.setItem('homeFeature3Title', homeFeature3TitleField.value);
+            localStorage.setItem('homeFeature3Desc', homeFeature3DescField.value);
+            // Save CTA text
+            if (homeCtaField) localStorage.setItem('homeCtaText', homeCtaField.value);
+            const msg = document.getElementById('home-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+        // Document management
+        function loadAdminDocs() {
+            let docs = [];
+            try {
+                const stored = localStorage.getItem('documents');
+                if (stored) docs = JSON.parse(stored);
+            } catch (e) {
+                console.error('Could not parse documents', e);
+            }
+            const list = document.getElementById('admin-doc-list');
+            list.innerHTML = '';
+            if (docs && docs.length > 0) {
+                docs.forEach(function(doc, index) {
+                    const li = document.createElement('li');
+                    li.className = 'bg-white p-4 rounded-lg shadow flex justify-between items-center';
+                    const link = document.createElement('a');
+                    link.href = doc.data;
+                    link.textContent = doc.name;
+                    link.setAttribute('download', doc.name);
+                    link.className = 'text-blue-600 hover:underline';
+                    li.appendChild(link);
+                    const del = document.createElement('button');
+                    del.textContent = 'Delete';
+                    del.className = 'text-red-600 hover:underline ml-4 text-sm';
+                    del.addEventListener('click', function() {
+                        docs.splice(index, 1);
+                        localStorage.setItem('documents', JSON.stringify(docs));
+                        loadAdminDocs();
+                    });
+                    li.appendChild(del);
+                    list.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.className = 'text-gray-500';
+                li.textContent = 'No documents uploaded yet.';
+                list.appendChild(li);
+            }
+        }
+        // File upload handler
+        document.getElementById('document-upload').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+            let docs = [];
+            try {
+                const stored = localStorage.getItem('documents');
+                if (stored) docs = JSON.parse(stored);
+            } catch (e) {
+                docs = [];
+            }
+            // Process each file asynchronously
+            files.forEach(function(file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    docs.push({ name: file.name, data: evt.target.result });
+                    localStorage.setItem('documents', JSON.stringify(docs));
+                    loadAdminDocs();
+                };
+                reader.readAsDataURL(file);
+            });
+            // Reset the input value so the same file can be uploaded again if desired
+            e.target.value = '';
+        });
+        // Initial render
+        loadAdminDocs();
+
+        // -------------------------------------------------------------------
+        // User management
+        const exportUsersBtn = document.getElementById('export-users');
+        const usersMsgEl = document.getElementById('users-msg');
+        const usersTableBody = document.getElementById('users-table-body');
+
+        // Helper to generate a random alphanumeric string for passwords
+        function generateRandomString(length) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Load users from localStorage and render the table
+        function loadUsers() {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            usersTableBody.innerHTML = '';
+            if (!users || users.length === 0) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 10;
+                td.className = 'px-3 py-2 text-gray-500';
+                td.textContent = 'No users have signed up yet.';
+                tr.appendChild(td);
+                usersTableBody.appendChild(tr);
+                return;
+            }
+            users.forEach(function(user, index) {
+                const tr = document.createElement('tr');
+                // Name
+                const nameTd = document.createElement('td');
+                nameTd.className = 'px-3 py-2 whitespace-nowrap';
+                nameTd.textContent = `${user.firstName} ${user.lastName}`;
+                tr.appendChild(nameTd);
+                // Email
+                const emailTd = document.createElement('td');
+                emailTd.className = 'px-3 py-2 whitespace-nowrap';
+                emailTd.textContent = user.email;
+                tr.appendChild(emailTd);
+                // Followers
+                const folTd = document.createElement('td');
+                folTd.className = 'px-3 py-2 whitespace-nowrap';
+                folTd.textContent = user.followersRange;
+                tr.appendChild(folTd);
+                // Niche
+                const nicheTd = document.createElement('td');
+                nicheTd.className = 'px-3 py-2 whitespace-nowrap';
+                nicheTd.textContent = user.niche;
+                tr.appendChild(nicheTd);
+                // Instagram
+                const instaTd = document.createElement('td');
+                instaTd.className = 'px-3 py-2 whitespace-nowrap';
+                instaTd.textContent = user.instagram;
+                tr.appendChild(instaTd);
+                // Newsletter
+                const newsTd = document.createElement('td');
+                newsTd.className = 'px-3 py-2 whitespace-nowrap';
+                newsTd.textContent = user.newsletter ? 'Yes' : 'No';
+                tr.appendChild(newsTd);
+                // Status
+                const statusTd = document.createElement('td');
+                statusTd.className = 'px-3 py-2 whitespace-nowrap capitalize';
+                statusTd.textContent = user.status;
+                tr.appendChild(statusTd);
+                // Login input
+                const loginTd = document.createElement('td');
+                loginTd.className = 'px-3 py-2';
+                const loginInput = document.createElement('input');
+                loginInput.type = 'text';
+                loginInput.value = user.login || '';
+                loginInput.dataset.index = index;
+                loginInput.dataset.field = 'login';
+                loginInput.className = 'border border-gray-300 rounded px-2 py-1 w-28';
+                loginTd.appendChild(loginInput);
+                tr.appendChild(loginTd);
+                // Password input
+                const passTd = document.createElement('td');
+                passTd.className = 'px-3 py-2';
+                const passInput = document.createElement('input');
+                passInput.type = 'text';
+                passInput.value = user.password || '';
+                passInput.dataset.index = index;
+                passInput.dataset.field = 'password';
+                passInput.className = 'border border-gray-300 rounded px-2 py-1 w-28';
+                passTd.appendChild(passInput);
+                tr.appendChild(passTd);
+                // Actions
+                const actionsTd = document.createElement('td');
+                actionsTd.className = 'px-3 py-2 whitespace-nowrap';
+                // Activate/Deactivate button
+                const toggleBtn = document.createElement('button');
+                toggleBtn.textContent = user.status === 'inactive' ? 'Activate' : 'Deactivate';
+                toggleBtn.dataset.action = 'toggleStatus';
+                toggleBtn.dataset.index = index;
+                toggleBtn.className = 'text-blue-600 hover:underline mr-3';
+                actionsTd.appendChild(toggleBtn);
+                // Save credentials button
+                const saveBtn = document.createElement('button');
+                saveBtn.textContent = 'Save';
+                saveBtn.dataset.action = 'saveCred';
+                saveBtn.dataset.index = index;
+                saveBtn.className = 'text-green-600 hover:underline';
+                actionsTd.appendChild(saveBtn);
+
+                // Delete button
+                const delBtn = document.createElement('button');
+                delBtn.textContent = 'Delete';
+                delBtn.dataset.action = 'deleteUser';
+                delBtn.dataset.index = index;
+                delBtn.className = 'text-red-600 hover:underline ml-3';
+                actionsTd.appendChild(delBtn);
+                tr.appendChild(actionsTd);
+                usersTableBody.appendChild(tr);
+            });
+        }
+
+        // Export users to CSV for Excel.  Generates a CSV on the fly and triggers a download.
+        function exportUsersToCSV() {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            if (!users || users.length === 0) {
+                alert('There are no users to export.');
+                return;
+            }
+            let csv = 'ID,First Name,Last Name,Email,Followers Range,Niche,Instagram,Newsletter,Status,Login,Password\n';
+            users.forEach(function(u) {
+                const line = [u.id, u.firstName, u.lastName, u.email, u.followersRange, u.niche, u.instagram, u.newsletter ? 'Yes' : 'No', u.status, u.login, u.password];
+                csv += line.map(function(item) {
+                    // Escape quotes by doubling them and wrap fields containing commas or quotes in quotes
+                    const str = String(item || '').replace(/"/g, '""');
+                    return (/[,\"]/.test(str) ? '"' + str + '"' : str);
+                }).join(',') + '\n';
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'users.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Toggle user status between inactive and active.  When activating, generate login and
+        // password if not already present and simulate an email being sent.  Deactivating
+        // leaves credentials intact but marks the user as inactive.
+        function toggleUserStatus(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            const user = users[index];
+            if (!user) return;
+            if (user.status === 'inactive') {
+                // Generate login & password if missing
+                if (!user.login) user.login = 'user' + Math.floor(1000 + Math.random() * 9000);
+                if (!user.password) user.password = generateRandomString(10);
+                user.status = 'active';
+                // Simulate sending email to user with credentials
+                alert('Activation email sent to ' + user.email + ' with login: ' + user.login + ' and password: ' + user.password + '.');
+            } else {
+                // Deactivate the user (credentials remain so they could be reactivated later)
+                user.status = 'inactive';
+            }
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+            if (usersMsgEl) {
+                usersMsgEl.textContent = 'User status updated.';
+                usersMsgEl.classList.remove('hidden');
+                setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Save login and password changes for a specific user.  Takes values from the input
+        // fields in the table row.
+        function saveUserCredentials(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            const user = users[index];
+            if (!user) return;
+            // Find inputs by dataset index
+            const loginInput = usersTableBody.querySelector('input[data-field="login"][data-index="' + index + '"]');
+            const passInput = usersTableBody.querySelector('input[data-field="password"][data-index="' + index + '"]');
+            user.login = loginInput ? loginInput.value.trim() : user.login;
+            user.password = passInput ? passInput.value.trim() : user.password;
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+            if (usersMsgEl) {
+                usersMsgEl.textContent = 'User credentials updated.';
+                usersMsgEl.classList.remove('hidden');
+                setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Delete a user from the list. Removes the user at the given index
+        // and updates localStorage. Then reloads the user table and shows a success message.
+        function deleteUser(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            // Remove the user at the index if it exists
+            if (users && index >= 0 && index < users.length) {
+                users.splice(index, 1);
+                localStorage.setItem('users', JSON.stringify(users));
+                loadUsers();
+                if (usersMsgEl) {
+                    usersMsgEl.textContent = 'User removed.';
+                    usersMsgEl.classList.remove('hidden');
+                    setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+                }
+            }
+        }
+
+        // Event delegation for user table actions
+        if (usersTableBody) {
+            usersTableBody.addEventListener('click', function(e) {
+                const action = e.target.dataset.action;
+                const index = parseInt(e.target.dataset.index, 10);
+                if (isNaN(index)) return;
+                if (action === 'toggleStatus') {
+                    toggleUserStatus(index);
+                } else if (action === 'saveCred') {
+                    saveUserCredentials(index);
+                } else if (action === 'deleteUser') {
+                    deleteUser(index);
+                }
+            });
+        }
+
+        // Bind export button
+        if (exportUsersBtn) {
+            exportUsersBtn.addEventListener('click', exportUsersToCSV);
+        }
+
+        // Initial load of users table
+        loadUsers();
+
+        // -------------------------------------------------------------------
+        // Footer settings
+        // Grab input fields for footer editing. These correspond to the fields
+        // defined in the markup above. When the admin opens the dashboard, we
+        // populate them with values from localStorage (or leave blank if none
+        // have been saved yet). On save we persist the values back to
+        // localStorage so that the front‑end footer can load them via
+        // auth.js.
+        const footerCompanyField = document.getElementById('footer-company-field');
+        const footerAddressField = document.getElementById('footer-address-field');
+        const footerRegField = document.getElementById('footer-reg-field');
+        const footerEmailField = document.getElementById('footer-email-field');
+        const footerPhoneField = document.getElementById('footer-phone-field');
+        const footerExtraField = document.getElementById('footer-extra-field');
+        const footerInstagramField = document.getElementById('footer-instagram-field');
+        const footerTikTokField = document.getElementById('footer-tiktok-field');
+        const footerYouTubeField = document.getElementById('footer-youtube-field');
+        const saveFooterBtn = document.getElementById('save-footer');
+        const footerMsg = document.getElementById('footer-save-msg');
+
+        function loadFooterSettings() {
+            if (footerCompanyField) footerCompanyField.value = localStorage.getItem('footerCompanyName') || '';
+            if (footerAddressField) footerAddressField.value = localStorage.getItem('footerAddress') || '';
+            if (footerRegField) footerRegField.value = localStorage.getItem('footerRegistration') || '';
+            if (footerEmailField) footerEmailField.value = localStorage.getItem('footerEmail') || '';
+            if (footerPhoneField) footerPhoneField.value = localStorage.getItem('footerPhone') || '';
+            if (footerExtraField) footerExtraField.value = localStorage.getItem('footerExtra') || '';
+            if (footerInstagramField) footerInstagramField.value = localStorage.getItem('footerInstagram') || '';
+            if (footerTikTokField) footerTikTokField.value = localStorage.getItem('footerTikTok') || '';
+            if (footerYouTubeField) footerYouTubeField.value = localStorage.getItem('footerYouTube') || '';
+        }
+
+        loadFooterSettings();
+
+        if (saveFooterBtn) {
+            saveFooterBtn.addEventListener('click', function() {
+                localStorage.setItem('footerCompanyName', footerCompanyField.value || '');
+                localStorage.setItem('footerAddress', footerAddressField.value || '');
+                localStorage.setItem('footerRegistration', footerRegField.value || '');
+                localStorage.setItem('footerEmail', footerEmailField.value || '');
+                localStorage.setItem('footerPhone', footerPhoneField.value || '');
+                localStorage.setItem('footerExtra', footerExtraField.value || '');
+                localStorage.setItem('footerInstagram', footerInstagramField.value || '');
+                localStorage.setItem('footerTikTok', footerTikTokField.value || '');
+                localStorage.setItem('footerYouTube', footerYouTubeField.value || '');
+                if (footerMsg) {
+                    footerMsg.classList.remove('hidden');
+                    setTimeout(() => footerMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
+
+        // -------------------------------------------------------------------
+        // Legal settings
+        // Grab textarea fields for legal pages. These allow the admin to
+        // define the content of the Terms & Conditions, Cookies Policy and
+        // Privacy/GDPR pages.  On load we populate them from localStorage.
+        const legalTermsField = document.getElementById('legal-terms-field');
+        const legalCookiesField = document.getElementById('legal-cookies-field');
+        const legalGDPRField = document.getElementById('legal-gdpr-field');
+        const saveLegalBtn = document.getElementById('save-legal');
+        const legalMsg = document.getElementById('legal-save-msg');
+
+        function loadLegalSettings() {
+            if (legalTermsField) legalTermsField.value = localStorage.getItem('legalTerms') || '';
+            if (legalCookiesField) legalCookiesField.value = localStorage.getItem('legalCookies') || '';
+            if (legalGDPRField) legalGDPRField.value = localStorage.getItem('legalGDPR') || '';
+        }
+
+        loadLegalSettings();
+
+        if (saveLegalBtn) {
+            saveLegalBtn.addEventListener('click', function() {
+                if (legalTermsField) localStorage.setItem('legalTerms', legalTermsField.value || '');
+                if (legalCookiesField) localStorage.setItem('legalCookies', legalCookiesField.value || '');
+                if (legalGDPRField) localStorage.setItem('legalGDPR', legalGDPRField.value || '');
+                if (legalMsg) {
+                    legalMsg.classList.remove('hidden');
+                    setTimeout(() => legalMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
+    });
+    </script>
+    <!-- Load separate admin management script for managing administrator accounts -->
+    <script src="admin-manage.js"></script>
+    <!-- Load Polish translation management script (handles saving and loading of PL content) -->
+    <script src="admin-pl.js"></script>
+</body>
+</html>

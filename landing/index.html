@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idol Brands 2.0 - Turn Your Influence Into a Fashion Empire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --secondary-gray: #f5f5f5;
+            --accent-gray: #e5e5e5;
+            --text-gray: #666666;
+            --border-gray: #333333;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-white);
+            color: var(--primary-black);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+        
+        .vanta-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: var(--primary-black);
+            color: var(--primary-white);
+            border: 2px solid var(--primary-black);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary-black);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-black);
+            color: var(--primary-white);
+            transform: translateY(-2px);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-gray);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .stats-card {
+            background: var(--secondary-gray);
+            border: 1px solid var(--accent-gray);
+        }
+        
+        .calculator-section {
+            background: var(--secondary-gray);
+        }
+        
+        .input-field {
+            border: 2px solid var(--accent-gray);
+            background: var(--primary-white);
+            color: var(--primary-black);
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: var(--primary-black);
+            outline: none;
+        }
+        
+        .result-card {
+            background: var(--primary-white);
+            border: 2px solid var(--primary-black);
+        }
+        
+        .step-indicator {
+            background: var(--primary-black);
+            color: var(--primary-white);
+        }
+        
+        .step-indicator.active {
+            background: var(--primary-white);
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .gradient-border {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            padding: 2px;
+            border-radius: 12px;
+        }
+        
+        .gradient-border-inner {
+            background: var(--primary-white);
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+                line-height: 1.1;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-display font-bold text-black">Idol Brands</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <!-- Admin dashboard link is hidden by default; shown only when an admin is logged in -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <!-- Language switcher (English page) -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <span class="text-black font-semibold">EN</span>
+                        <span class="text-black">|</span>
+                        <a href="index-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+                    </div>
+                    <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+                </div>
+                <div class="md:hidden">
+                    <!-- Mobile hamburger toggler.  aria-* attributes improve accessibility. -->
+                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Mobile menu panel: hidden by default on desktop (md:hidden). Contains duplicate nav links for mobile users. -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+      <div class="px-4 py-4 space-y-4">
+        <a href="about.html" class="block text-black font-medium">About</a>
+        <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
+        <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
+        <a href="blog.html" class="block text-black font-medium">Blog</a>
+        <a href="#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+        <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
+        <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+        <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
+        <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
+        <!-- Language switcher for mobile -->
+        <div class="flex justify-center space-x-1 text-sm py-2">
+          <span class="text-black font-semibold">EN</span>
+          <span class="text-black">|</span>
+          <a href="index-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+        </div>
+        <a href="#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div id="vanta-bg" class="vanta-canvas"></div>
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="floating-element">
+                        <!-- The hero heading now has an id so it can be customised by an admin via localStorage. -->
+                        <h1 id="hero-title" class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
+                            <span class="text-gradient">Turn Your</span><br>
+                            <span class="text-black">Influence</span><br>
+                            <span class="text-gradient">Into Fashion</span>
+                        </h1>
+                    </div>
+                    <!-- Subtitle also has an id for CMS editing -->
+                    <p id="hero-subtitle" class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
+                        We handle everything from design to delivery so you can focus on your story. 
+                        The only platform that transforms influencers into fashion brand owners.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
+                            Start Your Fashion Brand
+                        </button>
+                        <!-- CTA button text wrapped in a span with an id so it can be customized via CMS -->
+                        <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold">
+                            <span id="home-cta-text">See How It Works</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- New hero image and metrics layout -->
+                    <div class="w-4/5 mx-auto transform rotate-2">
+                        <div class="bg-white p-2 rounded-xl shadow-xl">
+                            <img src="images/hero-market.jpg" alt="Live selling platform" class="rounded-lg w-full">
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="flex flex-col items-center">
+                            <div id="metric-market-size-value" class="text-3xl font-bold text-black">27B</div>
+                            <div id="metric-market-size-label" class="text-sm text-gray-600">Market Size</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div id="metric-growth-rate-value" class="text-3xl font-bold text-black">39.9%</div>
+                            <div id="metric-growth-rate-label" class="text-sm text-gray-600">Growth Rate</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div id="metric-fail-rate-value" class="text-3xl font-bold text-black">90%</div>
+                            <div id="metric-fail-rate-label" class="text-sm text-gray-600">Brands Fail</div>
+                        </div>
+                    </div>
+                    <p id="metric-tagline" class="text-gray-600 italic mt-4 text-center">
+                        Unlock a $27B market growing 39.9% annually—be among the 10% who succeed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-display font-bold text-black mb-6">Built by Fashion Industry Veterans</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We understand the challenges of building a fashion brand because we've been there. 
+                    Our mission is to democratize fashion entrepreneurship for every influencer.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-industry text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-black mb-4">Manufacturing Expertise</h3>
+                    <p class="text-gray-600">
+                        Decades of experience in fashion production, quality control, and supply chain management 
+                        across global markets.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shipping-fast text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-black mb-4">Logistics Mastery</h3>
+                    <p class="text-gray-600">
+                        End-to-end logistics solutions from warehousing to last-mile delivery, 
+                        optimized for influencer fashion brands.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-laptop-code text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-black mb-4">Technology Innovation</h3>
+                    <p class="text-gray-600">
+                        Cutting-edge live-commerce platform with real-time analytics, 
+                        AI-powered recommendations, and seamless integration.
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mt-12 fade-in">
+                <a href="about.html" class="bg-black text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors inline-flex items-center">
+                    Read Our Full Story
+                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-display font-bold text-black mb-6">Our Complete Solution</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Everything you need to launch and scale your fashion brand, all in one platform.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 fade-in">
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-black mb-2">Brand Strategy</h3>
+                            <p class="text-gray-600">We develop your unique brand identity, positioning, and go-to-market strategy.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-black mb-2">Product Development</h3>
+                            <p class="text-gray-600">From concept to final product, we handle design, sampling, and production.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-black mb-2">E-commerce Platform</h3>
+                            <p class="text-gray-600">Custom online store with integrated payment processing and inventory management.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">4</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-black mb-2">Marketing & Growth</h3>
+                            <p class="text-gray-600">Data-driven marketing campaigns and growth strategies to scale your brand.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-black mb-6 text-center">Success Timeline</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Week 1-2</span>
+                                <span class="text-gray-600">Brand Strategy & Design</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Week 3-6</span>
+                                <span class="text-gray-600">Product Development</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Week 7-8</span>
+                                <span class="text-gray-600">Store Setup & Launch</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Month 3+</span>
+                                <span class="text-gray-600">Scale & Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator-section" class="py-20 calculator-section hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-display font-bold text-black mb-6">ROI Calculator</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    See exactly how much revenue your fashion brand could generate. 
+                    All calculations are transparent and based on real market data.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-6 fade-in">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-black mb-6">Your Audience Profile</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Total Followers</label>
+                                <input type="number" id="followers" class="input-field w-full px-4 py-3 rounded-lg" placeholder="e.g., 100000" value="100000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Average Engagement Rate (%)</label>
+                                <input type="number" id="engagement" class="input-field w-full px-4 py-3 rounded-lg" placeholder="e.g., 3.5" value="3.5" step="0.1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Fashion Niche</label>
+                                <select id="niche-select" class="input-field w-full px-4 py-3 rounded-lg">
+                                    <option value="fashion">General Fashion</option>
+                                    <option value="streetwear">Streetwear</option>
+                                    <option value="luxury">Luxury Fashion</option>
+                                    <option value="accessories">Accessories</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Collection Type</label>
+                                <select id="collection-select" class="input-field w-full px-4 py-3 rounded-lg">
+                                    <option value="basic">Basic Collection</option>
+                                    <option value="seasonal">Seasonal Collection</option>
+                                    <option value="limited">Limited Edition</option>
+                                    <option value="premium">Premium Collection</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">LIVE Sessions per Month</label>
+                                <input type="number" id="live-sessions" class="input-field w-full px-4 py-3 rounded-lg" placeholder="e.g., 8" value="8" min="1" max="30">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-2xl">
+                        <h3 class="text-lg font-bold text-black mb-4">LIVE-Selling Funnel</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Followers to LIVE:</span>
+                                <span class="font-semibold">5%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">LIVE to Purchase:</span>
+                                <span class="font-semibold" id="market-conversion">15%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Avg. Order Value:</span>
+                                <span class="font-semibold" id="market-aov">$100</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Profit Margin:</span>
+                                <span class="font-semibold" id="market-margin">20%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">LIVE Participants:</span>
+                                <span class="font-semibold" id="live-participants">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Purchases per LIVE:</span>
+                                <span class="font-semibold" id="purchases-per-live">0</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4">
+                            *Based on verified live-selling industry data and conversion funnel analysis. 
+                            AOV varies by niche: Luxury $250, Streetwear $120, Fashion $100, Accessories $80. 
+                            Standard influencer commission: 20% for all niches.
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-6 fade-in">
+                    <div class="result-card p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-black mb-6">Revenue Projection</h3>
+                        <div class="space-y-4" id="results">
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Monthly Revenue</span>
+                                <span class="text-2xl font-bold text-black" id="monthlyRevenue">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Monthly Profit</span>
+                                <span class="text-2xl font-bold text-black" id="monthlyProfit">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-black text-white rounded-lg">
+                                <span class="font-semibold">Annual Revenue</span>
+                                <span class="text-3xl font-bold" id="annualRevenue">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="text-xl font-bold text-black mb-4">Calculation Breakdown</h3>
+                        <div class="space-y-2 text-sm" id="breakdown">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Engaged Audience:</span>
+                                <span class="font-semibold" id="engagedAudience">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Monthly Customers:</span>
+                                <span class="font-semibold" id="monthlyCustomers">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Revenue per Customer:</span>
+                                <span class="font-semibold" id="revenuePerCustomer">$0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Profit per Customer:</span>
+                                <span class="font-semibold" id="profitPerCustomer">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start Your Brand Section -->
+    <section id="start" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in">
+                <h2 id="home-start-title" class="text-5xl font-display font-bold text-black mb-6">Ready to Start Your Fashion Empire?</h2>
+                <p id="home-start-subtitle" class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Join hundreds of successful influencers who've transformed their influence into thriving fashion brands. 
+                    Your journey starts here.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-white text-3xl"></i>
+                        </div>
+                        <h3 id="home-feature1-title" class="text-xl font-bold text-black mb-2">Fast Launch</h3>
+                        <p id="home-feature1-desc" class="text-gray-600">Get your brand live in just 8 weeks</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-white text-3xl"></i>
+                        </div>
+                        <h3 id="home-feature2-title" class="text-xl font-bold text-black mb-2">Done For You</h3>
+                        <p id="home-feature2-desc" class="text-gray-600">We handle everything, you focus on content</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-white text-3xl"></i>
+                        </div>
+                        <h3 id="home-feature3-title" class="text-xl font-bold text-black mb-2">Proven Results</h3>
+                        <p id="home-feature3-desc" class="text-gray-600">Join the 10% who succeed</p>
+                    </div>
+                </div>
+                
+                <!-- Waiting List Form -->
+                <div class="max-w-2xl mx-auto mt-16">
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 shadow-lg border border-gray-200">
+                        <div class="text-center mb-8">
+                            <h3 class="text-3xl font-bold text-black mb-4">Join the Waiting List</h3>
+                            <p class="text-gray-600 text-lg">
+                                Be the first to know when we launch. Get exclusive early access and special launch pricing.
+                            </p>
+                        </div>
+                        
+                        <form id="waiting-list-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstName" class="block text-sm font-semibold text-black mb-2">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" required 
+                                           class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                           placeholder="Your first name">
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-sm font-semibold text-black mb-2">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" required 
+                                           class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                           placeholder="Your last name">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-black mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required 
+                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                       placeholder="your@email.com">
+                            </div>
+                            
+                            <div>
+                                <label for="followers-range" class="block text-sm font-semibold text-black mb-2">Followers Count</label>
+                                <!--
+                                  The ROI calculator above also uses an input with the id `followers`.
+                                  Duplicate IDs in a single document can cause unpredictable behaviour when
+                                  JavaScript looks up an element by its ID. To avoid conflicts, give this
+                                  select element a distinct identifier (followers-range) and update the
+                                  corresponding label's `for` attribute. The `name` attribute is also
+                                  updated to reflect the new identifier.
+                                -->
+                                <select id="followers-range" name="followersRange" required 
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors">
+                                    <option value="">Select your follower range</option>
+                                    <option value="10k-50k">10K - 50K followers</option>
+                                    <option value="50k-100k">50K - 100K followers</option>
+                                    <option value="100k-500k">100K - 500K followers</option>
+                                    <option value="500k-1m">500K - 1M followers</option>
+                                    <option value="1m+">1M+ followers</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="niche" class="block text-sm font-semibold text-black mb-2">Fashion Niche</label>
+                                <select id="niche" name="niche" required 
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors">
+                                    <option value="">Select your niche</option>
+                                    <option value="fashion">General Fashion</option>
+                                    <option value="streetwear">Streetwear</option>
+                                    <option value="luxury">Luxury Fashion</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="activewear">Activewear</option>
+                                    <option value="beauty">Beauty & Lifestyle</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="instagram" class="block text-sm font-semibold text-black mb-2">Instagram Handle (Optional)</label>
+                                <input type="text" id="instagram" name="instagram" 
+                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                       placeholder="@yourhandle">
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <input type="checkbox" id="newsletter" name="newsletter" class="mt-1 mr-3">
+                                <label for="newsletter" class="text-sm text-gray-600">
+                                    I want to receive updates about Idol Brands, live-selling tips, and exclusive influencer opportunities.
+                                </label>
+                            </div>
+                            <!-- GDPR consent checkboxes -->
+                            <div class="space-y-4 text-sm text-gray-700">
+                                <label class="flex items-start space-x-3">
+                                    <input id="consent-required" type="checkbox" class="mt-1" />
+                                    <span>
+                                        I consent to the processing of my personal data by Idol Brands to handle my enquiry. See our <a href="legal/gdpr.html" target="_blank" class="underline">Privacy Policy (GDPR)</a>.
+                                    </span>
+                                </label>
+                                <label class="flex items-start space-x-3">
+                                    <input id="consent-marketing" type="checkbox" class="mt-1" />
+                                    <span>I agree to receive marketing communications and promotional offers (optional).</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" 
+                                    class="w-full bg-black text-white py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
+                                Join the Waiting List
+                            </button>
+                        </form>
+                        
+                        <div id="success-message" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-green-800">Thank you for joining!</h4>
+                                    <p class="text-green-700 text-sm">You're on the waiting list. We'll notify you when spots become available.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <p class="text-gray-500 text-sm">
+                        Free consultation • No commitment • Results in 8 weeks
+                    </p>
+                    <p class="text-gray-400 text-xs mt-2">
+                        Limited spots available • Join 500+ influencers on the waiting list
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. All rights reserved.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Initialize Vanta.js background
+        VANTA.BIRDS({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0xf8f9fa,
+            color1: 0x000000,
+            color2: 0x333333,
+            birdSize: 1.20,
+            wingSpan: 20.00,
+            speedLimit: 4.00,
+            separation: 20.00,
+            alignment: 20.00,
+            cohesion: 20.00,
+            quantity: 3.00
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Live-Selling ROI Calculator - Updated with LIVE conversion funnel
+        function calculateROI() {
+            const followers = parseFloat(document.getElementById('followers').value) || 0;
+            const engagement = parseFloat(document.getElementById('engagement').value) || 0;
+            const niche = document.getElementById('niche-select').value;
+            const collection = document.getElementById('collection-select').value;
+            const liveSessions = parseFloat(document.getElementById('live-sessions').value) || 8;
+
+            // LIVE conversion funnel - allow admin-defined values from localStorage
+            let followersToLiveConversion;
+            let liveToPurchaseConversion;
+            {
+                const storedFollowersConv = parseFloat(localStorage.getItem('followersToLiveConversion'));
+                followersToLiveConversion = isNaN(storedFollowersConv) ? 0.05 : storedFollowersConv;
+                const storedLiveConv = parseFloat(localStorage.getItem('liveToPurchaseConversion'));
+                liveToPurchaseConversion = isNaN(storedLiveConv) ? 0.15 : storedLiveConv;
+            }
+
+            // Niche-specific AOV with admin overrides
+            let nicheData = {
+                fashion: { aov: 100 },
+                streetwear: { aov: 120 },
+                luxury: { aov: 250 },
+                accessories: { aov: 80 }
+            };
+            {
+                const storedNicheAOV = localStorage.getItem('nicheAOV');
+                if (storedNicheAOV) {
+                    try {
+                        const obj = JSON.parse(storedNicheAOV);
+                        nicheData = {
+                            fashion: { aov: obj.fashion || 100 },
+                            streetwear: { aov: obj.streetwear || 120 },
+                            luxury: { aov: obj.luxury || 250 },
+                            accessories: { aov: obj.accessories || 80 }
+                        };
+                    } catch (e) {
+                        // ignore parse errors and keep defaults
+                    }
+                }
+            }
+            const avgOrderValue = nicheData[niche].aov;
+            // Profit margin (commission) may be overridden by admin
+            let profitMargin;
+            {
+                const storedProfit = parseFloat(localStorage.getItem('profitMargin'));
+                profitMargin = isNaN(storedProfit) ? 0.20 : storedProfit;
+            }
+
+            // Collection type multipliers with admin overrides
+            let collectionMultipliers = {
+                basic: 1.0,
+                seasonal: 1.2,
+                limited: 1.5,
+                premium: 1.8
+            };
+            {
+                const storedCollection = localStorage.getItem('collectionMultipliers');
+                if (storedCollection) {
+                    try {
+                        const obj = JSON.parse(storedCollection);
+                        collectionMultipliers = {
+                            basic: obj.basic || 1.0,
+                            seasonal: obj.seasonal || 1.2,
+                            limited: obj.limited || 1.5,
+                            premium: obj.premium || 1.8
+                        };
+                    } catch (e) {
+                        // ignore parse errors
+                    }
+                }
+            }
+            // Niche engagement multipliers with admin overrides
+            let nicheMultipliers = {
+                fashion: 1.0,
+                streetwear: 1.1,
+                luxury: 0.8,
+                accessories: 1.3
+            };
+            {
+                const storedNicheMult = localStorage.getItem('nicheMultipliers');
+                if (storedNicheMult) {
+                    try {
+                        const obj = JSON.parse(storedNicheMult);
+                        nicheMultipliers = {
+                            fashion: obj.fashion || 1.0,
+                            streetwear: obj.streetwear || 1.1,
+                            luxury: obj.luxury || 0.8,
+                            accessories: obj.accessories || 1.3
+                        };
+                    } catch (e) {
+                        // ignore parse errors
+                    }
+                }
+            }
+
+            // Calculations
+            const engagedAudience = Math.round(followers * (engagement / 100));
+            const liveParticipantsPerSession = Math.round(engagedAudience * followersToLiveConversion * nicheMultipliers[niche]);
+            const purchasesPerSession = Math.round(liveParticipantsPerSession * liveToPurchaseConversion * collectionMultipliers[collection]);
+            
+            const monthlyCustomers = purchasesPerSession * liveSessions;
+            const revenuePerCustomer = avgOrderValue;
+            const profitPerCustomer = revenuePerCustomer * profitMargin;
+            
+            const monthlyRevenue = monthlyCustomers * revenuePerCustomer;
+            const monthlyProfit = monthlyCustomers * profitPerCustomer;
+            const annualRevenue = monthlyRevenue * 12;
+
+
+            // Update results
+            document.getElementById('monthlyRevenue').textContent = `$${monthlyRevenue.toLocaleString()}`;
+            document.getElementById('monthlyProfit').textContent = `$${monthlyProfit.toLocaleString()}`;
+            document.getElementById('annualRevenue').textContent = `$${annualRevenue.toLocaleString()}`;
+
+            // Update market data display with LIVE funnel data
+            document.getElementById('market-conversion').textContent = `${(liveToPurchaseConversion * 100).toFixed(0)}%`;
+            document.getElementById('market-aov').textContent = `$${avgOrderValue}`;
+            document.getElementById('market-margin').textContent = `${(profitMargin * 100).toFixed(0)}%`;
+            
+            // Update AOV display based on niche
+            document.getElementById('market-aov').textContent = `$${avgOrderValue}`;
+
+            // Update breakdown with LIVE funnel
+            document.getElementById('engagedAudience').textContent = engagedAudience.toLocaleString();
+            document.getElementById('monthlyCustomers').textContent = monthlyCustomers.toLocaleString();
+            document.getElementById('revenuePerCustomer').textContent = `$${revenuePerCustomer.toFixed(2)}`;
+            document.getElementById('profitPerCustomer').textContent = `$${profitPerCustomer.toFixed(2)}`;
+
+            // Update additional LIVE metrics
+            document.getElementById('live-participants').textContent = liveParticipantsPerSession.toLocaleString();
+            document.getElementById('purchases-per-live').textContent = purchasesPerSession.toLocaleString();
+        }
+
+        // Add event listeners for calculator inputs
+        document.querySelectorAll('#calculator input, #calculator select').forEach(input => {
+            input.addEventListener('input', calculateROI);
+            input.addEventListener('change', calculateROI);
+        });
+
+        // Initial calculation
+        calculateROI();
+
+
+        // Button click handlers
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('Start Your Fashion Brand') || this.textContent.includes('Start Your Fashion Brand Today')) {
+                    document.getElementById('start').scrollIntoView({ behavior: 'smooth' });
+                } else if (this.textContent.includes('See How It Works')) {
+                    document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Waiting List Form Handler
+        document.getElementById('waiting-list-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide form
+                this.style.display = 'none';
+                
+                // Show success message
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Log data (in real implementation, this would be sent to server)
+                console.log('Waiting list submission:', data);
+            }, 1000);
+        });
+    </script>
+    <!-- Home page dynamic content loader: updates metrics and CTA text from localStorage if available -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function getItem(key, def) {
+            const val = localStorage.getItem(key);
+            return val !== null ? val : def;
+        }
+        // Metrics
+        const msVal = document.getElementById('metric-market-size-value');
+        if (msVal) msVal.textContent = getItem('metricMarketSizeValue', msVal.textContent);
+        const msLabel = document.getElementById('metric-market-size-label');
+        if (msLabel) msLabel.textContent = getItem('metricMarketSizeLabel', msLabel.textContent);
+        const grVal = document.getElementById('metric-growth-rate-value');
+        if (grVal) grVal.textContent = getItem('metricGrowthRateValue', grVal.textContent);
+        const grLabel = document.getElementById('metric-growth-rate-label');
+        if (grLabel) grLabel.textContent = getItem('metricGrowthRateLabel', grLabel.textContent);
+        const frVal = document.getElementById('metric-fail-rate-value');
+        if (frVal) frVal.textContent = getItem('metricFailRateValue', frVal.textContent);
+        const frLabel = document.getElementById('metric-fail-rate-label');
+        if (frLabel) frLabel.textContent = getItem('metricFailRateLabel', frLabel.textContent);
+        const tagEl = document.getElementById('metric-tagline');
+        if (tagEl) tagEl.textContent = getItem('metricTagline', tagEl.textContent);
+        // Start section
+        const startTitle = document.getElementById('home-start-title');
+        if (startTitle) startTitle.textContent = getItem('homeStartTitle', startTitle.textContent);
+        const startSub = document.getElementById('home-start-subtitle');
+        if (startSub) startSub.textContent = getItem('homeStartSubtitle', startSub.textContent);
+        // Feature cards
+        const f1Title = document.getElementById('home-feature1-title');
+        if (f1Title) f1Title.textContent = getItem('homeFeature1Title', f1Title.textContent);
+        const f1Desc = document.getElementById('home-feature1-desc');
+        if (f1Desc) f1Desc.textContent = getItem('homeFeature1Desc', f1Desc.textContent);
+        const f2Title = document.getElementById('home-feature2-title');
+        if (f2Title) f2Title.textContent = getItem('homeFeature2Title', f2Title.textContent);
+        const f2Desc = document.getElementById('home-feature2-desc');
+        if (f2Desc) f2Desc.textContent = getItem('homeFeature2Desc', f2Desc.textContent);
+        const f3Title = document.getElementById('home-feature3-title');
+        if (f3Title) f3Title.textContent = getItem('homeFeature3Title', f3Title.textContent);
+        const f3Desc = document.getElementById('home-feature3-desc');
+        if (f3Desc) f3Desc.textContent = getItem('homeFeature3Desc', f3Desc.textContent);
+
+        // CTA button
+        const cta = document.getElementById('home-cta-text');
+        if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
+    });
+    </script>
+    <!-- Authentication helper to control login state, navigation and calculator visibility -->
+    <script src="auth.js"></script>
+    <!-- Apply any custom hero text stored by the admin.  When an administrator edits
+         the hero title or subtitle in the admin dashboard, it is saved in
+         localStorage.  On page load we replace the default headings with those values. -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElem = document.getElementById('hero-title');
+        const subtitleElem = document.getElementById('hero-subtitle');
+        const storedTitle = localStorage.getItem('heroTitle');
+        const storedSubtitle = localStorage.getItem('heroSubtitle');
+        if (storedTitle && titleElem) {
+            // heroTitle may contain HTML spans and line breaks so use innerHTML
+            titleElem.innerHTML = storedTitle;
+        }
+        if (storedSubtitle && subtitleElem) {
+            subtitleElem.textContent = storedSubtitle;
+        }
+    });
+</script>
+
+    <!-- Consent validation script for waiting list form -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('waiting-list-form');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                const requiredConsent = document.getElementById('consent-required');
+                if (requiredConsent && !requiredConsent.checked) {
+                    // Prevent form submission if the mandatory GDPR consent is unchecked
+                    e.preventDefault();
+                    alert('Please consent to data processing to join the waiting list.');
+                    return false;
+                }
+                // Collect form data and save as a new user record in localStorage
+                const firstName = document.getElementById('firstName')?.value || '';
+                const lastName = document.getElementById('lastName')?.value || '';
+                const email = document.getElementById('email')?.value || '';
+                const followersRange = document.getElementById('followers-range')?.value || '';
+                const niche = document.getElementById('niche')?.value || '';
+                const instagram = document.getElementById('instagram')?.value || '';
+                const newsletter = document.getElementById('newsletter')?.checked || false;
+                const user = {
+                    id: Date.now(),
+                    firstName: firstName.trim(),
+                    lastName: lastName.trim(),
+                    email: email.trim(),
+                    followersRange: followersRange,
+                    niche: niche,
+                    instagram: instagram.trim(),
+                    newsletter: newsletter,
+                    status: 'inactive',
+                    login: '',
+                    password: ''
+                };
+                try {
+                    const stored = localStorage.getItem('users');
+                    let users = [];
+                    if (stored) users = JSON.parse(stored);
+                    users.push(user);
+                    localStorage.setItem('users', JSON.stringify(users));
+                } catch (err) {
+                    console.error('Could not save user record', err);
+                }
+            });
+        }
+    });
+    </script>
+
+</body>
+</html>
