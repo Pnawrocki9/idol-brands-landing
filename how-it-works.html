@@ -350,12 +350,19 @@
                             </div>
                             <div class="text-sm text-gray-400">2,847 viewers</div>
                         </div>
-                        <div class="aspect-video rounded-lg mb-4 overflow-hidden">
-                            <!-- Illustrative image of a live-selling session. The image is an abstract
-                                 depiction of a street‑wear influencer hosting a live fashion show. This
-                                 avoids using a real person’s likeness while still conveying the
-                                 experience of a streamed event. -->
-                            <img src="live-selling.png" alt="Streetwear influencer live selling" class="w-full h-full object-cover">
+                        <!--
+                          Replace the illustrative placeholder with an actual demo video.  The video was
+                          supplied by the user and shows a real streetwear influencer live selling
+                          clothing.  It has a portrait (vertical) aspect ratio, so we switch the
+                          wrapper from `aspect-video` (16/9) to a custom vertical ratio.  Tailwind’s
+                          arbitrary value syntax allows specifying a ratio such as 3/4 for a
+                          portrait‑oriented container.  The `<video>` tag is configured to play
+                          automatically, loop indefinitely, remain muted and allow inline playback on
+                          mobile devices.  Using `object-cover` ensures the video fills the
+                          container without distortion.
+                        -->
+                        <div class="aspect-[3/4] rounded-lg mb-4 overflow-hidden">
+                            <video src="live-selling.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                         </div>
                         <div class="grid grid-cols-3 gap-4 text-center">
                             <div>
