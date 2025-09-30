@@ -17,15 +17,21 @@
                     <h1 class="text-2xl font-display font-bold text-black">Idol Brands</h1>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
-                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
-                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
-                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
-                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
-                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium">Your Documents</a>
+                    <a href="about-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">O&nbsp;nas</a>
+                    <a href="how-it-works-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Jak&nbsp;to&nbsp;działa</a>
+                    <a href="success-stories-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Historie&nbsp;sukcesu</a>
+                    <a href="blog-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Kalkulator</a>
+                    <a href="your-documents-pl.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium">Twoje&nbsp;dokumenty</a>
                     <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
-                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
-                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <a href="login-pl.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Zaloguj&nbsp;się</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
+                    <!-- Language switcher (Polish Documents page) -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <a href="your-documents.html" class="text-black hover:text-gray-600 font-medium">EN</a>
+                        <span class="text-black">|</span>
+                        <span class="text-black font-semibold">PL</span>
+                    </div>
                     <a href="index.html#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
                 </div>
                 <!-- Mobile hamburger toggler -->
@@ -41,22 +47,22 @@
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
         <div class="px-4 py-4 space-y-4">
-            <a href="about.html" class="block text-black font-medium">About</a>
-            <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
-            <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
-            <a href="blog.html" class="block text-black font-medium">Blog</a>
-            <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
-            <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium">Your Documents</a>
+            <a href="about-pl.html" class="block text-black font-medium">O&nbsp;nas</a>
+            <a href="how-it-works-pl.html" class="block text-black font-medium">Jak&nbsp;to&nbsp;działa</a>
+            <a href="success-stories-pl.html" class="block text-black font-medium">Historie&nbsp;sukcesu</a>
+            <a href="blog-pl.html" class="block text-black font-medium">Blog</a>
+            <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Kalkulator</a>
+            <a href="your-documents-pl.html" id="nav-documents-mobile" class="block text-black font-medium">Twoje&nbsp;dokumenty</a>
             <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
-            <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
-            <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
-            <a href="index.html#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+            <a href="login-pl.html" id="nav-login-mobile" class="block text-black font-medium">Zaloguj&nbsp;się</a>
+            <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
+            <a href="index.html#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Załóż&nbsp;swoją&nbsp;markę</a>
         </div>
     </div>
 
     <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-display font-bold mb-6">Your Documents</h1>
-        <p class="mb-8 text-gray-600">Below you'll find any documents we've shared with you, such as agreements, brochures and presentations. If nothing appears here you haven't been assigned any documents yet.</p>
+        <h1 id="documents-title" class="text-4xl font-display font-bold mb-6">Twoje dokumenty</h1>
+        <p id="documents-message" class="mb-8 text-gray-600">Znajdziesz tutaj wszelkie dokumenty udostępnione Ci przez nas, takie jak umowy, broszury i prezentacje. Jeśli nic się nie pojawia, nie przydzieliliśmy Ci jeszcze żadnych dokumentów.</p>
         <ul id="documents-list" class="space-y-4">
             <!-- Documents will be dynamically inserted here in future. For now this is static. -->
             <li class="bg-white p-4 rounded-lg shadow text-gray-500">No documents available. Check back later.</li>
@@ -110,6 +116,17 @@
                 console.error('Failed to parse documents from localStorage', err);
             }
         }
+    });
+    // After loading documents, override heading and message with Polish translations
+    document.addEventListener('DOMContentLoaded', function() {
+        function t(key, fallback) {
+            const val = localStorage.getItem(key);
+            return val && val !== '' ? val : fallback;
+        }
+        const titleEl = document.getElementById('documents-title');
+        if (titleEl) titleEl.textContent = t('plDocumentsTitle','Twoje dokumenty');
+        const msgEl = document.getElementById('documents-message');
+        if (msgEl) msgEl.textContent = t('plDocumentsMessage','Brak dokumentów do wyświetlenia.');
     });
     </script>
 

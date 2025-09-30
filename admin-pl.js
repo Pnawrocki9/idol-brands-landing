@@ -156,4 +156,69 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  // ===== Login Page (PL) =====
+  // Load login page translations with no English fallback as they don't exist yet; provide sensible defaults
+  loadField('admin-login-title-pl','plLoginTitle',null,'Logowanie influencera');
+  loadField('admin-login-subtitle-pl','plLoginSubtitle',null,'Wprowadź dane logowania z e-maila akceptacyjnego.');
+  loadField('admin-login-username-label-pl','plLoginUsernameLabel',null,'Nazwa użytkownika');
+  loadField('admin-login-password-label-pl','plLoginPasswordLabel',null,'Hasło');
+  loadField('admin-login-button-text-pl','plLoginButtonText',null,'Zaloguj się');
+  loadField('admin-login-error-pl','plLoginError',null,'Nieprawidłowa nazwa użytkownika lub hasło.');
+  const saveLoginPl = document.getElementById('save-login-pl');
+  if (saveLoginPl) {
+    saveLoginPl.addEventListener('click', function() {
+      saveFields([
+        ['admin-login-title-pl','plLoginTitle'],
+        ['admin-login-subtitle-pl','plLoginSubtitle'],
+        ['admin-login-username-label-pl','plLoginUsernameLabel'],
+        ['admin-login-password-label-pl','plLoginPasswordLabel'],
+        ['admin-login-button-text-pl','plLoginButtonText'],
+        ['admin-login-error-pl','plLoginError']
+      ]);
+      const msg = document.getElementById('login-save-msg-pl');
+      if (msg) {
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      }
+    });
+  }
+
+  // ===== Documents Page (PL) =====
+  loadField('admin-documents-title-pl','plDocumentsTitle',null,'Twoje dokumenty');
+  loadField('admin-documents-message-pl','plDocumentsMessage',null,'Brak dokumentów do wyświetlenia.');
+  const saveDocsPl = document.getElementById('save-documents-pl');
+  if (saveDocsPl) {
+    saveDocsPl.addEventListener('click', function() {
+      saveFields([
+        ['admin-documents-title-pl','plDocumentsTitle'],
+        ['admin-documents-message-pl','plDocumentsMessage']
+      ]);
+      const msg = document.getElementById('documents-save-msg-pl');
+      if (msg) {
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      }
+    });
+  }
+
+  // ===== Blog Page (PL) =====
+  loadField('admin-blog-title-pl','plBlogTitle',null,'Blog');
+  loadField('admin-blog-subtitle-pl','plBlogSubtitle',null,'Czytaj nasze najnowsze artykuły i inspiracje dotyczące mody.');
+  loadField('admin-blog-noposts-pl','plBlogNoPostsMessage',null,'Brak wpisów na blogu.');
+  const saveBlogPl = document.getElementById('save-blog-pl');
+  if (saveBlogPl) {
+    saveBlogPl.addEventListener('click', function() {
+      saveFields([
+        ['admin-blog-title-pl','plBlogTitle'],
+        ['admin-blog-subtitle-pl','plBlogSubtitle'],
+        ['admin-blog-noposts-pl','plBlogNoPostsMessage']
+      ]);
+      const msg = document.getElementById('blog-save-msg-pl');
+      if (msg) {
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      }
+    });
+  }
 });

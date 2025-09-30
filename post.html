@@ -45,6 +45,12 @@
                     <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
                     <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
                     <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <!-- Language switcher (English Blog Post page) -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <span class="text-black font-semibold">EN</span>
+                        <span class="text-black">|</span>
+                        <a id="lang-pl-link" href="post-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+                    </div>
                     <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
                 </div>
                 <!-- Mobile hamburger toggler -->
@@ -175,6 +181,15 @@
             para.textContent = p;
             container.appendChild(para);
         });
+    });
+    </script>
+    <script>
+    // Dynamically set the Polish link in the language switcher to preserve query string
+    document.addEventListener('DOMContentLoaded', function() {
+        const plLink = document.getElementById('lang-pl-link');
+        if (plLink) {
+            plLink.href = 'post-pl.html' + window.location.search;
+        }
     });
     </script>
 </body>

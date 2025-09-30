@@ -181,18 +181,24 @@
                     <h1 class="text-2xl font-display font-bold text-black">Idol Brands</h1>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
-                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
-                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
-                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
-                    <!-- Updated to point to calculator on the index page instead of local anchor so it works correctly when not on index page -->
-                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
-                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <a href="about-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">O&nbsp;nas</a>
+                    <a href="how-it-works-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Jak&nbsp;to&nbsp;działa</a>
+                    <a href="success-stories-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Historie&nbsp;sukcesu</a>
+                    <a href="blog-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <!-- Updated to point to the calculator on the English index page because calculator is only available there -->
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Kalkulator</a>
+                    <a href="your-documents-pl.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Twoje&nbsp;dokumenty</a>
                     <!-- Hidden admin dashboard link.  Visible only for admin sessions -->
                     <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
-                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
-                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
-                    <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+                    <a href="login-pl.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Zaloguj&nbsp;się</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
+                    <!-- Language switcher for Polish fashion page -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <a href="index-fashion.html" class="text-black hover:text-gray-600 font-medium">EN</a>
+                        <span class="text-black">|</span>
+                        <span class="text-black font-semibold">PL</span>
+                    </div>
+                    <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Załóż&nbsp;swoją&nbsp;markę</a>
                 </div>
                 <div class="md:hidden">
                     <!-- Mobile hamburger toggler for fashion page -->
@@ -206,16 +212,22 @@
     <!-- Mobile menu panel: hidden by default on desktop (md:hidden). Contains duplicate nav links for mobile users. -->
     <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
       <div class="px-4 py-4 space-y-4">
-        <a href="about.html" class="block text-black font-medium">About</a>
-        <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
-        <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
-        <a href="blog.html" class="block text-black font-medium">Blog</a>
-        <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
-        <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
+        <a href="about-pl.html" class="block text-black font-medium">O&nbsp;nas</a>
+        <a href="how-it-works-pl.html" class="block text-black font-medium">Jak&nbsp;to&nbsp;działa</a>
+        <a href="success-stories-pl.html" class="block text-black font-medium">Historie&nbsp;sukcesu</a>
+        <a href="blog-pl.html" class="block text-black font-medium">Blog</a>
+        <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Kalkulator</a>
+        <a href="your-documents-pl.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Twoje&nbsp;dokumenty</a>
         <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
-        <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
-        <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
-        <a href="#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+        <a href="login-pl.html" id="nav-login-mobile" class="block text-black font-medium">Zaloguj&nbsp;się</a>
+        <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
+        <!-- Language switcher for mobile on Polish fashion page -->
+        <div class="flex justify-center space-x-1 text-sm py-2">
+          <a href="index-fashion.html" class="text-black hover:text-gray-600 font-medium">EN</a>
+          <span class="text-black">|</span>
+          <span class="text-black font-semibold">PL</span>
+        </div>
+        <a href="#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Załóż&nbsp;swoją&nbsp;markę</a>
       </div>
     </div>
 
@@ -997,40 +1009,43 @@
             const val = localStorage.getItem(key);
             return val !== null ? val : def;
         }
+        // Metrics: prefer Polish translations if available
         const msVal = document.getElementById('metric-market-size-value');
-        if (msVal) msVal.textContent = getItem('metricMarketSizeValue', msVal.textContent);
+        if (msVal) msVal.textContent = getItem('plMetricMarketSizeValue', getItem('metricMarketSizeValue', msVal.textContent));
         const msLabel = document.getElementById('metric-market-size-label');
-        if (msLabel) msLabel.textContent = getItem('metricMarketSizeLabel', msLabel.textContent);
+        if (msLabel) msLabel.textContent = getItem('plMetricMarketSizeLabel', getItem('metricMarketSizeLabel', msLabel.textContent));
         const grVal = document.getElementById('metric-growth-rate-value');
-        if (grVal) grVal.textContent = getItem('metricGrowthRateValue', grVal.textContent);
+        if (grVal) grVal.textContent = getItem('plMetricGrowthRateValue', getItem('metricGrowthRateValue', grVal.textContent));
         const grLabel = document.getElementById('metric-growth-rate-label');
-        if (grLabel) grLabel.textContent = getItem('metricGrowthRateLabel', grLabel.textContent);
+        if (grLabel) grLabel.textContent = getItem('plMetricGrowthRateLabel', getItem('metricGrowthRateLabel', grLabel.textContent));
         const frVal = document.getElementById('metric-fail-rate-value');
-        if (frVal) frVal.textContent = getItem('metricFailRateValue', frVal.textContent);
+        if (frVal) frVal.textContent = getItem('plMetricFailRateValue', getItem('metricFailRateValue', frVal.textContent));
         const frLabel = document.getElementById('metric-fail-rate-label');
-        if (frLabel) frLabel.textContent = getItem('metricFailRateLabel', frLabel.textContent);
+        if (frLabel) frLabel.textContent = getItem('plMetricFailRateLabel', getItem('metricFailRateLabel', frLabel.textContent));
         const tagEl = document.getElementById('metric-tagline');
-        if (tagEl) tagEl.textContent = getItem('metricTagline', tagEl.textContent);
+        if (tagEl) tagEl.textContent = getItem('plMetricTagline', getItem('metricTagline', tagEl.textContent));
+        // Start section: prefer Polish translations
         const startTitle = document.getElementById('home-start-title');
-        if (startTitle) startTitle.textContent = getItem('homeStartTitle', startTitle.textContent);
+        if (startTitle) startTitle.textContent = getItem('plHomeStartTitle', getItem('homeStartTitle', startTitle.textContent));
         const startSub = document.getElementById('home-start-subtitle');
-        if (startSub) startSub.textContent = getItem('homeStartSubtitle', startSub.textContent);
+        if (startSub) startSub.textContent = getItem('plHomeStartSubtitle', getItem('homeStartSubtitle', startSub.textContent));
+        // Feature cards: prefer Polish translations
         const f1Title = document.getElementById('home-feature1-title');
-        if (f1Title) f1Title.textContent = getItem('homeFeature1Title', f1Title.textContent);
+        if (f1Title) f1Title.textContent = getItem('plHomeFeature1Title', getItem('homeFeature1Title', f1Title.textContent));
         const f1Desc = document.getElementById('home-feature1-desc');
-        if (f1Desc) f1Desc.textContent = getItem('homeFeature1Desc', f1Desc.textContent);
+        if (f1Desc) f1Desc.textContent = getItem('plHomeFeature1Desc', getItem('homeFeature1Desc', f1Desc.textContent));
         const f2Title = document.getElementById('home-feature2-title');
-        if (f2Title) f2Title.textContent = getItem('homeFeature2Title', f2Title.textContent);
+        if (f2Title) f2Title.textContent = getItem('plHomeFeature2Title', getItem('homeFeature2Title', f2Title.textContent));
         const f2Desc = document.getElementById('home-feature2-desc');
-        if (f2Desc) f2Desc.textContent = getItem('homeFeature2Desc', f2Desc.textContent);
+        if (f2Desc) f2Desc.textContent = getItem('plHomeFeature2Desc', getItem('homeFeature2Desc', f2Desc.textContent));
         const f3Title = document.getElementById('home-feature3-title');
-        if (f3Title) f3Title.textContent = getItem('homeFeature3Title', f3Title.textContent);
+        if (f3Title) f3Title.textContent = getItem('plHomeFeature3Title', getItem('homeFeature3Title', f3Title.textContent));
         const f3Desc = document.getElementById('home-feature3-desc');
-        if (f3Desc) f3Desc.textContent = getItem('homeFeature3Desc', f3Desc.textContent);
+        if (f3Desc) f3Desc.textContent = getItem('plHomeFeature3Desc', getItem('homeFeature3Desc', f3Desc.textContent));
 
-        // CTA button
+        // CTA button: prefer Polish translation
         const cta = document.getElementById('home-cta-text');
-        if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
+        if (cta) cta.textContent = getItem('plHomeCtaText', getItem('homeCtaText', cta.textContent));
     });
     </script>
     <!-- Authentication helper to control login state, nav and calculator visibility -->
@@ -1040,12 +1055,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         const titleElem = document.getElementById('hero-title');
         const subtitleElem = document.getElementById('hero-subtitle');
-        const storedTitle = localStorage.getItem('heroTitle');
-        const storedSubtitle = localStorage.getItem('heroSubtitle');
-        if (storedTitle) {
+        // Prefer Polish hero content if available, otherwise fallback to English
+        const storedTitle = localStorage.getItem('plHeroTitle') || localStorage.getItem('heroTitle');
+        const storedSubtitle = localStorage.getItem('plHeroSubtitle') || localStorage.getItem('heroSubtitle');
+        if (storedTitle && titleElem) {
             titleElem.innerHTML = storedTitle;
         }
-        if (storedSubtitle) {
+        if (storedSubtitle && subtitleElem) {
             subtitleElem.textContent = storedSubtitle;
         }
     });
