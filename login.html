@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Idol Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-100 font-sans">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-3xl font-bold mb-6 text-center">Influencer Login</h1>
+        <p class="text-sm text-gray-600 mb-4 text-center">Enter the credentials provided in your acceptance email.</p>
+        <form id="login-form" class="space-y-4">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Enter your username" required>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="w-full bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800">Login</button>
+        </form>
+        <p id="error-message" class="text-red-600 text-sm mt-4 hidden text-center">Invalid username or password.</p>
+    </div>
+
+    <script>
+    // Attach handler after DOM load
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        // Hardcoded credentials for demo purposes. In a real application these
+        // would be validated on the server.
+        const VALID_USER = 'influencer';
+        const VALID_PASS = 'idol2025';
+        if (username === VALID_USER && password === VALID_PASS) {
+            localStorage.setItem('loggedIn', 'true');
+            window.location.href = 'index.html';
+        } else {
+            const error = document.getElementById('error-message');
+            error.classList.remove('hidden');
+        }
+    });
+    </script>
+</body>
+</html>

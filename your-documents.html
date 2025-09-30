@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Documents – Idol Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-display font-bold text-black">Idol Brands</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium">Your Documents</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" onclick="logout()">Logout</a>
+                    <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-display font-bold mb-6">Your Documents</h1>
+        <p class="mb-8 text-gray-600">Below you'll find any documents we've shared with you, such as agreements, brochures and presentations. If nothing appears here you haven't been assigned any documents yet.</p>
+        <ul id="documents-list" class="space-y-4">
+            <!-- Documents will be dynamically inserted here in future. For now this is static. -->
+            <li class="bg-white p-4 rounded-lg shadow text-gray-500">No documents available. Check back later.</li>
+        </ul>
+    </div>
+
+    <script>
+    // Require login on this page
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!isLoggedIn()) {
+            // redirect to login if not authenticated
+            window.location.href = 'login.html';
+        }
+    });
+    </script>
+</body>
+</html>
