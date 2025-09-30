@@ -963,7 +963,17 @@
         // Display up to 3 latest posts (most recent first)
         posts.slice().reverse().slice(0,3).forEach(function(post) {
             const card = document.createElement('div');
-            card.className = 'bg-white rounded-xl shadow p-6 flex flex-col';
+            card.className = 'bg-white rounded-xl shadow overflow-hidden flex flex-col';
+            // If the post has an image, show it at the top of the card
+            if (post.img) {
+                const img = document.createElement('img');
+                img.src = post.img;
+                img.alt = post.title || '';
+                img.className = 'w-full h-48 object-cover';
+                card.appendChild(img);
+            }
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'p-6 flex flex-col flex-grow';
             const title = document.createElement('h3');
             title.className = 'text-2xl font-bold text-black mb-3';
             title.textContent = post.title || 'Untitled Post';
@@ -972,11 +982,12 @@
             date.textContent = post.date || '';
             const excerpt = document.createElement('p');
             excerpt.className = 'text-gray-700 flex-grow';
-            const content = (post.content || '').replace(/\n+/g, ' ').trim();
-            excerpt.textContent = content.substring(0, 150) + (content.length > 150 ? '…' : '');
-            card.appendChild(title);
-            if (post.date) card.appendChild(date);
-            card.appendChild(excerpt);
+            const contentText = (post.content || '').replace(/\n+/g, ' ').trim();
+            excerpt.textContent = contentText.substring(0, 150) + (contentText.length > 150 ? '…' : '');
+            contentWrapper.appendChild(title);
+            if (post.date) contentWrapper.appendChild(date);
+            contentWrapper.appendChild(excerpt);
+            card.appendChild(contentWrapper);
             blogContainer.appendChild(card);
         });
     });

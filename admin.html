@@ -232,10 +232,22 @@
         <section class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Manage Blog Posts</h2>
             <p class="text-sm text-gray-600 mb-4">Create new blog posts or edit existing ones.  Posts are stored locally and shown on the home page.</p>
+            <!-- Blog post title -->
             <div class="mb-4">
                 <label for="blog-title" class="block text-sm font-medium text-gray-700 mb-1">Post Title</label>
                 <input id="blog-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
             </div>
+            <!-- Blog post image upload -->
+            <div class="mb-4">
+                <label for="blog-image" class="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
+                <!--
+                  The admin can upload an image for each blog post.  The image is converted to a Base64 data URL and stored in localStorage alongside the post data.  When editing a post,
+                  leaving this field blank will keep the previous image.
+                -->
+                <input id="blog-image" type="file" accept="image/*" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                <div id="blog-image-preview" class="mt-2"></div>
+            </div>
+            <!-- Blog post content -->
             <div class="mb-4">
                 <label for="blog-content" class="block text-sm font-medium text-gray-700 mb-1">Content</label>
                 <textarea id="blog-content" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
@@ -460,8 +472,27 @@
         let editingPostIndex = -1;
         const blogTitleField = document.getElementById('blog-title');
         const blogContentField = document.getElementById('blog-content');
+        const blogImageField = document.getElementById('blog-image');
+        const blogImagePreview = document.getElementById('blog-image-preview');
         const blogListElem = document.getElementById('blog-posts-list');
         const blogSaveBtn = document.getElementById('blog-save');
+
+        // When the admin selects an image file, display a preview of the uploaded image
+        blogImageField.addEventListener('change', function() {
+            blogImagePreview.innerHTML = '';
+            const file = this.files && this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Preview';
+                    img.className = 'w-full mb-2 rounded';
+                    blogImagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
         function loadBlogPosts() {
             let posts = [];
@@ -488,6 +519,14 @@
                 const date = document.createElement('p');
                 date.className = 'text-xs text-gray-500 mb-2';
                 date.textContent = post.date || '';
+                // Optionally display a small thumbnail in the admin list
+                if (post.img) {
+                    const thumb = document.createElement('img');
+                    thumb.src = post.img;
+                    thumb.alt = post.title || '';
+                    thumb.className = 'w-full mb-2 rounded';
+                    li.appendChild(thumb);
+                }
                 const actions = document.createElement('div');
                 actions.className = 'mt-2';
                 const editBtn = document.createElement('button');
@@ -497,6 +536,15 @@
                     editingPostIndex = index;
                     blogTitleField.value = post.title;
                     blogContentField.value = post.content;
+                    // Set preview and clear file input when editing.  We don't prefill the file input due to browser restrictions.
+                    if (post.img) {
+                        blogImagePreview.innerHTML = '';
+                        const img = document.createElement('img');
+                        img.src = post.img;
+                        img.alt = post.title || '';
+                        img.className = 'w-full mb-2 rounded';
+                        blogImagePreview.appendChild(img);
+                    }
                     blogSaveBtn.textContent = 'Update Blog Post';
                 });
                 const deleteBtn = document.createElement('button');
@@ -508,6 +556,8 @@
                     editingPostIndex = -1;
                     blogTitleField.value = '';
                     blogContentField.value = '';
+                    blogImageField.value = '';
+                    blogImagePreview.innerHTML = '';
                     blogSaveBtn.textContent = 'Save Blog Post';
                     loadBlogPosts();
                 });
@@ -524,6 +574,7 @@
         loadBlogPosts();
 
         blogSaveBtn.addEventListener('click', function() {
+            // Retrieve existing posts from storage
             let posts = [];
             try {
                 const stored = localStorage.getItem('blogPosts');
@@ -536,21 +587,53 @@
             if (!title || !content) return; // require both fields
             const now = new Date();
             const dateStr = now.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-            if (editingPostIndex >= 0 && editingPostIndex < posts.length) {
-                // update existing post
-                posts[editingPostIndex] = { title: title, content: content, date: dateStr };
-                editingPostIndex = -1;
-                blogSaveBtn.textContent = 'Save Blog Post';
-            } else {
-                posts.push({ title: title, content: content, date: dateStr });
+            // Helper to finalize saving after image reading completes
+            function finalizeSave(imgDataUrl) {
+                if (editingPostIndex >= 0 && editingPostIndex < posts.length) {
+                    // update existing post, preserving old image if new one not provided
+                    const existing = posts[editingPostIndex] || {};
+                    posts[editingPostIndex] = {
+                        title: title,
+                        content: content,
+                        date: dateStr,
+                        img: imgDataUrl || existing.img || null
+                    };
+                    editingPostIndex = -1;
+                    blogSaveBtn.textContent = 'Save Blog Post';
+                } else {
+                    posts.push({
+                        title: title,
+                        content: content,
+                        date: dateStr,
+                        img: imgDataUrl || null
+                    });
+                }
+                localStorage.setItem('blogPosts', JSON.stringify(posts));
+                blogTitleField.value = '';
+                blogContentField.value = '';
+                blogImageField.value = '';
+                blogImagePreview.innerHTML = '';
+                const msg = document.getElementById('blog-save-msg');
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 2000);
+                loadBlogPosts();
             }
-            localStorage.setItem('blogPosts', JSON.stringify(posts));
-            blogTitleField.value = '';
-            blogContentField.value = '';
-            const msg = document.getElementById('blog-save-msg');
-            msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 2000);
-            loadBlogPosts();
+            // If a new image file is selected, read it; otherwise save immediately
+            const file = blogImageField.files && blogImageField.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgDataUrl = e.target.result;
+                    finalizeSave(imgDataUrl);
+                };
+                reader.onerror = function() {
+                    // If reading fails, proceed without image
+                    finalizeSave(null);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                finalizeSave(null);
+            }
         });
         // Document management
         function loadAdminDocs() {
