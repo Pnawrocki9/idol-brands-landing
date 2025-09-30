@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idol Brands Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #000;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="fade-in">
+                <h1 class="text-6xl font-display font-bold text-black mb-4">Blog</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Read our latest insights, tips and stories to inspire your fashion journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="blog-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <p id="no-posts-msg" class="text-gray-600 text-center mt-8 hidden">No blog posts available yet.</p>
+        </div>
+    </section>
+
+    <!-- Footer (optional simple footer) -->
+    <footer class="py-6 bg-gray-100 border-t border-gray-200 text-center">
+        <p class="text-sm text-gray-600">&copy; <span id="copyright-year"></span> Idol Brands. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        // Load blog posts from localStorage
+        const grid = document.getElementById('blog-posts-grid');
+        const noPostsMsg = document.getElementById('no-posts-msg');
+        let posts = [];
+        try {
+            const stored = localStorage.getItem('blogPosts');
+            if (stored) posts = JSON.parse(stored);
+        } catch (e) {
+            posts = [];
+        }
+        grid.innerHTML = '';
+        if (!posts || posts.length === 0) {
+            noPostsMsg.classList.remove('hidden');
+            return;
+        }
+        noPostsMsg.classList.add('hidden');
+        // Display all posts as cards
+        posts.slice().reverse().forEach(function(post) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow overflow-hidden flex flex-col';
+            // Add image if present
+            if (post.img) {
+                const img = document.createElement('img');
+                img.src = post.img;
+                img.alt = post.title || '';
+                img.className = 'w-full h-56 object-cover';
+                card.appendChild(img);
+            }
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'p-6 flex flex-col flex-grow';
+            const title = document.createElement('h3');
+            title.className = 'text-2xl font-bold text-black mb-2';
+            title.textContent = post.title || 'Untitled';
+            const date = document.createElement('p');
+            date.className = 'text-sm text-gray-500 mb-4';
+            date.textContent = post.date || '';
+            const excerpt = document.createElement('p');
+            excerpt.className = 'text-gray-700 flex-grow';
+            const contentText = (post.content || '').replace(/\n+/g, ' ').trim();
+            excerpt.textContent = contentText.substring(0, 200) + (contentText.length > 200 ? '…' : '');
+            contentWrapper.appendChild(title);
+            if (post.date) contentWrapper.appendChild(date);
+            contentWrapper.appendChild(excerpt);
+            card.appendChild(contentWrapper);
+            grid.appendChild(card);
+        });
+    });
+    </script>
+</body>
+</html>
