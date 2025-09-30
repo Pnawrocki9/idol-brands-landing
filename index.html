@@ -733,36 +733,93 @@
             const collection = document.getElementById('collection-select').value;
             const liveSessions = parseFloat(document.getElementById('live-sessions').value) || 8;
 
-            // LIVE conversion funnel - Updated with influencer commission model
-            const followersToLiveConversion = 0.05; // 5% followers convert to LIVE participants
-            const liveToPurchaseConversion = 0.15;  // 15% LIVE participants make purchase
-            
-            // Niche-specific AOV with standard 20% influencer commission
-            const nicheData = {
-                fashion: { aov: 100 },      // General fashion: $100 AOV
-                streetwear: { aov: 120 },   // Streetwear: $120 AOV  
-                luxury: { aov: 250 },       // Luxury: $250 AOV
-                accessories: { aov: 80 }    // Accessories: $80 AOV
-            };
-            
-            const avgOrderValue = nicheData[niche].aov;
-            const profitMargin = 0.20; // Standard 20% influencer commission for all niches
+            // LIVE conversion funnel - allow admin-defined values from localStorage
+            let followersToLiveConversion;
+            let liveToPurchaseConversion;
+            {
+                const storedFollowersConv = parseFloat(localStorage.getItem('followersToLiveConversion'));
+                followersToLiveConversion = isNaN(storedFollowersConv) ? 0.05 : storedFollowersConv;
+                const storedLiveConv = parseFloat(localStorage.getItem('liveToPurchaseConversion'));
+                liveToPurchaseConversion = isNaN(storedLiveConv) ? 0.15 : storedLiveConv;
+            }
 
-            // Collection type multipliers
-            const collectionMultipliers = {
+            // Niche-specific AOV with admin overrides
+            let nicheData = {
+                fashion: { aov: 100 },
+                streetwear: { aov: 120 },
+                luxury: { aov: 250 },
+                accessories: { aov: 80 }
+            };
+            {
+                const storedNicheAOV = localStorage.getItem('nicheAOV');
+                if (storedNicheAOV) {
+                    try {
+                        const obj = JSON.parse(storedNicheAOV);
+                        nicheData = {
+                            fashion: { aov: obj.fashion || 100 },
+                            streetwear: { aov: obj.streetwear || 120 },
+                            luxury: { aov: obj.luxury || 250 },
+                            accessories: { aov: obj.accessories || 80 }
+                        };
+                    } catch (e) {
+                        // ignore parse errors and keep defaults
+                    }
+                }
+            }
+            const avgOrderValue = nicheData[niche].aov;
+            // Profit margin (commission) may be overridden by admin
+            let profitMargin;
+            {
+                const storedProfit = parseFloat(localStorage.getItem('profitMargin'));
+                profitMargin = isNaN(storedProfit) ? 0.20 : storedProfit;
+            }
+
+            // Collection type multipliers with admin overrides
+            let collectionMultipliers = {
                 basic: 1.0,
                 seasonal: 1.2,
                 limited: 1.5,
                 premium: 1.8
             };
-
-            // Niche multipliers for engagement
-            const nicheMultipliers = {
+            {
+                const storedCollection = localStorage.getItem('collectionMultipliers');
+                if (storedCollection) {
+                    try {
+                        const obj = JSON.parse(storedCollection);
+                        collectionMultipliers = {
+                            basic: obj.basic || 1.0,
+                            seasonal: obj.seasonal || 1.2,
+                            limited: obj.limited || 1.5,
+                            premium: obj.premium || 1.8
+                        };
+                    } catch (e) {
+                        // ignore parse errors
+                    }
+                }
+            }
+            // Niche engagement multipliers with admin overrides
+            let nicheMultipliers = {
                 fashion: 1.0,
                 streetwear: 1.1,
                 luxury: 0.8,
                 accessories: 1.3
             };
+            {
+                const storedNicheMult = localStorage.getItem('nicheMultipliers');
+                if (storedNicheMult) {
+                    try {
+                        const obj = JSON.parse(storedNicheMult);
+                        nicheMultipliers = {
+                            fashion: obj.fashion || 1.0,
+                            streetwear: obj.streetwear || 1.1,
+                            luxury: obj.luxury || 0.8,
+                            accessories: obj.accessories || 1.3
+                        };
+                    } catch (e) {
+                        // ignore parse errors
+                    }
+                }
+            }
 
             // Calculations
             const engagedAudience = Math.round(followers * (engagement / 100));
