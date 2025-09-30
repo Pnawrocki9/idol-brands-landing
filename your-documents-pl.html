@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Documents – Idol Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-display font-bold text-black">Idol Brands</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium">Your Documents</a>
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <a href="index.html#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+                </div>
+                <!-- Mobile hamburger toggler -->
+                <div class="md:hidden">
+                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+        <div class="px-4 py-4 space-y-4">
+            <a href="about.html" class="block text-black font-medium">About</a>
+            <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
+            <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
+            <a href="blog.html" class="block text-black font-medium">Blog</a>
+            <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+            <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium">Your Documents</a>
+            <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+            <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
+            <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
+            <a href="index.html#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+        </div>
+    </div>
+
+    <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-display font-bold mb-6">Your Documents</h1>
+        <p class="mb-8 text-gray-600">Below you'll find any documents we've shared with you, such as agreements, brochures and presentations. If nothing appears here you haven't been assigned any documents yet.</p>
+        <ul id="documents-list" class="space-y-4">
+            <!-- Documents will be dynamically inserted here in future. For now this is static. -->
+            <li class="bg-white p-4 rounded-lg shadow text-gray-500">No documents available. Check back later.</li>
+        </ul>
+    </div>
+
+    <script>
+    // Require login on this page and load any shared documents.  When an influencer
+    // or admin visits this page, we first ensure they are authenticated.  Then
+    // we populate the documents list from localStorage.  Admins additionally
+    // see a delete button to remove documents.
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!isLoggedIn()) {
+            window.location.href = 'login.html';
+            return;
+        }
+        const listElem = document.getElementById('documents-list');
+        // Retrieve stored documents (an array of objects with name and data fields).
+        const stored = localStorage.getItem('documents');
+        if (stored) {
+            try {
+                const docs = JSON.parse(stored);
+                if (Array.isArray(docs) && docs.length > 0) {
+                    // Clear placeholder
+                    listElem.innerHTML = '';
+                    docs.forEach(function(doc, index) {
+                        const li = document.createElement('li');
+                        li.className = 'bg-white p-4 rounded-lg shadow flex justify-between items-center';
+                        const link = document.createElement('a');
+                        link.href = doc.data;
+                        link.textContent = doc.name;
+                        link.setAttribute('download', doc.name);
+                        link.className = 'text-blue-600 hover:underline';
+                        li.appendChild(link);
+                        // Show delete button only for admin users
+                        if (typeof isAdmin === 'function' && isAdmin()) {
+                            const btn = document.createElement('button');
+                            btn.textContent = 'Delete';
+                            btn.className = 'text-red-600 hover:underline ml-4 text-sm';
+                            btn.addEventListener('click', function() {
+                                docs.splice(index, 1);
+                                localStorage.setItem('documents', JSON.stringify(docs));
+                                location.reload();
+                            });
+                            li.appendChild(btn);
+                        }
+                        listElem.appendChild(li);
+                    });
+                }
+            } catch (err) {
+                console.error('Failed to parse documents from localStorage', err);
+            }
+        }
+    });
+    </script>
+
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. All rights reserved.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

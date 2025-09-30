@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idol Brands 2.0 - Turn Your Influence Into a Fashion Empire</title>
+    <title>Idol Brands Fashion - Live-Selling Marketplace for Influencers</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -185,22 +185,17 @@
                     <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
                     <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
                     <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
-                    <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <!-- Updated to point to calculator on the index page instead of local anchor so it works correctly when not on index page -->
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
                     <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
-                    <!-- Admin dashboard link is hidden by default; shown only when an admin is logged in -->
+                    <!-- Hidden admin dashboard link.  Visible only for admin sessions -->
                     <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
                     <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
                     <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
-                    <!-- Language switcher (English page) -->
-                    <div class="flex items-center space-x-1 text-sm mr-4">
-                        <span class="text-black font-semibold">EN</span>
-                        <span class="text-black">|</span>
-                        <a href="index-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
-                    </div>
                     <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
                 </div>
                 <div class="md:hidden">
-                    <!-- Mobile hamburger toggler.  aria-* attributes improve accessibility. -->
+                    <!-- Mobile hamburger toggler for fashion page -->
                     <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
                         <i id="menuIcon" class="fas fa-bars text-xl"></i>
                     </button>
@@ -215,17 +210,11 @@
         <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
         <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
         <a href="blog.html" class="block text-black font-medium">Blog</a>
-        <a href="#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+        <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
         <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
         <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
         <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
         <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
-        <!-- Language switcher for mobile -->
-        <div class="flex justify-center space-x-1 text-sm py-2">
-          <span class="text-black font-semibold">EN</span>
-          <span class="text-black">|</span>
-          <a href="index-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
-        </div>
         <a href="#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
       </div>
     </div>
@@ -237,14 +226,12 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8">
                     <div class="floating-element">
-                        <!-- The hero heading now has an id so it can be customised by an admin via localStorage. -->
                         <h1 id="hero-title" class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
                             <span class="text-gradient">Turn Your</span><br>
                             <span class="text-black">Influence</span><br>
                             <span class="text-gradient">Into Fashion</span>
                         </h1>
                     </div>
-                    <!-- Subtitle also has an id for CMS editing -->
                     <p id="hero-subtitle" class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
                         We handle everything from design to delivery so you can focus on your story. 
                         The only platform that transforms influencers into fashion brand owners.
@@ -260,7 +247,7 @@
                     </div>
                 </div>
                 <div class="relative">
-                    <!-- New hero image and metrics layout -->
+                    <!-- New hero image and metrics layout for fashion page -->
                     <div class="w-4/5 mx-auto transform rotate-2">
                         <div class="bg-white p-2 rounded-xl shadow-xl">
                             <img src="images/hero-market.jpg" alt="Live selling platform" class="rounded-lg w-full">
@@ -603,12 +590,10 @@
                             <div>
                                 <label for="followers-range" class="block text-sm font-semibold text-black mb-2">Followers Count</label>
                                 <!--
-                                  The ROI calculator above also uses an input with the id `followers`.
-                                  Duplicate IDs in a single document can cause unpredictable behaviour when
-                                  JavaScript looks up an element by its ID. To avoid conflicts, give this
-                                  select element a distinct identifier (followers-range) and update the
-                                  corresponding label's `for` attribute. The `name` attribute is also
-                                  updated to reflect the new identifier.
+                                  Avoid duplicate IDs: the ROI calculator uses an input with id `followers`.
+                                  This select in the waiting list uses a unique id (`followers-range`) and
+                                  matching name attribute to prevent conflicts when scripts query for
+                                  elements by ID.
                                 -->
                                 <select id="followers-range" name="followersRange" required 
                                         class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors">
@@ -738,8 +723,8 @@
     </footer>
 
     <script>
-        // Initialize Vanta.js background
-        VANTA.BIRDS({
+        // Initialize Vanta.js background with fashion runway theme
+        VANTA.WAVES({
             el: "#vanta-bg",
             mouseControls: true,
             touchControls: true,
@@ -748,17 +733,54 @@
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            backgroundColor: 0xf8f9fa,
-            color1: 0x000000,
-            color2: 0x333333,
-            birdSize: 1.20,
-            wingSpan: 20.00,
-            speedLimit: 4.00,
-            separation: 20.00,
-            alignment: 20.00,
-            cohesion: 20.00,
-            quantity: 3.00
+            color: 0x000000,
+            shininess: 30.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.75,
+            zoom: 0.65
         });
+        
+        // Add fashion silhouettes animation
+        function createFashionSilhouettes() {
+            const heroSection = document.querySelector('.hero-bg');
+            if (!heroSection) return;
+            
+            // Create fashion model silhouettes
+            for (let i = 0; i < 5; i++) {
+                const silhouette = document.createElement('div');
+                silhouette.className = 'fashion-silhouette';
+                silhouette.style.cssText = `
+                    position: absolute;
+                    width: 60px;
+                    height: 120px;
+                    background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+                    clip-path: polygon(50% 0%, 45% 20%, 40% 40%, 35% 60%, 30% 80%, 25% 100%, 75% 100%, 70% 80%, 65% 60%, 60% 40%, 55% 20%);
+                    animation: runwayWalk 20s infinite linear;
+                    animation-delay: ${i * 4}s;
+                    bottom: 10%;
+                    left: ${-10 + i * 25}%;
+                    z-index: 1;
+                `;
+                heroSection.appendChild(silhouette);
+            }
+        }
+        
+        // Add CSS for runway animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes runwayWalk {
+                0% { transform: translateX(-100px) scaleX(-1); opacity: 0; }
+                10% { opacity: 1; }
+                45% { transform: translateX(50vw) scaleX(-1); }
+                50% { transform: translateX(50vw) scaleX(1); }
+                90% { opacity: 1; }
+                100% { transform: translateX(calc(100vw + 100px)) scaleX(1); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize silhouettes after page load
+        setTimeout(createFashionSilhouettes, 1000);
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -975,7 +997,6 @@
             const val = localStorage.getItem(key);
             return val !== null ? val : def;
         }
-        // Metrics
         const msVal = document.getElementById('metric-market-size-value');
         if (msVal) msVal.textContent = getItem('metricMarketSizeValue', msVal.textContent);
         const msLabel = document.getElementById('metric-market-size-label');
@@ -990,12 +1011,10 @@
         if (frLabel) frLabel.textContent = getItem('metricFailRateLabel', frLabel.textContent);
         const tagEl = document.getElementById('metric-tagline');
         if (tagEl) tagEl.textContent = getItem('metricTagline', tagEl.textContent);
-        // Start section
         const startTitle = document.getElementById('home-start-title');
         if (startTitle) startTitle.textContent = getItem('homeStartTitle', startTitle.textContent);
         const startSub = document.getElementById('home-start-subtitle');
         if (startSub) startSub.textContent = getItem('homeStartSubtitle', startSub.textContent);
-        // Feature cards
         const f1Title = document.getElementById('home-feature1-title');
         if (f1Title) f1Title.textContent = getItem('homeFeature1Title', f1Title.textContent);
         const f1Desc = document.getElementById('home-feature1-desc');
@@ -1014,22 +1033,19 @@
         if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
     });
     </script>
-    <!-- Authentication helper to control login state, navigation and calculator visibility -->
+    <!-- Authentication helper to control login state, nav and calculator visibility -->
     <script src="auth.js"></script>
-    <!-- Apply any custom hero text stored by the admin.  When an administrator edits
-         the hero title or subtitle in the admin dashboard, it is saved in
-         localStorage.  On page load we replace the default headings with those values. -->
+    <!-- Apply custom hero content on fashion index page from localStorage -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const titleElem = document.getElementById('hero-title');
         const subtitleElem = document.getElementById('hero-subtitle');
         const storedTitle = localStorage.getItem('heroTitle');
         const storedSubtitle = localStorage.getItem('heroSubtitle');
-        if (storedTitle && titleElem) {
-            // heroTitle may contain HTML spans and line breaks so use innerHTML
+        if (storedTitle) {
             titleElem.innerHTML = storedTitle;
         }
-        if (storedSubtitle && subtitleElem) {
+        if (storedSubtitle) {
             subtitleElem.textContent = storedSubtitle;
         }
     });
@@ -1043,12 +1059,11 @@
             form.addEventListener('submit', function (e) {
                 const requiredConsent = document.getElementById('consent-required');
                 if (requiredConsent && !requiredConsent.checked) {
-                    // Prevent form submission if the mandatory GDPR consent is unchecked
                     e.preventDefault();
                     alert('Please consent to data processing to join the waiting list.');
                     return false;
                 }
-                // Collect form data and save as a new user record in localStorage
+                // Save user data to localStorage so that administrators can manage sign‑ups
                 const firstName = document.getElementById('firstName')?.value || '';
                 const lastName = document.getElementById('lastName')?.value || '';
                 const email = document.getElementById('email')?.value || '';

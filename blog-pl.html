@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idol Brands Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #000;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
+                </div>
+                <!-- Mobile hamburger toggler -->
+                <div class="md:hidden">
+                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+        <div class="px-4 py-4 space-y-4">
+            <a href="index.html" class="block text-black font-medium">Home</a>
+            <a href="about.html" class="block text-black font-medium">About</a>
+            <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
+            <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
+            <a href="blog.html" class="block text-black font-medium">Blog</a>
+            <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+            <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
+            <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+            <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
+            <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
+            <a href="index.html#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="fade-in">
+                <h1 class="text-6xl font-display font-bold text-black mb-4">Blog</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Read our latest insights, tips and stories to inspire your fashion journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="blog-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <p id="no-posts-msg" class="text-gray-600 text-center mt-8 hidden">No blog posts available yet.</p>
+        </div>
+    </section>
+
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. All rights reserved.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        // Load blog posts from localStorage
+        const grid = document.getElementById('blog-posts-grid');
+        const noPostsMsg = document.getElementById('no-posts-msg');
+        let posts = [];
+        try {
+            const stored = localStorage.getItem('blogPosts');
+            if (stored) posts = JSON.parse(stored);
+        } catch (e) {
+            posts = [];
+        }
+        grid.innerHTML = '';
+        if (!posts || posts.length === 0) {
+            noPostsMsg.classList.remove('hidden');
+            return;
+        }
+        noPostsMsg.classList.add('hidden');
+        // Display all posts as cards with click handler to open full post
+        const total = posts.length;
+        posts.slice().reverse().forEach(function(post, idx) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow overflow-hidden cursor-pointer';
+            // Add image if present
+            if (post.img) {
+                const img = document.createElement('img');
+                img.src = post.img;
+                img.alt = post.title || '';
+                img.className = 'w-full h-56 object-cover';
+                card.appendChild(img);
+            }
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'p-4';
+            const title = document.createElement('h3');
+            title.className = 'text-xl font-bold text-black';
+            title.textContent = post.title || 'Untitled';
+            const date = document.createElement('p');
+            date.className = 'text-sm text-gray-500 mb-2';
+            date.textContent = post.date || '';
+            contentWrapper.appendChild(title);
+            if (post.date) contentWrapper.appendChild(date);
+            card.appendChild(contentWrapper);
+            // Determine the original index of this post in the posts array (not reversed)
+            const globalIndex = total - 1 - idx;
+            // Add click event to open full post
+            card.addEventListener('click', function() {
+                window.open('post.html?index=' + globalIndex, '_blank');
+            });
+            grid.appendChild(card);
+        });
+    });
+    </script>
+</body>
+</html>
