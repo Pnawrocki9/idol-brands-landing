@@ -71,9 +71,13 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
-                    <a href="index.html#about" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
-                    <a href="index.html#services" class="text-black hover:text-gray-600 transition-colors font-medium">Services</a>
-                    <a href="index.html#calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
                     <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
                 </div>
             </div>
@@ -423,5 +427,7 @@
             alert('Brand consultation booking - coming soon! Please contact us directly.');
         });
     </script>
+    <!-- Authentication helper to control login state and nav -->
+    <script src="auth.js"></script>
 </body>
 </html>

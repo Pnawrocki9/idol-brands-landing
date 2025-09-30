@@ -79,10 +79,13 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
-                    <a href="index.html#about" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
                     <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
                     <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
-                    <a href="index.html#calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
                     <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
                 </div>
             </div>
@@ -347,8 +350,12 @@
                             </div>
                             <div class="text-sm text-gray-400">2,847 viewers</div>
                         </div>
-                        <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                            <i class="fas fa-play text-6xl text-gray-600"></i>
+                        <div class="aspect-video rounded-lg mb-4 overflow-hidden">
+                            <!-- Illustrative image of a live-selling session. The image is an abstract
+                                 depiction of a street‑wear influencer hosting a live fashion show. This
+                                 avoids using a real person’s likeness while still conveying the
+                                 experience of a streamed event. -->
+                            <img src="images/live-selling.png" alt="Streetwear influencer live selling" class="w-full h-full object-cover">
                         </div>
                         <div class="grid grid-cols-3 gap-4 text-center">
                             <div>
@@ -515,5 +522,7 @@
             alert('Live-selling shop setup - coming soon! Please contact us directly.');
         });
     </script>
+    <!-- Authentication helper to control login state and nav -->
+    <script src="auth.js"></script>
 </body>
 </html>

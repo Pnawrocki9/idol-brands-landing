@@ -184,7 +184,10 @@
                     <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
                     <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
                     <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
-                    <a href="#calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
                     <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
                 </div>
                 <div class="md:hidden">
@@ -372,7 +375,7 @@
     </section>
 
     <!-- Calculator Section -->
-    <section id="calculator" class="py-20 calculator-section">
+    <section id="calculator-section" class="py-20 calculator-section hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
                 <h2 class="text-5xl font-display font-bold text-black mb-6">ROI Calculator</h2>
@@ -844,5 +847,7 @@
             }, 1000);
         });
     </script>
+    <!-- Authentication helper to control login state, navigation and calculator visibility -->
+    <script src="auth.js"></script>
 </body>
 </html>
