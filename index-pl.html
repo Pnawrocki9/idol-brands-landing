@@ -976,42 +976,43 @@
             return val !== null ? val : def;
         }
         // Metrics
+        // Metrics: prefer Polish translations if available
         const msVal = document.getElementById('metric-market-size-value');
-        if (msVal) msVal.textContent = getItem('metricMarketSizeValue', msVal.textContent);
+        if (msVal) msVal.textContent = getItem('plMetricMarketSizeValue', getItem('metricMarketSizeValue', msVal.textContent));
         const msLabel = document.getElementById('metric-market-size-label');
-        if (msLabel) msLabel.textContent = getItem('metricMarketSizeLabel', msLabel.textContent);
+        if (msLabel) msLabel.textContent = getItem('plMetricMarketSizeLabel', getItem('metricMarketSizeLabel', msLabel.textContent));
         const grVal = document.getElementById('metric-growth-rate-value');
-        if (grVal) grVal.textContent = getItem('metricGrowthRateValue', grVal.textContent);
+        if (grVal) grVal.textContent = getItem('plMetricGrowthRateValue', getItem('metricGrowthRateValue', grVal.textContent));
         const grLabel = document.getElementById('metric-growth-rate-label');
-        if (grLabel) grLabel.textContent = getItem('metricGrowthRateLabel', grLabel.textContent);
+        if (grLabel) grLabel.textContent = getItem('plMetricGrowthRateLabel', getItem('metricGrowthRateLabel', grLabel.textContent));
         const frVal = document.getElementById('metric-fail-rate-value');
-        if (frVal) frVal.textContent = getItem('metricFailRateValue', frVal.textContent);
+        if (frVal) frVal.textContent = getItem('plMetricFailRateValue', getItem('metricFailRateValue', frVal.textContent));
         const frLabel = document.getElementById('metric-fail-rate-label');
-        if (frLabel) frLabel.textContent = getItem('metricFailRateLabel', frLabel.textContent);
+        if (frLabel) frLabel.textContent = getItem('plMetricFailRateLabel', getItem('metricFailRateLabel', frLabel.textContent));
         const tagEl = document.getElementById('metric-tagline');
-        if (tagEl) tagEl.textContent = getItem('metricTagline', tagEl.textContent);
-        // Start section
+        if (tagEl) tagEl.textContent = getItem('plMetricTagline', getItem('metricTagline', tagEl.textContent));
+        // Start section: prefer Polish translations
         const startTitle = document.getElementById('home-start-title');
-        if (startTitle) startTitle.textContent = getItem('homeStartTitle', startTitle.textContent);
+        if (startTitle) startTitle.textContent = getItem('plHomeStartTitle', getItem('homeStartTitle', startTitle.textContent));
         const startSub = document.getElementById('home-start-subtitle');
-        if (startSub) startSub.textContent = getItem('homeStartSubtitle', startSub.textContent);
-        // Feature cards
+        if (startSub) startSub.textContent = getItem('plHomeStartSubtitle', getItem('homeStartSubtitle', startSub.textContent));
+        // Feature cards: prefer Polish translations
         const f1Title = document.getElementById('home-feature1-title');
-        if (f1Title) f1Title.textContent = getItem('homeFeature1Title', f1Title.textContent);
+        if (f1Title) f1Title.textContent = getItem('plHomeFeature1Title', getItem('homeFeature1Title', f1Title.textContent));
         const f1Desc = document.getElementById('home-feature1-desc');
-        if (f1Desc) f1Desc.textContent = getItem('homeFeature1Desc', f1Desc.textContent);
+        if (f1Desc) f1Desc.textContent = getItem('plHomeFeature1Desc', getItem('homeFeature1Desc', f1Desc.textContent));
         const f2Title = document.getElementById('home-feature2-title');
-        if (f2Title) f2Title.textContent = getItem('homeFeature2Title', f2Title.textContent);
+        if (f2Title) f2Title.textContent = getItem('plHomeFeature2Title', getItem('homeFeature2Title', f2Title.textContent));
         const f2Desc = document.getElementById('home-feature2-desc');
-        if (f2Desc) f2Desc.textContent = getItem('homeFeature2Desc', f2Desc.textContent);
+        if (f2Desc) f2Desc.textContent = getItem('plHomeFeature2Desc', getItem('homeFeature2Desc', f2Desc.textContent));
         const f3Title = document.getElementById('home-feature3-title');
-        if (f3Title) f3Title.textContent = getItem('homeFeature3Title', f3Title.textContent);
+        if (f3Title) f3Title.textContent = getItem('plHomeFeature3Title', getItem('homeFeature3Title', f3Title.textContent));
         const f3Desc = document.getElementById('home-feature3-desc');
-        if (f3Desc) f3Desc.textContent = getItem('homeFeature3Desc', f3Desc.textContent);
+        if (f3Desc) f3Desc.textContent = getItem('plHomeFeature3Desc', getItem('homeFeature3Desc', f3Desc.textContent));
 
-        // CTA button
+        // CTA button: prefer Polish translation
         const cta = document.getElementById('home-cta-text');
-        if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
+        if (cta) cta.textContent = getItem('plHomeCtaText', getItem('homeCtaText', cta.textContent));
     });
     </script>
     <!-- Authentication helper to control login state, navigation and calculator visibility -->
@@ -1023,10 +1024,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         const titleElem = document.getElementById('hero-title');
         const subtitleElem = document.getElementById('hero-subtitle');
-        const storedTitle = localStorage.getItem('heroTitle');
-        const storedSubtitle = localStorage.getItem('heroSubtitle');
+        // Prefer Polish hero content if available
+        const storedTitle = localStorage.getItem('plHeroTitle') || localStorage.getItem('heroTitle');
+        const storedSubtitle = localStorage.getItem('plHeroSubtitle') || localStorage.getItem('heroSubtitle');
         if (storedTitle && titleElem) {
-            // heroTitle may contain HTML spans and line breaks so use innerHTML
+            // hero title may contain HTML spans and line breaks so use innerHTML
             titleElem.innerHTML = storedTitle;
         }
         if (storedSubtitle && subtitleElem) {

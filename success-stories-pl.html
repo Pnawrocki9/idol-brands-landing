@@ -485,8 +485,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         const successTitleElem = document.getElementById('success-title');
         const successSubtitleElem = document.getElementById('success-subtitle');
-        const storedSuccessTitle = localStorage.getItem('successTitle');
-        const storedSuccessSubtitle = localStorage.getItem('successSubtitle');
+        // Prefer Polish values for Success Stories page
+        const storedSuccessTitle = localStorage.getItem('plSuccessTitle') || localStorage.getItem('successTitle');
+        const storedSuccessSubtitle = localStorage.getItem('plSuccessSubtitle') || localStorage.getItem('successSubtitle');
         if (storedSuccessTitle) successTitleElem.textContent = storedSuccessTitle;
         if (storedSuccessSubtitle) successSubtitleElem.textContent = storedSuccessSubtitle;
     });

@@ -386,8 +386,9 @@
         // Hero
         const aboutTitleElem = document.getElementById('about-hero-title');
         const aboutSubtitleElem = document.getElementById('about-hero-subtitle');
-        const storedAboutHeroTitle = localStorage.getItem('aboutHeroTitle');
-        const storedAboutHeroSubtitle = localStorage.getItem('aboutHeroSubtitle');
+        // Prefer Polish values for hero if present
+        const storedAboutHeroTitle = localStorage.getItem('plAboutHeroTitle') || localStorage.getItem('aboutHeroTitle');
+        const storedAboutHeroSubtitle = localStorage.getItem('plAboutHeroSubtitle') || localStorage.getItem('aboutHeroSubtitle');
         if (storedAboutHeroTitle) {
             aboutTitleElem.textContent = storedAboutHeroTitle;
         }
@@ -396,7 +397,8 @@
         }
         // Our Story
         const storyContainer = document.getElementById('about-story-content');
-        const storedStory = localStorage.getItem('aboutStory');
+        // Prefer Polish story
+        const storedStory = localStorage.getItem('plAboutStory') || localStorage.getItem('aboutStory');
         if (storedStory && storyContainer) {
             // Clear current paragraphs and insert new ones.  Split on double newline.
             storyContainer.innerHTML = '';
@@ -413,12 +415,13 @@
         const visionTitleElem = document.getElementById('vision-title');
         const visionDesc1Elem = document.getElementById('vision-desc1');
         const visionDesc2Elem = document.getElementById('vision-desc2');
-        const storedMissionTitle = localStorage.getItem('missionTitle');
-        const storedMissionDesc1 = localStorage.getItem('missionDesc1');
-        const storedMissionDesc2 = localStorage.getItem('missionDesc2');
-        const storedVisionTitle = localStorage.getItem('visionTitle');
-        const storedVisionDesc1 = localStorage.getItem('visionDesc1');
-        const storedVisionDesc2 = localStorage.getItem('visionDesc2');
+        // Prefer Polish Mission & Vision
+        const storedMissionTitle = localStorage.getItem('plMissionTitle') || localStorage.getItem('missionTitle');
+        const storedMissionDesc1 = localStorage.getItem('plMissionDesc1') || localStorage.getItem('missionDesc1');
+        const storedMissionDesc2 = localStorage.getItem('plMissionDesc2') || localStorage.getItem('missionDesc2');
+        const storedVisionTitle = localStorage.getItem('plVisionTitle') || localStorage.getItem('visionTitle');
+        const storedVisionDesc1 = localStorage.getItem('plVisionDesc1') || localStorage.getItem('visionDesc1');
+        const storedVisionDesc2 = localStorage.getItem('plVisionDesc2') || localStorage.getItem('visionDesc2');
         if (storedMissionTitle) missionTitleElem.textContent = storedMissionTitle;
         if (storedMissionDesc1) missionDesc1Elem.textContent = storedMissionDesc1;
         if (storedMissionDesc2) missionDesc2Elem.textContent = storedMissionDesc2;
@@ -428,15 +431,17 @@
         // Team
         const teamTitleElem = document.getElementById('team-title');
         const teamSubtitleElem = document.getElementById('team-subtitle');
-        const storedTeamTitle = localStorage.getItem('teamTitle');
-        const storedTeamSubtitle = localStorage.getItem('teamSubtitle');
+        // Prefer Polish Team values
+        const storedTeamTitle = localStorage.getItem('plTeamTitle') || localStorage.getItem('teamTitle');
+        const storedTeamSubtitle = localStorage.getItem('plTeamSubtitle') || localStorage.getItem('teamSubtitle');
         if (storedTeamTitle) teamTitleElem.textContent = storedTeamTitle;
         if (storedTeamSubtitle) teamSubtitleElem.textContent = storedTeamSubtitle;
         // Impact
         const impactTitleElem = document.getElementById('impact-title');
         const impactSubtitleElem = document.getElementById('impact-subtitle');
-        const storedImpactTitle = localStorage.getItem('impactTitle');
-        const storedImpactSubtitle = localStorage.getItem('impactSubtitle');
+        // Prefer Polish Impact values
+        const storedImpactTitle = localStorage.getItem('plImpactTitle') || localStorage.getItem('impactTitle');
+        const storedImpactSubtitle = localStorage.getItem('plImpactSubtitle') || localStorage.getItem('impactSubtitle');
         if (storedImpactTitle) impactTitleElem.textContent = storedImpactTitle;
         if (storedImpactSubtitle) impactSubtitleElem.textContent = storedImpactSubtitle;
     });

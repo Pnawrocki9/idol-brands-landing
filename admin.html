@@ -335,6 +335,182 @@
             <p id="home-save-msg" class="text-green-600 text-sm mt-3 hidden">Home page settings saved.</p>
         </section>
 
+        <!-- Polish translations editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edytuj treść stron (PL)</h2>
+            <p class="text-sm text-gray-600 mb-6">Niniejsze pola pozwalają zarządzać tłumaczeniami na język polski. Zmiany zapisują się osobno, nie nadpisując wersji angielskiej.</p>
+            <!-- Home hero (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Hero Strony Głównej</h3>
+            <div class="mb-4">
+                <label for="admin-hero-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Hero Title (PL)</label>
+                <textarea id="admin-hero-title-pl" rows="4" data-default="<span class=\"text-gradient\">Zamień swój</span><br><span class=\"text-black\">wpływ</span><br><span class=\"text-gradient\">w modowe imperium</span>" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle (PL)</label>
+                <input id="admin-hero-subtitle-pl" type="text" data-default="Zajmujemy się wszystkim od projektu po dostawę, abyś Ty mógł skupić się na swojej historii. Jedyna platforma, która zamienia influencerów w właścicieli marek modowych." class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-hero-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz Hero (PL)</button>
+            <p id="hero-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treść hero (PL) została zapisana.</p>
+            <hr class="my-6" />
+            <!-- Home page content (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona Główna – treść</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia sekcji statystyk, sekcji startowej i kart funkcjonalnych.</p>
+            <!-- Metrics inputs (PL) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="home-metric-market-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość rynku (PL)</label>
+                    <input id="home-metric-market-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-market-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta rynku (PL)</label>
+                    <input id="home-metric-market-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość wzrostu (PL)</label>
+                    <input id="home-metric-growth-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta wzrostu (PL)</label>
+                    <input id="home-metric-growth-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość niepowodzeń (PL)</label>
+                    <input id="home-metric-fail-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta niepowodzeń (PL)</label>
+                    <input id="home-metric-fail-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div class="md:col-span-2">
+                    <label for="home-metric-tagline-pl" class="block text-sm font-medium text-gray-700 mb-1">Slogan pod statystykami (PL)</label>
+                    <input id="home-metric-tagline-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Start section inputs (PL) -->
+            <div class="mb-6">
+                <label for="home-start-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji startowej (PL)</label>
+                <input id="home-start-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-6">
+                <label for="home-start-subtitle-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji startowej (PL)</label>
+                <textarea id="home-start-subtitle-field-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <!-- Feature card inputs (PL) -->
+            <h4 class="text-lg font-semibold mb-2">Karty funkcjonalne (PL)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="home-feature1-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 1 (PL)</label>
+                    <input id="home-feature1-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature1-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 1 (PL)</label>
+                    <input id="home-feature1-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature2-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 2 (PL)</label>
+                    <input id="home-feature2-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature2-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 2 (PL)</label>
+                    <input id="home-feature2-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature3-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 3 (PL)</label>
+                    <input id="home-feature3-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature3-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 3 (PL)</label>
+                    <input id="home-feature3-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- CTA text (PL) -->
+            <div class="mb-6 mt-6 md:col-span-2">
+                <label for="home-cta-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku CTA (PL)</label>
+                <input id="home-cta-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Tekst przycisku 'Zobacz, jak to działa'" />
+            </div>
+            <button id="save-home-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Zapisz ustawienia strony głównej (PL)</button>
+            <p id="home-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Ustawienia strony głównej (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- About page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'O nas' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-about-hero-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł hero (PL)</label>
+                <input id="admin-about-hero-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł hero (PL)</label>
+                <input id="admin-about-hero-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-story-pl" class="block text-sm font-medium text-gray-700 mb-1">Nasza historia (PL) – jeden akapit w linii</label>
+                <textarea id="admin-about-story-pl" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-mission-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Misja (PL)</label>
+                    <input id="admin-mission-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc1-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis misji – linia 1 (PL)</label>
+                    <input id="admin-mission-desc1-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc2-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis misji – linia 2 (PL)</label>
+                    <input id="admin-mission-desc2-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-vision-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Wizja (PL)</label>
+                    <input id="admin-vision-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc1-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis wizji – linia 1 (PL)</label>
+                    <input id="admin-vision-desc1-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc2-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis wizji – linia 2 (PL)</label>
+                    <input id="admin-vision-desc2-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-team-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Zespół (PL)</label>
+                    <input id="admin-team-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-team-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji Zespół (PL)</label>
+                    <input id="admin-team-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-impact-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Wpływ (PL)</label>
+                    <input id="admin-impact-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-impact-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji Wpływ (PL)</label>
+                    <input id="admin-impact-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-about-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'O nas' (PL)</button>
+            <p id="about-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści strony 'O nas' (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- How It Works (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Jak to działa' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-how-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji live-selling (PL)</label>
+                <input id="admin-how-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji live-selling (PL)</label>
+                <input id="admin-how-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-ready-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji 'Gotowi?' (PL)</label>
+                <input id="admin-ready-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-how-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'Jak to działa' (PL)</button>
+            <p id="how-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści 'Jak to działa' (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- Success Stories (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Historie sukcesu' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-success-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł hero (PL)</label>
+                <input id="admin-success-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł hero (PL)</label>
+                <input id="admin-success-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-success-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'Historie sukcesu' (PL)</button>
+            <p id="success-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści 'Historie sukcesu' (PL) zapisane.</p>
+        </section>
+
         <!-- Document manager -->
         <section>
             <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
@@ -1317,5 +1493,7 @@
     </script>
     <!-- Load separate admin management script for managing administrator accounts -->
     <script src="admin-manage.js"></script>
+    <!-- Load Polish translation management script (handles saving and loading of PL content) -->
+    <script src="admin-pl.js"></script>
 </body>
 </html>

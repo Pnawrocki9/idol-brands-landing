@@ -587,9 +587,10 @@
         const howTitleElem = document.getElementById('how-title');
         const howSubtitleElem = document.getElementById('how-subtitle');
         const readyTitleElem = document.getElementById('ready-title');
-        const storedHowTitle = localStorage.getItem('howTitle');
-        const storedHowSubtitle = localStorage.getItem('howSubtitle');
-        const storedReadyTitle = localStorage.getItem('readyTitle');
+        // Prefer Polish values for How It Works page
+        const storedHowTitle = localStorage.getItem('plHowTitle') || localStorage.getItem('howTitle');
+        const storedHowSubtitle = localStorage.getItem('plHowSubtitle') || localStorage.getItem('howSubtitle');
+        const storedReadyTitle = localStorage.getItem('plReadyTitle') || localStorage.getItem('readyTitle');
         if (storedHowTitle) howTitleElem.textContent = storedHowTitle;
         if (storedHowSubtitle) howSubtitleElem.textContent = storedHowSubtitle;
         if (storedReadyTitle) readyTitleElem.textContent = storedReadyTitle;
