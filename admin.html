@@ -233,20 +233,19 @@
         <section class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Manage Blog Posts</h2>
             <p class="text-sm text-gray-600 mb-4">Create new blog posts or edit existing ones.  Posts are stored locally and shown on the home page.</p>
-            <!-- Blog post title -->
-            <div class="mb-4">
-                <label for="blog-title" class="block text-sm font-medium text-gray-700 mb-1">Post Title</label>
-                <input id="blog-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
-            </div>
             <!-- Blog post image upload -->
             <div class="mb-4">
                 <label for="blog-image" class="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
                 <!--
-                  The admin can upload an image for each blog post.  The image is converted to a Base64 data URL and stored in localStorage alongside the post data.  When editing a post,
-                  leaving this field blank will keep the previous image.
+                  The admin should upload an image first.  The image will be shown at the top of the blog card and full post.  It is stored as a Base64 data URL in localStorage.
                 -->
                 <input id="blog-image" type="file" accept="image/*" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
                 <div id="blog-image-preview" class="mt-2"></div>
+            </div>
+            <!-- Blog post title -->
+            <div class="mb-4">
+                <label for="blog-title" class="block text-sm font-medium text-gray-700 mb-1">Post Title</label>
+                <input id="blog-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
             </div>
             <!-- Blog post content -->
             <div class="mb-4">

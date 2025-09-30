@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idol Brands Blog</title>
+    <title>Blog Post - Idol Brands</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -50,39 +50,25 @@
             </div>
         </div>
     </nav>
-
-    <!-- Hero Section -->
-    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white text-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="fade-in">
-                <h1 class="text-6xl font-display font-bold text-black mb-4">Blog</h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Read our latest insights, tips and stories to inspire your fashion journey.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Posts Grid -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="blog-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-            <p id="no-posts-msg" class="text-gray-600 text-center mt-8 hidden">No blog posts available yet.</p>
-        </div>
-    </section>
-
-    <!-- Footer (optional simple footer) -->
+    <!-- Blog Post Content -->
+    <main class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <article id="post-container" class="max-w-4xl mx-auto"></article>
+    </main>
     <footer class="py-6 bg-gray-100 border-t border-gray-200 text-center">
         <p class="text-sm text-gray-600">&copy; <span id="copyright-year"></span> Idol Brands. All rights reserved.</p>
     </footer>
-
-    <!-- Scripts -->
     <script src="auth.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Show copyright year
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
-        // Load blog posts from localStorage
-        const grid = document.getElementById('blog-posts-grid');
-        const noPostsMsg = document.getElementById('no-posts-msg');
+        // Parse index parameter from query string
+        const params = new URLSearchParams(window.location.search);
+        const indexParam = params.get('index');
+        const idx = parseInt(indexParam, 10);
+        if (isNaN(idx)) {
+            document.getElementById('post-container').innerHTML = '<p class="text-gray-600">Invalid post.</p>';
+            return;
+        }
         let posts = [];
         try {
             const stored = localStorage.getItem('blogPosts');
@@ -90,39 +76,40 @@
         } catch (e) {
             posts = [];
         }
-        grid.innerHTML = '';
-        if (!posts || posts.length === 0) {
-            noPostsMsg.classList.remove('hidden');
+        if (!posts || idx < 0 || idx >= posts.length) {
+            document.getElementById('post-container').innerHTML = '<p class="text-gray-600">Post not found.</p>';
             return;
         }
-        noPostsMsg.classList.add('hidden');
-        // Display all posts as cards with click handler to open full post
-        const total = posts.length;
-        posts.slice().reverse().forEach(function(post, idx) {
-            const card = document.createElement('div');
-            card.className = 'bg-white rounded-xl shadow overflow-hidden cursor-pointer';
-            // Add image if present
-            if (post.img) {
-                const img = document.createElement('img');
-                img.src = post.img;
-                img.alt = post.title || '';
-                img.className = 'w-full h-56 object-cover';
-                card.appendChild(img);
-            }
-            const contentWrapper = document.createElement('div');
-            contentWrapper.className = 'p-4';
-            const title = document.createElement('h3');
-            title.className = 'text-xl font-bold text-black mb-2';
-            title.textContent = post.title || 'Untitled';
-            contentWrapper.appendChild(title);
-            card.appendChild(contentWrapper);
-            // Determine the original index of this post in the posts array (not reversed)
-            const globalIndex = total - 1 - idx;
-            // Add click event to open full post
-            card.addEventListener('click', function() {
-                window.open('post.html?index=' + globalIndex, '_blank');
-            });
-            grid.appendChild(card);
+        const post = posts[idx];
+        const container = document.getElementById('post-container');
+        container.innerHTML = '';
+        // Featured image
+        if (post.img) {
+            const img = document.createElement('img');
+            img.src = post.img;
+            img.alt = post.title || '';
+            img.className = 'w-full h-auto rounded-xl mb-6';
+            container.appendChild(img);
+        }
+        // Title
+        const title = document.createElement('h1');
+        title.className = 'text-4xl font-display font-bold text-black mb-4';
+        title.textContent = post.title || 'Untitled';
+        container.appendChild(title);
+        // Date
+        if (post.date) {
+            const dateEl = document.createElement('p');
+            dateEl.className = 'text-sm text-gray-500 mb-6';
+            dateEl.textContent = post.date;
+            container.appendChild(dateEl);
+        }
+        // Full content
+        const paragraphs = (post.content || '').split(/\n+/).filter(l => l.trim() !== '');
+        paragraphs.forEach(function(p) {
+            const para = document.createElement('p');
+            para.className = 'text-lg text-gray-700 mb-4';
+            para.textContent = p;
+            container.appendChild(para);
         });
     });
     </script>
