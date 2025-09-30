@@ -342,6 +342,94 @@
             <input type="file" id="document-upload" multiple class="mb-4" />
             <ul id="admin-doc-list" class="space-y-2"></ul>
         </section>
+
+        <!-- Footer editor -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Footer Details</h2>
+            <p class="text-sm text-gray-600 mb-4">Update the company information and social links shown in the site footer.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="footer-company-field" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                    <input id="footer-company-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-address-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Address</label>
+                    <input id="footer-address-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-reg-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Registration / Tax Info</label>
+                    <input id="footer-reg-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-email-field" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input id="footer-email-field" type="email" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-phone-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Phone</label>
+                    <input id="footer-phone-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-extra-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Footer Tagline</label>
+                    <input id="footer-extra-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Social links -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div>
+                    <label for="footer-instagram-field" class="block text-sm font-medium text-gray-700 mb-1">Instagram URL</label>
+                    <input id="footer-instagram-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-tiktok-field" class="block text-sm font-medium text-gray-700 mb-1">TikTok URL</label>
+                    <input id="footer-tiktok-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-youtube-field" class="block text-sm font-medium text-gray-700 mb-1">YouTube URL</label>
+                    <input id="footer-youtube-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-footer" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Footer</button>
+            <p id="footer-save-msg" class="text-green-600 text-sm mt-3 hidden">Footer details saved.</p>
+        </section>
+
+        <!-- Legal pages editor -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Legal Pages</h2>
+            <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages.  Use basic HTML for formatting (e.g. &lt;h2&gt;,&lt;p&gt;,&lt;ul&gt;).</p>
+            <div class="mb-6">
+                <label for="legal-terms-field" class="block text-sm font-medium text-gray-700 mb-1">Terms &amp; Conditions</label>
+                <textarea id="legal-terms-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="legal-cookies-field" class="block text-sm font-medium text-gray-700 mb-1">Cookies Policy</label>
+                <textarea id="legal-cookies-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="legal-gdpr-field" class="block text-sm font-medium text-gray-700 mb-1">Privacy / GDPR</label>
+                <textarea id="legal-gdpr-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-legal" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Legal Pages</button>
+            <p id="legal-save-msg" class="text-green-600 text-sm mt-3 hidden">Legal pages saved.</p>
+        </section>
+
+        <!-- Registered users management -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Registered Users</h2>
+            <p class="text-sm text-gray-600 mb-4">Here are the sign-ups from the waiting list. Activate users to assign them login credentials and manage their access.  You can also export the list to a CSV file for further processing.</p>
+            <button id="export-users" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mb-4">Export to CSV</button>
+            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Name</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Email</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Followers</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Niche</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Instagram</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Newsletter</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Status</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Login</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Password</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <p id="users-msg" class="text-green-600 text-sm mt-3 hidden">User updated.</p>
+        </section>
     </div>
 
     <script>
@@ -852,6 +940,320 @@
         });
         // Initial render
         loadAdminDocs();
+
+        // -------------------------------------------------------------------
+        // User management
+        const exportUsersBtn = document.getElementById('export-users');
+        const usersMsgEl = document.getElementById('users-msg');
+        const usersTableBody = document.getElementById('users-table-body');
+
+        // Helper to generate a random alphanumeric string for passwords
+        function generateRandomString(length) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Load users from localStorage and render the table
+        function loadUsers() {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            usersTableBody.innerHTML = '';
+            if (!users || users.length === 0) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 10;
+                td.className = 'px-3 py-2 text-gray-500';
+                td.textContent = 'No users have signed up yet.';
+                tr.appendChild(td);
+                usersTableBody.appendChild(tr);
+                return;
+            }
+            users.forEach(function(user, index) {
+                const tr = document.createElement('tr');
+                // Name
+                const nameTd = document.createElement('td');
+                nameTd.className = 'px-3 py-2 whitespace-nowrap';
+                nameTd.textContent = `${user.firstName} ${user.lastName}`;
+                tr.appendChild(nameTd);
+                // Email
+                const emailTd = document.createElement('td');
+                emailTd.className = 'px-3 py-2 whitespace-nowrap';
+                emailTd.textContent = user.email;
+                tr.appendChild(emailTd);
+                // Followers
+                const folTd = document.createElement('td');
+                folTd.className = 'px-3 py-2 whitespace-nowrap';
+                folTd.textContent = user.followersRange;
+                tr.appendChild(folTd);
+                // Niche
+                const nicheTd = document.createElement('td');
+                nicheTd.className = 'px-3 py-2 whitespace-nowrap';
+                nicheTd.textContent = user.niche;
+                tr.appendChild(nicheTd);
+                // Instagram
+                const instaTd = document.createElement('td');
+                instaTd.className = 'px-3 py-2 whitespace-nowrap';
+                instaTd.textContent = user.instagram;
+                tr.appendChild(instaTd);
+                // Newsletter
+                const newsTd = document.createElement('td');
+                newsTd.className = 'px-3 py-2 whitespace-nowrap';
+                newsTd.textContent = user.newsletter ? 'Yes' : 'No';
+                tr.appendChild(newsTd);
+                // Status
+                const statusTd = document.createElement('td');
+                statusTd.className = 'px-3 py-2 whitespace-nowrap capitalize';
+                statusTd.textContent = user.status;
+                tr.appendChild(statusTd);
+                // Login input
+                const loginTd = document.createElement('td');
+                loginTd.className = 'px-3 py-2';
+                const loginInput = document.createElement('input');
+                loginInput.type = 'text';
+                loginInput.value = user.login || '';
+                loginInput.dataset.index = index;
+                loginInput.dataset.field = 'login';
+                loginInput.className = 'border border-gray-300 rounded px-2 py-1 w-28';
+                loginTd.appendChild(loginInput);
+                tr.appendChild(loginTd);
+                // Password input
+                const passTd = document.createElement('td');
+                passTd.className = 'px-3 py-2';
+                const passInput = document.createElement('input');
+                passInput.type = 'text';
+                passInput.value = user.password || '';
+                passInput.dataset.index = index;
+                passInput.dataset.field = 'password';
+                passInput.className = 'border border-gray-300 rounded px-2 py-1 w-28';
+                passTd.appendChild(passInput);
+                tr.appendChild(passTd);
+                // Actions
+                const actionsTd = document.createElement('td');
+                actionsTd.className = 'px-3 py-2 whitespace-nowrap';
+                // Activate/Deactivate button
+                const toggleBtn = document.createElement('button');
+                toggleBtn.textContent = user.status === 'inactive' ? 'Activate' : 'Deactivate';
+                toggleBtn.dataset.action = 'toggleStatus';
+                toggleBtn.dataset.index = index;
+                toggleBtn.className = 'text-blue-600 hover:underline mr-3';
+                actionsTd.appendChild(toggleBtn);
+                // Save credentials button
+                const saveBtn = document.createElement('button');
+                saveBtn.textContent = 'Save';
+                saveBtn.dataset.action = 'saveCred';
+                saveBtn.dataset.index = index;
+                saveBtn.className = 'text-green-600 hover:underline';
+                actionsTd.appendChild(saveBtn);
+                tr.appendChild(actionsTd);
+                usersTableBody.appendChild(tr);
+            });
+        }
+
+        // Export users to CSV for Excel.  Generates a CSV on the fly and triggers a download.
+        function exportUsersToCSV() {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            if (!users || users.length === 0) {
+                alert('There are no users to export.');
+                return;
+            }
+            let csv = 'ID,First Name,Last Name,Email,Followers Range,Niche,Instagram,Newsletter,Status,Login,Password\n';
+            users.forEach(function(u) {
+                const line = [u.id, u.firstName, u.lastName, u.email, u.followersRange, u.niche, u.instagram, u.newsletter ? 'Yes' : 'No', u.status, u.login, u.password];
+                csv += line.map(function(item) {
+                    // Escape quotes by doubling them and wrap fields containing commas or quotes in quotes
+                    const str = String(item || '').replace(/"/g, '""');
+                    return (/[,\"]/.test(str) ? '"' + str + '"' : str);
+                }).join(',') + '\n';
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'users.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Toggle user status between inactive and active.  When activating, generate login and
+        // password if not already present and simulate an email being sent.  Deactivating
+        // leaves credentials intact but marks the user as inactive.
+        function toggleUserStatus(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            const user = users[index];
+            if (!user) return;
+            if (user.status === 'inactive') {
+                // Generate login & password if missing
+                if (!user.login) user.login = 'user' + Math.floor(1000 + Math.random() * 9000);
+                if (!user.password) user.password = generateRandomString(10);
+                user.status = 'active';
+                // Simulate sending email to user with credentials
+                alert('Activation email sent to ' + user.email + ' with login: ' + user.login + ' and password: ' + user.password + '.');
+            } else {
+                // Deactivate the user (credentials remain so they could be reactivated later)
+                user.status = 'inactive';
+            }
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+            if (usersMsgEl) {
+                usersMsgEl.textContent = 'User status updated.';
+                usersMsgEl.classList.remove('hidden');
+                setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Save login and password changes for a specific user.  Takes values from the input
+        // fields in the table row.
+        function saveUserCredentials(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            const user = users[index];
+            if (!user) return;
+            // Find inputs by dataset index
+            const loginInput = usersTableBody.querySelector('input[data-field="login"][data-index="' + index + '"]');
+            const passInput = usersTableBody.querySelector('input[data-field="password"][data-index="' + index + '"]');
+            user.login = loginInput ? loginInput.value.trim() : user.login;
+            user.password = passInput ? passInput.value.trim() : user.password;
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+            if (usersMsgEl) {
+                usersMsgEl.textContent = 'User credentials updated.';
+                usersMsgEl.classList.remove('hidden');
+                setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Event delegation for user table actions
+        if (usersTableBody) {
+            usersTableBody.addEventListener('click', function(e) {
+                const action = e.target.dataset.action;
+                const index = parseInt(e.target.dataset.index, 10);
+                if (isNaN(index)) return;
+                if (action === 'toggleStatus') {
+                    toggleUserStatus(index);
+                } else if (action === 'saveCred') {
+                    saveUserCredentials(index);
+                }
+            });
+        }
+
+        // Bind export button
+        if (exportUsersBtn) {
+            exportUsersBtn.addEventListener('click', exportUsersToCSV);
+        }
+
+        // Initial load of users table
+        loadUsers();
+
+        // -------------------------------------------------------------------
+        // Footer settings
+        // Grab input fields for footer editing. These correspond to the fields
+        // defined in the markup above. When the admin opens the dashboard, we
+        // populate them with values from localStorage (or leave blank if none
+        // have been saved yet). On save we persist the values back to
+        // localStorage so that the front‑end footer can load them via
+        // auth.js.
+        const footerCompanyField = document.getElementById('footer-company-field');
+        const footerAddressField = document.getElementById('footer-address-field');
+        const footerRegField = document.getElementById('footer-reg-field');
+        const footerEmailField = document.getElementById('footer-email-field');
+        const footerPhoneField = document.getElementById('footer-phone-field');
+        const footerExtraField = document.getElementById('footer-extra-field');
+        const footerInstagramField = document.getElementById('footer-instagram-field');
+        const footerTikTokField = document.getElementById('footer-tiktok-field');
+        const footerYouTubeField = document.getElementById('footer-youtube-field');
+        const saveFooterBtn = document.getElementById('save-footer');
+        const footerMsg = document.getElementById('footer-save-msg');
+
+        function loadFooterSettings() {
+            if (footerCompanyField) footerCompanyField.value = localStorage.getItem('footerCompanyName') || '';
+            if (footerAddressField) footerAddressField.value = localStorage.getItem('footerAddress') || '';
+            if (footerRegField) footerRegField.value = localStorage.getItem('footerRegistration') || '';
+            if (footerEmailField) footerEmailField.value = localStorage.getItem('footerEmail') || '';
+            if (footerPhoneField) footerPhoneField.value = localStorage.getItem('footerPhone') || '';
+            if (footerExtraField) footerExtraField.value = localStorage.getItem('footerExtra') || '';
+            if (footerInstagramField) footerInstagramField.value = localStorage.getItem('footerInstagram') || '';
+            if (footerTikTokField) footerTikTokField.value = localStorage.getItem('footerTikTok') || '';
+            if (footerYouTubeField) footerYouTubeField.value = localStorage.getItem('footerYouTube') || '';
+        }
+
+        loadFooterSettings();
+
+        if (saveFooterBtn) {
+            saveFooterBtn.addEventListener('click', function() {
+                localStorage.setItem('footerCompanyName', footerCompanyField.value || '');
+                localStorage.setItem('footerAddress', footerAddressField.value || '');
+                localStorage.setItem('footerRegistration', footerRegField.value || '');
+                localStorage.setItem('footerEmail', footerEmailField.value || '');
+                localStorage.setItem('footerPhone', footerPhoneField.value || '');
+                localStorage.setItem('footerExtra', footerExtraField.value || '');
+                localStorage.setItem('footerInstagram', footerInstagramField.value || '');
+                localStorage.setItem('footerTikTok', footerTikTokField.value || '');
+                localStorage.setItem('footerYouTube', footerYouTubeField.value || '');
+                if (footerMsg) {
+                    footerMsg.classList.remove('hidden');
+                    setTimeout(() => footerMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
+
+        // -------------------------------------------------------------------
+        // Legal settings
+        // Grab textarea fields for legal pages. These allow the admin to
+        // define the content of the Terms & Conditions, Cookies Policy and
+        // Privacy/GDPR pages.  On load we populate them from localStorage.
+        const legalTermsField = document.getElementById('legal-terms-field');
+        const legalCookiesField = document.getElementById('legal-cookies-field');
+        const legalGDPRField = document.getElementById('legal-gdpr-field');
+        const saveLegalBtn = document.getElementById('save-legal');
+        const legalMsg = document.getElementById('legal-save-msg');
+
+        function loadLegalSettings() {
+            if (legalTermsField) legalTermsField.value = localStorage.getItem('legalTerms') || '';
+            if (legalCookiesField) legalCookiesField.value = localStorage.getItem('legalCookies') || '';
+            if (legalGDPRField) legalGDPRField.value = localStorage.getItem('legalGDPR') || '';
+        }
+
+        loadLegalSettings();
+
+        if (saveLegalBtn) {
+            saveLegalBtn.addEventListener('click', function() {
+                if (legalTermsField) localStorage.setItem('legalTerms', legalTermsField.value || '');
+                if (legalCookiesField) localStorage.setItem('legalCookies', legalCookiesField.value || '');
+                if (legalGDPRField) localStorage.setItem('legalGDPR', legalGDPRField.value || '');
+                if (legalMsg) {
+                    legalMsg.classList.remove('hidden');
+                    setTimeout(() => legalMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
     });
     </script>
 </body>

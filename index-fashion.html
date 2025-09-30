@@ -195,13 +195,29 @@
                     <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
                 </div>
                 <div class="md:hidden">
-                    <button class="text-black">
-                        <i class="fas fa-bars text-xl"></i>
+                    <!-- Mobile hamburger toggler for fashion page -->
+                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
+    <!-- Mobile menu panel: hidden by default on desktop (md:hidden). Contains duplicate nav links for mobile users. -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+      <div class="px-4 py-4 space-y-4">
+        <a href="about.html" class="block text-black font-medium">About</a>
+        <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
+        <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
+        <a href="blog.html" class="block text-black font-medium">Blog</a>
+        <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+        <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
+        <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+        <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
+        <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
+        <a href="#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
@@ -617,6 +633,19 @@
                                     I want to receive updates about Idol Brands, live-selling tips, and exclusive influencer opportunities.
                                 </label>
                             </div>
+                            <!-- GDPR consent checkboxes -->
+                            <div class="space-y-4 text-sm text-gray-700">
+                                <label class="flex items-start space-x-3">
+                                    <input id="consent-required" type="checkbox" class="mt-1" />
+                                    <span>
+                                        I consent to the processing of my personal data by Idol Brands to handle my enquiry. See our <a href="legal/gdpr.html" target="_blank" class="underline">Privacy Policy (GDPR)</a>.
+                                    </span>
+                                </label>
+                                <label class="flex items-start space-x-3">
+                                    <input id="consent-marketing" type="checkbox" class="mt-1" />
+                                    <span>I agree to receive marketing communications and promotional offers (optional).</span>
+                                </label>
+                            </div>
                             
                             <button type="submit" 
                                     class="w-full bg-black text-white py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
@@ -648,25 +677,49 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h3 class="text-3xl font-display font-bold mb-4">Idol Brands</h3>
-                <p class="text-gray-400 mb-8">Turning influence into fashion empires</p>
-                <div class="flex justify-center space-x-8 mb-8">
-                    <a href="about.html" class="text-gray-400 hover:text-white transition-colors">About</a>
-                    <a href="how-it-works.html" class="text-gray-400 hover:text-white transition-colors">How It Works</a>
-                    <a href="success-stories.html" class="text-gray-400 hover:text-white transition-colors">Success Stories</a>
-                    <!-- Updated calculator link to point to calculator on the index page instead of local anchor -->
-                    <a href="index.html#calculator-section" class="text-gray-400 hover:text-white transition-colors">Calculator</a>
-                    <a href="#start" class="text-gray-400 hover:text-white transition-colors">Get Started</a>
-                </div>
-                <p class="text-gray-500 text-sm">
-                    © 2024 Idol Brands. All rights reserved. Empowering influencers worldwide.
-                </p>
-            </div>
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
         </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. All rights reserved.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
     </footer>
 
     <script>
@@ -904,14 +957,6 @@
         // Initial calculation
         calculateROI();
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.md\\:hidden button');
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', function() {
-                // Add mobile menu functionality here
-                alert('Mobile menu - coming soon!');
-            });
-        }
 
         // Button click handlers
         document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
@@ -1002,6 +1047,53 @@
         }
         if (storedSubtitle) {
             subtitleElem.textContent = storedSubtitle;
+        }
+    });
+</script>
+
+    <!-- Consent validation script for waiting list form -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('waiting-list-form');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                const requiredConsent = document.getElementById('consent-required');
+                if (requiredConsent && !requiredConsent.checked) {
+                    e.preventDefault();
+                    alert('Please consent to data processing to join the waiting list.');
+                    return false;
+                }
+                // Save user data to localStorage so that administrators can manage sign‑ups
+                const firstName = document.getElementById('firstName')?.value || '';
+                const lastName = document.getElementById('lastName')?.value || '';
+                const email = document.getElementById('email')?.value || '';
+                const followersRange = document.getElementById('followers-range')?.value || '';
+                const niche = document.getElementById('niche')?.value || '';
+                const instagram = document.getElementById('instagram')?.value || '';
+                const newsletter = document.getElementById('newsletter')?.checked || false;
+                const user = {
+                    id: Date.now(),
+                    firstName: firstName.trim(),
+                    lastName: lastName.trim(),
+                    email: email.trim(),
+                    followersRange: followersRange,
+                    niche: niche,
+                    instagram: instagram.trim(),
+                    newsletter: newsletter,
+                    status: 'inactive',
+                    login: '',
+                    password: ''
+                };
+                try {
+                    const stored = localStorage.getItem('users');
+                    let users = [];
+                    if (stored) users = JSON.parse(stored);
+                    users.push(user);
+                    localStorage.setItem('users', JSON.stringify(users));
+                } catch (err) {
+                    console.error('Could not save user record', err);
+                }
+            });
         }
     });
     </script>
