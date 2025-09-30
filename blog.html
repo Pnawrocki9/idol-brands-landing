@@ -112,9 +112,13 @@
             const contentWrapper = document.createElement('div');
             contentWrapper.className = 'p-4';
             const title = document.createElement('h3');
-            title.className = 'text-xl font-bold text-black mb-2';
+            title.className = 'text-xl font-bold text-black';
             title.textContent = post.title || 'Untitled';
+            const date = document.createElement('p');
+            date.className = 'text-sm text-gray-500 mb-2';
+            date.textContent = post.date || '';
             contentWrapper.appendChild(title);
+            if (post.date) contentWrapper.appendChild(date);
             card.appendChild(contentWrapper);
             // Determine the original index of this post in the posts array (not reversed)
             const globalIndex = total - 1 - idx;

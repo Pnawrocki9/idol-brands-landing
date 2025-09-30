@@ -91,18 +91,18 @@
             img.className = 'w-full h-auto rounded-xl mb-6';
             container.appendChild(img);
         }
+        // Date before title
+        if (post.date) {
+            const dateEl = document.createElement('p');
+            dateEl.className = 'text-sm text-gray-500 mb-2';
+            dateEl.textContent = post.date;
+            container.appendChild(dateEl);
+        }
         // Title
         const title = document.createElement('h1');
         title.className = 'text-4xl font-display font-bold text-black mb-4';
         title.textContent = post.title || 'Untitled';
         container.appendChild(title);
-        // Date
-        if (post.date) {
-            const dateEl = document.createElement('p');
-            dateEl.className = 'text-sm text-gray-500 mb-6';
-            dateEl.textContent = post.date;
-            container.appendChild(dateEl);
-        }
         // Full content
         const paragraphs = (post.content || '').split(/\n+/).filter(l => l.trim() !== '');
         paragraphs.forEach(function(p) {

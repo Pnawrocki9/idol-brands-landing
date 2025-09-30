@@ -502,6 +502,12 @@
             } catch (e) {
                 posts = [];
             }
+            // Reset input fields when reloading the list
+            blogTitleField.value = '';
+            blogContentField.value = '';
+            blogImageField.value = '';
+            blogImagePreview.innerHTML = '';
+            blogSaveBtn.textContent = 'Save Blog Post';
             blogListElem.innerHTML = '';
             if (!posts || posts.length === 0) {
                 const li = document.createElement('li');
@@ -536,14 +542,15 @@
                     editingPostIndex = index;
                     blogTitleField.value = post.title;
                     blogContentField.value = post.content;
-                    // Set preview and clear file input when editing.  We don't prefill the file input due to browser restrictions.
+                    // Clear file input when editing to avoid confusion
+                    blogImageField.value = '';
+                    blogImagePreview.innerHTML = '';
                     if (post.img) {
-                        blogImagePreview.innerHTML = '';
-                        const img = document.createElement('img');
-                        img.src = post.img;
-                        img.alt = post.title || '';
-                        img.className = 'w-full mb-2 rounded';
-                        blogImagePreview.appendChild(img);
+                        const imgPrev = document.createElement('img');
+                        imgPrev.src = post.img;
+                        imgPrev.alt = post.title || '';
+                        imgPrev.className = 'w-full mb-2 rounded';
+                        blogImagePreview.appendChild(imgPrev);
                     }
                     blogSaveBtn.textContent = 'Update Blog Post';
                 });
