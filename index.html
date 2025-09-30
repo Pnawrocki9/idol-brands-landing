@@ -186,6 +186,8 @@
                     <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
                     <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
                     <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <!-- Admin dashboard link is hidden by default; shown only when an admin is logged in -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
                     <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
                     <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
                     <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
@@ -206,13 +208,15 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8">
                     <div class="floating-element">
-                        <h1 class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
+                        <!-- The hero heading now has an id so it can be customised by an admin via localStorage. -->
+                        <h1 id="hero-title" class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
                             <span class="text-gradient">Turn Your</span><br>
                             <span class="text-black">Influence</span><br>
                             <span class="text-gradient">Into Fashion</span>
                         </h1>
                     </div>
-                    <p class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
+                    <!-- Subtitle also has an id for CMS editing -->
+                    <p id="hero-subtitle" class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
                         We handle everything from design to delivery so you can focus on your story. 
                         The only platform that transforms influencers into fashion brand owners.
                     </p>
@@ -850,5 +854,23 @@
     </script>
     <!-- Authentication helper to control login state, navigation and calculator visibility -->
     <script src="auth.js"></script>
+    <!-- Apply any custom hero text stored by the admin.  When an administrator edits
+         the hero title or subtitle in the admin dashboard, it is saved in
+         localStorage.  On page load we replace the default headings with those values. -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElem = document.getElementById('hero-title');
+        const subtitleElem = document.getElementById('hero-subtitle');
+        const storedTitle = localStorage.getItem('heroTitle');
+        const storedSubtitle = localStorage.getItem('heroSubtitle');
+        if (storedTitle && titleElem) {
+            // heroTitle may contain HTML spans and line breaks so use innerHTML
+            titleElem.innerHTML = storedTitle;
+        }
+        if (storedSubtitle && subtitleElem) {
+            subtitleElem.textContent = storedSubtitle;
+        }
+    });
+    </script>
 </body>
 </html>

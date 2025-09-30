@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard – Idol Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Authentication helper provides isLoggedIn, isAdmin and navigation toggling -->
+    <script src="auth.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation: reuse same structure as other pages.  updateNav() will show/hide links appropriately. -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <!-- Admin link itself is visible because we are on the admin page.  updateNav() may hide it on other pages. -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" onclick="logout()">Logout</a>
+                    <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-display font-bold mb-8">Admin Dashboard</h1>
+        <!-- Hero content editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Home Page Hero</h2>
+            <p class="text-sm text-gray-600 mb-4">You can customise the hero heading and subtitle on the home page.  Use simple HTML (e.g. &lt;span class=&quot;text-gradient&quot;&gt;) to style parts of the heading.</p>
+            <div class="mb-4">
+                <label for="admin-hero-title" class="block text-sm font-medium text-gray-700 mb-1">Hero Title (HTML allowed)</label>
+                <textarea id="admin-hero-title" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" rows="4"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-hero-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle</label>
+                <input type="text" id="admin-hero-subtitle" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-hero" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Hero Content</button>
+            <p id="hero-save-msg" class="text-green-600 text-sm mt-3 hidden">Hero content saved.</p>
+        </section>
+
+        <!-- Document manager -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
+            <p class="text-sm text-gray-600 mb-4">Upload files here to share them with approved influencers.  Files are stored in the browser and will persist across sessions on this device.  Each upload will appear below with a link and a delete button.</p>
+            <input type="file" id="document-upload" multiple class="mb-4" />
+            <ul id="admin-doc-list" class="space-y-2"></ul>
+        </section>
+    </div>
+
+    <script>
+    // Admin page script.  Only administrators should access this page; redirect others.
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verify admin credentials.  If not, send to admin login.
+        if (!isAdmin()) {
+            window.location.href = 'admin-login.html';
+            return;
+        }
+        // Ensure loggedIn flag is set so nav shows appropriate options
+        updateNav();
+        // Populate hero fields
+        const heroTitleField = document.getElementById('admin-hero-title');
+        const heroSubtitleField = document.getElementById('admin-hero-subtitle');
+        // Default values reflect the current hard-coded hero from index.html
+        const defaultTitle = '<span class="text-gradient">Turn Your</span><br><span class="text-black">Influence</span><br><span class="text-gradient">Into Fashion</span>';
+        const defaultSubtitle = 'We handle everything from design to delivery so you can focus on your story. The only platform that transforms influencers into fashion brand owners.';
+        const storedTitle = localStorage.getItem('heroTitle');
+        const storedSubtitle = localStorage.getItem('heroSubtitle');
+        heroTitleField.value = storedTitle || defaultTitle;
+        heroSubtitleField.value = storedSubtitle || defaultSubtitle;
+        // Save handler
+        document.getElementById('save-hero').addEventListener('click', function() {
+            localStorage.setItem('heroTitle', heroTitleField.value);
+            localStorage.setItem('heroSubtitle', heroSubtitleField.value);
+            const msg = document.getElementById('hero-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+        // Document management
+        function loadAdminDocs() {
+            let docs = [];
+            try {
+                const stored = localStorage.getItem('documents');
+                if (stored) docs = JSON.parse(stored);
+            } catch (e) {
+                console.error('Could not parse documents', e);
+            }
+            const list = document.getElementById('admin-doc-list');
+            list.innerHTML = '';
+            if (docs && docs.length > 0) {
+                docs.forEach(function(doc, index) {
+                    const li = document.createElement('li');
+                    li.className = 'bg-white p-4 rounded-lg shadow flex justify-between items-center';
+                    const link = document.createElement('a');
+                    link.href = doc.data;
+                    link.textContent = doc.name;
+                    link.setAttribute('download', doc.name);
+                    link.className = 'text-blue-600 hover:underline';
+                    li.appendChild(link);
+                    const del = document.createElement('button');
+                    del.textContent = 'Delete';
+                    del.className = 'text-red-600 hover:underline ml-4 text-sm';
+                    del.addEventListener('click', function() {
+                        docs.splice(index, 1);
+                        localStorage.setItem('documents', JSON.stringify(docs));
+                        loadAdminDocs();
+                    });
+                    li.appendChild(del);
+                    list.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.className = 'text-gray-500';
+                li.textContent = 'No documents uploaded yet.';
+                list.appendChild(li);
+            }
+        }
+        // File upload handler
+        document.getElementById('document-upload').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+            let docs = [];
+            try {
+                const stored = localStorage.getItem('documents');
+                if (stored) docs = JSON.parse(stored);
+            } catch (e) {
+                docs = [];
+            }
+            // Process each file asynchronously
+            files.forEach(function(file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    docs.push({ name: file.name, data: evt.target.result });
+                    localStorage.setItem('documents', JSON.stringify(docs));
+                    loadAdminDocs();
+                };
+                reader.readAsDataURL(file);
+            });
+            // Reset the input value so the same file can be uploaded again if desired
+            e.target.value = '';
+        });
+        // Initial render
+        loadAdminDocs();
+    });
+    </script>
+</body>
+</html>

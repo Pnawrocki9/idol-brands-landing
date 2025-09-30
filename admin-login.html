@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login – Idol Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Include auth.js so we can reuse helpers like logout if needed -->
+    <script src="auth.js"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-100 font-sans">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-3xl font-bold mb-6 text-center">Admin Login</h1>
+        <p class="text-sm text-gray-600 mb-4 text-center">Enter your administrator credentials.</p>
+        <form id="admin-login-form" class="space-y-4">
+            <div>
+                <label for="admin-username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="admin-username" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Enter your username" required>
+            </div>
+            <div>
+                <label for="admin-password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="admin-password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="w-full bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800">Login</button>
+        </form>
+        <p id="admin-error-message" class="text-red-600 text-sm mt-4 hidden text-center">Invalid administrator credentials.</p>
+        <p class="mt-6 text-center text-sm text-gray-500">
+            Need to log in as an influencer? <a href="login.html" class="text-blue-600 hover:underline">Influencer Login</a>
+        </p>
+    </div>
+
+    <script>
+    // Handle admin login submission.  Admin credentials are hard‑coded for this demo.
+    document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = document.getElementById('admin-username').value.trim();
+        const password = document.getElementById('admin-password').value.trim();
+        // Demo admin credentials.  In a production environment, this would be secure and server‑side.
+        const ADMIN_USER = 'admin';
+        const ADMIN_PASS = 'idoladmin2025';
+        if (username === ADMIN_USER && password === ADMIN_PASS) {
+            // Set both loggedIn and adminLoggedIn flags
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('adminLoggedIn', 'true');
+            window.location.href = 'admin.html';
+        } else {
+            const error = document.getElementById('admin-error-message');
+            error.classList.remove('hidden');
+        }
+    });
+    </script>
+</body>
+</html>

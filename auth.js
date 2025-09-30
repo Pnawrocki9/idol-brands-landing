@@ -12,8 +12,18 @@ function isLoggedIn() {
   return localStorage.getItem('loggedIn') === 'true';
 }
 
+// Check if the current user is logged in as administrator.  Admins have
+// additional privileges such as editing site content and managing documents.
+// We store a separate flag in localStorage to distinguish admin sessions.
+function isAdmin() {
+  return localStorage.getItem('adminLoggedIn') === 'true';
+}
+
 function logout() {
+  // Clear both regular and admin login flags on logout.  This ensures
+  // administrators are fully logged out and cannot access the admin dashboard.
   localStorage.removeItem('loggedIn');
+  localStorage.removeItem('adminLoggedIn');
   // redirect to home page after logout
   window.location.href = 'index.html';
 }
@@ -23,6 +33,7 @@ function updateNav() {
   const docLink = document.getElementById('nav-documents');
   const loginLink = document.getElementById('nav-login');
   const logoutLink = document.getElementById('nav-logout');
+  const adminLink = document.getElementById('nav-admin');
   const calcSection = document.getElementById('calculator-section');
 
     if (isLoggedIn()) {
@@ -30,6 +41,10 @@ function updateNav() {
         if (docLink) docLink.style.display = '';
         if (logoutLink) logoutLink.style.display = '';
         if (loginLink) loginLink.style.display = 'none';
+        // show admin link only if adminLoggedIn
+        if (adminLink) {
+          adminLink.style.display = isAdmin() ? '' : 'none';
+        }
         // Allow calculator link to anchor to the calculator section. Preserve the
         // original target (index.html#calculator-section or #calculator-section)
         if (calcLink) {
@@ -51,6 +66,7 @@ function updateNav() {
         if (docLink) docLink.style.display = 'none';
         if (logoutLink) logoutLink.style.display = 'none';
         if (loginLink) loginLink.style.display = '';
+        if (adminLink) adminLink.style.display = 'none';
         // point calculator link to login page
         if (calcLink) calcLink.setAttribute('href', 'login.html');
         // hide calculator section if present
@@ -81,6 +97,15 @@ function attachNavHandlers() {
       // Always navigate to the login page via assignment to avoid prevented default
       e.preventDefault();
       window.location.href = 'login.html';
+    });
+  }
+  const adminLink = document.getElementById('nav-admin');
+  if (adminLink && !adminLink.dataset.handler) {
+    adminLink.dataset.handler = 'true';
+    adminLink.addEventListener('click', function (e) {
+      // Navigate to the admin dashboard regardless of default anchor behaviour.
+      e.preventDefault();
+      window.location.href = 'admin.html';
     });
   }
 }

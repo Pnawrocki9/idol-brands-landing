@@ -23,6 +23,8 @@
                     <!-- Updated to point to calculator on the index page instead of local anchor -->
                     <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
                     <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium">Your Documents</a>
+                    <!-- Admin dashboard link appears only when admin is logged in -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
                     <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
                     <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" onclick="logout()">Logout</a>
                     <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
@@ -41,11 +43,51 @@
     </div>
 
     <script>
-    // Require login on this page
+    // Require login on this page and load any shared documents.  When an influencer
+    // or admin visits this page, we first ensure they are authenticated.  Then
+    // we populate the documents list from localStorage.  Admins additionally
+    // see a delete button to remove documents.
     document.addEventListener('DOMContentLoaded', function() {
         if (!isLoggedIn()) {
-            // redirect to login if not authenticated
             window.location.href = 'login.html';
+            return;
+        }
+        const listElem = document.getElementById('documents-list');
+        // Retrieve stored documents (an array of objects with name and data fields).
+        const stored = localStorage.getItem('documents');
+        if (stored) {
+            try {
+                const docs = JSON.parse(stored);
+                if (Array.isArray(docs) && docs.length > 0) {
+                    // Clear placeholder
+                    listElem.innerHTML = '';
+                    docs.forEach(function(doc, index) {
+                        const li = document.createElement('li');
+                        li.className = 'bg-white p-4 rounded-lg shadow flex justify-between items-center';
+                        const link = document.createElement('a');
+                        link.href = doc.data;
+                        link.textContent = doc.name;
+                        link.setAttribute('download', doc.name);
+                        link.className = 'text-blue-600 hover:underline';
+                        li.appendChild(link);
+                        // Show delete button only for admin users
+                        if (typeof isAdmin === 'function' && isAdmin()) {
+                            const btn = document.createElement('button');
+                            btn.textContent = 'Delete';
+                            btn.className = 'text-red-600 hover:underline ml-4 text-sm';
+                            btn.addEventListener('click', function() {
+                                docs.splice(index, 1);
+                                localStorage.setItem('documents', JSON.stringify(docs));
+                                location.reload();
+                            });
+                            li.appendChild(btn);
+                        }
+                        listElem.appendChild(li);
+                    });
+                }
+            } catch (err) {
+                console.error('Failed to parse documents from localStorage', err);
+            }
         }
     });
     </script>
