@@ -503,6 +503,16 @@
             </div>
         </div>
     </section>
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-5xl font-display font-bold text-black mb-4">Latest from Our Blog</h2>
+                <p class="text-xl text-gray-600">Insights, tips and success stories to help you build and grow your fashion brand.</p>
+            </div>
+            <div id="blog-list" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
 
     <!-- Start Your Brand Section -->
     <section id="start" class="py-20 bg-white">
@@ -927,6 +937,48 @@
         if (storedSubtitle && subtitleElem) {
             subtitleElem.textContent = storedSubtitle;
         }
+    });
+    </script>
+
+    <!-- Blog posts loader.  Reads posts from localStorage (key `blogPosts`) and populates the blog section on the home page. -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const blogContainer = document.getElementById('blog-list');
+        if (!blogContainer) return;
+        let posts = [];
+        try {
+            const stored = localStorage.getItem('blogPosts');
+            if (stored) posts = JSON.parse(stored);
+        } catch (e) {
+            posts = [];
+        }
+        blogContainer.innerHTML = '';
+        if (!posts || posts.length === 0) {
+            const msg = document.createElement('p');
+            msg.className = 'text-gray-600 text-center col-span-full';
+            msg.textContent = 'No blog posts available yet.';
+            blogContainer.appendChild(msg);
+            return;
+        }
+        // Display up to 3 latest posts (most recent first)
+        posts.slice().reverse().slice(0,3).forEach(function(post) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow p-6 flex flex-col';
+            const title = document.createElement('h3');
+            title.className = 'text-2xl font-bold text-black mb-3';
+            title.textContent = post.title || 'Untitled Post';
+            const date = document.createElement('p');
+            date.className = 'text-sm text-gray-500 mb-4';
+            date.textContent = post.date || '';
+            const excerpt = document.createElement('p');
+            excerpt.className = 'text-gray-700 flex-grow';
+            const content = (post.content || '').replace(/\n+/g, ' ').trim();
+            excerpt.textContent = content.substring(0, 150) + (content.length > 150 ? '…' : '');
+            card.appendChild(title);
+            if (post.date) card.appendChild(date);
+            card.appendChild(excerpt);
+            blogContainer.appendChild(card);
+        });
     });
     </script>
 </body>
