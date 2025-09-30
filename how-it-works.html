@@ -337,8 +337,8 @@
     <section class="py-20 bg-black text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-5xl font-display font-bold mb-6">Experience Live-Selling</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                <h2 id="how-title" class="text-5xl font-display font-bold mb-6">Experience Live-Selling</h2>
+                <p id="how-subtitle" class="text-xl text-gray-300 max-w-3xl mx-auto">
                     See how our live-selling platform transforms your fashion shows into sales events.
                 </p>
             </div>
@@ -435,7 +435,7 @@
     <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="fade-in">
-                <h2 class="text-5xl font-display font-bold text-black mb-6">Ready to Start Live-Selling?</h2>
+                <h2 id="ready-title" class="text-5xl font-display font-bold text-black mb-6">Ready to Start Live-Selling?</h2>
                 <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
                     Join hundreds of influencers who've transformed their influence into thriving fashion brands 
                     through live-selling. Your marketplace journey starts here.
@@ -535,5 +535,19 @@
     </script>
     <!-- Authentication helper to control login state and nav -->
     <script src="auth.js"></script>
+    <!-- Apply admin-defined headings for How It Works page from localStorage -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const howTitleElem = document.getElementById('how-title');
+        const howSubtitleElem = document.getElementById('how-subtitle');
+        const readyTitleElem = document.getElementById('ready-title');
+        const storedHowTitle = localStorage.getItem('howTitle');
+        const storedHowSubtitle = localStorage.getItem('howSubtitle');
+        const storedReadyTitle = localStorage.getItem('readyTitle');
+        if (storedHowTitle) howTitleElem.textContent = storedHowTitle;
+        if (storedHowSubtitle) howSubtitleElem.textContent = storedHowSubtitle;
+        if (storedReadyTitle) readyTitleElem.textContent = storedReadyTitle;
+    });
+    </script>
 </body>
 </html>

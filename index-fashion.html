@@ -209,13 +209,13 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8">
                     <div class="floating-element">
-                        <h1 class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
+                        <h1 id="hero-title" class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
                             <span class="text-gradient">Turn Your</span><br>
                             <span class="text-black">Influence</span><br>
                             <span class="text-gradient">Into Fashion</span>
                         </h1>
                     </div>
-                    <p class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
+                    <p id="hero-subtitle" class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
                         We handle everything from design to delivery so you can focus on your story. 
                         The only platform that transforms influencers into fashion brand owners.
                     </p>
@@ -888,5 +888,20 @@
     </script>
     <!-- Authentication helper to control login state, nav and calculator visibility -->
     <script src="auth.js"></script>
+    <!-- Apply custom hero content on fashion index page from localStorage -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElem = document.getElementById('hero-title');
+        const subtitleElem = document.getElementById('hero-subtitle');
+        const storedTitle = localStorage.getItem('heroTitle');
+        const storedSubtitle = localStorage.getItem('heroSubtitle');
+        if (storedTitle) {
+            titleElem.innerHTML = storedTitle;
+        }
+        if (storedSubtitle) {
+            subtitleElem.textContent = storedSubtitle;
+        }
+    });
+    </script>
 </body>
 </html>

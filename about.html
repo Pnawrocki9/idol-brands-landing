@@ -68,8 +68,8 @@
     <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="fade-in">
-                <h1 class="text-6xl font-display font-bold text-black mb-6">About Idol Brands</h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h1 id="about-hero-title" class="text-6xl font-display font-bold text-black mb-6">About Idol Brands</h1>
+                <p id="about-hero-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Built by fashion industry veterans. Designed for the new generation of influence-driven brands.
                 </p>
             </div>
@@ -82,7 +82,8 @@
             <div class="text-center mb-16 fade-in">
                 <h2 class="text-5xl font-display font-bold text-black mb-6">Our Story</h2>
             </div>
-            <div class="space-y-8 text-lg text-gray-700 fade-in">
+            <!-- Assign an ID to the container so admin-edited paragraphs can be inserted on page load -->
+            <div id="about-story-content" class="space-y-8 text-lg text-gray-700 fade-in">
                 <p>
                     Idol Brands was founded in 2024 by a team of fashion industry veterans who watched countless 
                     influencers struggle to launch their own fashion brands. We saw the same story repeat itself: 
@@ -108,24 +109,24 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="fade-in">
-                    <h2 class="text-4xl font-display font-bold text-black mb-8">Our Mission</h2>
-                    <p class="text-xl text-gray-600 mb-6">
+                    <h2 id="mission-title" class="text-4xl font-display font-bold text-black mb-8">Our Mission</h2>
+                    <p id="mission-desc1" class="text-xl text-gray-600 mb-6">
                         To democratize fashion entrepreneurship by providing influencers with the tools, 
                         expertise, and platform they need to build successful fashion brands.
                     </p>
-                    <p class="text-lg text-gray-600">
+                    <p id="mission-desc2" class="text-lg text-gray-600">
                         We believe that every influencer with a passionate community deserves the opportunity 
                         to turn their influence into a thriving business, without being held back by 
                         operational complexity.
                     </p>
                 </div>
                 <div class="fade-in">
-                    <h2 class="text-4xl font-display font-bold text-black mb-8">Our Vision</h2>
-                    <p class="text-xl text-gray-600 mb-6">
+                    <h2 id="vision-title" class="text-4xl font-display font-bold text-black mb-8">Our Vision</h2>
+                    <p id="vision-desc1" class="text-xl text-gray-600 mb-6">
                         To become the world's leading live-selling marketplace for influencer fashion brands, 
                         where creativity meets commerce in real-time.
                     </p>
-                    <p class="text-lg text-gray-600">
+                    <p id="vision-desc2" class="text-lg text-gray-600">
                         We're building a future where fashion brands are born from authentic communities, 
                         not boardrooms - where influence drives innovation and passion creates profit.
                     </p>
@@ -138,8 +139,8 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-display font-bold text-black mb-6">Fashion Industry Veterans</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h2 id="team-title" class="text-4xl font-display font-bold text-black mb-6">Fashion Industry Veterans</h2>
+                <p id="team-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Our team combines decades of experience in fashion manufacturing, logistics, retail, 
                     and technology to support your brand's success.
                 </p>
@@ -183,8 +184,8 @@
     <section class="py-20 bg-black text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-display font-bold mb-6">Our Impact</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                <h2 id="impact-title" class="text-4xl font-display font-bold mb-6">Our Impact</h2>
+                <p id="impact-subtitle" class="text-xl text-gray-300 max-w-3xl mx-auto">
                     Real results from real influencers who've transformed their passion into profitable fashion brands.
                 </p>
             </div>
@@ -329,5 +330,69 @@
     </script>
     <!-- Authentication helper to control login state and nav -->
     <script src="auth.js"></script>
+    <!-- Apply admin-defined content for the About page.  Values saved in localStorage
+         are injected into the page on load.  Each element is updated only if a
+         corresponding key exists.  Multi-paragraph story content is stored with
+         blank lines separating paragraphs. -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hero
+        const aboutTitleElem = document.getElementById('about-hero-title');
+        const aboutSubtitleElem = document.getElementById('about-hero-subtitle');
+        const storedAboutHeroTitle = localStorage.getItem('aboutHeroTitle');
+        const storedAboutHeroSubtitle = localStorage.getItem('aboutHeroSubtitle');
+        if (storedAboutHeroTitle) {
+            aboutTitleElem.textContent = storedAboutHeroTitle;
+        }
+        if (storedAboutHeroSubtitle) {
+            aboutSubtitleElem.textContent = storedAboutHeroSubtitle;
+        }
+        // Our Story
+        const storyContainer = document.getElementById('about-story-content');
+        const storedStory = localStorage.getItem('aboutStory');
+        if (storedStory && storyContainer) {
+            // Clear current paragraphs and insert new ones.  Split on double newline.
+            storyContainer.innerHTML = '';
+            storedStory.split(/\n\s*\n/).forEach(function(paragraph) {
+                const p = document.createElement('p');
+                p.textContent = paragraph.trim();
+                storyContainer.appendChild(p);
+            });
+        }
+        // Mission & Vision
+        const missionTitleElem = document.getElementById('mission-title');
+        const missionDesc1Elem = document.getElementById('mission-desc1');
+        const missionDesc2Elem = document.getElementById('mission-desc2');
+        const visionTitleElem = document.getElementById('vision-title');
+        const visionDesc1Elem = document.getElementById('vision-desc1');
+        const visionDesc2Elem = document.getElementById('vision-desc2');
+        const storedMissionTitle = localStorage.getItem('missionTitle');
+        const storedMissionDesc1 = localStorage.getItem('missionDesc1');
+        const storedMissionDesc2 = localStorage.getItem('missionDesc2');
+        const storedVisionTitle = localStorage.getItem('visionTitle');
+        const storedVisionDesc1 = localStorage.getItem('visionDesc1');
+        const storedVisionDesc2 = localStorage.getItem('visionDesc2');
+        if (storedMissionTitle) missionTitleElem.textContent = storedMissionTitle;
+        if (storedMissionDesc1) missionDesc1Elem.textContent = storedMissionDesc1;
+        if (storedMissionDesc2) missionDesc2Elem.textContent = storedMissionDesc2;
+        if (storedVisionTitle) visionTitleElem.textContent = storedVisionTitle;
+        if (storedVisionDesc1) visionDesc1Elem.textContent = storedVisionDesc1;
+        if (storedVisionDesc2) visionDesc2Elem.textContent = storedVisionDesc2;
+        // Team
+        const teamTitleElem = document.getElementById('team-title');
+        const teamSubtitleElem = document.getElementById('team-subtitle');
+        const storedTeamTitle = localStorage.getItem('teamTitle');
+        const storedTeamSubtitle = localStorage.getItem('teamSubtitle');
+        if (storedTeamTitle) teamTitleElem.textContent = storedTeamTitle;
+        if (storedTeamSubtitle) teamSubtitleElem.textContent = storedTeamSubtitle;
+        // Impact
+        const impactTitleElem = document.getElementById('impact-title');
+        const impactSubtitleElem = document.getElementById('impact-subtitle');
+        const storedImpactTitle = localStorage.getItem('impactTitle');
+        const storedImpactSubtitle = localStorage.getItem('impactSubtitle');
+        if (storedImpactTitle) impactTitleElem.textContent = storedImpactTitle;
+        if (storedImpactSubtitle) impactSubtitleElem.textContent = storedImpactSubtitle;
+    });
+    </script>
 </body>
 </html>

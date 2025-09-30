@@ -52,6 +52,100 @@
             <p id="hero-save-msg" class="text-green-600 text-sm mt-3 hidden">Hero content saved.</p>
         </section>
 
+        <!-- About page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit About Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Customise the hero and first sections of the About page.  These values will replace the default headings and paragraphs when the page loads.</p>
+            <div class="mb-4">
+                <label for="admin-about-hero-title" class="block text-sm font-medium text-gray-700 mb-1">About Hero Title</label>
+                <input id="admin-about-hero-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-hero-subtitle" class="block text-sm font-medium text-gray-700 mb-1">About Hero Subtitle</label>
+                <input id="admin-about-hero-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-story" class="block text-sm font-medium text-gray-700 mb-1">Our Story (one paragraph per line)</label>
+                <textarea id="admin-about-story" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" rows="6"></textarea>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-mission-title" class="block text-sm font-medium text-gray-700 mb-1">Mission Section Title</label>
+                    <input id="admin-mission-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc1" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Mission Description Line 1</label>
+                    <input id="admin-mission-desc1" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc2" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Mission Description Line 2</label>
+                    <input id="admin-mission-desc2" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-vision-title" class="block text-sm font-medium text-gray-700 mb-1">Vision Section Title</label>
+                    <input id="admin-vision-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc1" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Vision Description Line 1</label>
+                    <input id="admin-vision-desc1" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc2" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Vision Description Line 2</label>
+                    <input id="admin-vision-desc2" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-team-title" class="block text-sm font-medium text-gray-700 mb-1">Team Section Title</label>
+                    <input id="admin-team-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-team-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Team Section Subtitle</label>
+                    <input id="admin-team-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-impact-title" class="block text-sm font-medium text-gray-700 mb-1">Impact Section Title</label>
+                    <input id="admin-impact-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-impact-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Impact Section Subtitle</label>
+                    <input id="admin-impact-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-about" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save About Content</button>
+            <p id="about-save-msg" class="text-green-600 text-sm mt-3 hidden">About page content saved.</p>
+        </section>
+
+        <!-- How It Works page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit How It Works Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Modify the main headings on the How It Works page.  Steps themselves remain static.</p>
+            <div class="mb-4">
+                <label for="admin-how-title" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Title</label>
+                <input id="admin-how-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Subtitle</label>
+                <input id="admin-how-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-ready-title" class="block text-sm font-medium text-gray-700 mb-1">Ready Section Title</label>
+                <input id="admin-ready-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-how" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save How It Works Content</button>
+            <p id="how-save-msg" class="text-green-600 text-sm mt-3 hidden">How It Works page content saved.</p>
+        </section>
+
+        <!-- Success Stories page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Success Stories Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Adjust the hero heading and subtitle for the Success Stories page.</p>
+            <div class="mb-4">
+                <label for="admin-success-title" class="block text-sm font-medium text-gray-700 mb-1">Success Stories Title</label>
+                <input id="admin-success-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Success Stories Subtitle</label>
+                <input id="admin-success-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-success" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Success Content</button>
+            <p id="success-save-msg" class="text-green-600 text-sm mt-3 hidden">Success Stories content saved.</p>
+        </section>
+
         <!-- Document manager -->
         <section>
             <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
@@ -71,21 +165,99 @@
         }
         // Ensure loggedIn flag is set so nav shows appropriate options
         updateNav();
-        // Populate hero fields
+        // Populate hero fields for home page
         const heroTitleField = document.getElementById('admin-hero-title');
         const heroSubtitleField = document.getElementById('admin-hero-subtitle');
-        // Default values reflect the current hard-coded hero from index.html
-        const defaultTitle = '<span class="text-gradient">Turn Your</span><br><span class="text-black">Influence</span><br><span class="text-gradient">Into Fashion</span>';
-        const defaultSubtitle = 'We handle everything from design to delivery so you can focus on your story. The only platform that transforms influencers into fashion brand owners.';
-        const storedTitle = localStorage.getItem('heroTitle');
-        const storedSubtitle = localStorage.getItem('heroSubtitle');
-        heroTitleField.value = storedTitle || defaultTitle;
-        heroSubtitleField.value = storedSubtitle || defaultSubtitle;
-        // Save handler
+        const defaultHeroTitle = '<span class="text-gradient">Turn Your</span><br><span class="text-black">Influence</span><br><span class="text-gradient">Into Fashion</span>';
+        const defaultHeroSubtitle = 'We handle everything from design to delivery so you can focus on your story. The only platform that transforms influencers into fashion brand owners.';
+        heroTitleField.value = localStorage.getItem('heroTitle') || defaultHeroTitle;
+        heroSubtitleField.value = localStorage.getItem('heroSubtitle') || defaultHeroSubtitle;
         document.getElementById('save-hero').addEventListener('click', function() {
             localStorage.setItem('heroTitle', heroTitleField.value);
             localStorage.setItem('heroSubtitle', heroSubtitleField.value);
             const msg = document.getElementById('hero-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate About page fields
+        const aboutHeroTitleField = document.getElementById('admin-about-hero-title');
+        const aboutHeroSubtitleField = document.getElementById('admin-about-hero-subtitle');
+        const aboutStoryField = document.getElementById('admin-about-story');
+        const missionTitleField = document.getElementById('admin-mission-title');
+        const missionDesc1Field = document.getElementById('admin-mission-desc1');
+        const missionDesc2Field = document.getElementById('admin-mission-desc2');
+        const visionTitleField = document.getElementById('admin-vision-title');
+        const visionDesc1Field = document.getElementById('admin-vision-desc1');
+        const visionDesc2Field = document.getElementById('admin-vision-desc2');
+        const teamTitleField = document.getElementById('admin-team-title');
+        const teamSubtitleField = document.getElementById('admin-team-subtitle');
+        const impactTitleField = document.getElementById('admin-impact-title');
+        const impactSubtitleField = document.getElementById('admin-impact-subtitle');
+        // Set defaults based on current hard-coded content
+        aboutHeroTitleField.value = localStorage.getItem('aboutHeroTitle') || 'About Idol Brands';
+        aboutHeroSubtitleField.value = localStorage.getItem('aboutHeroSubtitle') || 'Built by fashion industry veterans. Designed for the new generation of influence-driven brands.';
+        // Our Story paragraphs stored as newline separated string
+        const defaultAboutStory = [
+            'Idol Brands was founded in 2024 by a team of fashion industry veterans who watched countless influencers struggle to launch their own fashion brands. We saw the same story repeat itself: passionate creators with amazing ideas who failed because they couldn\'t handle the operational complexity.',
+            'After decades in fashion manufacturing, logistics, and retail, we realized that the traditional fashion industry model was broken for the new generation of influence-driven brands. Influencers needed a different approach - one that let them focus on creativity and community while experts handled the operations.',
+            'We combined our deep fashion industry expertise with cutting-edge live-commerce technology to create the first platform specifically designed for influencer fashion brands. Today, Idol Brands is more than just a service - we\'re a movement to democratize fashion entrepreneurship.'
+        ].join('\n\n');
+        aboutStoryField.value = localStorage.getItem('aboutStory') || defaultAboutStory;
+        missionTitleField.value = localStorage.getItem('missionTitle') || 'Our Mission';
+        missionDesc1Field.value = localStorage.getItem('missionDesc1') || 'To democratize fashion entrepreneurship by providing influencers with the tools, expertise, and platform they need to build successful fashion brands.';
+        missionDesc2Field.value = localStorage.getItem('missionDesc2') || 'We believe that every influencer with a passionate community deserves the opportunity to turn their influence into a thriving business, without being held back by operational complexity.';
+        visionTitleField.value = localStorage.getItem('visionTitle') || 'Our Vision';
+        visionDesc1Field.value = localStorage.getItem('visionDesc1') || 'To become the world\'s leading live-selling marketplace for influencer fashion brands, where creativity meets commerce in real-time.';
+        visionDesc2Field.value = localStorage.getItem('visionDesc2') || 'We\'re building a future where fashion brands are born from authentic communities, not boardrooms - where influence drives innovation and passion creates profit.';
+        teamTitleField.value = localStorage.getItem('teamTitle') || 'Fashion Industry Veterans';
+        teamSubtitleField.value = localStorage.getItem('teamSubtitle') || 'Our team combines decades of experience in fashion manufacturing, logistics, retail, and technology to support your brand\'s success.';
+        impactTitleField.value = localStorage.getItem('impactTitle') || 'Our Impact';
+        impactSubtitleField.value = localStorage.getItem('impactSubtitle') || 'Real results from real influencers who\'ve transformed their passion into profitable fashion brands.';
+        document.getElementById('save-about').addEventListener('click', function() {
+            localStorage.setItem('aboutHeroTitle', aboutHeroTitleField.value);
+            localStorage.setItem('aboutHeroSubtitle', aboutHeroSubtitleField.value);
+            localStorage.setItem('aboutStory', aboutStoryField.value);
+            localStorage.setItem('missionTitle', missionTitleField.value);
+            localStorage.setItem('missionDesc1', missionDesc1Field.value);
+            localStorage.setItem('missionDesc2', missionDesc2Field.value);
+            localStorage.setItem('visionTitle', visionTitleField.value);
+            localStorage.setItem('visionDesc1', visionDesc1Field.value);
+            localStorage.setItem('visionDesc2', visionDesc2Field.value);
+            localStorage.setItem('teamTitle', teamTitleField.value);
+            localStorage.setItem('teamSubtitle', teamSubtitleField.value);
+            localStorage.setItem('impactTitle', impactTitleField.value);
+            localStorage.setItem('impactSubtitle', impactSubtitleField.value);
+            const msg = document.getElementById('about-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate How It Works page fields
+        const howTitleField = document.getElementById('admin-how-title');
+        const howSubtitleField = document.getElementById('admin-how-subtitle');
+        const readyTitleField = document.getElementById('admin-ready-title');
+        howTitleField.value = localStorage.getItem('howTitle') || 'Experience Live-Selling';
+        howSubtitleField.value = localStorage.getItem('howSubtitle') || 'See how our live-selling platform transforms your fashion shows into sales events.';
+        readyTitleField.value = localStorage.getItem('readyTitle') || 'Ready to Start Live-Selling?';
+        document.getElementById('save-how').addEventListener('click', function() {
+            localStorage.setItem('howTitle', howTitleField.value);
+            localStorage.setItem('howSubtitle', howSubtitleField.value);
+            localStorage.setItem('readyTitle', readyTitleField.value);
+            const msg = document.getElementById('how-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate Success Stories page fields
+        const successTitleField = document.getElementById('admin-success-title');
+        const successSubtitleField = document.getElementById('admin-success-subtitle');
+        successTitleField.value = localStorage.getItem('successTitle') || 'Success Stories';
+        successSubtitleField.value = localStorage.getItem('successSubtitle') || 'Real influencers, real results. See how we\'ve transformed their influence into thriving fashion brands with our proven system.';
+        document.getElementById('save-success').addEventListener('click', function() {
+            localStorage.setItem('successTitle', successTitleField.value);
+            localStorage.setItem('successSubtitle', successSubtitleField.value);
+            const msg = document.getElementById('success-save-msg');
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 2000);
         });
