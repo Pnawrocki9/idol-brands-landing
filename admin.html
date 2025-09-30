@@ -1079,6 +1079,14 @@
                 saveBtn.dataset.index = index;
                 saveBtn.className = 'text-green-600 hover:underline';
                 actionsTd.appendChild(saveBtn);
+
+                // Delete button
+                const delBtn = document.createElement('button');
+                delBtn.textContent = 'Delete';
+                delBtn.dataset.action = 'deleteUser';
+                delBtn.dataset.index = index;
+                delBtn.className = 'text-red-600 hover:underline ml-3';
+                actionsTd.appendChild(delBtn);
                 tr.appendChild(actionsTd);
                 usersTableBody.appendChild(tr);
             });
@@ -1176,6 +1184,29 @@
             }
         }
 
+        // Delete a user from the list. Removes the user at the given index
+        // and updates localStorage. Then reloads the user table and shows a success message.
+        function deleteUser(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            // Remove the user at the index if it exists
+            if (users && index >= 0 && index < users.length) {
+                users.splice(index, 1);
+                localStorage.setItem('users', JSON.stringify(users));
+                loadUsers();
+                if (usersMsgEl) {
+                    usersMsgEl.textContent = 'User removed.';
+                    usersMsgEl.classList.remove('hidden');
+                    setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+                }
+            }
+        }
+
         // Event delegation for user table actions
         if (usersTableBody) {
             usersTableBody.addEventListener('click', function(e) {
@@ -1186,6 +1217,8 @@
                     toggleUserStatus(index);
                 } else if (action === 'saveCred') {
                     saveUserCredentials(index);
+                } else if (action === 'deleteUser') {
+                    deleteUser(index);
                 }
             });
         }
