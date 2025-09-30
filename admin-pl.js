@@ -5,14 +5,30 @@ document.addEventListener('DOMContentLoaded', function() {
   function loadField(fieldId, plKey, enKey, defaultVal) {
     const field = document.getElementById(fieldId);
     if (!field) return;
+    // Try to read Polish translation from localStorage
     const plVal = localStorage.getItem(plKey);
-    if (plVal !== null) {
+    if (plVal !== null && plVal !== undefined && plVal !== '') {
       field.value = plVal;
-    } else if (enKey) {
+      return;
+    }
+    // Otherwise fallback to English value if provided
+    let fallback = null;
+    if (enKey) {
       const enVal = localStorage.getItem(enKey);
-      if (enVal !== null) field.value = enVal; else if (defaultVal !== undefined) field.value = defaultVal;
-    } else if (defaultVal !== undefined) {
-      field.value = defaultVal;
+      if (enVal !== null && enVal !== '') {
+        fallback = enVal;
+      }
+    }
+    // Or use defaultVal argument
+    if (!fallback && defaultVal !== undefined) {
+      fallback = defaultVal;
+    }
+    // Or use data-default attribute on the element
+    if (!fallback && field.dataset && field.dataset.default) {
+      fallback = field.dataset.default;
+    }
+    if (fallback !== null && fallback !== undefined) {
+      field.value = fallback;
     }
   }
   function saveFields(list) {

@@ -347,7 +347,8 @@
             </div>
             <div class="mb-4">
                 <label for="admin-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle (PL)</label>
-                <input id="admin-hero-subtitle-pl" type="text" data-default="Zajmujemy się wszystkim od projektu po dostawę, abyś Ty mógł skupić się na swojej historii. Jedyna platforma, która zamienia influencerów w właścicieli marek modowych." class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                <!-- Use a textarea instead of input so longer subtitles with line breaks can be edited -->
+                <textarea id="admin-hero-subtitle-pl" rows="4" data-default="Zajmujemy się wszystkim od projektu po dostawę, abyś Ty mógł skupić się na swojej historii. Jedyna platforma, która zamienia influencerów w właścicieli marek modowych." class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
             </div>
             <button id="save-hero-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz Hero (PL)</button>
             <p id="hero-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treść hero (PL) została zapisana.</p>
