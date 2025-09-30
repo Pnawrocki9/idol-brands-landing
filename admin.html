@@ -259,6 +259,82 @@
             <ul id="blog-posts-list" class="space-y-4"></ul>
         </section>
 
+        <!-- Home page content editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Home Page Content</h2>
+            <p class="text-sm text-gray-600 mb-4">Customize the key messages and feature section on the home page.</p>
+            <!-- Metrics inputs -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="home-metric-market-value" class="block text-sm font-medium text-gray-700 mb-1">Market Size Value</label>
+                    <input id="home-metric-market-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-market-label" class="block text-sm font-medium text-gray-700 mb-1">Market Size Label</label>
+                    <input id="home-metric-market-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-value" class="block text-sm font-medium text-gray-700 mb-1">Growth Rate Value</label>
+                    <input id="home-metric-growth-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-label" class="block text-sm font-medium text-gray-700 mb-1">Growth Rate Label</label>
+                    <input id="home-metric-growth-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-value" class="block text-sm font-medium text-gray-700 mb-1">Fail Rate Value</label>
+                    <input id="home-metric-fail-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-label" class="block text-sm font-medium text-gray-700 mb-1">Fail Rate Label</label>
+                    <input id="home-metric-fail-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div class="md:col-span-2">
+                    <label for="home-metric-tagline" class="block text-sm font-medium text-gray-700 mb-1">Metrics Tagline</label>
+                    <input id="home-metric-tagline" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Start section inputs -->
+            <div class="mb-6">
+                <label for="home-start-title-field" class="block text-sm font-medium text-gray-700 mb-1">Start Section Title</label>
+                <input id="home-start-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-6">
+                <label for="home-start-subtitle-field" class="block text-sm font-medium text-gray-700 mb-1">Start Section Subtitle</label>
+                <textarea id="home-start-subtitle-field" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <!-- Feature card inputs -->
+            <h3 class="text-xl font-semibold mb-2">Feature Cards</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="home-feature1-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 1 Title</label>
+                    <input id="home-feature1-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature1-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 1 Description</label>
+                    <input id="home-feature1-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature2-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 2 Title</label>
+                    <input id="home-feature2-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature2-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 2 Description</label>
+                    <input id="home-feature2-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature3-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 3 Title</label>
+                    <input id="home-feature3-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature3-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 3 Description</label>
+                    <input id="home-feature3-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+
+            <!-- CTA button text input -->
+            <div class="mb-6 mt-6 md:col-span-2">
+                <label for="home-cta-field" class="block text-sm font-medium text-gray-700 mb-1">Home Page CTA Text</label>
+                <input id="home-cta-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Text for 'See How It Works' button" />
+            </div>
+            <button id="save-home" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Home Settings</button>
+            <p id="home-save-msg" class="text-green-600 text-sm mt-3 hidden">Home page settings saved.</p>
+        </section>
+
         <!-- Document manager -->
         <section>
             <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
@@ -641,6 +717,75 @@
             } else {
                 finalizeSave(null);
             }
+        });
+
+        // ===== Home page content management =====
+        const homeMarketValueField = document.getElementById('home-metric-market-value');
+        const homeMarketLabelField = document.getElementById('home-metric-market-label');
+        const homeGrowthValueField = document.getElementById('home-metric-growth-value');
+        const homeGrowthLabelField = document.getElementById('home-metric-growth-label');
+        const homeFailValueField = document.getElementById('home-metric-fail-value');
+        const homeFailLabelField = document.getElementById('home-metric-fail-label');
+        const homeTaglineField = document.getElementById('home-metric-tagline');
+        const homeStartTitleField = document.getElementById('home-start-title-field');
+        const homeStartSubtitleField = document.getElementById('home-start-subtitle-field');
+        const homeFeature1TitleField = document.getElementById('home-feature1-title-field');
+        const homeFeature1DescField = document.getElementById('home-feature1-desc-field');
+        const homeFeature2TitleField = document.getElementById('home-feature2-title-field');
+        const homeFeature2DescField = document.getElementById('home-feature2-desc-field');
+        const homeFeature3TitleField = document.getElementById('home-feature3-title-field');
+        const homeFeature3DescField = document.getElementById('home-feature3-desc-field');
+        // CTA text field for home page
+        const homeCtaField = document.getElementById('home-cta-field');
+        const saveHomeBtn = document.getElementById('save-home');
+
+        function loadHomeSettings() {
+            // Load or set defaults
+            homeMarketValueField.value = localStorage.getItem('metricMarketSizeValue') || document.getElementById('metric-market-size-value')?.textContent || '27B';
+            homeMarketLabelField.value = localStorage.getItem('metricMarketSizeLabel') || document.getElementById('metric-market-size-label')?.textContent || 'Market Size';
+            homeGrowthValueField.value = localStorage.getItem('metricGrowthRateValue') || document.getElementById('metric-growth-rate-value')?.textContent || '39.9%';
+            homeGrowthLabelField.value = localStorage.getItem('metricGrowthRateLabel') || document.getElementById('metric-growth-rate-label')?.textContent || 'Growth Rate';
+            homeFailValueField.value = localStorage.getItem('metricFailRateValue') || document.getElementById('metric-fail-rate-value')?.textContent || '90%';
+            homeFailLabelField.value = localStorage.getItem('metricFailRateLabel') || document.getElementById('metric-fail-rate-label')?.textContent || 'Brands Fail';
+            homeTaglineField.value = localStorage.getItem('metricTagline') || document.getElementById('metric-tagline')?.textContent || 'Unlock a $27B market growing 39.9% annually—be among the 10% who succeed.';
+            homeStartTitleField.value = localStorage.getItem('homeStartTitle') || document.getElementById('home-start-title')?.textContent || 'Ready to Start Your Fashion Empire?';
+            homeStartSubtitleField.value = localStorage.getItem('homeStartSubtitle') || document.getElementById('home-start-subtitle')?.textContent || "Join hundreds of successful influencers who've transformed their influence into thriving fashion brands. Your journey starts here.";
+            homeFeature1TitleField.value = localStorage.getItem('homeFeature1Title') || document.getElementById('home-feature1-title')?.textContent || 'Fast Launch';
+            homeFeature1DescField.value = localStorage.getItem('homeFeature1Desc') || document.getElementById('home-feature1-desc')?.textContent || 'Get your brand live in just 8 weeks';
+            homeFeature2TitleField.value = localStorage.getItem('homeFeature2Title') || document.getElementById('home-feature2-title')?.textContent || 'Done For You';
+            homeFeature2DescField.value = localStorage.getItem('homeFeature2Desc') || document.getElementById('home-feature2-desc')?.textContent || 'We handle everything, you focus on content';
+            homeFeature3TitleField.value = localStorage.getItem('homeFeature3Title') || document.getElementById('home-feature3-title')?.textContent || 'Proven Results';
+            homeFeature3DescField.value = localStorage.getItem('homeFeature3Desc') || document.getElementById('home-feature3-desc')?.textContent || 'Join the 10% who succeed';
+            // CTA button text default
+            homeCtaField.value = localStorage.getItem('homeCtaText') || document.getElementById('home-cta-text')?.textContent || 'See How It Works';
+        }
+
+        loadHomeSettings();
+
+        saveHomeBtn.addEventListener('click', function() {
+            // Save metrics
+            localStorage.setItem('metricMarketSizeValue', homeMarketValueField.value);
+            localStorage.setItem('metricMarketSizeLabel', homeMarketLabelField.value);
+            localStorage.setItem('metricGrowthRateValue', homeGrowthValueField.value);
+            localStorage.setItem('metricGrowthRateLabel', homeGrowthLabelField.value);
+            localStorage.setItem('metricFailRateValue', homeFailValueField.value);
+            localStorage.setItem('metricFailRateLabel', homeFailLabelField.value);
+            localStorage.setItem('metricTagline', homeTaglineField.value);
+            // Save start section
+            localStorage.setItem('homeStartTitle', homeStartTitleField.value);
+            localStorage.setItem('homeStartSubtitle', homeStartSubtitleField.value);
+            // Save feature cards
+            localStorage.setItem('homeFeature1Title', homeFeature1TitleField.value);
+            localStorage.setItem('homeFeature1Desc', homeFeature1DescField.value);
+            localStorage.setItem('homeFeature2Title', homeFeature2TitleField.value);
+            localStorage.setItem('homeFeature2Desc', homeFeature2DescField.value);
+            localStorage.setItem('homeFeature3Title', homeFeature3TitleField.value);
+            localStorage.setItem('homeFeature3Desc', homeFeature3DescField.value);
+            // Save CTA text
+            if (homeCtaField) localStorage.setItem('homeCtaText', homeCtaField.value);
+            const msg = document.getElementById('home-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
         });
         // Document management
         function loadAdminDocs() {

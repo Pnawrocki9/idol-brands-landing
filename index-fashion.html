@@ -224,8 +224,9 @@
                         <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
                             Start Your Fashion Brand
                         </button>
+                        <!-- CTA button text wrapped in a span with an id so it can be customized via CMS -->
                         <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold">
-                            See How It Works
+                            <span id="home-cta-text">See How It Works</span>
                         </button>
                     </div>
                 </div>
@@ -238,19 +239,19 @@
                     </div>
                     <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div class="flex flex-col items-center">
-                            <div class="text-3xl font-bold text-black">27B</div>
-                            <div class="text-sm text-gray-600">Market Size</div>
+                            <div id="metric-market-size-value" class="text-3xl font-bold text-black">27B</div>
+                            <div id="metric-market-size-label" class="text-sm text-gray-600">Market Size</div>
                         </div>
                         <div class="flex flex-col items-center">
-                            <div class="text-3xl font-bold text-black">39.9%</div>
-                            <div class="text-sm text-gray-600">Growth Rate</div>
+                            <div id="metric-growth-rate-value" class="text-3xl font-bold text-black">39.9%</div>
+                            <div id="metric-growth-rate-label" class="text-sm text-gray-600">Growth Rate</div>
                         </div>
                         <div class="flex flex-col items-center">
-                            <div class="text-3xl font-bold text-black">90%</div>
-                            <div class="text-sm text-gray-600">Brands Fail</div>
+                            <div id="metric-fail-rate-value" class="text-3xl font-bold text-black">90%</div>
+                            <div id="metric-fail-rate-label" class="text-sm text-gray-600">Brands Fail</div>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mt-4 text-center">
+                    <p id="metric-tagline" class="text-gray-600 italic mt-4 text-center">
                         Unlock a $27B market growing 39.9% annually—be among the 10% who succeed.
                     </p>
                 </div>
@@ -508,8 +509,8 @@
     <section id="start" class="py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="fade-in">
-                <h2 class="text-5xl font-display font-bold text-black mb-6">Ready to Start Your Fashion Empire?</h2>
-                <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                <h2 id="home-start-title" class="text-5xl font-display font-bold text-black mb-6">Ready to Start Your Fashion Empire?</h2>
+                <p id="home-start-subtitle" class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
                     Join hundreds of successful influencers who've transformed their influence into thriving fashion brands. 
                     Your journey starts here.
                 </p>
@@ -518,22 +519,22 @@
                         <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-rocket text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-black mb-2">Fast Launch</h3>
-                        <p class="text-gray-600">Get your brand live in just 8 weeks</p>
+                        <h3 id="home-feature1-title" class="text-xl font-bold text-black mb-2">Fast Launch</h3>
+                        <p id="home-feature1-desc" class="text-gray-600">Get your brand live in just 8 weeks</p>
                     </div>
                     <div class="text-center">
                         <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-handshake text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-black mb-2">Done For You</h3>
-                        <p class="text-gray-600">We handle everything, you focus on content</p>
+                        <h3 id="home-feature2-title" class="text-xl font-bold text-black mb-2">Done For You</h3>
+                        <p id="home-feature2-desc" class="text-gray-600">We handle everything, you focus on content</p>
                     </div>
                     <div class="text-center">
                         <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-chart-line text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-black mb-2">Proven Results</h3>
-                        <p class="text-gray-600">Join the 10% who succeed</p>
+                        <h3 id="home-feature3-title" class="text-xl font-bold text-black mb-2">Proven Results</h3>
+                        <p id="home-feature3-desc" class="text-gray-600">Join the 10% who succeed</p>
                     </div>
                 </div>
                 
@@ -943,6 +944,49 @@
                 console.log('Waiting list submission:', data);
             }, 1000);
         });
+    </script>
+    <!-- Home page dynamic content loader: updates metrics and CTA text from localStorage if available -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function getItem(key, def) {
+            const val = localStorage.getItem(key);
+            return val !== null ? val : def;
+        }
+        const msVal = document.getElementById('metric-market-size-value');
+        if (msVal) msVal.textContent = getItem('metricMarketSizeValue', msVal.textContent);
+        const msLabel = document.getElementById('metric-market-size-label');
+        if (msLabel) msLabel.textContent = getItem('metricMarketSizeLabel', msLabel.textContent);
+        const grVal = document.getElementById('metric-growth-rate-value');
+        if (grVal) grVal.textContent = getItem('metricGrowthRateValue', grVal.textContent);
+        const grLabel = document.getElementById('metric-growth-rate-label');
+        if (grLabel) grLabel.textContent = getItem('metricGrowthRateLabel', grLabel.textContent);
+        const frVal = document.getElementById('metric-fail-rate-value');
+        if (frVal) frVal.textContent = getItem('metricFailRateValue', frVal.textContent);
+        const frLabel = document.getElementById('metric-fail-rate-label');
+        if (frLabel) frLabel.textContent = getItem('metricFailRateLabel', frLabel.textContent);
+        const tagEl = document.getElementById('metric-tagline');
+        if (tagEl) tagEl.textContent = getItem('metricTagline', tagEl.textContent);
+        const startTitle = document.getElementById('home-start-title');
+        if (startTitle) startTitle.textContent = getItem('homeStartTitle', startTitle.textContent);
+        const startSub = document.getElementById('home-start-subtitle');
+        if (startSub) startSub.textContent = getItem('homeStartSubtitle', startSub.textContent);
+        const f1Title = document.getElementById('home-feature1-title');
+        if (f1Title) f1Title.textContent = getItem('homeFeature1Title', f1Title.textContent);
+        const f1Desc = document.getElementById('home-feature1-desc');
+        if (f1Desc) f1Desc.textContent = getItem('homeFeature1Desc', f1Desc.textContent);
+        const f2Title = document.getElementById('home-feature2-title');
+        if (f2Title) f2Title.textContent = getItem('homeFeature2Title', f2Title.textContent);
+        const f2Desc = document.getElementById('home-feature2-desc');
+        if (f2Desc) f2Desc.textContent = getItem('homeFeature2Desc', f2Desc.textContent);
+        const f3Title = document.getElementById('home-feature3-title');
+        if (f3Title) f3Title.textContent = getItem('homeFeature3Title', f3Title.textContent);
+        const f3Desc = document.getElementById('home-feature3-desc');
+        if (f3Desc) f3Desc.textContent = getItem('homeFeature3Desc', f3Desc.textContent);
+
+        // CTA button
+        const cta = document.getElementById('home-cta-text');
+        if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
+    });
     </script>
     <!-- Authentication helper to control login state, nav and calculator visibility -->
     <script src="auth.js"></script>
