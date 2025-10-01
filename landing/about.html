@@ -302,7 +302,7 @@
                     Join hundreds of influencers who've transformed their influence into thriving fashion brands. 
                     Your journey to fashion entrepreneurship begins now.
                 </p>
-                <button class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
+                <button id="cta-button" class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
                     Start Your Fashion Brand Today
                 </button>
                 <p class="text-gray-500 text-sm mt-4">
@@ -377,9 +377,12 @@
         });
 
         // Button click handler
-        document.querySelector('button').addEventListener('click', function() {
-            alert('Brand consultation booking - coming soon! Please contact us directly.');
-        });
+        const ctaButton = document.querySelector('#cta-button');
+        if (ctaButton) {
+            ctaButton.addEventListener('click', function() {
+                alert('Brand consultation booking - coming soon! Please contact us directly.');
+            });
+        }
     </script>
     <!-- Authentication helper to control login state and nav -->
     <script src="auth.js"></script>
