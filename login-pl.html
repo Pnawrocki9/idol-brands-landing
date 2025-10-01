@@ -7,18 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="auth.js"></script>
-    <script src="cms-sync.js"></script>
-
-    <script>
-        // Auto-inject CMS data from server
-        (function() {
-            const cmsData = {"testKey":"Test CMS Value","plHeroTitle":"Test Hero Title"};
-            for (const [key, value] of Object.entries(cmsData)) {
-                localStorage.setItem(key, value);
-            }
-        })();
-    </script>
-</head>
+    <script src="cms-sync.js"></script></head>
 <body class="min-h-screen flex items-center justify-center bg-gray-100 font-sans">
     <!-- Back arrow linking to Polish home page -->
     <a href="index-pl.html" class="absolute top-4 left-4 text-black text-lg hover:underline flex items-center">
