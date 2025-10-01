@@ -247,6 +247,11 @@ function attachNavHandlers() {
 
 // Run on every page load to adjust navigation and calculator state.
 document.addEventListener('DOMContentLoaded', function () {
+  // Prevent horizontal scrolling on all pages (mobile overflow guard)
+  try {
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+  } catch (e) {}
   updateNav();
   attachNavHandlers();
   setupMobileMenu();
