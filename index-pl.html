@@ -233,10 +233,10 @@
                     </div>
                     <a href="#start" class="btn-primary px-4 xl:px-6 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Załóż&nbsp;swoją&nbsp;markę</a>
                 </div>
-                <div class="flex items-center lg:hidden">
+                <div class="lg:hidden">
                     <!-- Mobile hamburger toggler.  aria-* attributes improve accessibility. -->
-                    <button id="menuToggle" class="text-black p-3 focus:outline-none focus:ring-2 focus:ring-black rounded-md" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
-                        <i id="menuIcon" class="fas fa-bars text-3xl"></i>
+                    <button id="menuToggle" class="text-black p-2 focus:outline-none focus:ring-2 focus:ring-black rounded" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
@@ -272,23 +272,24 @@
                 <div class="space-y-8">
                     <div class="floating-element">
                         <!-- The hero heading now has an id so it can be customised by an admin via localStorage. -->
-                        <h1 id="hero-title" class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight">
+                        <h1 id="hero-title" class="hero-title text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight">
                             <span class="text-gradient">Zamień&nbsp;swój</span><br>
                             <span class="text-black">wpływ</span><br>
-                            <span class="text-gradient">w&nbsp;imperium<br class="sm:hidden">&nbsp;mody</span>
+                            <span class="text-gradient">w&nbsp;modowe</span><br>
+                            <span class="text-gradient">imperium</span>
                         </h1>
                     </div>
                     <!-- Subtitle also has an id for CMS editing -->
-                    <p id="hero-subtitle" class="hero-subtitle text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg">
+                    <p id="hero-subtitle" class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
                         Zajmujemy się wszystkim od projektu do dostawy, abyś mógł skupić się na swojej historii.
                         Jedyna platforma, która zamienia influencerów w właścicieli marek modowych.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="btn-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold">
+                        <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
                             Załóż swoją markę modową
                         </button>
                         <!-- CTA button text wrapped in a span with an id so it can be customized via CMS -->
-                        <button class="btn-secondary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold">
+                        <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold">
                             <span id="home-cta-text">Zobacz, jak to działa</span>
                         </button>
                     </div>
