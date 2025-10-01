@@ -1064,6 +1064,22 @@
         const teamSubtitleField = document.getElementById('admin-team-subtitle');
         const impactTitleField = document.getElementById('admin-impact-title');
         const impactSubtitleField = document.getElementById('admin-impact-subtitle');
+        // Values section fields (EN)
+        const valuesTitleField = document.getElementById('admin-values-title');
+        const valuesSubtitleField = document.getElementById('admin-values-subtitle');
+        const value1TitleField = document.getElementById('admin-value1-title');
+        const value1DescField = document.getElementById('admin-value1-desc');
+        const value2TitleField = document.getElementById('admin-value2-title');
+        const value2DescField = document.getElementById('admin-value2-desc');
+        const value3TitleField = document.getElementById('admin-value3-title');
+        const value3DescField = document.getElementById('admin-value3-desc');
+        const value4TitleField = document.getElementById('admin-value4-title');
+        const value4DescField = document.getElementById('admin-value4-desc');
+        // About CTA fields (EN)
+        const aboutCtaTitleField = document.getElementById('admin-about-cta-title');
+        const aboutCtaDescField = document.getElementById('admin-about-cta-desc');
+        const aboutCtaButtonField = document.getElementById('admin-about-cta-button');
+        const aboutCtaSubtextField = document.getElementById('admin-about-cta-subtext');
         // Set defaults based on current hard-coded content
         aboutHeroTitleField.value = localStorage.getItem('aboutHeroTitle') || 'About Idol Brands';
         aboutHeroSubtitleField.value = localStorage.getItem('aboutHeroSubtitle') || 'Built by fashion industry veterans. Designed for the new generation of influence-driven brands.';
@@ -1084,6 +1100,22 @@
         teamSubtitleField.value = localStorage.getItem('teamSubtitle') || 'Our team combines decades of experience in fashion manufacturing, logistics, retail, and technology to support your brand\'s success.';
         impactTitleField.value = localStorage.getItem('impactTitle') || 'Our Impact';
         impactSubtitleField.value = localStorage.getItem('impactSubtitle') || 'Real results from real influencers who\'ve transformed their passion into profitable fashion brands.';
+        // Values section defaults (EN)
+        valuesTitleField.value = localStorage.getItem('valuesTitle') || 'Our Values';
+        valuesSubtitleField.value = localStorage.getItem('valuesSubtitle') || 'The principles that guide everything we do and drive every decision we make.';
+        value1TitleField.value = localStorage.getItem('value1Title') || 'Authenticity';
+        value1DescField.value = localStorage.getItem('value1Desc') || 'We believe in real influence, real communities, and real results. No fake metrics, no artificial engagement.';
+        value2TitleField.value = localStorage.getItem('value2Title') || 'Partnership';
+        value2DescField.value = localStorage.getItem('value2Desc') || 'Your success is our success. We work as true partners, invested in your brand\'s growth and long-term success.';
+        value3TitleField.value = localStorage.getItem('value3Title') || 'Innovation';
+        value3DescField.value = localStorage.getItem('value3Desc') || 'We\'re constantly pushing the boundaries of what\'s possible in live-commerce and influencer fashion brand building.';
+        value4TitleField.value = localStorage.getItem('value4Title') || 'Results';
+        value4DescField.value = localStorage.getItem('value4Desc') || 'Everything we do is measured by results. We\'re committed to delivering measurable success for every brand we partner with.';
+        // About CTA defaults (EN)
+        aboutCtaTitleField.value = localStorage.getItem('aboutCtaTitle') || 'Ready to Start Your Fashion Story?';
+        aboutCtaDescField.value = localStorage.getItem('aboutCtaDesc') || 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands. Your journey to fashion entrepreneurship begins now.';
+        aboutCtaButtonField.value = localStorage.getItem('aboutCtaButton') || 'Start Your Fashion Brand Today';
+        aboutCtaSubtextField.value = localStorage.getItem('aboutCtaSubtext') || 'Free consultation • No commitment • Results in 8 weeks';
         document.getElementById('save-about').addEventListener('click', function() {
             localStorage.setItem('aboutHeroTitle', aboutHeroTitleField.value);
             localStorage.setItem('aboutHeroSubtitle', aboutHeroSubtitleField.value);
@@ -1098,6 +1130,22 @@
             localStorage.setItem('teamSubtitle', teamSubtitleField.value);
             localStorage.setItem('impactTitle', impactTitleField.value);
             localStorage.setItem('impactSubtitle', impactSubtitleField.value);
+            // Save Values section (EN)
+            localStorage.setItem('valuesTitle', valuesTitleField.value);
+            localStorage.setItem('valuesSubtitle', valuesSubtitleField.value);
+            localStorage.setItem('value1Title', value1TitleField.value);
+            localStorage.setItem('value1Desc', value1DescField.value);
+            localStorage.setItem('value2Title', value2TitleField.value);
+            localStorage.setItem('value2Desc', value2DescField.value);
+            localStorage.setItem('value3Title', value3TitleField.value);
+            localStorage.setItem('value3Desc', value3DescField.value);
+            localStorage.setItem('value4Title', value4TitleField.value);
+            localStorage.setItem('value4Desc', value4DescField.value);
+            // Save About CTA (EN)
+            localStorage.setItem('aboutCtaTitle', aboutCtaTitleField.value);
+            localStorage.setItem('aboutCtaDesc', aboutCtaDescField.value);
+            localStorage.setItem('aboutCtaButton', aboutCtaButtonField.value);
+            localStorage.setItem('aboutCtaSubtext', aboutCtaSubtextField.value);
             const msg = document.getElementById('about-save-msg');
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 2000);
@@ -1107,13 +1155,43 @@
         const howTitleField = document.getElementById('admin-how-title');
         const howSubtitleField = document.getElementById('admin-how-subtitle');
         const readyTitleField = document.getElementById('admin-ready-title');
+        // How It Works CTA fields (EN)
+        const howCtaDescField = document.getElementById('admin-how-cta-desc');
+        const howCtaFeature1TitleField = document.getElementById('admin-how-cta-feature1-title');
+        const howCtaFeature1DescField = document.getElementById('admin-how-cta-feature1-desc');
+        const howCtaFeature2TitleField = document.getElementById('admin-how-cta-feature2-title');
+        const howCtaFeature2DescField = document.getElementById('admin-how-cta-feature2-desc');
+        const howCtaFeature3TitleField = document.getElementById('admin-how-cta-feature3-title');
+        const howCtaFeature3DescField = document.getElementById('admin-how-cta-feature3-desc');
+        const howCtaButtonField = document.getElementById('admin-how-cta-button');
+        const howCtaSubtextField = document.getElementById('admin-how-cta-subtext');
         howTitleField.value = localStorage.getItem('howTitle') || 'Experience Live-Selling';
         howSubtitleField.value = localStorage.getItem('howSubtitle') || 'See how our live-selling platform transforms your fashion shows into sales events.';
         readyTitleField.value = localStorage.getItem('readyTitle') || 'Ready to Start Live-Selling?';
+        // How It Works CTA defaults (EN)
+        howCtaDescField.value = localStorage.getItem('howCtaDesc') || 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands through live-selling. Your marketplace journey starts here.';
+        howCtaFeature1TitleField.value = localStorage.getItem('howCtaFeature1Title') || 'Fast Setup';
+        howCtaFeature1DescField.value = localStorage.getItem('howCtaFeature1Desc') || 'Your shop live in 1 week';
+        howCtaFeature2TitleField.value = localStorage.getItem('howCtaFeature2Title') || 'Live-Selling Ready';
+        howCtaFeature2DescField.value = localStorage.getItem('howCtaFeature2Desc') || 'Professional streaming setup';
+        howCtaFeature3TitleField.value = localStorage.getItem('howCtaFeature3Title') || 'Built-in Audience';
+        howCtaFeature3DescField.value = localStorage.getItem('howCtaFeature3Desc') || 'Access to marketplace traffic';
+        howCtaButtonField.value = localStorage.getItem('howCtaButton') || 'Create Your Live-Selling Shop';
+        howCtaSubtextField.value = localStorage.getItem('howCtaSubtext') || 'Free consultation • No setup fees • Start earning in 1 week';
         document.getElementById('save-how').addEventListener('click', function() {
             localStorage.setItem('howTitle', howTitleField.value);
             localStorage.setItem('howSubtitle', howSubtitleField.value);
             localStorage.setItem('readyTitle', readyTitleField.value);
+            // Save How It Works CTA (EN)
+            localStorage.setItem('howCtaDesc', howCtaDescField.value);
+            localStorage.setItem('howCtaFeature1Title', howCtaFeature1TitleField.value);
+            localStorage.setItem('howCtaFeature1Desc', howCtaFeature1DescField.value);
+            localStorage.setItem('howCtaFeature2Title', howCtaFeature2TitleField.value);
+            localStorage.setItem('howCtaFeature2Desc', howCtaFeature2DescField.value);
+            localStorage.setItem('howCtaFeature3Title', howCtaFeature3TitleField.value);
+            localStorage.setItem('howCtaFeature3Desc', howCtaFeature3DescField.value);
+            localStorage.setItem('howCtaButton', howCtaButtonField.value);
+            localStorage.setItem('howCtaSubtext', howCtaSubtextField.value);
             const msg = document.getElementById('how-save-msg');
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 2000);
@@ -1122,11 +1200,44 @@
         // Populate Success Stories page fields
         const successTitleField = document.getElementById('admin-success-title');
         const successSubtitleField = document.getElementById('admin-success-subtitle');
+        // Success Stories CTA fields (EN)
+        const successCtaTitleField = document.getElementById('admin-success-cta-title');
+        const successCtaDescField = document.getElementById('admin-success-cta-desc');
+        const successCtaFeature1TitleField = document.getElementById('admin-success-cta-feature1-title');
+        const successCtaFeature1DescField = document.getElementById('admin-success-cta-feature1-desc');
+        const successCtaFeature2TitleField = document.getElementById('admin-success-cta-feature2-title');
+        const successCtaFeature2DescField = document.getElementById('admin-success-cta-feature2-desc');
+        const successCtaFeature3TitleField = document.getElementById('admin-success-cta-feature3-title');
+        const successCtaFeature3DescField = document.getElementById('admin-success-cta-feature3-desc');
+        const successCtaButtonField = document.getElementById('admin-success-cta-button');
+        const successCtaSubtextField = document.getElementById('admin-success-cta-subtext');
         successTitleField.value = localStorage.getItem('successTitle') || 'Success Stories';
         successSubtitleField.value = localStorage.getItem('successSubtitle') || 'Real influencers, real results. See how we\'ve transformed their influence into thriving fashion brands with our proven system.';
+        // Success Stories CTA defaults (EN)
+        successCtaTitleField.value = localStorage.getItem('successCtaTitle') || 'Your Success Story Starts Here';
+        successCtaDescField.value = localStorage.getItem('successCtaDesc') || 'Join these successful influencers who transformed their passion into profitable fashion brands. Your journey to fashion entrepreneurship begins now.';
+        successCtaFeature1TitleField.value = localStorage.getItem('successCtaFeature1Title') || 'Free Consultation';
+        successCtaFeature1DescField.value = localStorage.getItem('successCtaFeature1Desc') || '60-minute strategy session';
+        successCtaFeature2TitleField.value = localStorage.getItem('successCtaFeature2Title') || 'Custom Strategy';
+        successCtaFeature2DescField.value = localStorage.getItem('successCtaFeature2Desc') || 'Tailored to your audience';
+        successCtaFeature3TitleField.value = localStorage.getItem('successCtaFeature3Title') || '8-Week Launch';
+        successCtaFeature3DescField.value = localStorage.getItem('successCtaFeature3Desc') || 'From idea to live brand';
+        successCtaButtonField.value = localStorage.getItem('successCtaButton') || 'Start Your Fashion Brand';
+        successCtaSubtextField.value = localStorage.getItem('successCtaSubtext') || 'Join 500+ successful influencers • No commitment required • Results in 8 weeks';
         document.getElementById('save-success').addEventListener('click', function() {
             localStorage.setItem('successTitle', successTitleField.value);
             localStorage.setItem('successSubtitle', successSubtitleField.value);
+            // Save Success Stories CTA (EN)
+            localStorage.setItem('successCtaTitle', successCtaTitleField.value);
+            localStorage.setItem('successCtaDesc', successCtaDescField.value);
+            localStorage.setItem('successCtaFeature1Title', successCtaFeature1TitleField.value);
+            localStorage.setItem('successCtaFeature1Desc', successCtaFeature1DescField.value);
+            localStorage.setItem('successCtaFeature2Title', successCtaFeature2TitleField.value);
+            localStorage.setItem('successCtaFeature2Desc', successCtaFeature2DescField.value);
+            localStorage.setItem('successCtaFeature3Title', successCtaFeature3TitleField.value);
+            localStorage.setItem('successCtaFeature3Desc', successCtaFeature3DescField.value);
+            localStorage.setItem('successCtaButton', successCtaButtonField.value);
+            localStorage.setItem('successCtaSubtext', successCtaSubtextField.value);
             const msg = document.getElementById('success-save-msg');
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 2000);
