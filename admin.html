@@ -2327,16 +2327,16 @@
 
         // Event delegation for user table actions
         if (usersTableBody) {
-            usersTableBody.addEventListener('click', function(e) {
+            usersTableBody.addEventListener('click', async function(e) {
                 const action = e.target.dataset.action;
                 const index = parseInt(e.target.dataset.index, 10);
                 if (isNaN(index)) return;
                 if (action === 'toggleStatus') {
-                    toggleUserStatus(index);
+                    await toggleUserStatus(index);
                 } else if (action === 'saveCred') {
-                    saveUserCredentials(index);
+                    await saveUserCredentials(index);
                 } else if (action === 'deleteUser') {
-                    deleteUser(index);
+                    await deleteUser(index);
                 }
             });
         }
