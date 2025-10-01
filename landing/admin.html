@@ -1028,6 +1028,80 @@
     <script>
     // Admin page script.  Only administrators should access this page; redirect others.
     document.addEventListener('DOMContentLoaded', function() {
+        // Auto-initialize localStorage with default values if not already set
+        function initDefaultIfEmpty(key, defaultValue) {
+            if (!localStorage.getItem(key)) {
+                localStorage.setItem(key, defaultValue);
+            }
+        }
+
+        // Initialize all default EN values
+        initDefaultIfEmpty('heroTitle', '<span class="text-gradient">Turn Your</span><br><span class="text-black">Influence</span><br><span class="text-gradient">Into Fashion</span>');
+        initDefaultIfEmpty('heroSubtitle', 'We handle everything from design to delivery so you can focus on your story. The only platform that transforms influencers into fashion brand owners.');
+        initDefaultIfEmpty('aboutHeroTitle', 'About Idol Brands');
+        initDefaultIfEmpty('aboutHeroSubtitle', 'Built by fashion industry veterans. Designed for the new generation of influence-driven brands.');
+        initDefaultIfEmpty('aboutStory', 'Idol Brands was founded in 2024 by a team of fashion industry veterans who watched countless influencers struggle to launch their own fashion brands. We saw the same story repeat itself: passionate creators with amazing ideas who failed because they couldn\'t handle the operational complexity.\n\nAfter decades in fashion manufacturing, logistics, and retail, we realized that the traditional fashion industry model was broken for the new generation of influence-driven brands. Influencers needed a different approach - one that let them focus on creativity and community while experts handled the operations.\n\nWe combined our deep fashion industry expertise with cutting-edge live-commerce technology to create the first platform specifically designed for influencer fashion brands. Today, Idol Brands is more than just a service - we\'re a movement to democratize fashion entrepreneurship.');
+        initDefaultIfEmpty('missionTitle', 'Our Mission');
+        initDefaultIfEmpty('missionDesc1', 'To democratize fashion entrepreneurship by providing influencers with the tools, expertise, and platform they need to build successful fashion brands.');
+        initDefaultIfEmpty('missionDesc2', 'We believe that every influencer with a passionate community deserves the opportunity to turn their influence into a thriving business, without being held back by operational complexity.');
+        initDefaultIfEmpty('visionTitle', 'Our Vision');
+        initDefaultIfEmpty('visionDesc1', 'To become the world\'s leading live-selling marketplace for influencer fashion brands, where creativity meets commerce in real-time.');
+        initDefaultIfEmpty('visionDesc2', 'We\'re building a future where fashion brands are born from authentic communities, not boardrooms - where influence drives innovation and passion creates profit.');
+        initDefaultIfEmpty('teamTitle', 'Fashion Industry Veterans');
+        initDefaultIfEmpty('teamSubtitle', 'Our team combines decades of experience in fashion manufacturing, logistics, retail, and technology to support your brand\'s success.');
+        initDefaultIfEmpty('impactTitle', 'Our Impact');
+        initDefaultIfEmpty('impactSubtitle', 'Real results from real influencers who\'ve transformed their passion into profitable fashion brands.');
+        initDefaultIfEmpty('valuesTitle', 'Our Values');
+        initDefaultIfEmpty('valuesSubtitle', 'The principles that guide everything we do and drive every decision we make.');
+        initDefaultIfEmpty('value1Title', 'Authenticity');
+        initDefaultIfEmpty('value1Desc', 'We believe in real influence, real communities, and real results. No fake metrics, no artificial engagement.');
+        initDefaultIfEmpty('value2Title', 'Partnership');
+        initDefaultIfEmpty('value2Desc', 'Your success is our success. We work as true partners, invested in your brand\'s growth and long-term success.');
+        initDefaultIfEmpty('value3Title', 'Innovation');
+        initDefaultIfEmpty('value3Desc', 'We\'re constantly pushing the boundaries of what\'s possible in live-commerce and influencer fashion brand building.');
+        initDefaultIfEmpty('value4Title', 'Results');
+        initDefaultIfEmpty('value4Desc', 'Everything we do is measured by results. We\'re committed to delivering measurable success for every brand we partner with.');
+        initDefaultIfEmpty('aboutCtaTitle', 'Ready to Start Your Fashion Story?');
+        initDefaultIfEmpty('aboutCtaDesc', 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands. Your journey to fashion entrepreneurship begins now.');
+        initDefaultIfEmpty('aboutCtaButton', 'Start Your Fashion Brand Today');
+        initDefaultIfEmpty('aboutCtaSubtext', 'Free consultation • No commitment • Results in 8 weeks');
+        initDefaultIfEmpty('howTitle', 'Experience Live-Selling');
+        initDefaultIfEmpty('howSubtitle', 'See how our live-selling platform transforms your fashion shows into sales events.');
+        initDefaultIfEmpty('readyTitle', 'Ready to Start Live-Selling?');
+        initDefaultIfEmpty('howCtaDesc', 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands through live-selling. Your marketplace journey starts here.');
+        initDefaultIfEmpty('howCtaFeature1Title', 'Fast Setup');
+        initDefaultIfEmpty('howCtaFeature1Desc', 'Your shop live in 1 week');
+        initDefaultIfEmpty('howCtaFeature2Title', 'Live-Selling Ready');
+        initDefaultIfEmpty('howCtaFeature2Desc', 'Professional streaming setup');
+        initDefaultIfEmpty('howCtaFeature3Title', 'Built-in Audience');
+        initDefaultIfEmpty('howCtaFeature3Desc', 'Access to marketplace traffic');
+        initDefaultIfEmpty('howCtaButton', 'Create Your Live-Selling Shop');
+        initDefaultIfEmpty('howCtaSubtext', 'Free consultation • No setup fees • Start earning in 1 week');
+        initDefaultIfEmpty('successTitle', 'Success Stories');
+        initDefaultIfEmpty('successSubtitle', 'Real influencers, real results. See how we\'ve transformed their influence into thriving fashion brands with our proven system.');
+        initDefaultIfEmpty('successCtaTitle', 'Your Success Story Starts Here');
+        initDefaultIfEmpty('successCtaDesc', 'Join these successful influencers who transformed their passion into profitable fashion brands. Your journey to fashion entrepreneurship begins now.');
+        initDefaultIfEmpty('successCtaFeature1Title', 'Free Consultation');
+        initDefaultIfEmpty('successCtaFeature1Desc', '60-minute strategy session');
+        initDefaultIfEmpty('successCtaFeature2Title', 'Custom Strategy');
+        initDefaultIfEmpty('successCtaFeature2Desc', 'Tailored to your audience');
+        initDefaultIfEmpty('successCtaFeature3Title', '8-Week Launch');
+        initDefaultIfEmpty('successCtaFeature3Desc', 'From idea to live brand');
+        initDefaultIfEmpty('successCtaButton', 'Start Your Fashion Brand');
+        initDefaultIfEmpty('successCtaSubtext', 'Join 500+ successful influencers • No commitment required • Results in 8 weeks');
+        initDefaultIfEmpty('blogTitle', 'Blog');
+        initDefaultIfEmpty('blogSubtitle', 'Read our latest articles and fashion inspiration.');
+        initDefaultIfEmpty('blogNoPostsMessage', 'No blog posts yet.');
+        initDefaultIfEmpty('loginTitle', 'Influencer Login');
+        initDefaultIfEmpty('loginSubtitle', 'Enter your login credentials from your acceptance email.');
+        initDefaultIfEmpty('loginUsernameLabel', 'Username');
+        initDefaultIfEmpty('loginPasswordLabel', 'Password');
+        initDefaultIfEmpty('loginButtonText', 'Login');
+        initDefaultIfEmpty('loginError', 'Invalid username or password.');
+        initDefaultIfEmpty('documentsTitle', 'Your Documents');
+        initDefaultIfEmpty('documentsMessage', 'No documents available yet.');
+
+        // Populate hero fields
         // Verify admin credentials.  If not, send to admin login.
         if (!isAdmin()) {
             window.location.href = 'admin-login.html';

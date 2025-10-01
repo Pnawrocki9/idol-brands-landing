@@ -1,6 +1,79 @@
 // Polish translation management for admin dashboard
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Auto-initialize PL localStorage with default Polish values if not already set
+  function initDefaultIfEmpty(key, defaultValue) {
+    if (!localStorage.getItem(key)) {
+      localStorage.setItem(key, defaultValue);
+    }
+  }
+
+  // Initialize all default PL values
+  initDefaultIfEmpty('plHeroTitle', '<span class="text-gradient">Zamień swój</span><br><span class="text-black">wpływ</span><br><span class="text-gradient">w modowe imperium</span>');
+  initDefaultIfEmpty('plHeroSubtitle', 'Zajmujemy się wszystkim od projektu po dostawę, abyś Ty mógł skupić się na swojej historii. Jedyna platforma, która zamienia influencerów w właścicieli marek modowych.');
+  initDefaultIfEmpty('plAboutHeroTitle', 'O Idol Brands');
+  initDefaultIfEmpty('plAboutHeroSubtitle', 'Stworzone przez weteranów branży modowej. Zaprojektowane dla nowej generacji marek opartych na wpływach.');
+  initDefaultIfEmpty('plAboutStory', 'Idol Brands zostało założone w 2024 roku przez zespół weteranów branży modowej, którzy obserwowali niezliczonych influencerów zmagających się z uruchomieniem własnych marek modowych. Widzieliśmy, jak ta sama historia się powtarza: pasjonaci z niesamowitymi pomysłami, którzy ponieśli porażkę, ponieważ nie potrafili poradzić sobie ze złożonością operacyjną.\n\nPo dekadach w produkcji mody, logistyce i handlu detalicznym zdaliśmy sobie sprawę, że tradycyjny model branży modowej nie sprawdza się dla nowej generacji marek opartych na wpływach. Influencerzy potrzebowali innego podejścia - takiego, które pozwala im skupić się na kreatywności i społeczności, podczas gdy eksperci zajmują się operacjami.\n\nPołączyliśmy naszą głęboką wiedzę branżową w modzie z najnowocześniejszą technologią live-commerce, aby stworzyć pierwszą platformę specjalnie zaprojektowaną dla influencerskich marek modowych. Dziś Idol Brands to więcej niż tylko usługa - jesteśmy ruchem demokratyzującym przedsiębiorczość modową.');
+  initDefaultIfEmpty('plMissionTitle', 'Nasza Misja');
+  initDefaultIfEmpty('plMissionDesc1', 'Demokratyzacja przedsiębiorczości modowej poprzez zapewnienie influencerom narzędzi, wiedzy i platformy, których potrzebują do budowania odnoszących sukcesy marek modowych.');
+  initDefaultIfEmpty('plMissionDesc2', 'Wierzymy, że każdy influencer z zaangażowaną społecznością zasługuje na możliwość przekształcenia swoich wpływów w kwitnący biznes, bez ograniczeń wynikających z złożoności operacyjnej.');
+  initDefaultIfEmpty('plVisionTitle', 'Nasza Wizja');
+  initDefaultIfEmpty('plVisionDesc1', 'Zostać wiodącym na świecie rynkiem live-selling dla influencerskich marek modowych, gdzie kreatywność spotyka się z handlem w czasie rzeczywistym.');
+  initDefaultIfEmpty('plVisionDesc2', 'Budujemy przyszłość, w której marki modowe rodzą się z autentycznych społeczności, a nie sal konferencyjnych - gdzie wpływy napędzają innowacje, a pasja tworzy zysk.');
+  initDefaultIfEmpty('plTeamTitle', 'Weterani Branży Modowej');
+  initDefaultIfEmpty('plTeamSubtitle', 'Nasz zespół łączy dekady doświadczenia w produkcji mody, logistyce, handlu detalicznym i technologii, aby wspierać sukces Twojej marki.');
+  initDefaultIfEmpty('plImpactTitle', 'Nasz Wpływ');
+  initDefaultIfEmpty('plImpactSubtitle', 'Rzeczywiste wyniki od prawdziwych influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe.');
+  initDefaultIfEmpty('plValuesTitle', 'Nasze Wartości');
+  initDefaultIfEmpty('plValuesSubtitle', 'Zasady, które kierują wszystkim, co robimy i napędzają każdą podjętą przez nas decyzję.');
+  initDefaultIfEmpty('plValue1Title', 'Autentyczność');
+  initDefaultIfEmpty('plValue1Desc', 'Wierzymy w prawdziwe wpływy, prawdziwe społeczności i prawdziwe wyniki. Żadnych fałszywych metryk, żadnego sztucznego zaangażowania.');
+  initDefaultIfEmpty('plValue2Title', 'Partnerstwo');
+  initDefaultIfEmpty('plValue2Desc', 'Twój sukces to nasz sukces. Pracujemy jako prawdziwi partnerzy, zaangażowani w rozwój Twojej marki i długoterminowy sukces.');
+  initDefaultIfEmpty('plValue3Title', 'Innowacyjność');
+  initDefaultIfEmpty('plValue3Desc', 'Nieustannie poszerzamy granice tego, co możliwe w live-commerce i budowaniu influencerskich marek modowych.');
+  initDefaultIfEmpty('plValue4Title', 'Wyniki');
+  initDefaultIfEmpty('plValue4Desc', 'Wszystko, co robimy, jest mierzone wynikami. Zobowiązujemy się do dostarczania mierzalnego sukcesu dla każdej marki, z którą współpracujemy.');
+  initDefaultIfEmpty('plAboutCtaTitle', 'Gotowy, Aby Rozpocząć Swoją Modową Historię?');
+  initDefaultIfEmpty('plAboutCtaDesc', 'Dołącz do setek influencerów, którzy przekształcili swoje wpływy w kwitnące marki modowe. Twoja podróż w stronę przedsiębiorczości modowej zaczyna się teraz.');
+  initDefaultIfEmpty('plAboutCtaButton', 'Załóż Swoją Markę Modową Dzisiaj');
+  initDefaultIfEmpty('plAboutCtaSubtext', 'Bezpłatna konsultacja • Bez zobowiązań • Wyniki w 8 tygodni');
+  initDefaultIfEmpty('plHowTitle', 'Poznaj Live-Selling');
+  initDefaultIfEmpty('plHowSubtitle', 'Zobacz, jak nasza platforma live-selling przekształca Twoje pokazy mody w wydarzenia sprzedażowe.');
+  initDefaultIfEmpty('plReadyTitle', 'Gotowy Na Start Z Live-Selling?');
+  initDefaultIfEmpty('plHowCtaDesc', 'Dołącz do setek influencerów, którzy przekształcili swoje wpływy w kwitnące marki modowe poprzez live-selling. Twoja podróż na marketplace zaczyna się tutaj.');
+  initDefaultIfEmpty('plHowCtaFeature1Title', 'Szybka Konfiguracja');
+  initDefaultIfEmpty('plHowCtaFeature1Desc', 'Twój sklep na żywo w 1 tydzień');
+  initDefaultIfEmpty('plHowCtaFeature2Title', 'Gotowy Na Live-Selling');
+  initDefaultIfEmpty('plHowCtaFeature2Desc', 'Profesjonalna konfiguracja streamingu');
+  initDefaultIfEmpty('plHowCtaFeature3Title', 'Wbudowana Publiczność');
+  initDefaultIfEmpty('plHowCtaFeature3Desc', 'Dostęp do ruchu marketplace');
+  initDefaultIfEmpty('plHowCtaButton', 'Stwórz Swój Sklep Live-Selling');
+  initDefaultIfEmpty('plHowCtaSubtext', 'Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 1 tydzień');
+  initDefaultIfEmpty('plSuccessTitle', 'Historie Sukcesu');
+  initDefaultIfEmpty('plSuccessSubtitle', 'Prawdziwi influencerzy, prawdziwe wyniki. Zobacz, jak przekształciliśmy ich wpływy w kwitnące marki modowe dzięki naszemu sprawdzonemu systemowi.');
+  initDefaultIfEmpty('plSuccessCtaTitle', 'Twoja Historia Sukcesu Zaczyna Się Tutaj');
+  initDefaultIfEmpty('plSuccessCtaDesc', 'Dołącz do tych odnoszących sukcesy influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe. Twoja podróż w stronę przedsiębiorczości modowej zaczyna się teraz.');
+  initDefaultIfEmpty('plSuccessCtaFeature1Title', 'Bezpłatna Konsultacja');
+  initDefaultIfEmpty('plSuccessCtaFeature1Desc', '60-minutowa sesja strategiczna');
+  initDefaultIfEmpty('plSuccessCtaFeature2Title', 'Spersonalizowana Strategia');
+  initDefaultIfEmpty('plSuccessCtaFeature2Desc', 'Dostosowana do Twojej publiczności');
+  initDefaultIfEmpty('plSuccessCtaFeature3Title', 'Start w 8 Tygodni');
+  initDefaultIfEmpty('plSuccessCtaFeature3Desc', 'Od pomysłu do działającej marki');
+  initDefaultIfEmpty('plSuccessCtaButton', 'Załóż Swoją Markę Modową');
+  initDefaultIfEmpty('plSuccessCtaSubtext', 'Dołącz do 500+ odnoszących sukcesy influencerów • Bez zobowiązań • Wyniki w 8 tygodni');
+  initDefaultIfEmpty('plBlogTitle', 'Blog');
+  initDefaultIfEmpty('plBlogSubtitle', 'Czytaj nasze najnowsze artykuły i inspiracje dotyczące mody.');
+  initDefaultIfEmpty('plBlogNoPostsMessage', 'Brak wpisów na blogu.');
+  initDefaultIfEmpty('plLoginTitle', 'Logowanie influencera');
+  initDefaultIfEmpty('plLoginSubtitle', 'Wprowadź dane logowania z e-maila akceptacyjnego.');
+  initDefaultIfEmpty('plLoginUsernameLabel', 'Nazwa użytkownika');
+  initDefaultIfEmpty('plLoginPasswordLabel', 'Hasło');
+  initDefaultIfEmpty('plLoginButtonText', 'Zaloguj się');
+  initDefaultIfEmpty('plLoginError', 'Nieprawidłowa nazwa użytkownika lub hasło.');
+  initDefaultIfEmpty('plDocumentsTitle', 'Twoje dokumenty');
+  initDefaultIfEmpty('plDocumentsMessage', 'Brak dokumentów do wyświetlenia.');
+
   // Helper to load a value with fallback to English default (from other keys)
   function loadField(fieldId, plKey, enKey, defaultVal) {
     const field = document.getElementById(fieldId);
