@@ -2,6 +2,5 @@ node_modules
 .git
 *.bak
 .vercel
-server.js
 test-cms.sh
 start-cms.sh
