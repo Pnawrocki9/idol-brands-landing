@@ -19,11 +19,22 @@
             --border-gray: #333333;
         }
         
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
             background: var(--primary-white);
             color: var(--primary-black);
-            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
         }
         
         .font-display {
@@ -160,80 +171,63 @@
             border-radius: 10px;
         }
         
-        /* Mobile Navigation Improvements */
-        @media (max-width: 1024px) {
-            nav {
-                padding: 0 1rem;
-            }
-        }
-        
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
                 line-height: 1.1;
             }
             
             .hero-subtitle {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
-            /* Improve button responsiveness */
-            .btn-primary, .btn-secondary {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.875rem;
-            }
-            
-            /* Better spacing on mobile */
-            section {
-                padding-left: 1rem;
-                padding-right: 1rem;
+            /* Prevent horizontal scroll on mobile */
+            .max-w-7xl {
+                max-width: 100%;
             }
         }
         
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2rem;
+        /* Additional mobile fixes */
+        @media (max-width: 1024px) {
+            nav .flex {
+                width: 100%;
             }
             
-            .hero-subtitle {
-                font-size: 0.9rem;
-            }
-            
-            /* Stack buttons vertically on very small screens */
-            .flex-col.sm\:flex-row {
-                gap: 0.75rem;
+            section {
+                max-width: 100vw;
+                overflow-x: hidden;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 w-full">
+        <div class="w-full px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 w-full">
                 <div class="flex items-center flex-shrink-0">
-                    <h1 class="text-xl sm:text-2xl font-display font-bold text-black">Idol Brands</h1>
+                    <h1 class="text-xl sm:text-2xl font-display font-bold text-black whitespace-nowrap">Idol Brands</h1>
                 </div>
-                <div class="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-wrap">
-                    <a href="about-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">O&nbsp;nas</a>
-                    <a href="how-it-works-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Jak&nbsp;to&nbsp;działa</a>
-                    <a href="success-stories-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Historie&nbsp;sukcesu</a>
-                    <a href="blog-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
-                    <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Kalkulator</a>
-                    <a href="your-documents-pl.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Twoje&nbsp;dokumenty</a>
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
+                    <a href="about-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap">O&nbsp;nas</a>
+                    <a href="how-it-works-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap">Jak&nbsp;to&nbsp;działa</a>
+                    <a href="success-stories-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap">Historie&nbsp;sukcesu</a>
+                    <a href="blog-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap">Blog</a>
+                    <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap">Kalkulator</a>
+                    <a href="your-documents-pl.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap" style="display: none;">Twoje&nbsp;dokumenty</a>
                     <!-- Admin dashboard link is hidden by default; shown only when an admin is logged in -->
-                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
-                    <a href="login-pl.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Zaloguj&nbsp;się</a>
-                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap" style="display: none;">Admin</a>
+                    <a href="login-pl.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap">Zaloguj&nbsp;się</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium whitespace-nowrap" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
                     <!-- Language switcher (Polish page) -->
-                    <div class="flex items-center space-x-1 text-sm mr-4">
+                    <div class="flex items-center space-x-1 text-sm">
                         <a href="index.html" class="text-black hover:text-gray-600 font-medium">EN</a>
                         <span class="text-black">|</span>
                         <span class="text-black font-semibold">PL</span>
                     </div>
-                    <a href="#start" class="btn-primary px-4 xl:px-6 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Załóż&nbsp;swoją&nbsp;markę</a>
+                    <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Załóż&nbsp;swoją&nbsp;markę</a>
                 </div>
-                <div class="lg:hidden flex items-center">
+                <div class="lg:hidden flex items-center flex-shrink-0">
                     <!-- Mobile hamburger toggler.  aria-* attributes improve accessibility. -->
                     <button id="menuToggle" class="text-black p-2 focus:outline-none focus:ring-2 focus:ring-black rounded" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
                         <i id="menuIcon" class="fas fa-bars text-2xl"></i>
@@ -243,8 +237,8 @@
         </div>
     </nav>
     <!-- Mobile menu panel: hidden by default on desktop (lg:hidden). Contains duplicate nav links for mobile users. -->
-    <div id="mobileMenu" class="lg:hidden hidden fixed top-16 left-0 right-0 border-t border-gray-200 bg-white/95 backdrop-blur-md shadow-lg z-40 max-h-screen overflow-y-auto">
-      <div class="px-4 py-4 space-y-4">
+    <div id="mobileMenu" class="lg:hidden hidden fixed top-16 left-0 right-0 border-t border-gray-200 bg-white/95 backdrop-blur-md shadow-lg z-40 max-h-screen overflow-y-auto w-full">
+      <div class="px-4 py-4 space-y-4 w-full">
         <a href="about-pl.html" class="block text-black font-medium">O&nbsp;nas</a>
         <a href="how-it-works-pl.html" class="block text-black font-medium">Jak&nbsp;to&nbsp;działa</a>
         <a href="success-stories-pl.html" class="block text-black font-medium">Historie&nbsp;sukcesu</a>
