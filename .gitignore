@@ -1,8 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
 
-# CMS Data (should be backed up separately)
+# CMS Data (stored in Vercel KV, not in git)
 cms-data.json
 
 # Logs
@@ -19,3 +18,6 @@ Thumbs.db
 
 # Backup files
 *.bak
+
+# Vercel
+.vercel
