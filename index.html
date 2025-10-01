@@ -1116,13 +1116,14 @@
         const form = document.getElementById('waiting-list-form');
         if (form) {
             form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent form submission
+                
                 const requiredConsent = document.getElementById('consent-required');
                 if (requiredConsent && !requiredConsent.checked) {
-                    // Prevent form submission if the mandatory GDPR consent is unchecked
-                    e.preventDefault();
                     alert('Please consent to data processing to join the waiting list.');
                     return false;
                 }
+                
                 // Collect form data and save as a new user record in localStorage
                 const firstName = document.getElementById('firstName')?.value || '';
                 const lastName = document.getElementById('lastName')?.value || '';
@@ -1131,6 +1132,7 @@
                 const niche = document.getElementById('niche')?.value || '';
                 const instagram = document.getElementById('instagram')?.value || '';
                 const newsletter = document.getElementById('newsletter')?.checked || false;
+                
                 const user = {
                     id: Date.now(),
                     firstName: firstName.trim(),
@@ -1144,14 +1146,20 @@
                     login: '',
                     password: ''
                 };
+                
                 try {
                     const stored = localStorage.getItem('users');
                     let users = [];
                     if (stored) users = JSON.parse(stored);
                     users.push(user);
                     localStorage.setItem('users', JSON.stringify(users));
+                    
+                    // Show success message and reset form
+                    alert('Thank you for registering! We will contact you soon.');
+                    form.reset();
                 } catch (err) {
                     console.error('Could not save user record', err);
+                    alert('An error occurred while saving. Please try again.');
                 }
             });
         }

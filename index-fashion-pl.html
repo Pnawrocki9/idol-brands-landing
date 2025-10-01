@@ -1153,12 +1153,14 @@
         const form = document.getElementById('waiting-list-form');
         if (form) {
             form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent form submission
+                
                 const requiredConsent = document.getElementById('consent-required');
                 if (requiredConsent && !requiredConsent.checked) {
-                    e.preventDefault();
-                    alert('Please consent to data processing to join the waiting list.');
+                    alert('Proszę wyrazić zgodę na przetwarzanie danych, aby dołączyć do listy oczekujących.');
                     return false;
                 }
+                
                 // Save user data to localStorage so that administrators can manage sign‑ups
                 const firstName = document.getElementById('firstName')?.value || '';
                 const lastName = document.getElementById('lastName')?.value || '';
@@ -1167,6 +1169,7 @@
                 const niche = document.getElementById('niche')?.value || '';
                 const instagram = document.getElementById('instagram')?.value || '';
                 const newsletter = document.getElementById('newsletter')?.checked || false;
+                
                 const user = {
                     id: Date.now(),
                     firstName: firstName.trim(),
@@ -1180,14 +1183,20 @@
                     login: '',
                     password: ''
                 };
+                
                 try {
                     const stored = localStorage.getItem('users');
                     let users = [];
                     if (stored) users = JSON.parse(stored);
                     users.push(user);
                     localStorage.setItem('users', JSON.stringify(users));
+                    
+                    // Show success message and reset form
+                    alert('Dziękujemy za rejestrację! Skontaktujemy się z Tobą wkrótce.');
+                    form.reset();
                 } catch (err) {
                     console.error('Could not save user record', err);
+                    alert('Wystąpił błąd podczas zapisywania. Spróbuj ponownie.');
                 }
             });
         }
