@@ -954,21 +954,43 @@
         <!-- Legal pages editor -->
         <section class="mt-12">
             <h2 class="text-2xl font-semibold mb-4">Edit Legal Pages</h2>
-            <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages.  Use basic HTML for formatting (e.g. &lt;h2&gt;,&lt;p&gt;,&lt;ul&gt;).</p>
+            <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages in both languages. Use basic HTML for formatting (e.g. &lt;h2&gt;,&lt;p&gt;,&lt;ul&gt;).</p>
+            
+            <!-- English versions -->
+            <h3 class="text-xl font-semibold mb-2">English Versions</h3>
             <div class="mb-6">
-                <label for="legal-terms-field" class="block text-sm font-medium text-gray-700 mb-1">Terms &amp; Conditions</label>
+                <label for="legal-terms-field" class="block text-sm font-medium text-gray-700 mb-1">Terms &amp; Conditions (EN)</label>
                 <textarea id="legal-terms-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
             </div>
             <div class="mb-6">
-                <label for="legal-cookies-field" class="block text-sm font-medium text-gray-700 mb-1">Cookies Policy</label>
+                <label for="legal-cookies-field" class="block text-sm font-medium text-gray-700 mb-1">Cookies Policy (EN)</label>
                 <textarea id="legal-cookies-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
             </div>
             <div class="mb-6">
-                <label for="legal-gdpr-field" class="block text-sm font-medium text-gray-700 mb-1">Privacy / GDPR</label>
+                <label for="legal-gdpr-field" class="block text-sm font-medium text-gray-700 mb-1">Privacy / GDPR (EN)</label>
                 <textarea id="legal-gdpr-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
             </div>
-            <button id="save-legal" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Legal Pages</button>
+            <button id="save-legal" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Legal Pages (EN)</button>
             <p id="legal-save-msg" class="text-green-600 text-sm mt-3 hidden">Legal pages saved.</p>
+            
+            <hr class="my-6" />
+            
+            <!-- Polish versions -->
+            <h3 class="text-xl font-semibold mb-2">Wersje Polskie</h3>
+            <div class="mb-6">
+                <label for="legal-terms-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Regulamin (PL)</label>
+                <textarea id="legal-terms-field-pl" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="legal-cookies-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Polityka Cookies (PL)</label>
+                <textarea id="legal-cookies-field-pl" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="legal-gdpr-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Prywatność / RODO (PL)</label>
+                <textarea id="legal-gdpr-field-pl" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-legal-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz strony prawne (PL)</button>
+            <p id="legal-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Strony prawne zapisane.</p>
         </section>
 
         <!-- Registered users management -->
@@ -2062,6 +2084,34 @@
                 if (legalMsg) {
                     legalMsg.classList.remove('hidden');
                     setTimeout(() => legalMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
+
+        // -------------------------------------------------------------------
+        // Legal settings (PL)
+        const legalTermsFieldPL = document.getElementById('legal-terms-field-pl');
+        const legalCookiesFieldPL = document.getElementById('legal-cookies-field-pl');
+        const legalGDPRFieldPL = document.getElementById('legal-gdpr-field-pl');
+        const saveLegalBtnPL = document.getElementById('save-legal-pl');
+        const legalMsgPL = document.getElementById('legal-save-msg-pl');
+
+        function loadLegalSettingsPL() {
+            if (legalTermsFieldPL) legalTermsFieldPL.value = localStorage.getItem('legalTermsPL') || '';
+            if (legalCookiesFieldPL) legalCookiesFieldPL.value = localStorage.getItem('legalCookiesPL') || '';
+            if (legalGDPRFieldPL) legalGDPRFieldPL.value = localStorage.getItem('legalGDPRPL') || '';
+        }
+
+        loadLegalSettingsPL();
+
+        if (saveLegalBtnPL) {
+            saveLegalBtnPL.addEventListener('click', function() {
+                if (legalTermsFieldPL) localStorage.setItem('legalTermsPL', legalTermsFieldPL.value || '');
+                if (legalCookiesFieldPL) localStorage.setItem('legalCookiesPL', legalCookiesFieldPL.value || '');
+                if (legalGDPRFieldPL) localStorage.setItem('legalGDPRPL', legalGDPRFieldPL.value || '');
+                if (legalMsgPL) {
+                    legalMsgPL.classList.remove('hidden');
+                    setTimeout(() => legalMsgPL.classList.add('hidden'), 2000);
                 }
             });
         }
