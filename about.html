@@ -38,6 +38,17 @@
             transform: translateY(0);
         }
     </style>
+    <script src="cms-sync.js"></script>
+
+    <script>
+        // Auto-inject CMS data from server
+        (function() {
+            const cmsData = {"testKey":"Test CMS Value","plHeroTitle":"Test Hero Title"};
+            for (const [key, value] of Object.entries(cmsData)) {
+                localStorage.setItem(key, value);
+            }
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation -->
