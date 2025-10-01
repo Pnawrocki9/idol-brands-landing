@@ -2205,7 +2205,7 @@
         // Toggle user status between inactive and active.  When activating, generate login and
         // password if not already present and simulate an email being sent.  Deactivating
         // leaves credentials intact but marks the user as inactive.
-        function toggleUserStatus(index) {
+        async function toggleUserStatus(index) {
             let users = [];
             try {
                 const stored = localStorage.getItem('users');
@@ -2226,6 +2226,21 @@
                 // Deactivate the user (credentials remain so they could be reactivated later)
                 user.status = 'inactive';
             }
+            
+            // Update in Firebase if available
+            if (user.firebaseId && window.firestoreDB && window.firestoreDoc && window.firestoreUpdateDoc) {
+                try {
+                    const userRef = window.firestoreDoc(window.firestoreDB, 'users', user.firebaseId);
+                    await window.firestoreUpdateDoc(userRef, {
+                        status: user.status,
+                        login: user.login,
+                        password: user.password
+                    });
+                } catch (e) {
+                    console.error('Error updating Firebase:', e);
+                }
+            }
+            
             localStorage.setItem('users', JSON.stringify(users));
             loadUsers();
             if (usersMsgEl) {
@@ -2237,7 +2252,7 @@
 
         // Save login and password changes for a specific user.  Takes values from the input
         // fields in the table row.
-        function saveUserCredentials(index) {
+        async function saveUserCredentials(index) {
             let users = [];
             try {
                 const stored = localStorage.getItem('users');
@@ -2252,6 +2267,20 @@
             const passInput = usersTableBody.querySelector('input[data-field="password"][data-index="' + index + '"]');
             user.login = loginInput ? loginInput.value.trim() : user.login;
             user.password = passInput ? passInput.value.trim() : user.password;
+            
+            // Update in Firebase if available
+            if (user.firebaseId && window.firestoreDB && window.firestoreDoc && window.firestoreUpdateDoc) {
+                try {
+                    const userRef = window.firestoreDoc(window.firestoreDB, 'users', user.firebaseId);
+                    await window.firestoreUpdateDoc(userRef, {
+                        login: user.login,
+                        password: user.password
+                    });
+                } catch (e) {
+                    console.error('Error updating Firebase:', e);
+                }
+            }
+            
             localStorage.setItem('users', JSON.stringify(users));
             loadUsers();
             if (usersMsgEl) {
@@ -2263,7 +2292,7 @@
 
         // Delete a user from the list. Removes the user at the given index
         // and updates localStorage. Then reloads the user table and shows a success message.
-        function deleteUser(index) {
+        async function deleteUser(index) {
             let users = [];
             try {
                 const stored = localStorage.getItem('users');
@@ -2273,6 +2302,18 @@
             }
             // Remove the user at the index if it exists
             if (users && index >= 0 && index < users.length) {
+                const user = users[index];
+                
+                // Delete from Firebase if available
+                if (user.firebaseId && window.firestoreDB && window.firestoreDoc && window.firestoreDeleteDoc) {
+                    try {
+                        const userRef = window.firestoreDoc(window.firestoreDB, 'users', user.firebaseId);
+                        await window.firestoreDeleteDoc(userRef);
+                    } catch (e) {
+                        console.error('Error deleting from Firebase:', e);
+                    }
+                }
+                
                 users.splice(index, 1);
                 localStorage.setItem('users', JSON.stringify(users));
                 loadUsers();
