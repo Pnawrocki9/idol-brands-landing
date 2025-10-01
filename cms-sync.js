@@ -121,38 +121,35 @@
     if (window.location.pathname.includes('admin')) {
         document.addEventListener('DOMContentLoaded', function() {
             // Add a "Publish Changes" button to admin panel
-            const adminContainer = document.querySelector('.max-w-6xl');
-            if (adminContainer) {
-                const publishButton = document.createElement('button');
-                publishButton.id = 'publish-cms-changes';
-                publishButton.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
-                publishButton.innerHTML = '📤 Publikuj Zmiany Online';
-                publishButton.onclick = async function() {
-                    this.disabled = true;
-                    this.innerHTML = '⏳ Publikowanie...';
-                    
-                    const success = await saveAllCmsToServer();
-                    
-                    if (success) {
-                        this.innerHTML = '✅ Opublikowano!';
-                        this.className = 'fixed bottom-6 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg font-semibold z-50';
-                        setTimeout(() => {
-                            this.innerHTML = '📤 Publikuj Zmiany Online';
-                            this.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
-                            this.disabled = false;
-                        }, 3000);
-                    } else {
-                        this.innerHTML = '❌ Błąd publikacji';
-                        this.className = 'fixed bottom-6 right-6 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg font-semibold z-50';
-                        setTimeout(() => {
-                            this.innerHTML = '📤 Publikuj Zmiany Online';
-                            this.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
-                            this.disabled = false;
-                        }, 3000);
-                    }
-                };
-                document.body.appendChild(publishButton);
-            }
+            const publishButton = document.createElement('button');
+            publishButton.id = 'publish-cms-changes';
+            publishButton.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
+            publishButton.innerHTML = '📤 Publikuj Zmiany Online';
+            publishButton.onclick = async function() {
+                this.disabled = true;
+                this.innerHTML = '⏳ Publikowanie...';
+                
+                const success = await saveAllCmsToServer();
+                
+                if (success) {
+                    this.innerHTML = '✅ Opublikowano!';
+                    this.className = 'fixed bottom-6 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg font-semibold z-50';
+                    setTimeout(() => {
+                        this.innerHTML = '📤 Publikuj Zmiany Online';
+                        this.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
+                        this.disabled = false;
+                    }, 3000);
+                } else {
+                    this.innerHTML = '❌ Błąd publikacji';
+                    this.className = 'fixed bottom-6 right-6 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg font-semibold z-50';
+                    setTimeout(() => {
+                        this.innerHTML = '📤 Publikuj Zmiany Online';
+                        this.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
+                        this.disabled = false;
+                    }, 3000);
+                }
+            };
+            document.body.appendChild(publishButton);
         });
     }
 })();
