@@ -212,7 +212,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center flex-shrink-0">
-                    <h1 class="text-xl sm:text-2xl font-display font-bold text-black">Idol Brands</h1>
+                    <h1 class="text-xl sm:text-3xl font-display font-bold text-black">Idol Brands</h1>
                 </div>
                 <div class="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-wrap">
                     <a href="about-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">O&nbsp;nas</a>
@@ -233,10 +233,10 @@
                     </div>
                     <a href="#start" class="btn-primary px-4 xl:px-6 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Załóż&nbsp;swoją&nbsp;markę</a>
                 </div>
-                <div class="lg:hidden flex items-center">
+                <div class="flex items-center lg:hidden">
                     <!-- Mobile hamburger toggler.  aria-* attributes improve accessibility. -->
-                    <button id="menuToggle" class="text-black p-2 focus:outline-none focus:ring-2 focus:ring-black rounded" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
-                        <i id="menuIcon" class="fas fa-bars text-2xl"></i>
+                    <button id="menuToggle" class="text-black p-3 focus:outline-none focus:ring-2 focus:ring-black rounded-md" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-3xl"></i>
                     </button>
                 </div>
             </div>
@@ -272,23 +272,23 @@
                 <div class="space-y-8">
                     <div class="floating-element">
                         <!-- The hero heading now has an id so it can be customised by an admin via localStorage. -->
-                        <h1 id="hero-title" class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
+                        <h1 id="hero-title" class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight">
                             <span class="text-gradient">Zamień&nbsp;swój</span><br>
                             <span class="text-black">wpływ</span><br>
-                            <span class="text-gradient">w&nbsp;imperium&nbsp;mody</span>
+                            <span class="text-gradient">w&nbsp;imperium<br class="sm:hidden">&nbsp;mody</span>
                         </h1>
                     </div>
                     <!-- Subtitle also has an id for CMS editing -->
-                    <p id="hero-subtitle" class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
+                    <p id="hero-subtitle" class="hero-subtitle text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg">
                         Zajmujemy się wszystkim od projektu do dostawy, abyś mógł skupić się na swojej historii.
                         Jedyna platforma, która zamienia influencerów w właścicieli marek modowych.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
+                        <button class="btn-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold">
                             Załóż swoją markę modową
                         </button>
                         <!-- CTA button text wrapped in a span with an id so it can be customized via CMS -->
-                        <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold">
+                        <button class="btn-secondary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold">
                             <span id="home-cta-text">Zobacz, jak to działa</span>
                         </button>
                     </div>
@@ -337,7 +337,7 @@
                     <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-industry text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-black mb-4">Doświadczenie w&nbsp;produkcji</h3>
+                    <h3 class="text-3xl font-bold text-black mb-4">Doświadczenie w&nbsp;produkcji</h3>
                     <p class="text-gray-600">
                         Dziesięcioletnie doświadczenie w produkcji mody, kontroli jakości i zarządzaniu łańcuchem dostaw
                         na rynkach globalnych.
@@ -347,7 +347,7 @@
                     <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-shipping-fast text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-black mb-4">Mistrzostwo logistyki</h3>
+                    <h3 class="text-3xl font-bold text-black mb-4">Mistrzostwo logistyki</h3>
                     <p class="text-gray-600">
                         Kompleksowe rozwiązania logistyczne od magazynowania po dostawę ostatniej mili,
                         zoptymalizowane dla marek modowych influencerów.
@@ -357,7 +357,7 @@
                     <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-laptop-code text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-black mb-4">Innowacje technologiczne</h3>
+                    <h3 class="text-3xl font-bold text-black mb-4">Innowacje technologiczne</h3>
                     <p class="text-gray-600">
                         Najnowocześniejsza platforma live-commerce z analizami w czasie rzeczywistym,
                         rekomendacjami opartymi na AI i płynną integracją.
@@ -389,35 +389,35 @@
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">Strategia&nbsp;marki</h3>
+                            <h3 class="text-3xl font-bold text-black mb-2">Strategia&nbsp;marki</h3>
                             <p class="text-gray-600">Opracowujemy Twoją unikalną tożsamość marki, pozycjonowanie i strategię wejścia na rynek.</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">Rozwój&nbsp;produktu</h3>
+                            <h3 class="text-3xl font-bold text-black mb-2">Rozwój&nbsp;produktu</h3>
                             <p class="text-gray-600">Od pomysłu do gotowego produktu — zajmujemy się projektem, próbnymi seriami i produkcją.</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">Platforma&nbsp;e-commerce</h3>
+                            <h3 class="text-3xl font-bold text-black mb-2">Platforma&nbsp;e-commerce</h3>
                             <p class="text-gray-600">Sklep online dostosowany do Twoich potrzeb z wbudowanymi płatnościami i zarządzaniem stanem magazynowym.</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">4</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">Marketing&nbsp;i&nbsp;rozwój</h3>
+                            <h3 class="text-3xl font-bold text-black mb-2">Marketing&nbsp;i&nbsp;rozwój</h3>
                             <p class="text-gray-600">Kampanie marketingowe oparte na danych i strategie wzrostu pozwalające skalować Twoją markę.</p>
                         </div>
                     </div>
                 </div>
                 <div class="fade-in">
                     <div class="bg-white p-8 rounded-2xl shadow-lg">
-                        <h3 class="text-2xl font-bold text-black mb-6 text-center">Oś&nbsp;sukcesu</h3>
+                        <h3 class="text-3xl font-bold text-black mb-6 text-center">Oś&nbsp;sukcesu</h3>
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                             <span class="font-semibold text-black">Tydzień&nbsp;1–2</span>
@@ -455,7 +455,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div class="space-y-6 fade-in">
                     <div class="bg-white p-6 rounded-2xl shadow-lg">
-                        <h3 class="text-2xl font-bold text-black mb-6">Twój&nbsp;profil&nbsp;odbiorców</h3>
+                        <h3 class="text-3xl font-bold text-black mb-6">Twój&nbsp;profil&nbsp;odbiorców</h3>
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-semibold text-black mb-2">Liczba&nbsp;obserwujących</label>
@@ -526,15 +526,15 @@
                 </div>
                 <div class="space-y-6 fade-in">
                     <div class="result-card p-6 rounded-2xl">
-                        <h3 class="text-2xl font-bold text-black mb-6">Prognoza&nbsp;przychodów</h3>
+                        <h3 class="text-3xl font-bold text-black mb-6">Prognoza&nbsp;przychodów</h3>
                         <div class="space-y-4" id="results">
                             <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                                 <span class="font-semibold text-black">Miesięczny&nbsp;przychód</span>
-                                <span class="text-2xl font-bold text-black" id="monthlyRevenue">$0</span>
+                                <span class="text-3xl font-bold text-black" id="monthlyRevenue">$0</span>
                             </div>
                             <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                                 <span class="font-semibold text-black">Miesięczny&nbsp;zysk</span>
-                                <span class="text-2xl font-bold text-black" id="monthlyProfit">$0</span>
+                                <span class="text-3xl font-bold text-black" id="monthlyProfit">$0</span>
                             </div>
                             <div class="flex justify-between items-center p-4 bg-black text-white rounded-lg">
                                 <span class="font-semibold">Roczny&nbsp;przychód</span>
