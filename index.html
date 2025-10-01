@@ -378,8 +378,8 @@
     <section id="services" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-5xl font-display font-bold text-black mb-6">Our Complete Solution</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h2 id="solution-title" class="text-5xl font-display font-bold text-black mb-6">Our Complete Solution</h2>
+                <p id="solution-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Everything you need to launch and scale your fashion brand, all in one platform.
                 </p>
             </div>
@@ -388,51 +388,51 @@
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">Brand Strategy</h3>
-                            <p class="text-gray-600">We develop your unique brand identity, positioning, and go-to-market strategy.</p>
+                            <h3 id="solution-step1-title" class="text-2xl font-bold text-black mb-2">Brand Strategy</h3>
+                            <p id="solution-step1-desc" class="text-gray-600">We develop your unique brand identity, positioning, and go-to-market strategy.</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">Product Development</h3>
-                            <p class="text-gray-600">From concept to final product, we handle design, sampling, and production.</p>
+                            <h3 id="solution-step2-title" class="text-2xl font-bold text-black mb-2">Product Development</h3>
+                            <p id="solution-step2-desc" class="text-gray-600">From concept to final product, we handle design, sampling, and production.</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">E-commerce Platform</h3>
-                            <p class="text-gray-600">Custom online store with integrated payment processing and inventory management.</p>
+                            <h3 id="solution-step3-title" class="text-2xl font-bold text-black mb-2">E-commerce Platform</h3>
+                            <p id="solution-step3-desc" class="text-gray-600">Custom online store with integrated payment processing and inventory management.</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
                         <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold">4</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-black mb-2">Marketing & Growth</h3>
-                            <p class="text-gray-600">Data-driven marketing campaigns and growth strategies to scale your brand.</p>
+                            <h3 id="solution-step4-title" class="text-2xl font-bold text-black mb-2">Marketing & Growth</h3>
+                            <p id="solution-step4-desc" class="text-gray-600">Data-driven marketing campaigns and growth strategies to scale your brand.</p>
                         </div>
                     </div>
                 </div>
                 <div class="fade-in">
                     <div class="bg-white p-8 rounded-2xl shadow-lg">
-                        <h3 class="text-2xl font-bold text-black mb-6 text-center">Success Timeline</h3>
+                        <h3 id="timeline-title" class="text-2xl font-bold text-black mb-6 text-center">Success Timeline</h3>
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-                                <span class="font-semibold text-black">Week 1-2</span>
-                                <span class="text-gray-600">Brand Strategy & Design</span>
+                                <span id="timeline1-period" class="font-semibold text-black">Week 1-2</span>
+                                <span id="timeline1-desc" class="text-gray-600">Brand Strategy & Design</span>
                             </div>
                             <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-                                <span class="font-semibold text-black">Week 3-6</span>
-                                <span class="text-gray-600">Product Development</span>
+                                <span id="timeline2-period" class="font-semibold text-black">Week 3-6</span>
+                                <span id="timeline2-desc" class="text-gray-600">Product Development</span>
                             </div>
                             <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-                                <span class="font-semibold text-black">Week 7-8</span>
-                                <span class="text-gray-600">Store Setup & Launch</span>
+                                <span id="timeline3-period" class="font-semibold text-black">Week 7-8</span>
+                                <span id="timeline3-desc" class="text-gray-600">Store Setup & Launch</span>
                             </div>
                             <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-                                <span class="font-semibold text-black">Month 3+</span>
-                                <span class="text-gray-600">Scale & Growth</span>
+                                <span id="timeline4-period" class="font-semibold text-black">Month 3+</span>
+                                <span id="timeline4-desc" class="text-gray-600">Scale & Growth</span>
                             </div>
                         </div>
                     </div>
@@ -1045,6 +1045,48 @@
         // CTA button
         const cta = document.getElementById('home-cta-text');
         if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
+
+        // Complete Solution Section
+        const solutionTitle = document.getElementById('solution-title');
+        if (solutionTitle) solutionTitle.textContent = getItem('solutionTitle', solutionTitle.textContent);
+        const solutionSubtitle = document.getElementById('solution-subtitle');
+        if (solutionSubtitle) solutionSubtitle.textContent = getItem('solutionSubtitle', solutionSubtitle.textContent);
+        const step1Title = document.getElementById('solution-step1-title');
+        if (step1Title) step1Title.textContent = getItem('solutionStep1Title', step1Title.textContent);
+        const step1Desc = document.getElementById('solution-step1-desc');
+        if (step1Desc) step1Desc.textContent = getItem('solutionStep1Desc', step1Desc.textContent);
+        const step2Title = document.getElementById('solution-step2-title');
+        if (step2Title) step2Title.textContent = getItem('solutionStep2Title', step2Title.textContent);
+        const step2Desc = document.getElementById('solution-step2-desc');
+        if (step2Desc) step2Desc.textContent = getItem('solutionStep2Desc', step2Desc.textContent);
+        const step3Title = document.getElementById('solution-step3-title');
+        if (step3Title) step3Title.textContent = getItem('solutionStep3Title', step3Title.textContent);
+        const step3Desc = document.getElementById('solution-step3-desc');
+        if (step3Desc) step3Desc.textContent = getItem('solutionStep3Desc', step3Desc.textContent);
+        const step4Title = document.getElementById('solution-step4-title');
+        if (step4Title) step4Title.textContent = getItem('solutionStep4Title', step4Title.textContent);
+        const step4Desc = document.getElementById('solution-step4-desc');
+        if (step4Desc) step4Desc.textContent = getItem('solutionStep4Desc', step4Desc.textContent);
+
+        // Success Timeline
+        const timelineTitle = document.getElementById('timeline-title');
+        if (timelineTitle) timelineTitle.textContent = getItem('timelineTitle', timelineTitle.textContent);
+        const timeline1Period = document.getElementById('timeline1-period');
+        if (timeline1Period) timeline1Period.textContent = getItem('timeline1Period', timeline1Period.textContent);
+        const timeline1Desc = document.getElementById('timeline1-desc');
+        if (timeline1Desc) timeline1Desc.textContent = getItem('timeline1Desc', timeline1Desc.textContent);
+        const timeline2Period = document.getElementById('timeline2-period');
+        if (timeline2Period) timeline2Period.textContent = getItem('timeline2Period', timeline2Period.textContent);
+        const timeline2Desc = document.getElementById('timeline2-desc');
+        if (timeline2Desc) timeline2Desc.textContent = getItem('timeline2Desc', timeline2Desc.textContent);
+        const timeline3Period = document.getElementById('timeline3-period');
+        if (timeline3Period) timeline3Period.textContent = getItem('timeline3Period', timeline3Period.textContent);
+        const timeline3Desc = document.getElementById('timeline3-desc');
+        if (timeline3Desc) timeline3Desc.textContent = getItem('timeline3Desc', timeline3Desc.textContent);
+        const timeline4Period = document.getElementById('timeline4-period');
+        if (timeline4Period) timeline4Period.textContent = getItem('timeline4Period', timeline4Period.textContent);
+        const timeline4Desc = document.getElementById('timeline4-desc');
+        if (timeline4Desc) timeline4Desc.textContent = getItem('timeline4Desc', timeline4Desc.textContent);
     });
     </script>
     <!-- Authentication helper to control login state, navigation and calculator visibility -->

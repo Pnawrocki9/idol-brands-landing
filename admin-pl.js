@@ -147,7 +147,28 @@ document.addEventListener('DOMContentLoaded', function() {
     ['home-feature2-desc-field-pl','plHomeFeature2Desc','homeFeature2Desc','We handle everything, you focus on content'],
     ['home-feature3-title-field-pl','plHomeFeature3Title','homeFeature3Title','Proven Results'],
     ['home-feature3-desc-field-pl','plHomeFeature3Desc','homeFeature3Desc','Join the 10% who succeed'],
-    ['home-cta-field-pl','plHomeCtaText','homeCtaText','See How It Works']
+    ['home-cta-field-pl','plHomeCtaText','homeCtaText','See How It Works'],
+    // Complete Solution Section (PL)
+    ['solution-title-field-pl','plSolutionTitle','solutionTitle','Our Complete Solution'],
+    ['solution-subtitle-field-pl','plSolutionSubtitle','solutionSubtitle','Everything you need to launch and scale your fashion brand, all in one platform.'],
+    ['solution-step1-title-field-pl','plSolutionStep1Title','solutionStep1Title','Brand Strategy'],
+    ['solution-step1-desc-field-pl','plSolutionStep1Desc','solutionStep1Desc','We develop your unique brand identity, positioning, and go-to-market strategy.'],
+    ['solution-step2-title-field-pl','plSolutionStep2Title','solutionStep2Title','Product Development'],
+    ['solution-step2-desc-field-pl','plSolutionStep2Desc','solutionStep2Desc','From concept to final product, we handle design, sampling, and production.'],
+    ['solution-step3-title-field-pl','plSolutionStep3Title','solutionStep3Title','E-commerce Platform'],
+    ['solution-step3-desc-field-pl','plSolutionStep3Desc','solutionStep3Desc','Custom online store with integrated payment processing and inventory management.'],
+    ['solution-step4-title-field-pl','plSolutionStep4Title','solutionStep4Title','Marketing & Growth'],
+    ['solution-step4-desc-field-pl','plSolutionStep4Desc','solutionStep4Desc','Data-driven marketing campaigns and growth strategies to scale your brand.'],
+    // Success Timeline (PL)
+    ['timeline-title-field-pl','plTimelineTitle','timelineTitle','Success Timeline'],
+    ['timeline1-period-field-pl','plTimeline1Period','timeline1Period','Week 1-2'],
+    ['timeline1-desc-field-pl','plTimeline1Desc','timeline1Desc','Brand Strategy & Design'],
+    ['timeline2-period-field-pl','plTimeline2Period','timeline2Period','Week 3-6'],
+    ['timeline2-desc-field-pl','plTimeline2Desc','timeline2Desc','Product Development'],
+    ['timeline3-period-field-pl','plTimeline3Period','timeline3Period','Week 7-8'],
+    ['timeline3-desc-field-pl','plTimeline3Desc','timeline3Desc','Store Setup & Launch'],
+    ['timeline4-period-field-pl','plTimeline4Period','timeline4Period','Month 3+'],
+    ['timeline4-desc-field-pl','plTimeline4Desc','timeline4Desc','Scale & Growth']
   ];
   homeMap.forEach(function(entry) {
     loadField(entry[0], entry[1], entry[2], entry[3]);
