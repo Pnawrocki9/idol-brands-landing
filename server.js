@@ -47,8 +47,7 @@ app.post('/api/cms-content', async (req, res) => {
         const data = req.body;
         await saveCmsData(data);
         
-        // Also update HTML files with the new content
-        await updateHtmlFiles(data);
+        // No need to update HTML files - cms-sync.js handles loading from server
         
         res.json({ success: true, message: 'Content saved successfully' });
     } catch (error) {
@@ -67,8 +66,7 @@ app.post('/api/cms-content/:key', async (req, res) => {
         data[key] = value;
         await saveCmsData(data);
         
-        // Update HTML files with the new content
-        await updateHtmlFiles(data);
+        // No need to update HTML files - cms-sync.js handles loading from server
         
         res.json({ success: true, message: 'Content saved successfully' });
     } catch (error) {
