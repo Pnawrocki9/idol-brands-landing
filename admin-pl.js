@@ -358,6 +358,94 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // ===== Hero Media Management =====
+  function loadHeroMedia() {
+    const mediaList = JSON.parse(localStorage.getItem('heroMediaList') || '[]');
+    const duration = localStorage.getItem('heroTransitionDuration') || '5';
+    
+    document.getElementById('hero-transition-duration').value = duration;
+    
+    const listEl = document.getElementById('hero-media-list');
+    if (!mediaList || mediaList.length === 0) {
+      listEl.innerHTML = '<p class="text-sm text-gray-500">Brak mediów. Dodaj pierwsze media powyżej.</p>';
+      return;
+    }
+    
+    listEl.innerHTML = '';
+    mediaList.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.className = 'flex items-center justify-between bg-white p-3 rounded border border-gray-200';
+      div.innerHTML = `
+        <div class="flex items-center gap-3 flex-1">
+          <span class="text-sm font-semibold text-gray-500">#${index + 1}</span>
+          <span class="text-sm text-gray-700 font-medium">${item.type === 'video' ? '🎥' : '🖼️'} ${item.type === 'video' ? 'Wideo' : 'Zdjęcie'}</span>
+          <span class="text-sm text-gray-600 truncate flex-1">${item.url}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          ${index > 0 ? `<button class="text-blue-600 hover:underline text-sm" onclick="moveHeroMedia(${index}, 'up')">↑</button>` : '<span class="w-4"></span>'}
+          ${index < mediaList.length - 1 ? `<button class="text-blue-600 hover:underline text-sm" onclick="moveHeroMedia(${index}, 'down')">↓</button>` : '<span class="w-4"></span>'}
+          <button class="text-red-600 hover:underline text-sm ml-2" onclick="deleteHeroMedia(${index})">Usuń</button>
+        </div>
+      `;
+      listEl.appendChild(div);
+    });
+  }
+  
+  window.moveHeroMedia = function(index, direction) {
+    const mediaList = JSON.parse(localStorage.getItem('heroMediaList') || '[]');
+    if (direction === 'up' && index > 0) {
+      [mediaList[index], mediaList[index - 1]] = [mediaList[index - 1], mediaList[index]];
+    } else if (direction === 'down' && index < mediaList.length - 1) {
+      [mediaList[index], mediaList[index + 1]] = [mediaList[index + 1], mediaList[index]];
+    }
+    localStorage.setItem('heroMediaList', JSON.stringify(mediaList));
+    loadHeroMedia();
+  };
+  
+  window.deleteHeroMedia = function(index) {
+    const mediaList = JSON.parse(localStorage.getItem('heroMediaList') || '[]');
+    mediaList.splice(index, 1);
+    localStorage.setItem('heroMediaList', JSON.stringify(mediaList));
+    loadHeroMedia();
+  };
+  
+  const addMediaBtn = document.getElementById('add-hero-media');
+  if (addMediaBtn) {
+    addMediaBtn.addEventListener('click', function() {
+      const url = document.getElementById('hero-media-url').value.trim();
+      const type = document.getElementById('hero-media-type').value;
+      
+      if (!url) {
+        alert('Proszę podać URL do pliku.');
+        return;
+      }
+      
+      const mediaList = JSON.parse(localStorage.getItem('heroMediaList') || '[]');
+      mediaList.push({ url, type });
+      localStorage.setItem('heroMediaList', JSON.stringify(mediaList));
+      
+      document.getElementById('hero-media-url').value = '';
+      loadHeroMedia();
+    });
+  }
+  
+  const saveMediaBtn = document.getElementById('save-hero-media');
+  if (saveMediaBtn) {
+    saveMediaBtn.addEventListener('click', function() {
+      const duration = document.getElementById('hero-transition-duration').value;
+      localStorage.setItem('heroTransitionDuration', duration);
+      
+      const msg = document.getElementById('hero-media-save-msg');
+      if (msg) {
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      }
+    });
+  }
+  
+  // Load hero media on page load
+  loadHeroMedia();
+
   // ===== Blog Page (EN) =====
   loadField('admin-blog-title','blogTitle',null,'Blog');
   loadField('admin-blog-subtitle','blogSubtitle',null,'Read our latest articles and fashion inspiration.');
