@@ -1,43 +1,106 @@
 // Vercel Serverless Function for CMS content management
-// Uses Vercel KV for persistent storage
+// Uses GitHub API to store data in repository
 
-// Initialize KV storage (will be set up in Vercel dashboard)
-let kv;
-try {
-    // Import Vercel KV if available
-    kv = require('@vercel/kv');
-} catch (e) {
-    // Fallback for local development
-    kv = null;
-}
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_REPO = process.env.GITHUB_REPO || 'Pnawrocki9/idol-brands-landing';
+const DATA_FILE_PATH = 'cms-data.json';
 
-// Load CMS data from KV store or fallback storage
+// In-memory cache for CMS data (persists during function lifetime)
+let cmsCache = null;
+
+// Load CMS data from GitHub repository
 async function loadCmsData() {
-    if (kv && process.env.KV_REST_API_URL) {
-        try {
-            const data = await kv.get('cms-data');
-            return data || {};
-        } catch (error) {
-            console.error('KV load error:', error);
+    if (cmsCache) {
+        return cmsCache;
+    }
+
+    if (!GITHUB_TOKEN) {
+        console.log('No GitHub token, using fallback data');
+        return JSON.parse(process.env.CMS_DATA || '{}');
+    }
+
+    try {
+        const response = await fetch(
+            `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`,
+            {
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            }
+        );
+
+        if (response.ok) {
+            const fileData = await response.json();
+            const content = Buffer.from(fileData.content, 'base64').toString('utf-8');
+            cmsCache = JSON.parse(content);
+            return cmsCache;
+        } else {
+            console.log('CMS data file not found in repo, returning empty');
             return {};
         }
+    } catch (error) {
+        console.error('Error loading from GitHub:', error);
+        return JSON.parse(process.env.CMS_DATA || '{}');
     }
-    // Fallback to environment variable for initial data
-    return JSON.parse(process.env.CMS_DATA || '{}');
 }
 
-// Save CMS data to KV store
+// Save CMS data to GitHub repository
 async function saveCmsData(data) {
-    if (kv && process.env.KV_REST_API_URL) {
-        try {
-            await kv.set('cms-data', data);
-        } catch (error) {
-            console.error('KV save error:', error);
-            throw error;
+    if (!GITHUB_TOKEN) {
+        console.log('No GitHub token, data not saved:', data);
+        cmsCache = data;
+        return;
+    }
+
+    try {
+        // First, get the current file SHA (required for update)
+        const getResponse = await fetch(
+            `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`,
+            {
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            }
+        );
+
+        let sha = null;
+        if (getResponse.ok) {
+            const fileData = await getResponse.json();
+            sha = fileData.sha;
         }
-    } else {
-        // For local dev or if KV not configured, just log
-        console.log('KV not configured. Data would be:', data);
+
+        // Update or create the file
+        const content = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
+        const updateResponse = await fetch(
+            `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: 'Update CMS content',
+                    content: content,
+                    sha: sha
+                })
+            }
+        );
+
+        if (updateResponse.ok) {
+            cmsCache = data;
+            console.log('CMS data saved to GitHub successfully');
+        } else {
+            const error = await updateResponse.json();
+            console.error('GitHub API error:', error);
+            throw new Error('Failed to save to GitHub');
+        }
+    } catch (error) {
+        console.error('Error saving to GitHub:', error);
+        throw error;
     }
 }
 
