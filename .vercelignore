@@ -1,6 +1,0 @@
-node_modules
-.git
-*.bak
-.vercel
-test-cms.sh
-start-cms.sh
