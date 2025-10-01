@@ -1237,6 +1237,36 @@
         </section>
     </div>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDvFEcH-YXhKb7gFkSnBobaj4B3b7-_VqY",
+      authDomain: "idol-brands.firebaseapp.com",
+      projectId: "idol-brands",
+      storageBucket: "idol-brands.firebasestorage.app",
+      messagingSenderId: "764493539637",
+      appId: "1:764493539637:web:e9a6a71ce9b36d73f1c47c",
+      measurementId: "G-V3K8KE25ZW"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
+    // Make Firestore available globally for admin panel
+    window.firestoreDB = db;
+    window.firestoreCollection = collection;
+    window.firestoreGetDocs = getDocs;
+    window.firestoreDoc = doc;
+    window.firestoreUpdateDoc = updateDoc;
+    window.firestoreDeleteDoc = deleteDoc;
+    window.firestoreAddDoc = addDoc;
+    window.firestoreQuery = query;
+    window.firestoreOrderBy = orderBy;
+    </script>
+
     <script>
     // Admin page script.  Only administrators should access this page; redirect others.
     document.addEventListener('DOMContentLoaded', function() {
@@ -2011,14 +2041,34 @@
         }
 
         // Load users from localStorage and render the table
-        function loadUsers() {
+        async function loadUsers() {
             let users = [];
-            try {
-                const stored = localStorage.getItem('users');
-                if (stored) users = JSON.parse(stored);
-            } catch (e) {
-                users = [];
+            
+            // Try to load from Firebase first
+            if (window.firestoreDB && window.firestoreCollection && window.firestoreGetDocs) {
+                try {
+                    const querySnapshot = await window.firestoreGetDocs(window.firestoreCollection(window.firestoreDB, 'users'));
+                    users = [];
+                    querySnapshot.forEach((doc) => {
+                        users.push({ ...doc.data(), firebaseId: doc.id });
+                    });
+                    // Sync to localStorage for backward compatibility
+                    localStorage.setItem('users', JSON.stringify(users));
+                } catch (e) {
+                    console.error('Error loading from Firebase:', e);
+                }
             }
+            
+            // Fallback to localStorage if Firebase fails
+            if (users.length === 0) {
+                try {
+                    const stored = localStorage.getItem('users');
+                    if (stored) users = JSON.parse(stored);
+                } catch (e) {
+                    users = [];
+                }
+            }
+            
             usersTableBody.innerHTML = '';
             if (!users || users.length === 0) {
                 const tr = document.createElement('tr');
