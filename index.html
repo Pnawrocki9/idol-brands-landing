@@ -177,10 +177,10 @@
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-display font-bold text-black">Idol Brands</h1>
+                <div class="flex items-center flex-shrink-0">
+                    <h1 class="text-xl sm:text-2xl font-display font-bold text-black">Idol Brands</h1>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-wrap">
                     <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
                     <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
                     <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
@@ -199,17 +199,17 @@
                     </div>
                     <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
                 </div>
-                <div class="md:hidden">
+                <div class="lg:hidden flex items-center">
                     <!-- Mobile hamburger toggler.  aria-* attributes improve accessibility. -->
-                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
-                        <i id="menuIcon" class="fas fa-bars text-xl"></i>
+                    <button id="menuToggle" class="text-black p-2 focus:outline-none focus:ring-2 focus:ring-black rounded" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
     <!-- Mobile menu panel: hidden by default on desktop (md:hidden). Contains duplicate nav links for mobile users. -->
-    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+    <div id="mobileMenu" class="lg:hidden hidden fixed top-16 left-0 right-0 shadow-lg z-40 max-h-screen overflow-y-auto border-t border-gray-200 bg-white/95 backdrop-blur-md">
       <div class="px-4 py-4 space-y-4">
         <a href="about.html" class="block text-black font-medium">About</a>
         <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
@@ -669,7 +669,7 @@
                         </form>
                         
                         <div id="success-message" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                            <div class="flex items-center">
+                            <div class="flex items-center flex-shrink-0">
                                 <i class="fas fa-check-circle text-green-500 mr-3"></i>
                                 <div>
                                     <h4 class="font-semibold text-green-800">Thank you for joining!</h4>
