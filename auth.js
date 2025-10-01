@@ -24,8 +24,14 @@ function logout() {
   // administrators are fully logged out and cannot access the admin dashboard.
   localStorage.removeItem('loggedIn');
   localStorage.removeItem('adminLoggedIn');
-  // redirect to home page after logout
-  window.location.href = 'index.html';
+  // Redirect to home page after logout, preserving language preference
+  // Check if current page is Polish version and redirect accordingly
+  const currentPage = window.location.pathname;
+  if (currentPage.includes('-pl.html') || currentPage.endsWith('/index-pl.html')) {
+    window.location.href = 'index-pl.html';
+  } else {
+    window.location.href = 'index.html';
+  }
 }
 
 function updateNav() {
@@ -62,14 +68,16 @@ function updateNav() {
           adminLinkMobile.style.display = isAdmin() ? '' : 'none';
         }
         // Allow calculator link to anchor to the calculator section. Preserve the
-        // original target (index.html#calculator-section or #calculator-section)
+        // original target (index.html#calculator-section or index-pl.html#calculator-section)
         if (calcLink) {
             // store original href on first run
             if (!calcLink.dataset.original) {
                 calcLink.dataset.original = calcLink.getAttribute('href');
             }
             const original = calcLink.dataset.original;
-            if (original && original.includes('index.html')) {
+            if (original && original.includes('index-pl.html')) {
+                calcLink.setAttribute('href', 'index-pl.html#calculator-section');
+            } else if (original && original.includes('index.html')) {
                 calcLink.setAttribute('href', 'index.html#calculator-section');
             } else {
                 calcLink.setAttribute('href', '#calculator-section');
@@ -80,7 +88,9 @@ function updateNav() {
                 calcLinkMobile.dataset.original = calcLinkMobile.getAttribute('href');
             }
             const original = calcLinkMobile.dataset.original;
-            if (original && original.includes('index.html')) {
+            if (original && original.includes('index-pl.html')) {
+                calcLinkMobile.setAttribute('href', 'index-pl.html#calculator-section');
+            } else if (original && original.includes('index.html')) {
                 calcLinkMobile.setAttribute('href', 'index.html#calculator-section');
             } else {
                 calcLinkMobile.setAttribute('href', '#calculator-section');
@@ -98,9 +108,12 @@ function updateNav() {
         if (loginLinkMobile) loginLinkMobile.style.display = '';
         if (adminLink) adminLink.style.display = 'none';
         if (adminLinkMobile) adminLinkMobile.style.display = 'none';
-        // point calculator link to login page
-        if (calcLink) calcLink.setAttribute('href', 'login.html');
-        if (calcLinkMobile) calcLinkMobile.setAttribute('href', 'login.html');
+        // point calculator link to login page (maintain language preference)
+        const currentPage = window.location.pathname;
+        const isPolish = currentPage.includes('-pl.html');
+        const loginPage = isPolish ? 'login-pl.html' : 'login.html';
+        if (calcLink) calcLink.setAttribute('href', loginPage);
+        if (calcLinkMobile) calcLinkMobile.setAttribute('href', loginPage);
         // hide calculator section if present
         if (calcSection) calcSection.classList.add('hidden');
     }
@@ -214,9 +227,11 @@ function attachNavHandlers() {
   if (loginLink && !loginLink.dataset.handler) {
     loginLink.dataset.handler = 'true';
     loginLink.addEventListener('click', function (e) {
-      // Always navigate to the login page via assignment to avoid prevented default
+      // Always navigate to the login page via assignment (maintain language preference)
       e.preventDefault();
-      window.location.href = 'login.html';
+      const currentPage = window.location.pathname;
+      const isPolish = currentPage.includes('-pl.html');
+      window.location.href = isPolish ? 'login-pl.html' : 'login.html';
     });
   }
   const adminLink = document.getElementById('nav-admin');

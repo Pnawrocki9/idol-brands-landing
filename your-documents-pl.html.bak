@@ -142,20 +142,20 @@
           <p id="footer-phone" class="text-sm text-gray-300"></p>
         </div>
         <div>
-          <h4 class="font-semibold mb-3">Firma</h4>
+          <h4 class="font-semibold mb-3">Company</h4>
           <ul class="space-y-2 text-sm text-gray-300">
-            <li><a href="about-pl.html" class="hover:underline">O&nbsp;nas</a></li>
-            <li><a href="how-it-works-pl.html" class="hover:underline">Jak&nbsp;to&nbsp;działa</a></li>
-            <li><a href="success-stories-pl.html" class="hover:underline">Historie&nbsp;sukcesu</a></li>
-            <li><a href="blog-pl.html" class="hover:underline">Blog</a></li>
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold mb-3">Prawne</h4>
+          <h4 class="font-semibold mb-3">Legal</h4>
           <ul class="space-y-2 text-sm text-gray-300">
-            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Regulamin</a></li>
-            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Polityka&nbsp;cookies</a></li>
-            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Prywatność&nbsp;/&nbsp;RODO</a></li>
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
           </ul>
         </div>
         <div>
