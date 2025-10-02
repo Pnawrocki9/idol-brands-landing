@@ -498,7 +498,7 @@
         if (storedSuccessTitle) successTitleElem.textContent = storedSuccessTitle;
         if (storedSuccessSubtitle) successSubtitleElem.textContent = storedSuccessSubtitle;
         
-        // Load statistics from CMS
+        // Load statistics from CMS (using shared impactStat values from About page)
         const stat1Value = document.getElementById('success-stat1-value');
         const stat1Label = document.getElementById('success-stat1-label');
         const stat2Value = document.getElementById('success-stat2-value');
@@ -508,14 +508,14 @@
         const stat4Value = document.getElementById('success-stat4-value');
         const stat4Label = document.getElementById('success-stat4-label');
         
-        const storedStat1Value = localStorage.getItem('successStat1Value');
-        const storedStat1Label = localStorage.getItem('successStat1Label');
-        const storedStat2Value = localStorage.getItem('successStat2Value');
-        const storedStat2Label = localStorage.getItem('successStat2Label');
-        const storedStat3Value = localStorage.getItem('successStat3Value');
-        const storedStat3Label = localStorage.getItem('successStat3Label');
-        const storedStat4Value = localStorage.getItem('successStat4Value');
-        const storedStat4Label = localStorage.getItem('successStat4Label');
+        const storedStat1Value = localStorage.getItem('impactStat1Value');
+        const storedStat1Label = localStorage.getItem('impactStat1Label');
+        const storedStat2Value = localStorage.getItem('impactStat2Value');
+        const storedStat2Label = localStorage.getItem('impactStat2Label');
+        const storedStat3Value = localStorage.getItem('impactStat3Value');
+        const storedStat3Label = localStorage.getItem('impactStat3Label');
+        const storedStat4Value = localStorage.getItem('impactStat4Value');
+        const storedStat4Label = localStorage.getItem('impactStat4Label');
         
         if (storedStat1Value) stat1Value.textContent = storedStat1Value;
         if (storedStat1Label) stat1Label.textContent = storedStat1Label;

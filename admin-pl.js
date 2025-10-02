@@ -60,14 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plHowCtaSubtext', 'Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 1 tydzień');
   initDefaultIfEmpty('plSuccessTitle', 'Historie Sukcesu');
   initDefaultIfEmpty('plSuccessSubtitle', 'Prawdziwi influencerzy, prawdziwe wyniki. Zobacz, jak przekształciliśmy ich wpływy w kwitnące marki modowe dzięki naszemu sprawdzonemu systemowi.');
-  initDefaultIfEmpty('plSuccessStat1Value', '500+');
-  initDefaultIfEmpty('plSuccessStat1Label', 'Uruchomionych Marek');
-  initDefaultIfEmpty('plSuccessStat2Value', '92%');
-  initDefaultIfEmpty('plSuccessStat2Label', 'Wskaźnik Sukcesu');
-  initDefaultIfEmpty('plSuccessStat3Value', '$2.5M+');
-  initDefaultIfEmpty('plSuccessStat3Label', 'Wygenerowanych Przychodów');
-  initDefaultIfEmpty('plSuccessStat4Value', '8');
-  initDefaultIfEmpty('plSuccessStat4Label', 'Tygodni do Startu');
+  // Note: Success Stories statistics now use plImpactStat* values (shared with About page)
   initDefaultIfEmpty('plSuccessCtaTitle', 'Twoja Historia Sukcesu Zaczyna Się Tutaj');
   initDefaultIfEmpty('plSuccessCtaDesc', 'Dołącz do tych odnoszących sukcesy influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe. Twoja podróż w stronę przedsiębiorczości modowej zaczyna się teraz.');
   initDefaultIfEmpty('plSuccessCtaFeature1Title', 'Bezpłatna Konsultacja');
@@ -384,16 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   // ===== Success Stories (PL) =====
-  const successStatsPairs = [
-    ['admin-success-stat1-value-pl','plSuccessStat1Value','successStat1Value','500+'],
-    ['admin-success-stat1-label-pl','plSuccessStat1Label','successStat1Label','Uruchomionych Marek'],
-    ['admin-success-stat2-value-pl','plSuccessStat2Value','successStat2Value','92%'],
-    ['admin-success-stat2-label-pl','plSuccessStat2Label','successStat2Label','Wskaźnik Sukcesu'],
-    ['admin-success-stat3-value-pl','plSuccessStat3Value','successStat3Value','$2.5M+'],
-    ['admin-success-stat3-label-pl','plSuccessStat3Label','successStat3Label','Wygenerowanych Przychodów'],
-    ['admin-success-stat4-value-pl','plSuccessStat4Value','successStat4Value','8'],
-    ['admin-success-stat4-label-pl','plSuccessStat4Label','successStat4Label','Tygodni do Startu']
-  ];
+  // Note: Success Stories statistics are managed via plImpactStat* fields in About section (shared)
   const successCtaPairs = [
     ['admin-success-cta-title-pl','plSuccessCtaTitle','successCtaTitle','Twoja Historia Sukcesu Zaczyna Się Tutaj'],
     ['admin-success-cta-desc-pl','plSuccessCtaDesc','successCtaDesc','Dołącz do tych odnoszących sukcesy influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe. Twoja podróż w stronę przedsiębiorczości modowej zaczyna się teraz.'],
@@ -408,9 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
   loadField('admin-success-title-pl','plSuccessTitle','successTitle');
   loadField('admin-success-subtitle-pl','plSuccessSubtitle','successSubtitle');
-  successStatsPairs.forEach(function(p) {
-    loadField(p[0], p[1], p[2], p[3]);
-  });
+  // Note: Statistics are loaded via About section (plImpactStat* values)
   successCtaPairs.forEach(function(p) {
     loadField(p[0], p[1], p[2], p[3]);
   });
@@ -421,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ['admin-success-title-pl','plSuccessTitle'],
         ['admin-success-subtitle-pl','plSuccessSubtitle']
       ]);
-      saveFields(successStatsPairs.map(item => [item[0], item[1]]));
+      // Note: Statistics are saved via About section (plImpactStat* values)
       saveFields(successCtaPairs.map(item => [item[0], item[1]]));
       const msg = document.getElementById('success-save-msg-pl');
       if (msg) {
