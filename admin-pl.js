@@ -24,10 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plTeamSubtitle', 'Nasz zespół łączy dekady doświadczenia w produkcji mody, logistyce, handlu detalicznym i technologii, aby wspierać sukces Twojej marki.');
   initDefaultIfEmpty('plImpactTitle', 'Nasz Wpływ');
   initDefaultIfEmpty('plImpactSubtitle', 'Rzeczywiste wyniki od prawdziwych influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe.');
-  // Impact Statistics Values are shared with EN version (no plImpactStat*Value needed)
+  // Impact Statistics Values and Labels (PL)
+  initDefaultIfEmpty('plImpactStat1Value', '500+');
   initDefaultIfEmpty('plImpactStat1Label', 'Uruchomionych Marek Modowych');
+  initDefaultIfEmpty('plImpactStat2Value', '$50M');
   initDefaultIfEmpty('plImpactStat2Label', 'Sprzedaż Marek');
+  initDefaultIfEmpty('plImpactStat3Value', '2,4M');
   initDefaultIfEmpty('plImpactStat3Label', 'Sprzedanych Produktów');
+  initDefaultIfEmpty('plImpactStat4Value', '98%');
   initDefaultIfEmpty('plImpactStat4Label', 'Wskaźnik Sukcesu');
   initDefaultIfEmpty('plValuesTitle', 'Nasze Wartości');
   initDefaultIfEmpty('plValuesSubtitle', 'Zasady, które kierują wszystkim, co robimy i napędzają każdą podjętą przez nas decyzję.');
@@ -279,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ['admin-impact-title-pl','plImpactTitle','impactTitle'],
     ['admin-impact-subtitle-pl','plImpactSubtitle','impactSubtitle']
   ];
-  // Note: Impact statistics PL labels are now managed in the EN section (admin.html)
+  // Note: Impact statistics (both Values and Labels for PL) are now managed in the EN section (admin.html)
   // and saved by the "Save About Content" button, so we don't load/save them here
   aboutPairs.forEach(function(p) {
     loadField(p[0], p[1], p[2]);
@@ -318,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (saveAboutPl) {
     saveAboutPl.addEventListener('click', function() {
       saveFields(aboutPairs.map(item => [item[0], item[1]]));
-      // Note: Impact statistics PL labels are saved by "Save About Content" button in EN section
+      // Note: Impact statistics (PL Values & Labels) are saved by "Save About Content" button in EN section
       saveFields(valuePairs.map(item => [item[0], item[1]]));
       saveFields(aboutCtaPairs.map(item => [item[0], item[1]]));
       const msg = document.getElementById('about-save-msg-pl');
@@ -363,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   // ===== Success Stories (PL) =====
-  // Note: Success Stories statistics are managed via plImpactStat* fields in About section (shared)
+  // Note: Success Stories statistics (Values & Labels) are managed via plImpactStat* fields in About section (shared)
   const successCtaPairs = [
     ['admin-success-cta-title-pl','plSuccessCtaTitle','successCtaTitle','Twoja Historia Sukcesu Zaczyna Się Tutaj'],
     ['admin-success-cta-desc-pl','plSuccessCtaDesc','successCtaDesc','Dołącz do tych odnoszących sukcesy influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe. Twoja podróż w stronę przedsiębiorczości modowej zaczyna się teraz.'],
@@ -378,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
   loadField('admin-success-title-pl','plSuccessTitle','successTitle');
   loadField('admin-success-subtitle-pl','plSuccessSubtitle','successSubtitle');
-  // Note: Statistics are loaded via About section (plImpactStat* values)
+  // Note: Statistics (Values & Labels) are loaded via About section (plImpactStat* values)
   successCtaPairs.forEach(function(p) {
     loadField(p[0], p[1], p[2], p[3]);
   });
@@ -389,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ['admin-success-title-pl','plSuccessTitle'],
         ['admin-success-subtitle-pl','plSuccessSubtitle']
       ]);
-      // Note: Statistics are saved via About section (plImpactStat* values)
+      // Note: Statistics (Values & Labels) are saved via About section (plImpactStat* values)
       saveFields(successCtaPairs.map(item => [item[0], item[1]]));
       const msg = document.getElementById('success-save-msg-pl');
       if (msg) {
