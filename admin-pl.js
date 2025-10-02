@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plWaitlistSubmitButton', 'Dołącz do listy oczekujących');
   initDefaultIfEmpty('plWaitlistSuccessTitle', 'Dziękujemy za dołączenie!');
   initDefaultIfEmpty('plWaitlistSuccessMessage', 'Jesteś na liście oczekujących. Powiadomimy Cię, gdy miejsca będą dostępne.');
+  // Calculator
+  initDefaultIfEmpty('plCalculatorTitle', 'Kalkulator ROI');
+  initDefaultIfEmpty('plCalculatorSubtitle', 'Zobacz dokładnie, jakie przychody może generować Twoja marka modowa. Wszystkie obliczenia są przejrzyste i oparte na rzeczywistych danych rynkowych.');
 
   // Helper to load a value with fallback to English default (from other keys)
   function loadField(fieldId, plKey, enKey, defaultVal) {
@@ -229,6 +232,24 @@ document.addEventListener('DOMContentLoaded', function() {
     saveWaitlistPl.addEventListener('click', function() {
       saveFields(waitlistPairs.map(item => [item[0], item[1]]));
       const msg = document.getElementById('waitlist-save-msg-pl');
+      if (msg) {
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      }
+    });
+  }
+  
+  // ===== Calculator (PL) =====
+  loadField('calculator-title-pl', 'plCalculatorTitle', 'calculatorTitle');
+  loadField('calculator-subtitle-pl', 'plCalculatorSubtitle', 'calculatorSubtitle');
+  const saveCalculatorPl = document.getElementById('save-calculator-pl');
+  if (saveCalculatorPl) {
+    saveCalculatorPl.addEventListener('click', function() {
+      saveFields([
+        ['calculator-title-pl', 'plCalculatorTitle'],
+        ['calculator-subtitle-pl', 'plCalculatorSubtitle']
+      ]);
+      const msg = document.getElementById('calculator-save-msg-pl');
       if (msg) {
         msg.classList.remove('hidden');
         setTimeout(() => msg.classList.add('hidden'), 2000);

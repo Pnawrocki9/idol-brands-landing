@@ -445,8 +445,8 @@
     <section id="calculator-section" class="py-20 calculator-section hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-5xl font-display font-bold text-black mb-6">ROI Calculator</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h2 id="calculator-title" class="text-5xl font-display font-bold text-black mb-6">ROI Calculator</h2>
+                <p id="calculator-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
                     See exactly how much revenue your fashion brand could generate. 
                     All calculations are transparent and based on real market data.
                 </p>
@@ -1103,6 +1103,12 @@
         if (waitlistSuccessTitle) waitlistSuccessTitle.textContent = getItem('waitlistSuccessTitle', waitlistSuccessTitle.textContent);
         const waitlistSuccessMsg = document.getElementById('waitlist-success-message');
         if (waitlistSuccessMsg) waitlistSuccessMsg.textContent = getItem('waitlistSuccessMessage', waitlistSuccessMsg.textContent);
+
+        // Calculator Section
+        const calculatorTitle = document.getElementById('calculator-title');
+        if (calculatorTitle) calculatorTitle.textContent = getItem('calculatorTitle', calculatorTitle.textContent);
+        const calculatorSubtitle = document.getElementById('calculator-subtitle');
+        if (calculatorSubtitle) calculatorSubtitle.textContent = getItem('calculatorSubtitle', calculatorSubtitle.textContent);
     });
     </script>
     <!-- Authentication helper to control login state, navigation and calculator visibility -->

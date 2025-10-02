@@ -485,8 +485,8 @@
     <section id="calculator-section" class="py-20 calculator-section hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-5xl font-display font-bold text-black mb-6">Kalkulator&nbsp;ROI</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h2 id="calculator-title" class="text-5xl font-display font-bold text-black mb-6">Kalkulator&nbsp;ROI</h2>
+                <p id="calculator-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Zobacz dokładnie, jakie przychody może generować Twoja marka modowa.
                     Wszystkie obliczenia są przejrzyste i oparte na rzeczywistych danych rynkowych.
                 </p>
@@ -1144,6 +1144,12 @@
         if (waitlistSuccessTitle) waitlistSuccessTitle.textContent = getItem('plWaitlistSuccessTitle', getItem('waitlistSuccessTitle', waitlistSuccessTitle.textContent));
         const waitlistSuccessMsg = document.getElementById('waitlist-success-message');
         if (waitlistSuccessMsg) waitlistSuccessMsg.textContent = getItem('plWaitlistSuccessMessage', getItem('waitlistSuccessMessage', waitlistSuccessMsg.textContent));
+
+        // Calculator Section
+        const calculatorTitle = document.getElementById('calculator-title');
+        if (calculatorTitle) calculatorTitle.textContent = getItem('plCalculatorTitle', getItem('calculatorTitle', calculatorTitle.textContent));
+        const calculatorSubtitle = document.getElementById('calculator-subtitle');
+        if (calculatorSubtitle) calculatorSubtitle.textContent = getItem('plCalculatorSubtitle', getItem('calculatorSubtitle', calculatorSubtitle.textContent));
     });
     </script>
     <!-- Authentication helper to control login state, navigation and calculator visibility -->
