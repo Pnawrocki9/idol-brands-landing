@@ -1,0 +1,8 @@
+{
+  "name": "idol-brands-cms",
+  "version": "1.0.0",
+  "description": "CMS for Idol Brands",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
