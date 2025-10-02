@@ -279,18 +279,10 @@ document.addEventListener('DOMContentLoaded', function() {
     ['admin-impact-title-pl','plImpactTitle','impactTitle'],
     ['admin-impact-subtitle-pl','plImpactSubtitle','impactSubtitle']
   ];
-  const impactStatsPairs = [
-    // Values are shared with EN version, only labels are translated
-    ['admin-impact-stat1-label-pl','plImpactStat1Label','impactStat1Label','Uruchomionych Marek Modowych'],
-    ['admin-impact-stat2-label-pl','plImpactStat2Label','impactStat2Label','Sprzedaż Marek'],
-    ['admin-impact-stat3-label-pl','plImpactStat3Label','impactStat3Label','Sprzedanych Produktów'],
-    ['admin-impact-stat4-label-pl','plImpactStat4Label','impactStat4Label','Wskaźnik Sukcesu']
-  ];
+  // Note: Impact statistics PL labels are now managed in the EN section (admin.html)
+  // and saved by the "Save About Content" button, so we don't load/save them here
   aboutPairs.forEach(function(p) {
     loadField(p[0], p[1], p[2]);
-  });
-  impactStatsPairs.forEach(function(p) {
-    loadField(p[0], p[1], p[2], p[3]);
   });
   // Add Values section fields (PL)
   const valuePairs = [
@@ -326,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (saveAboutPl) {
     saveAboutPl.addEventListener('click', function() {
       saveFields(aboutPairs.map(item => [item[0], item[1]]));
-      saveFields(impactStatsPairs.map(item => [item[0], item[1]]));
+      // Note: Impact statistics PL labels are saved by "Save About Content" button in EN section
       saveFields(valuePairs.map(item => [item[0], item[1]]));
       saveFields(aboutCtaPairs.map(item => [item[0], item[1]]));
       const msg = document.getElementById('about-save-msg-pl');

@@ -14,30 +14,22 @@
 
 **Wejdź na panel admin**: `/admin.html` (login: admin / idoladmin2025)
 
-#### Dla wersji angielskiej (EN):
+#### Dla WSZYSTKICH wersji (EN i PL):
 ```
 Sekcja: "Edit About Page"
   ↓
-Podsekcja: "Our Impact Statistics (EN)"
+Podsekcja: "Our Impact Statistics (EN & PL)"
   ↓
-Edytuj 4 pola (Value + Label)
+Dla każdej statystyki edytuj 3 pola:
+  • Value (Shared) - wartość współdzielona dla EN i PL
+  • Label (EN) - etykieta po angielsku
+  • Label (PL) - etykieta po polsku
   ↓
 Klik: "Save About Content"
   ↓
-✅ Zmieni się ZARÓWNO na About JAK I Success Stories!
-```
-
-#### Dla wersji polskiej (PL):
-```
-Sekcja: "Strona 'O nas' (PL)"
-  ↓
-Podsekcja: "Statystyki 'Nasz Wpływ' (PL)"
-  ↓
-Edytuj 4 pola (Wartość + Etykieta)
-  ↓
-Klik: "Zapisz treści 'O nas' (PL)"
-  ↓
-✅ Zmieni się ZARÓWNO na O nas JAK I Historie sukcesu!
+✅ Zmieni się ZARÓWNO na About/O nas JAK I Success Stories/Historie sukcesu!
+✅ W wersji EN wyświetli się Label (EN)
+✅ W wersji PL wyświetli się Label (PL)
 ```
 
 ---
@@ -65,18 +57,23 @@ Klik: "Zapisz treści 'O nas' (PL)"
 
 ## 📊 Przykład użycia
 
-### Chcę zmienić "500+" na "1000+":
+### Chcę zmienić "500+" na "1000+" i ustawić różne etykiety dla EN i PL:
 
 **Krok 1:** Wejdź na `/admin.html`  
 **Krok 2:** Przewiń do sekcji **"Edit About Page"**  
-**Krok 3:** Znajdź **"Our Impact Statistics (EN)"**  
-**Krok 4:** Zmień **"Stat 1 - Value"** z `500+` na `1000+`  
+**Krok 3:** Znajdź **"Our Impact Statistics (EN & PL)"**  
+**Krok 4:** W **"Statistic 1"** zmień:
+- **Value (Shared):** z `500+` na `1000+`
+- **Label (EN):** `Fashion Brands Launched`
+- **Label (PL):** `Uruchomionych Marek Modowych`  
 **Krok 5:** Kliknij **"Save About Content"**  
 **Krok 6:** Odśwież strony:
-- ✅ `/about.html` → zobaczysz "1000+"
-- ✅ `/success-stories.html` → zobaczysz "1000+"
+- ✅ `/about.html` → zobaczysz "1000+" z etykietą EN
+- ✅ `/success-stories.html` → zobaczysz "1000+" z etykietą EN
+- ✅ `/about-pl.html` → zobaczysz "1000+" z etykietą PL
+- ✅ `/success-stories-pl.html` → zobaczysz "1000+" z etykietą PL
 
-**To wszystko!** Jedna zmiana = aktualizacja na obu stronach! 🎉
+**To wszystko!** Jedna zmiana = aktualizacja na WSZYSTKICH stronach z odpowiednimi tłumaczeniami! 🎉
 
 ---
 
@@ -84,17 +81,23 @@ Klik: "Zapisz treści 'O nas' (PL)"
 
 ### Klucze localStorage:
 
-**Angielska wersja:**
-- `impactStat1Value`, `impactStat1Label`
-- `impactStat2Value`, `impactStat2Label`
-- `impactStat3Value`, `impactStat3Label`
-- `impactStat4Value`, `impactStat4Label`
+**Wartości (współdzielone EN & PL):**
+- `impactStat1Value`
+- `impactStat2Value`
+- `impactStat3Value`
+- `impactStat4Value`
 
-**Polska wersja:**
-- `plImpactStat1Value`, `plImpactStat1Label`
-- `plImpactStat2Value`, `plImpactStat2Label`
-- `plImpactStat3Value`, `plImpactStat3Label`
-- `plImpactStat4Value`, `plImpactStat4Label`
+**Etykiety angielskie:**
+- `impactStat1Label`
+- `impactStat2Label`
+- `impactStat3Label`
+- `impactStat4Label`
+
+**Etykiety polskie:**
+- `plImpactStat1Label`
+- `plImpactStat2Label`
+- `plImpactStat3Label`
+- `plImpactStat4Label`
 
 ### Strony które używają tych wartości:
 
@@ -112,23 +115,29 @@ Klik: "Zapisz treści 'O nas' (PL)"
 ### Zmienione pliki:
 
 1. **admin.html**
-   - ✅ Zmieniono tytuł sekcji: "Our Impact Statistics (EN)"
-   - ✅ Dodano info: "📍 These statistics are displayed on About page and Success Stories page."
-   - ✅ Usunięto duplikujące pola ze sekcji Success Stories (EN)
+   - ✅ Zmieniono strukturę sekcji: "Our Impact Statistics (EN & PL)"
+   - ✅ Każda statystyka ma teraz 3 pola: Value (Shared), Label (EN), Label (PL)
+   - ✅ Pola PL przeniesione z sekcji PL do sekcji EN dla łatwego zarządzania
+   - ✅ JavaScript zapisuje zarówno EN jak i PL etykiety przy kliknięciu "Save About Content"
+   - ✅ Dodano wizualne oddzielenie statystyk z szarym tłem
    - ✅ Dodano info w Success Stories: "ℹ️ Statistics for Success Stories are managed in the 'Our Impact Statistics' section above"
 
 2. **admin-pl.js**
-   - ✅ Usunięto inicjalizację `plSuccessStat*` (używamy teraz `plImpactStat*`)
-   - ✅ Usunięto ładowanie i zapisywanie pól `plSuccessStat*`
+   - ✅ Usunięto ładowanie i zapisywanie pól `plImpactStat*Label` (teraz zarządzane przez admin.html)
+   - ✅ Zachowano inicjalizację domyślnych wartości PL
+   - ✅ Dodano komentarze wyjaśniające nowy system
 
 3. **success-stories.html**
-   - ✅ Zmieniono ładowanie z `successStat*` na `impactStat*`
+   - ✅ Używa wartości `impactStat*Value` i etykiet `impactStat*Label`
 
 4. **success-stories-pl.html**
-   - ✅ Zmieniono ładowanie z `plSuccessStat*` na `plImpactStat*`
+   - ✅ Używa wartości `impactStat*Value` (współdzielone) i etykiet `plImpactStat*Label`
 
-5. **cms-data.json**
-   - ✅ Usunięto stare wartości `plSuccessStat*`
+5. **about.html**
+   - ✅ Używa wartości `impactStat*Value` i etykiet `impactStat*Label`
+
+6. **about-pl.html**
+   - ✅ Używa wartości `impactStat*Value` (współdzielone) i etykiet `plImpactStat*Label`
 
 ---
 
@@ -181,24 +190,36 @@ Klik: "Zapisz treści 'O nas' (PL)"
 1. Otwórz `/admin.html`
 2. Zaloguj się
 3. Przewiń do **"Edit About Page"**
-4. Znajdź **"Our Impact Statistics (EN)"** lub **"Statystyki 'Nasz Wpływ' (PL)"**
-5. Edytuj statystyki
-6. Kliknij **"Save About Content"** lub **"Zapisz treści 'O nas' (PL)"**
-7. Odśwież `/about.html` i `/success-stories.html` → **zmiana widoczna na obu!** ✅
+4. Znajdź **"Our Impact Statistics (EN & PL)"**
+5. Edytuj statystyki - każda ma 3 pola:
+   - **Value (Shared)** - wartość dla obu wersji językowych
+   - **Label (EN)** - etykieta po angielsku
+   - **Label (PL)** - etykieta po polsku
+6. Kliknij **"Save About Content"**
+7. Odśwież strony → **zmiana widoczna na WSZYSTKICH 4 stronach!** ✅
+   - `/about.html` (EN)
+   - `/about-pl.html` (PL)
+   - `/success-stories.html` (EN)
+   - `/success-stories-pl.html` (PL)
 
 ---
 
 ## 💡 Wskazówki
 
-- **Nie szukaj statystyk w sekcji Success Stories** - one teraz są zarządzane przez About!
-- **Widzisz info**: "ℹ️ Statistics for Success Stories are managed in the 'Our Impact Statistics' section above"
-- **Jedna zmiana** → automatyczna aktualizacja na **obu stronach** (About i Success Stories)
-- **Działa dla EN i PL** → pełna integracja
+- **Wszystkie statystyki w jednym miejscu** - zarządzaj EN i PL w sekcji "Edit About Page"
+- **Wartości współdzielone** - zmiana wartości automatycznie aktualizuje EN i PL
+- **Etykiety oddzielne** - możesz mieć różne tłumaczenia dla każdej wersji językowej
+- **Jedna zmiana** → automatyczna aktualizacja na **4 stronach** (About EN/PL i Success Stories EN/PL)
+- **Wizualne oddzielenie** - każda statystyka ma szare tło dla łatwej identyfikacji
 
 ---
 
 ## 🎉 Podsumowanie
 
-**Teraz masz jedną centralną sekcję "Our Impact Statistics"**, która aktualizuje statystyki na **obu stronach jednocześnie**!
+**Teraz masz jedną centralną sekcję "Our Impact Statistics (EN & PL)"**, która:
+- ✅ Aktualizuje statystyki na **4 stronach jednocześnie** (About EN/PL, Success Stories EN/PL)
+- ✅ Umożliwia **oddzielne etykiety** dla wersji angielskiej i polskiej
+- ✅ Współdzieli **wartości** między wersjami językowymi
+- ✅ Wszystko w **jednym miejscu** - nie musisz szukać w różnych sekcjach!
 
-**To znacznie upraszcza zarządzanie treścią i eliminuje ryzyko niespójności!** 🎯
+**To znacznie upraszcza zarządzanie treścią, eliminuje ryzyko niespójności i daje pełną kontrolę nad tłumaczeniami!** 🎯
