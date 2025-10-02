@@ -109,32 +109,49 @@
                     <input id="admin-impact-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
                 </div>
             </div>
-            <!-- Our Impact Statistics Section (EN) - Used on About & Success Stories -->
-            <h4 class="text-lg font-semibold mt-6 mb-2">Our Impact Statistics (EN)</h4>
+            <!-- Our Impact Statistics Section - Used on About & Success Stories -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">Our Impact Statistics</h4>
             <p class="text-sm text-gray-600 mb-3">📍 These statistics are displayed on <strong>About page</strong> and <strong>Success Stories page</strong>.</p>
+            <p class="text-sm text-blue-600 mb-3">ℹ️ <strong>Values are shared between EN and PL versions.</strong> Labels are translated separately below.</p>
+            
+            <!-- Shared Values -->
+            <h5 class="text-md font-semibold mt-4 mb-2">Values (Shared for EN & PL)</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label for="admin-impact-stat1-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 1 - Value (EN)</label>
+                    <label for="admin-impact-stat1-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 1 - Value</label>
                     <input id="admin-impact-stat1-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="500+" />
-                    <label for="admin-impact-stat1-label" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Stat 1 - Label (EN)</label>
+                </div>
+                <div>
+                    <label for="admin-impact-stat2-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 2 - Value</label>
+                    <input id="admin-impact-stat2-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="$50M" />
+                </div>
+                <div>
+                    <label for="admin-impact-stat3-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 3 - Value</label>
+                    <input id="admin-impact-stat3-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="2.4M" />
+                </div>
+                <div>
+                    <label for="admin-impact-stat4-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 4 - Value</label>
+                    <input id="admin-impact-stat4-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="98%" />
+                </div>
+            </div>
+            
+            <!-- Labels in EN -->
+            <h5 class="text-md font-semibold mt-4 mb-2">Labels (EN)</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="admin-impact-stat1-label" class="block text-sm font-medium text-gray-700 mb-1">Stat 1 - Label (EN)</label>
                     <input id="admin-impact-stat1-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Fashion Brands Launched" />
                 </div>
                 <div>
-                    <label for="admin-impact-stat2-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 2 - Value (EN)</label>
-                    <input id="admin-impact-stat2-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="$50M" />
-                    <label for="admin-impact-stat2-label" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Stat 2 - Label (EN)</label>
+                    <label for="admin-impact-stat2-label" class="block text-sm font-medium text-gray-700 mb-1">Stat 2 - Label (EN)</label>
                     <input id="admin-impact-stat2-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="In Brand Sales" />
                 </div>
                 <div>
-                    <label for="admin-impact-stat3-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 3 - Value (EN)</label>
-                    <input id="admin-impact-stat3-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="2.4M" />
-                    <label for="admin-impact-stat3-label" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Stat 3 - Label (EN)</label>
+                    <label for="admin-impact-stat3-label" class="block text-sm font-medium text-gray-700 mb-1">Stat 3 - Label (EN)</label>
                     <input id="admin-impact-stat3-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Products Sold" />
                 </div>
                 <div>
-                    <label for="admin-impact-stat4-value" class="block text-sm font-medium text-gray-700 mb-1">Stat 4 - Value (EN)</label>
-                    <input id="admin-impact-stat4-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="98%" />
-                    <label for="admin-impact-stat4-label" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Stat 4 - Label (EN)</label>
+                    <label for="admin-impact-stat4-label" class="block text-sm font-medium text-gray-700 mb-1">Stat 4 - Label (EN)</label>
                     <input id="admin-impact-stat4-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Success Rate" />
                 </div>
             </div>
@@ -984,29 +1001,25 @@
             <!-- Our Impact Statistics Section (PL) - Used on About & Success Stories -->
             <h4 class="text-lg font-semibold mt-6 mb-2">Statystyki "Nasz Wpływ" (PL)</h4>
             <p class="text-sm text-gray-600 mb-3">📍 Te statystyki są wyświetlane na stronie <strong>O nas</strong> oraz <strong>Historie sukcesu</strong>.</p>
+            <p class="text-sm text-blue-600 mb-3">ℹ️ <strong>Wartości są współdzielone z wersją EN</strong> (edytuj je w sekcji EN powyżej). Tutaj tłumaczysz tylko etykiety.</p>
+            
+            <!-- Labels in PL -->
+            <h5 class="text-md font-semibold mt-4 mb-2">Etykiety (PL)</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label for="admin-impact-stat1-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 1 - Wartość (PL)</label>
-                    <input id="admin-impact-stat1-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="500+" />
-                    <label for="admin-impact-stat1-label-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Statystyka 1 - Etykieta (PL)</label>
+                    <label for="admin-impact-stat1-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 1 - Etykieta (PL)</label>
                     <input id="admin-impact-stat1-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Uruchomionych Marek Modowych" />
                 </div>
                 <div>
-                    <label for="admin-impact-stat2-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 2 - Wartość (PL)</label>
-                    <input id="admin-impact-stat2-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="$50M" />
-                    <label for="admin-impact-stat2-label-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Statystyka 2 - Etykieta (PL)</label>
+                    <label for="admin-impact-stat2-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 2 - Etykieta (PL)</label>
                     <input id="admin-impact-stat2-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Sprzedaż Marek" />
                 </div>
                 <div>
-                    <label for="admin-impact-stat3-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 3 - Wartość (PL)</label>
-                    <input id="admin-impact-stat3-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="2.4M" />
-                    <label for="admin-impact-stat3-label-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Statystyka 3 - Etykieta (PL)</label>
+                    <label for="admin-impact-stat3-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 3 - Etykieta (PL)</label>
                     <input id="admin-impact-stat3-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Sprzedanych Produktów" />
                 </div>
                 <div>
-                    <label for="admin-impact-stat4-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 4 - Wartość (PL)</label>
-                    <input id="admin-impact-stat4-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="98%" />
-                    <label for="admin-impact-stat4-label-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Statystyka 4 - Etykieta (PL)</label>
+                    <label for="admin-impact-stat4-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Statystyka 4 - Etykieta (PL)</label>
                     <input id="admin-impact-stat4-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Wskaźnik Sukcesu" />
                 </div>
             </div>

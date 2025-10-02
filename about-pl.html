@@ -462,13 +462,14 @@
         const impactStat4Value = document.getElementById('impact-stat4-value');
         const impactStat4Label = document.getElementById('impact-stat4-label');
         
-        const storedStat1Value = localStorage.getItem('plImpactStat1Value') || localStorage.getItem('impactStat1Value');
+        // Values are shared with EN version, labels are translated
+        const storedStat1Value = localStorage.getItem('impactStat1Value');
         const storedStat1Label = localStorage.getItem('plImpactStat1Label') || localStorage.getItem('impactStat1Label');
-        const storedStat2Value = localStorage.getItem('plImpactStat2Value') || localStorage.getItem('impactStat2Value');
+        const storedStat2Value = localStorage.getItem('impactStat2Value');
         const storedStat2Label = localStorage.getItem('plImpactStat2Label') || localStorage.getItem('impactStat2Label');
-        const storedStat3Value = localStorage.getItem('plImpactStat3Value') || localStorage.getItem('impactStat3Value');
+        const storedStat3Value = localStorage.getItem('impactStat3Value');
         const storedStat3Label = localStorage.getItem('plImpactStat3Label') || localStorage.getItem('impactStat3Label');
-        const storedStat4Value = localStorage.getItem('plImpactStat4Value') || localStorage.getItem('impactStat4Value');
+        const storedStat4Value = localStorage.getItem('impactStat4Value');
         const storedStat4Label = localStorage.getItem('plImpactStat4Label') || localStorage.getItem('impactStat4Label');
         
         if (storedStat1Value) impactStat1Value.textContent = storedStat1Value;
