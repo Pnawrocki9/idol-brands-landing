@@ -50,7 +50,7 @@
 **Impact/Stats Section:**
 - ✅ Impact Title - edytowalne w CMS (EN + PL)
 - ✅ Impact Subtitle - edytowalne w CMS (EN + PL)
-- ❌ BRAK: Statystyki (500+, $50M, 2.4M, 98%) - tylko hardcoded
+- ✅ Statystyki (500+, $50M, 2.4M, 98%) - edytowalne w CMS (EN + PL)
 
 **Values Section:**
 - ❌ BRAK: Values Title + Subtitle - tylko hardcoded
@@ -92,7 +92,7 @@
 - ✅ Subtitle - edytowalne w CMS (EN + PL)
 
 **Stats Section:**
-- ❌ BRAK: 4 statystyki (500+ Brands, 92% Success, $2.5M+ Revenue, 8 Weeks) - tylko hardcoded
+- ✅ 4 statystyki (500+ Brands, 92% Success, $2.5M+ Revenue, 8 Weeks) - edytowalne w CMS (EN + PL)
 
 **Success Stories (3 historie):**
 - ❌ BRAK: Wszystkie 3 historie influencerów - tylko hardcoded
@@ -204,8 +204,7 @@
 
 ### WAŻNE (statyczne ale powinny być edytowalne):
 7. ❌ About - Team expertise cards (3 karty z tytułami i opisami)
-8. ❌ About/Success Stories - Statistics (liczby i etykiety)
-9. ❌ How It Works - 6 kroków timeline
+8. ❌ How It Works - 6 kroków timeline
 10. ❌ Success Stories - 3 historie influencerów
 11. ❌ ROI Calculator - etykiety i wyniki (PL)
 
@@ -222,7 +221,8 @@
 1. Dodać CMS dla wszystkich sekcji CTA (About, Success Stories, How It Works)
 2. Dodać CMS dla About Values Section
 3. Dodać CMS EN dla Blog, Login, Documents
-4. Dodać CMS dla statystyk (About Impact, Success Stories Stats)
+4. ✅ DONE: Dodać CMS dla statystyk Success Stories (500+, 92%, $2.5M+, 8 weeks) - EN + PL
+5. ✅ DONE: Dodać CMS dla statystyk About Impact (500+, $50M, 2.4M, 98%) - EN + PL
 
 ### Średnioterminowe:
 5. Dodać CMS dla How It Works - 6 kroków timeline

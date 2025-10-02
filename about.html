@@ -226,20 +226,20 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center fade-in">
                 <div>
-                    <div class="text-5xl font-bold text-white mb-2">500+</div>
-                    <p class="text-gray-300">Fashion Brands Launched</p>
+                    <div id="impact-stat1-value" class="text-5xl font-bold text-white mb-2">500+</div>
+                    <p id="impact-stat1-label" class="text-gray-300">Fashion Brands Launched</p>
                 </div>
                 <div>
-                    <div class="text-5xl font-bold text-white mb-2">$50M</div>
-                    <p class="text-gray-300">In Brand Sales</p>
+                    <div id="impact-stat2-value" class="text-5xl font-bold text-white mb-2">$50M</div>
+                    <p id="impact-stat2-label" class="text-gray-300">In Brand Sales</p>
                 </div>
                 <div>
-                    <div class="text-5xl font-bold text-white mb-2">2.4M</div>
-                    <p class="text-gray-300">Products Sold</p>
+                    <div id="impact-stat3-value" class="text-5xl font-bold text-white mb-2">2.4M</div>
+                    <p id="impact-stat3-label" class="text-gray-300">Products Sold</p>
                 </div>
                 <div>
-                    <div class="text-5xl font-bold text-white mb-2">98%</div>
-                    <p class="text-gray-300">Success Rate</p>
+                    <div id="impact-stat4-value" class="text-5xl font-bold text-white mb-2">98%</div>
+                    <p id="impact-stat4-label" class="text-gray-300">Success Rate</p>
                 </div>
             </div>
         </div>
@@ -447,6 +447,34 @@
         const storedImpactSubtitle = localStorage.getItem('impactSubtitle');
         if (storedImpactTitle) impactTitleElem.textContent = storedImpactTitle;
         if (storedImpactSubtitle) impactSubtitleElem.textContent = storedImpactSubtitle;
+        
+        // Load Impact statistics from CMS
+        const impactStat1Value = document.getElementById('impact-stat1-value');
+        const impactStat1Label = document.getElementById('impact-stat1-label');
+        const impactStat2Value = document.getElementById('impact-stat2-value');
+        const impactStat2Label = document.getElementById('impact-stat2-label');
+        const impactStat3Value = document.getElementById('impact-stat3-value');
+        const impactStat3Label = document.getElementById('impact-stat3-label');
+        const impactStat4Value = document.getElementById('impact-stat4-value');
+        const impactStat4Label = document.getElementById('impact-stat4-label');
+        
+        const storedStat1Value = localStorage.getItem('impactStat1Value');
+        const storedStat1Label = localStorage.getItem('impactStat1Label');
+        const storedStat2Value = localStorage.getItem('impactStat2Value');
+        const storedStat2Label = localStorage.getItem('impactStat2Label');
+        const storedStat3Value = localStorage.getItem('impactStat3Value');
+        const storedStat3Label = localStorage.getItem('impactStat3Label');
+        const storedStat4Value = localStorage.getItem('impactStat4Value');
+        const storedStat4Label = localStorage.getItem('impactStat4Label');
+        
+        if (storedStat1Value) impactStat1Value.textContent = storedStat1Value;
+        if (storedStat1Label) impactStat1Label.textContent = storedStat1Label;
+        if (storedStat2Value) impactStat2Value.textContent = storedStat2Value;
+        if (storedStat2Label) impactStat2Label.textContent = storedStat2Label;
+        if (storedStat3Value) impactStat3Value.textContent = storedStat3Value;
+        if (storedStat3Label) impactStat3Label.textContent = storedStat3Label;
+        if (storedStat4Value) impactStat4Value.textContent = storedStat4Value;
+        if (storedStat4Label) impactStat4Label.textContent = storedStat4Label;
     });
     </script>
 </body>

@@ -140,20 +140,20 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center fade-in">
                 <div class="metric-card p-6 rounded-2xl">
-                    <div class="text-4xl font-bold mb-2">500+</div>
-                    <p class="text-gray-300">Uruchomionych Marek</p>
+                    <div id="success-stat1-value" class="text-4xl font-bold mb-2">500+</div>
+                    <p id="success-stat1-label" class="text-gray-300">Uruchomionych Marek</p>
                 </div>
                 <div class="metric-card p-6 rounded-2xl">
-                    <div class="text-4xl font-bold mb-2">92%</div>
-                    <p class="text-gray-300">Wskaźnik Sukcesu</p>
+                    <div id="success-stat2-value" class="text-4xl font-bold mb-2">92%</div>
+                    <p id="success-stat2-label" class="text-gray-300">Wskaźnik Sukcesu</p>
                 </div>
                 <div class="metric-card p-6 rounded-2xl">
-                    <div class="text-4xl font-bold mb-2">$2.5M+</div>
-                    <p class="text-gray-300">Wygenerowanych Przychodów</p>
+                    <div id="success-stat3-value" class="text-4xl font-bold mb-2">$2.5M+</div>
+                    <p id="success-stat3-label" class="text-gray-300">Wygenerowanych Przychodów</p>
                 </div>
                 <div class="metric-card p-6 rounded-2xl">
-                    <div class="text-4xl font-bold mb-2">8</div>
-                    <p class="text-gray-300">Tygodni do Startu</p>
+                    <div id="success-stat4-value" class="text-4xl font-bold mb-2">8</div>
+                    <p id="success-stat4-label" class="text-gray-300">Tygodni do Startu</p>
                 </div>
             </div>
         </div>
@@ -497,6 +497,34 @@
         const storedSuccessSubtitle = localStorage.getItem('plSuccessSubtitle') || localStorage.getItem('successSubtitle');
         if (storedSuccessTitle) successTitleElem.textContent = storedSuccessTitle;
         if (storedSuccessSubtitle) successSubtitleElem.textContent = storedSuccessSubtitle;
+        
+        // Load statistics from CMS (using shared plImpactStat values from About page, prefer Polish)
+        const stat1Value = document.getElementById('success-stat1-value');
+        const stat1Label = document.getElementById('success-stat1-label');
+        const stat2Value = document.getElementById('success-stat2-value');
+        const stat2Label = document.getElementById('success-stat2-label');
+        const stat3Value = document.getElementById('success-stat3-value');
+        const stat3Label = document.getElementById('success-stat3-label');
+        const stat4Value = document.getElementById('success-stat4-value');
+        const stat4Label = document.getElementById('success-stat4-label');
+        
+        const storedStat1Value = localStorage.getItem('plImpactStat1Value') || localStorage.getItem('impactStat1Value');
+        const storedStat1Label = localStorage.getItem('plImpactStat1Label') || localStorage.getItem('impactStat1Label');
+        const storedStat2Value = localStorage.getItem('plImpactStat2Value') || localStorage.getItem('impactStat2Value');
+        const storedStat2Label = localStorage.getItem('plImpactStat2Label') || localStorage.getItem('impactStat2Label');
+        const storedStat3Value = localStorage.getItem('plImpactStat3Value') || localStorage.getItem('impactStat3Value');
+        const storedStat3Label = localStorage.getItem('plImpactStat3Label') || localStorage.getItem('impactStat3Label');
+        const storedStat4Value = localStorage.getItem('plImpactStat4Value') || localStorage.getItem('impactStat4Value');
+        const storedStat4Label = localStorage.getItem('plImpactStat4Label') || localStorage.getItem('impactStat4Label');
+        
+        if (storedStat1Value) stat1Value.textContent = storedStat1Value;
+        if (storedStat1Label) stat1Label.textContent = storedStat1Label;
+        if (storedStat2Value) stat2Value.textContent = storedStat2Value;
+        if (storedStat2Label) stat2Label.textContent = storedStat2Label;
+        if (storedStat3Value) stat3Value.textContent = storedStat3Value;
+        if (storedStat3Label) stat3Label.textContent = storedStat3Label;
+        if (storedStat4Value) stat4Value.textContent = storedStat4Value;
+        if (storedStat4Label) stat4Label.textContent = storedStat4Label;
     });
     </script>
 </body>
