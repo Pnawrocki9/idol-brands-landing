@@ -2874,6 +2874,51 @@
                 }
             });
         }
+
+        // -------------------------------------------------------------------
+        // Navigation Settings - Success Stories Toggle
+        const toggleSuccessStories = document.getElementById('toggle-success-stories');
+        const toggleSuccessStoriesLabel = document.getElementById('toggle-success-stories-label');
+        const navSettingsMsg = document.getElementById('nav-settings-save-msg');
+
+        // Load initial state from localStorage
+        function loadNavigationSettings() {
+            const isVisible = localStorage.getItem('showSuccessStories') !== 'false';
+            if (toggleSuccessStories) {
+                toggleSuccessStories.checked = isVisible;
+                updateToggleLabel(isVisible);
+            }
+        }
+
+        function updateToggleLabel(isVisible) {
+            if (toggleSuccessStoriesLabel) {
+                // Support both EN and PL - check document language
+                const lang = document.documentElement.lang || 'en';
+                if (lang === 'pl') {
+                    toggleSuccessStoriesLabel.textContent = isVisible ? 'Widoczne' : 'Ukryte';
+                } else {
+                    toggleSuccessStoriesLabel.textContent = isVisible ? 'Visible' : 'Hidden';
+                }
+            }
+        }
+
+        // Save state when toggle changes
+        if (toggleSuccessStories) {
+            toggleSuccessStories.addEventListener('change', function() {
+                const isVisible = this.checked;
+                localStorage.setItem('showSuccessStories', isVisible ? 'true' : 'false');
+                updateToggleLabel(isVisible);
+                
+                // Show confirmation message
+                if (navSettingsMsg) {
+                    navSettingsMsg.classList.remove('hidden');
+                    setTimeout(() => navSettingsMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
+
+        // Initialize navigation settings on page load
+        loadNavigationSettings();
     });
     </script>
     <!-- Load CMS sync script for server persistence -->
