@@ -24,11 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plTeamSubtitle', 'Nasz zespół łączy dekady doświadczenia w produkcji mody, logistyce, handlu detalicznym i technologii, aby wspierać sukces Twojej marki.');
   initDefaultIfEmpty('plImpactTitle', 'Nasz Wpływ');
   initDefaultIfEmpty('plImpactSubtitle', 'Rzeczywiste wyniki od prawdziwych influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe.');
-  // Impact Statistics Labels (PL) - Values are shared with EN version (impactStat*Value)
-  // Note: Values are managed in admin.html, only PL labels need defaults here
+  // Impact Statistics (PL) - Both Values and Labels are separate from EN version
+  // Note: Both values and labels are now managed in admin.html (EN & PL section)
+  initDefaultIfEmpty('plImpactStat1Value', '500+');
   initDefaultIfEmpty('plImpactStat1Label', 'Uruchomionych Marek Modowych');
+  initDefaultIfEmpty('plImpactStat2Value', '$50M');
   initDefaultIfEmpty('plImpactStat2Label', 'Sprzedaż Marek');
+  initDefaultIfEmpty('plImpactStat3Value', '2.4M');
   initDefaultIfEmpty('plImpactStat3Label', 'Sprzedanych Produktów');
+  initDefaultIfEmpty('plImpactStat4Value', '98%');
   initDefaultIfEmpty('plImpactStat4Label', 'Wskaźnik Sukcesu');
   initDefaultIfEmpty('plValuesTitle', 'Nasze Wartości');
   initDefaultIfEmpty('plValuesSubtitle', 'Zasady, które kierują wszystkim, co robimy i napędzają każdą podjętą przez nas decyzję.');
