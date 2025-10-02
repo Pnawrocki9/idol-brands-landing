@@ -38,10 +38,14 @@ function updateSuccessStoriesVisibility() {
   const allLinks = document.querySelectorAll('a[href*="success-stories"]');
   
   allLinks.forEach(link => {
+    // Check if the link is inside an <li> element (e.g., in footer)
+    const parentLi = link.closest('li');
+    const elementToHide = parentLi || link;
+    
     if (showSuccessStories) {
-      link.style.display = '';
+      elementToHide.style.display = '';
     } else {
-      link.style.display = 'none';
+      elementToHide.style.display = 'none';
     }
   });
 }
