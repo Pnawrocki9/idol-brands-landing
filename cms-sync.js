@@ -26,11 +26,12 @@
         try {
             const cmsData = {};
             
-            // Collect all CMS-related keys from localStorage (INCLUDING documents)
+            // Collect all CMS-related keys from localStorage (EXCLUDING documents - they're too large)
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
-                // Include all keys except admin credentials and user data
-                if (key && !key.includes('admin') && !key.includes('loggedIn') && key !== 'users') {
+                // Include all keys except admin credentials, user data, and documents
+                // Documents are excluded because Base64-encoded files are too large for GitHub API
+                if (key && !key.includes('admin') && !key.includes('loggedIn') && key !== 'users' && key !== 'documents') {
                     const value = localStorage.getItem(key);
                     if (value !== null) {
                         cmsData[key] = value;
@@ -39,7 +40,7 @@
             }
             
             console.log('Publishing CMS data with keys:', Object.keys(cmsData));
-            console.log('Documents included:', cmsData.documents ? 'YES' : 'NO');
+            console.log('Documents excluded from sync (too large for GitHub API)');
             
             const response = await fetch(API_URL, {
                 method: 'POST',
@@ -50,7 +51,7 @@
             });
             
             if (response.ok) {
-                console.log('All CMS content saved to server (including documents)');
+                console.log('All CMS content saved to server (documents stored locally only)');
                 return true;
             } else {
                 console.error('Failed to save CMS content to server');
@@ -80,7 +81,8 @@
             const publishButton = document.createElement('button');
             publishButton.id = 'publish-cms-changes';
             publishButton.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
-            publishButton.innerHTML = '📤 Publikuj Zmiany Online';
+            publishButton.innerHTML = '📤 Publikuj Treści Online';
+            publishButton.title = 'Publikuje teksty, nagłówki i ustawienia (bez dokumentów)';
             publishButton.onclick = async function() {
                 this.disabled = true;
                 this.innerHTML = '⏳ Publikowanie...';
@@ -88,10 +90,10 @@
                 const success = await saveAllCmsToServer();
                 
                 if (success) {
-                    this.innerHTML = '✅ Opublikowano!';
+                    this.innerHTML = '✅ Treści opublikowane!';
                     this.className = 'fixed bottom-6 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg font-semibold z-50';
                     setTimeout(() => {
-                        this.innerHTML = '📤 Publikuj Zmiany Online';
+                        this.innerHTML = '📤 Publikuj Treści Online';
                         this.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
                         this.disabled = false;
                     }, 3000);
@@ -99,7 +101,7 @@
                     this.innerHTML = '❌ Błąd publikacji';
                     this.className = 'fixed bottom-6 right-6 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg font-semibold z-50';
                     setTimeout(() => {
-                        this.innerHTML = '📤 Publikuj Zmiany Online';
+                        this.innerHTML = '📤 Publikuj Treści Online';
                         this.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-colors font-semibold z-50';
                         this.disabled = false;
                     }, 3000);

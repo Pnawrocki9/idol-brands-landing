@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Synchronizacji Dokumentów</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Test Synchronizacji Dokumentów</h1>
+        
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Status localStorage</h2>
+            <button onclick="checkLocalStorage()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Sprawdź localStorage
+            </button>
+            <pre id="local-status" class="mt-4 bg-gray-50 p-4 rounded text-sm overflow-auto"></pre>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Test Załadowania z Serwera</h2>
+            <button onclick="testLoad()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                Załaduj z Serwera
+            </button>
+            <pre id="load-status" class="mt-4 bg-gray-50 p-4 rounded text-sm overflow-auto"></pre>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Test Publikacji na Serwer</h2>
+            <button onclick="testSave()" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                Opublikuj na Serwer
+            </button>
+            <pre id="save-status" class="mt-4 bg-gray-50 p-4 rounded text-sm overflow-auto"></pre>
+        </div>
+
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <h3 class="font-semibold mb-2">Instrukcja testowania:</h3>
+            <ol class="list-decimal list-inside space-y-2 text-sm">
+                <li>Najpierw sprawdź localStorage - zobaczysz dokumenty dodane lokalnie</li>
+                <li>Kliknij "Załaduj z Serwera" - sprawdzi czy dokumenty są na serwerze</li>
+                <li>Jeśli nie ma dokumentów na serwerze, dodaj je w admin i kliknij "Opublikuj na Serwer"</li>
+                <li>Po publikacji odśwież stronę na innym urządzeniu - dokumenty powinny się załadować</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const DOCUMENTS_API_URL = window.location.origin + '/.netlify/functions/documents';
+
+        function checkLocalStorage() {
+            const output = document.getElementById('local-status');
+            const documentsStr = localStorage.getItem('documents');
+            
+            if (!documentsStr) {
+                output.textContent = '❌ Brak dokumentów w localStorage';
+                return;
+            }
+
+            try {
+                const documents = JSON.parse(documentsStr);
+                output.textContent = `✅ Znaleziono ${documents.length} dokumentów w localStorage:\n\n` +
+                    JSON.stringify(documents.map(d => ({
+                        name: d.name,
+                        size: d.data ? `${(d.data.length / 1024).toFixed(2)} KB` : 'unknown'
+                    })), null, 2);
+            } catch (e) {
+                output.textContent = `❌ Błąd parsowania: ${e.message}`;
+            }
+        }
+
+        async function testLoad() {
+            const output = document.getElementById('load-status');
+            output.textContent = '⏳ Ładowanie...';
+
+            try {
+                const response = await fetch(DOCUMENTS_API_URL);
+                
+                if (!response.ok) {
+                    output.textContent = `❌ Błąd HTTP: ${response.status} ${response.statusText}`;
+                    return;
+                }
+
+                const documents = await response.json();
+                
+                if (!Array.isArray(documents)) {
+                    output.textContent = `❌ Nieprawidłowa odpowiedź: ${JSON.stringify(documents)}`;
+                    return;
+                }
+
+                if (documents.length === 0) {
+                    output.textContent = '⚠️ Serwer odpowiada, ale nie ma dokumentów.\n\nDodaj dokumenty w admin i kliknij "Opublikuj dokumenty online".';
+                    return;
+                }
+
+                output.textContent = `✅ Załadowano ${documents.length} dokumentów z serwera:\n\n` +
+                    JSON.stringify(documents.map(d => ({
+                        name: d.name,
+                        size: d.data ? `${(d.data.length / 1024).toFixed(2)} KB` : 'unknown'
+                    })), null, 2);
+                
+                // Zapisz do localStorage
+                localStorage.setItem('documents', JSON.stringify(documents));
+                output.textContent += '\n\n✅ Zapisano do localStorage';
+            } catch (error) {
+                output.textContent = `❌ Błąd: ${error.message}\n\nCzy funkcja Netlify jest wdrożona?`;
+            }
+        }
+
+        async function testSave() {
+            const output = document.getElementById('save-status');
+            const documentsStr = localStorage.getItem('documents');
+
+            if (!documentsStr) {
+                output.textContent = '❌ Brak dokumentów w localStorage do publikacji';
+                return;
+            }
+
+            try {
+                const documents = JSON.parse(documentsStr);
+                output.textContent = `⏳ Publikowanie ${documents.length} dokumentów...`;
+
+                const response = await fetch(DOCUMENTS_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(documents)
+                });
+
+                if (!response.ok) {
+                    const error = await response.text();
+                    output.textContent = `❌ Błąd HTTP: ${response.status}\n\n${error}`;
+                    return;
+                }
+
+                const result = await response.json();
+                output.textContent = `✅ Opublikowano pomyślnie!\n\n${JSON.stringify(result, null, 2)}`;
+            } catch (error) {
+                output.textContent = `❌ Błąd: ${error.message}`;
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('DOMContentLoaded', checkLocalStorage);
+    </script>
+</body>
+</html>
