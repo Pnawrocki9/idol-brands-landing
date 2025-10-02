@@ -34,6 +34,28 @@ function logout() {
   }
 }
 
+// Update visibility of Success Stories navigation links based on admin settings
+function updateSuccessStoriesVisibility() {
+  // Check if Success Stories should be visible (default is true if not set)
+  const showSuccessStories = localStorage.getItem('showSuccessStories') !== 'false';
+  
+  // Find all Success Stories links in desktop and mobile navigation
+  // We need to find them by href since they don't have specific IDs
+  const allLinks = document.querySelectorAll('a[href*="success-stories"]');
+  
+  allLinks.forEach(link => {
+    // Check if the link is inside an <li> element (e.g., in footer)
+    const parentLi = link.closest('li');
+    const elementToHide = parentLi || link;
+    
+    if (showSuccessStories) {
+      elementToHide.style.display = '';
+    } else {
+      elementToHide.style.display = 'none';
+    }
+  });
+}
+
 function updateNav() {
   const calcLink = document.getElementById('nav-calculator');
   const docLink = document.getElementById('nav-documents');
@@ -51,6 +73,9 @@ function updateNav() {
   const loginLinkMobile = document.getElementById('nav-login-mobile');
   const logoutLinkMobile = document.getElementById('nav-logout-mobile');
   const adminLinkMobile = document.getElementById('nav-admin-mobile');
+
+  // Handle Success Stories visibility based on admin settings
+  updateSuccessStoriesVisibility();
 
     if (isLoggedIn()) {
         // show documents and logout links
