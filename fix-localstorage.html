@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix localStorage - Success Stories Toggle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .section h2 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .info {
+            margin: 10px 0;
+            padding: 10px;
+            background: #e8f4f8;
+            border-left: 4px solid #2196F3;
+        }
+        .error {
+            margin: 10px 0;
+            padding: 10px;
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        .success {
+            margin: 10px 0;
+            padding: 10px;
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+        }
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        button.danger {
+            background: #f44336;
+        }
+        button.danger:hover {
+            background: #d32f2f;
+        }
+        button.success {
+            background: #4CAF50;
+        }
+        button.success:hover {
+            background: #388E3C;
+        }
+        code {
+            background: #333;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        #log {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-height: 50px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Naprawa localStorage - Success Stories Toggle</h1>
+        
+        <div class="section">
+            <h2>1. Diagnoza - Obecny stan localStorage</h2>
+            <div id="current-state"></div>
+            <button onclick="checkCurrentState()">🔍 Sprawdź obecny stan</button>
+        </div>
+
+        <div class="section">
+            <h2>2. Wszystkie klucze w localStorage</h2>
+            <div id="all-keys"></div>
+            <button onclick="showAllKeys()">📋 Pokaż wszystkie klucze</button>
+        </div>
+
+        <div class="section">
+            <h2>3. Naprawa - Wyczyść i zresetuj</h2>
+            <div class="info">
+                <strong>Opcja 1:</strong> Usuń tylko klucz <code>showSuccessStories</code> i ustaw poprawną wartość
+            </div>
+            <button class="success" onclick="fixSuccessStoriesKey()">✅ Napraw klucz showSuccessStories</button>
+            
+            <div class="info" style="margin-top: 20px;">
+                <strong>Opcja 2:</strong> Wyczyść cały localStorage (uwaga: usunie wszystkie zapisane ustawienia!)
+            </div>
+            <button class="danger" onclick="clearAllLocalStorage()">🗑️ Wyczyść cały localStorage</button>
+        </div>
+
+        <div class="section">
+            <h2>4. Test - Ustaw wartości ręcznie</h2>
+            <button onclick="setSuccessStoriesVisible()">👁️ Pokaż Success Stories (true)</button>
+            <button onclick="setSuccessStoriesHidden()">🚫 Ukryj Success Stories (false)</button>
+        </div>
+
+        <div class="section">
+            <h2>5. Log operacji</h2>
+            <div id="log"></div>
+            <button onclick="clearLog()">🧹 Wyczyść log</button>
+        </div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString('pl-PL');
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️';
+            logEl.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('log').textContent = '';
+        }
+
+        function checkCurrentState() {
+            const value = localStorage.getItem('showSuccessStories');
+            const stateDiv = document.getElementById('current-state');
+            
+            log(`Sprawdzam wartość showSuccessStories...`);
+            
+            if (value === null) {
+                stateDiv.innerHTML = '<div class="info"><strong>Wartość:</strong> <code>null</code> (nie ustawiona)<br><strong>Zachowanie:</strong> Success Stories będzie WIDOCZNA (domyślnie)</div>';
+                log('Wartość nie jest ustawiona (null) - domyślnie widoczna', 'info');
+            } else if (value === 'false') {
+                stateDiv.innerHTML = '<div class="error"><strong>Wartość:</strong> <code>"false"</code><br><strong>Zachowanie:</strong> Success Stories jest UKRYTA</div>';
+                log('Wartość: "false" - zakładka ukryta', 'error');
+            } else if (value === 'true') {
+                stateDiv.innerHTML = '<div class="success"><strong>Wartość:</strong> <code>"true"</code><br><strong>Zachowanie:</strong> Success Stories jest WIDOCZNA</div>';
+                log('Wartość: "true" - zakładka widoczna', 'success');
+            } else {
+                stateDiv.innerHTML = `<div class="error"><strong>Wartość:</strong> <code>"${value}"</code><br><strong>Problem:</strong> Nieprawidłowa wartość! Powinna być "true", "false" lub null</div>`;
+                log(`PROBLEM! Nieprawidłowa wartość: "${value}"`, 'error');
+            }
+        }
+
+        function showAllKeys() {
+            const keysDiv = document.getElementById('all-keys');
+            const keys = Object.keys(localStorage);
+            
+            log(`Znaleziono ${keys.length} kluczy w localStorage`);
+            
+            if (keys.length === 0) {
+                keysDiv.innerHTML = '<div class="info">localStorage jest pusty</div>';
+                log('localStorage jest pusty', 'info');
+            } else {
+                let html = '<div class="info"><strong>Wszystkie klucze w localStorage:</strong><br>';
+                keys.forEach(key => {
+                    const value = localStorage.getItem(key);
+                    const displayValue = value.length > 100 ? value.substring(0, 100) + '...' : value;
+                    html += `<br><code>${key}</code> = "${displayValue}"`;
+                    log(`Klucz: ${key} = "${displayValue}"`);
+                });
+                html += '</div>';
+                keysDiv.innerHTML = html;
+            }
+        }
+
+        function fixSuccessStoriesKey() {
+            log('Naprawiam klucz showSuccessStories...');
+            
+            // Remove the key first
+            localStorage.removeItem('showSuccessStories');
+            log('Usunięto stary klucz showSuccessStories', 'success');
+            
+            // Set it to 'true' (visible by default)
+            localStorage.setItem('showSuccessStories', 'true');
+            log('Ustawiono nową wartość: "true" (widoczna)', 'success');
+            
+            alert('✅ Klucz showSuccessStories został naprawiony!\n\nSuccess Stories jest teraz WIDOCZNA.\n\nOdśwież stronę admin.html aby zobaczyć zmiany.');
+            
+            // Refresh the current state
+            checkCurrentState();
+        }
+
+        function clearAllLocalStorage() {
+            if (confirm('⚠️ Czy na pewno chcesz wyczyścić cały localStorage?\n\nTo usunie WSZYSTKIE zapisane ustawienia!')) {
+                const keysCount = localStorage.length;
+                log(`Czyszczę localStorage (${keysCount} kluczy)...`);
+                
+                localStorage.clear();
+                log('localStorage został całkowicie wyczyszczony', 'success');
+                
+                alert(`✅ localStorage został wyczyszczony!\n\nUsuniętych kluczy: ${keysCount}\n\nOdśwież stronę admin.html aby zobaczyć zmiany.`);
+                
+                // Refresh displays
+                checkCurrentState();
+                showAllKeys();
+            }
+        }
+
+        function setSuccessStoriesVisible() {
+            log('Ustawiam Success Stories jako widoczną...');
+            localStorage.setItem('showSuccessStories', 'true');
+            log('Ustawiono: "true"', 'success');
+            alert('✅ Success Stories ustawiona jako WIDOCZNA\n\nOdśwież stronę admin.html aby zobaczyć zmiany.');
+            checkCurrentState();
+        }
+
+        function setSuccessStoriesHidden() {
+            log('Ustawiam Success Stories jako ukrytą...');
+            localStorage.setItem('showSuccessStories', 'false');
+            log('Ustawiono: "false"', 'success');
+            alert('✅ Success Stories ustawiona jako UKRYTA\n\nOdśwież stronę admin.html aby zobaczyć zmiany.');
+            checkCurrentState();
+        }
+
+        // Auto-check on load
+        window.addEventListener('DOMContentLoaded', function() {
+            log('Strona diagnostyczna załadowana');
+            checkCurrentState();
+            showAllKeys();
+        });
+    </script>
+</body>
+</html>
