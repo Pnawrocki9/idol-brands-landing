@@ -576,7 +576,7 @@
                                 <span class="text-3xl font-bold text-black" id="monthlyProfit">$0</span>
                             </div>
                             <div class="flex justify-between items-center p-4 bg-black text-white rounded-lg">
-                                <span class="font-semibold">Roczny&nbsp;przychód</span>
+                                <span class="font-semibold">Roczny&nbsp;zysk</span>
                                 <span class="text-3xl font-bold" id="annualRevenue">$0</span>
                             </div>
                         </div>
@@ -964,13 +964,13 @@
             
             const monthlyRevenue = monthlyCustomers * revenuePerCustomer;
             const monthlyProfit = monthlyCustomers * profitPerCustomer;
-            const annualRevenue = monthlyRevenue * 12;
+            const annualProfit = monthlyProfit * 12;
 
 
             // Update results
             document.getElementById('monthlyRevenue').textContent = `$${monthlyRevenue.toLocaleString()}`;
             document.getElementById('monthlyProfit').textContent = `$${monthlyProfit.toLocaleString()}`;
-            document.getElementById('annualRevenue').textContent = `$${annualRevenue.toLocaleString()}`;
+            document.getElementById('annualRevenue').textContent = `$${annualProfit.toLocaleString()}`;
 
             // Update market data display with LIVE funnel data
             document.getElementById('market-conversion').textContent = `${(liveToPurchaseConversion * 100).toFixed(0)}%`;
