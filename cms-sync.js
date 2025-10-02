@@ -1,110 +1,28 @@
-// CMS Sync - Syncs localStorage changes to server for persistence
-// This ensures that CMS changes are published online, not just stored locally
+// CMS Sync - localStorage only (no server persistence)
+// Note: Changes are stored only in your browser
 
 (function() {
-    const API_URL = window.location.origin + '/api/cms-content';
+    const API_URL = null; // No API - localStorage only
     
-    // Load CMS content from server on page load
+    // Load CMS content - localStorage only (no server)
     async function loadCmsContentFromServer() {
-        try {
-            const response = await fetch(API_URL);
-            if (response.ok) {
-                const data = await response.json();
-                // Populate localStorage with server data
-                for (const [key, value] of Object.entries(data)) {
-                    localStorage.setItem(key, value);
-                }
-                console.log('CMS content loaded from server');
-            }
-        } catch (error) {
-            console.warn('Could not load CMS content from server:', error);
-            // Fallback to localStorage only
-        }
+        console.log('CMS: Using localStorage only (no server persistence)');
+        // Data is already in localStorage, nothing to load
     }
     
-    // Save a single key to server
+    // Save a single key - localStorage only
     async function saveCmsKeyToServer(key, value) {
-        try {
-            const response = await fetch(`${API_URL}/${encodeURIComponent(key)}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ value })
-            });
-            
-            if (response.ok) {
-                console.log(`CMS content saved to server: ${key}`);
-                return true;
-            } else {
-                console.error(`Failed to save CMS content to server: ${key}`);
-                return false;
-            }
-        } catch (error) {
-            console.error('Error saving to server:', error);
-            return false;
-        }
+        console.log(`CMS: Saved ${key} to localStorage`);
+        return true; // Always succeeds (already in localStorage)
     }
     
-    // Save all localStorage CMS data to server
+    // Save all localStorage CMS data - localStorage only
     async function saveAllCmsToServer() {
-        try {
-            const cmsData = {};
-            
-            // Collect all CMS-related keys from localStorage
-            const cmsKeys = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                // Include keys that are CMS-related (exclude admin credentials)
-                if (key && !key.includes('admin') && !key.includes('loggedIn') && key !== 'users') {
-                    cmsKeys.push(key);
-                }
-            }
-            
-            // Build CMS data object
-            for (const key of cmsKeys) {
-                const value = localStorage.getItem(key);
-                if (value !== null) {
-                    cmsData[key] = value;
-                }
-            }
-            
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(cmsData)
-            });
-            
-            if (response.ok) {
-                console.log('All CMS content saved to server');
-                return true;
-            } else {
-                console.error('Failed to save CMS content to server');
-                return false;
-            }
-        } catch (error) {
-            console.error('Error saving to server:', error);
-            return false;
-        }
+        console.log('CMS: All content saved to localStorage');
+        return true; // Always succeeds (already in localStorage)
     }
     
-    // Override localStorage.setItem to automatically sync to server
-    const originalSetItem = localStorage.setItem;
-    localStorage.setItem = function(key, value) {
-        // Call original setItem
-        originalSetItem.call(this, key, value);
-        
-        // Sync to server if it's a CMS key (not admin-related)
-        if (key && !key.includes('admin') && !key.includes('loggedIn') && key !== 'users') {
-            // Debounce to avoid too many requests
-            clearTimeout(window._cmsSyncTimeout);
-            window._cmsSyncTimeout = setTimeout(() => {
-                saveCmsKeyToServer(key, value);
-            }, 500);
-        }
-    };
+    // localStorage.setItem works normally - no server sync needed
     
     // Load content from server on page load
     if (document.readyState === 'loading') {
