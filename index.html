@@ -604,8 +604,8 @@
                 <div class="max-w-2xl mx-auto mt-16">
                     <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 shadow-lg border border-gray-200">
                         <div class="text-center mb-8">
-                            <h3 class="text-3xl font-bold text-black mb-4">Join the Waiting List</h3>
-                            <p class="text-gray-600 text-lg">
+                            <h3 id="waitlist-title" class="text-3xl font-bold text-black mb-4">Join the Waiting List</h3>
+                            <p id="waitlist-subtitle" class="text-gray-600 text-lg">
                                 Be the first to know when we launch. Get exclusive early access and special launch pricing.
                             </p>
                         </div>
@@ -613,13 +613,13 @@
                         <form id="waiting-list-form" class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="firstName" class="block text-sm font-semibold text-black mb-2">First Name</label>
+                                    <label for="firstName" id="waitlist-firstname-label" class="block text-sm font-semibold text-black mb-2">First Name</label>
                                     <input type="text" id="firstName" name="firstName" required 
                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
                                            placeholder="Your first name">
                                 </div>
                                 <div>
-                                    <label for="lastName" class="block text-sm font-semibold text-black mb-2">Last Name</label>
+                                    <label for="lastName" id="waitlist-lastname-label" class="block text-sm font-semibold text-black mb-2">Last Name</label>
                                     <input type="text" id="lastName" name="lastName" required 
                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
                                            placeholder="Your last name">
@@ -627,22 +627,14 @@
                             </div>
                             
                             <div>
-                                <label for="email" class="block text-sm font-semibold text-black mb-2">Email Address</label>
+                                <label for="email" id="waitlist-email-label" class="block text-sm font-semibold text-black mb-2">Email Address</label>
                                 <input type="email" id="email" name="email" required 
                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
                                        placeholder="your@email.com">
                             </div>
                             
                             <div>
-                                <label for="followers-range" class="block text-sm font-semibold text-black mb-2">Followers Count</label>
-                                <!--
-                                  The ROI calculator above also uses an input with the id `followers`.
-                                  Duplicate IDs in a single document can cause unpredictable behaviour when
-                                  JavaScript looks up an element by its ID. To avoid conflicts, give this
-                                  select element a distinct identifier (followers-range) and update the
-                                  corresponding label's `for` attribute. The `name` attribute is also
-                                  updated to reflect the new identifier.
-                                -->
+                                <label for="followers-range" id="waitlist-followers-label" class="block text-sm font-semibold text-black mb-2">Followers Count</label>
                                 <select id="followers-range" name="followersRange" required 
                                         class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors">
                                     <option value="">Select your follower range</option>
@@ -655,7 +647,7 @@
                             </div>
                             
                             <div>
-                                <label for="niche" class="block text-sm font-semibold text-black mb-2">Fashion Niche</label>
+                                <label for="niche" id="waitlist-niche-label" class="block text-sm font-semibold text-black mb-2">Fashion Niche</label>
                                 <select id="niche" name="niche" required 
                                         class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors">
                                     <option value="">Select your niche</option>
@@ -669,7 +661,7 @@
                             </div>
                             
                             <div>
-                                <label for="instagram" class="block text-sm font-semibold text-black mb-2">Instagram Handle (Optional)</label>
+                                <label for="instagram" id="waitlist-instagram-label" class="block text-sm font-semibold text-black mb-2">Instagram Handle (Optional)</label>
                                 <input type="text" id="instagram" name="instagram" 
                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
                                        placeholder="@yourhandle">
@@ -695,7 +687,7 @@
                                 </label>
                             </div>
                             
-                            <button type="submit" 
+                            <button type="submit" id="waitlist-submit-btn"
                                     class="w-full bg-black text-white py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
                                 Join the Waiting List
                             </button>
@@ -705,8 +697,8 @@
                             <div class="flex items-center flex-shrink-0">
                                 <i class="fas fa-check-circle text-green-500 mr-3"></i>
                                 <div>
-                                    <h4 class="font-semibold text-green-800">Thank you for joining!</h4>
-                                    <p class="text-green-700 text-sm">You're on the waiting list. We'll notify you when spots become available.</p>
+                                    <h4 id="waitlist-success-title" class="font-semibold text-green-800">Thank you for joining!</h4>
+                                    <p id="waitlist-success-message" class="text-green-700 text-sm">You're on the waiting list. We'll notify you when spots become available.</p>
                                 </div>
                             </div>
                         </div>
@@ -1087,6 +1079,30 @@
         if (timeline4Period) timeline4Period.textContent = getItem('timeline4Period', timeline4Period.textContent);
         const timeline4Desc = document.getElementById('timeline4-desc');
         if (timeline4Desc) timeline4Desc.textContent = getItem('timeline4Desc', timeline4Desc.textContent);
+
+        // Waiting List Form
+        const waitlistTitle = document.getElementById('waitlist-title');
+        if (waitlistTitle) waitlistTitle.textContent = getItem('waitlistTitle', waitlistTitle.textContent);
+        const waitlistSubtitle = document.getElementById('waitlist-subtitle');
+        if (waitlistSubtitle) waitlistSubtitle.textContent = getItem('waitlistSubtitle', waitlistSubtitle.textContent);
+        const waitlistFirstName = document.getElementById('waitlist-firstname-label');
+        if (waitlistFirstName) waitlistFirstName.textContent = getItem('waitlistFirstNameLabel', waitlistFirstName.textContent);
+        const waitlistLastName = document.getElementById('waitlist-lastname-label');
+        if (waitlistLastName) waitlistLastName.textContent = getItem('waitlistLastNameLabel', waitlistLastName.textContent);
+        const waitlistEmail = document.getElementById('waitlist-email-label');
+        if (waitlistEmail) waitlistEmail.textContent = getItem('waitlistEmailLabel', waitlistEmail.textContent);
+        const waitlistFollowers = document.getElementById('waitlist-followers-label');
+        if (waitlistFollowers) waitlistFollowers.textContent = getItem('waitlistFollowersLabel', waitlistFollowers.textContent);
+        const waitlistNiche = document.getElementById('waitlist-niche-label');
+        if (waitlistNiche) waitlistNiche.textContent = getItem('waitlistNicheLabel', waitlistNiche.textContent);
+        const waitlistInstagram = document.getElementById('waitlist-instagram-label');
+        if (waitlistInstagram) waitlistInstagram.textContent = getItem('waitlistInstagramLabel', waitlistInstagram.textContent);
+        const waitlistSubmitBtn = document.getElementById('waitlist-submit-btn');
+        if (waitlistSubmitBtn) waitlistSubmitBtn.textContent = getItem('waitlistSubmitButton', waitlistSubmitBtn.textContent);
+        const waitlistSuccessTitle = document.getElementById('waitlist-success-title');
+        if (waitlistSuccessTitle) waitlistSuccessTitle.textContent = getItem('waitlistSuccessTitle', waitlistSuccessTitle.textContent);
+        const waitlistSuccessMsg = document.getElementById('waitlist-success-message');
+        if (waitlistSuccessMsg) waitlistSuccessMsg.textContent = getItem('waitlistSuccessMessage', waitlistSuccessMsg.textContent);
     });
     </script>
     <!-- Authentication helper to control login state, navigation and calculator visibility -->
