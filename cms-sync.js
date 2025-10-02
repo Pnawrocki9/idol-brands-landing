@@ -26,10 +26,10 @@
         try {
             const cmsData = {};
             
-            // Collect all CMS-related keys from localStorage
+            // Collect all CMS-related keys from localStorage (INCLUDING documents)
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
-                // Include keys that are CMS-related (exclude admin credentials)
+                // Include all keys except admin credentials and user data
                 if (key && !key.includes('admin') && !key.includes('loggedIn') && key !== 'users') {
                     const value = localStorage.getItem(key);
                     if (value !== null) {
@@ -37,6 +37,9 @@
                     }
                 }
             }
+            
+            console.log('Publishing CMS data with keys:', Object.keys(cmsData));
+            console.log('Documents included:', cmsData.documents ? 'YES' : 'NO');
             
             const response = await fetch(API_URL, {
                 method: 'POST',
@@ -47,7 +50,7 @@
             });
             
             if (response.ok) {
-                console.log('All CMS content saved to server');
+                console.log('All CMS content saved to server (including documents)');
                 return true;
             } else {
                 console.error('Failed to save CMS content to server');
