@@ -24,6 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plTeamSubtitle', 'Nasz zespół łączy dekady doświadczenia w produkcji mody, logistyce, handlu detalicznym i technologii, aby wspierać sukces Twojej marki.');
   initDefaultIfEmpty('plImpactTitle', 'Nasz Wpływ');
   initDefaultIfEmpty('plImpactSubtitle', 'Rzeczywiste wyniki od prawdziwych influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe.');
+  initDefaultIfEmpty('plImpactStat1Value', '500+');
+  initDefaultIfEmpty('plImpactStat1Label', 'Uruchomionych Marek Modowych');
+  initDefaultIfEmpty('plImpactStat2Value', '$50M');
+  initDefaultIfEmpty('plImpactStat2Label', 'Sprzedaż Marek');
+  initDefaultIfEmpty('plImpactStat3Value', '2.4M');
+  initDefaultIfEmpty('plImpactStat3Label', 'Sprzedanych Produktów');
+  initDefaultIfEmpty('plImpactStat4Value', '98%');
+  initDefaultIfEmpty('plImpactStat4Label', 'Wskaźnik Sukcesu');
   initDefaultIfEmpty('plValuesTitle', 'Nasze Wartości');
   initDefaultIfEmpty('plValuesSubtitle', 'Zasady, które kierują wszystkim, co robimy i napędzają każdą podjętą przez nas decyzję.');
   initDefaultIfEmpty('plValue1Title', 'Autentyczność');
@@ -281,8 +289,21 @@ document.addEventListener('DOMContentLoaded', function() {
     ['admin-impact-title-pl','plImpactTitle','impactTitle'],
     ['admin-impact-subtitle-pl','plImpactSubtitle','impactSubtitle']
   ];
+  const impactStatsPairs = [
+    ['admin-impact-stat1-value-pl','plImpactStat1Value','impactStat1Value','500+'],
+    ['admin-impact-stat1-label-pl','plImpactStat1Label','impactStat1Label','Uruchomionych Marek Modowych'],
+    ['admin-impact-stat2-value-pl','plImpactStat2Value','impactStat2Value','$50M'],
+    ['admin-impact-stat2-label-pl','plImpactStat2Label','impactStat2Label','Sprzedaż Marek'],
+    ['admin-impact-stat3-value-pl','plImpactStat3Value','impactStat3Value','2.4M'],
+    ['admin-impact-stat3-label-pl','plImpactStat3Label','impactStat3Label','Sprzedanych Produktów'],
+    ['admin-impact-stat4-value-pl','plImpactStat4Value','impactStat4Value','98%'],
+    ['admin-impact-stat4-label-pl','plImpactStat4Label','impactStat4Label','Wskaźnik Sukcesu']
+  ];
   aboutPairs.forEach(function(p) {
     loadField(p[0], p[1], p[2]);
+  });
+  impactStatsPairs.forEach(function(p) {
+    loadField(p[0], p[1], p[2], p[3]);
   });
   // Add Values section fields (PL)
   const valuePairs = [
@@ -318,6 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (saveAboutPl) {
     saveAboutPl.addEventListener('click', function() {
       saveFields(aboutPairs.map(item => [item[0], item[1]]));
+      saveFields(impactStatsPairs.map(item => [item[0], item[1]]));
       saveFields(valuePairs.map(item => [item[0], item[1]]));
       saveFields(aboutCtaPairs.map(item => [item[0], item[1]]));
       const msg = document.getElementById('about-save-msg-pl');
