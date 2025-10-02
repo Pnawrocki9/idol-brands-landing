@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Authentication helper provides isLoggedIn, isAdmin and navigation toggling -->
     <script src="auth.js"></script>
+    <script src="cms-sync.js"></script>
+    <script src="documents-sync.js"></script>
 </head>
 <body class="bg-gray-100 font-sans">
     <!-- Navigation: reuse same structure as other pages.  updateNav() will show/hide links appropriately. -->
@@ -1230,7 +1232,12 @@
         <!-- Document manager -->
         <section>
             <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
-            <p class="text-sm text-gray-600 mb-4">Upload files here to share them with approved influencers.  Files are stored in the browser and will persist across sessions on this device.  Each upload will appear below with a link and a delete button.</p>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <p class="text-sm text-blue-800">
+                    <strong>📌 Ważne:</strong> Po dodaniu lub usunięciu dokumentów, kliknij przycisk <strong>"Opublikuj dokumenty online"</strong> poniżej, aby synchronizować zmiany z serwerem. Tylko wtedy dokumenty będą widoczne dla użytkowników na innych urządzeniach.
+                </p>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Upload files here to share them with approved influencers. Files are stored locally and can be published online using the button below.</p>
             <input type="file" id="document-upload" multiple class="mb-4" />
             <ul id="admin-doc-list" class="space-y-2"></ul>
         </section>
