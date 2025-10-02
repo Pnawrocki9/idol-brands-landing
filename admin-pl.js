@@ -73,6 +73,16 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plLoginError', 'Nieprawidłowa nazwa użytkownika lub hasło.');
   initDefaultIfEmpty('plDocumentsTitle', 'Twoje dokumenty');
   initDefaultIfEmpty('plDocumentsMessage', 'Brak dokumentów do wyświetlenia.');
+  // Timeline section
+  initDefaultIfEmpty('plTimelineTitle', 'Etapy Sukcesu');
+  initDefaultIfEmpty('plTimeline1Period', 'Tydzień 1–2');
+  initDefaultIfEmpty('plTimeline1Desc', 'Strategia marki i projekt');
+  initDefaultIfEmpty('plTimeline2Period', 'Tydzień 3–6');
+  initDefaultIfEmpty('plTimeline2Desc', 'Rozwój produktu');
+  initDefaultIfEmpty('plTimeline3Period', 'Tydzień 7–8');
+  initDefaultIfEmpty('plTimeline3Desc', 'Konfiguracja sklepu i start');
+  initDefaultIfEmpty('plTimeline4Period', 'Miesiąc 3+');
+  initDefaultIfEmpty('plTimeline4Desc', 'Skalowanie i rozwój');
 
   // Helper to load a value with fallback to English default (from other keys)
   function loadField(fieldId, plKey, enKey, defaultVal) {
