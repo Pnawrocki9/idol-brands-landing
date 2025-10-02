@@ -83,6 +83,18 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plTimeline3Desc', 'Konfiguracja sklepu i start');
   initDefaultIfEmpty('plTimeline4Period', 'Miesiąc 3+');
   initDefaultIfEmpty('plTimeline4Desc', 'Skalowanie i rozwój');
+  // Waiting List Form
+  initDefaultIfEmpty('plWaitlistTitle', 'Dołącz do listy oczekujących');
+  initDefaultIfEmpty('plWaitlistSubtitle', 'Bądź pierwszą osobą, która dowie się, kiedy wystartujemy. Otrzymaj ekskluzywny wczesny dostęp i specjalne ceny na start.');
+  initDefaultIfEmpty('plWaitlistFirstNameLabel', 'Imię');
+  initDefaultIfEmpty('plWaitlistLastNameLabel', 'Nazwisko');
+  initDefaultIfEmpty('plWaitlistEmailLabel', 'Adres e-mail');
+  initDefaultIfEmpty('plWaitlistFollowersLabel', 'Liczba obserwujących');
+  initDefaultIfEmpty('plWaitlistNicheLabel', 'Nisza modowa');
+  initDefaultIfEmpty('plWaitlistInstagramLabel', 'Nazwa profilu na Instagramie (opcjonalnie)');
+  initDefaultIfEmpty('plWaitlistSubmitButton', 'Dołącz do listy oczekujących');
+  initDefaultIfEmpty('plWaitlistSuccessTitle', 'Dziękujemy za dołączenie!');
+  initDefaultIfEmpty('plWaitlistSuccessMessage', 'Jesteś na liście oczekujących. Powiadomimy Cię, gdy miejsca będą dostępne.');
 
   // Helper to load a value with fallback to English default (from other keys)
   function loadField(fieldId, plKey, enKey, defaultVal) {
@@ -194,6 +206,36 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+  
+  // ===== Waiting List Form (PL) =====
+  const waitlistPairs = [
+    ['waitlist-title-pl','plWaitlistTitle','waitlistTitle'],
+    ['waitlist-subtitle-pl','plWaitlistSubtitle','waitlistSubtitle'],
+    ['waitlist-firstname-label-pl','plWaitlistFirstNameLabel','waitlistFirstNameLabel'],
+    ['waitlist-lastname-label-pl','plWaitlistLastNameLabel','waitlistLastNameLabel'],
+    ['waitlist-email-label-pl','plWaitlistEmailLabel','waitlistEmailLabel'],
+    ['waitlist-followers-label-pl','plWaitlistFollowersLabel','waitlistFollowersLabel'],
+    ['waitlist-niche-label-pl','plWaitlistNicheLabel','waitlistNicheLabel'],
+    ['waitlist-instagram-label-pl','plWaitlistInstagramLabel','waitlistInstagramLabel'],
+    ['waitlist-submit-button-pl','plWaitlistSubmitButton','waitlistSubmitButton'],
+    ['waitlist-success-title-pl','plWaitlistSuccessTitle','waitlistSuccessTitle'],
+    ['waitlist-success-message-pl','plWaitlistSuccessMessage','waitlistSuccessMessage']
+  ];
+  waitlistPairs.forEach(function(p) {
+    loadField(p[0], p[1], p[2]);
+  });
+  const saveWaitlistPl = document.getElementById('save-waitlist-pl');
+  if (saveWaitlistPl) {
+    saveWaitlistPl.addEventListener('click', function() {
+      saveFields(waitlistPairs.map(item => [item[0], item[1]]));
+      const msg = document.getElementById('waitlist-save-msg-pl');
+      if (msg) {
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      }
+    });
+  }
+  
   // ===== About Page (PL) =====
   const aboutPairs = [
     ['admin-about-hero-title-pl','plAboutHeroTitle','aboutHeroTitle'],
