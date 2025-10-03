@@ -206,7 +206,7 @@
   "metricGrowthRateLabel": "Growth Rate",
   "loginTitle": "Influencer Login",
   "plHowCtaFeature3Title": "Wbudowana Publiczność",
-  "aboutMediaList": "[{\"url\":\"images/Skims.mp4\",\"type\":\"video\"},{\"url\":\"images/Mix.mp4\",\"type\":\"video\"},{\"url\":\"images/Cool Influ.mp4\",\"type\":\"video\"}]",
+  "aboutMediaList": "[{\"url\":\"images/Skims.mp4\",\"type\":\"video\"}]",
   "heroTitle": "<span class=\"text-gradient\">Turn Your</span><br><span class=\"text-black\">Influence</span><br><span class=\"text-gradient\">Into Fashion</span>",
   "showSuccessStories": "false",
   "waitlistSubtitle": "Be the first to know when we launch. Be the first to build your own fashion empire.",
