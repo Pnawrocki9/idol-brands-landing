@@ -471,6 +471,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Hero Media Management =====
   function loadHeroMedia() {
+    // Initialize with default videos if heroMediaList doesn't exist
+    if (!localStorage.getItem('heroMediaList')) {
+      const defaultMediaList = [
+        { url: 'images/grok-video-159173c8-5359-49a7-97d7-e2eecbce1f37-1.mp4', type: 'video' },
+        { url: 'images/grok-video-202b544e-4cd8-4965-bd0e-8f83c7e7f26b-2.mp4', type: 'video' },
+        { url: 'images/grok-video-2747edf2-5b8d-4a0e-8b7d-f7e678e61921-4.mp4', type: 'video' },
+        { url: 'images/grok-video-ff39249d-79da-4763-a118-695b61c880f6.mp4', type: 'video' }
+      ];
+      localStorage.setItem('heroMediaList', JSON.stringify(defaultMediaList));
+    }
+    
     const mediaList = JSON.parse(localStorage.getItem('heroMediaList') || '[]');
     const duration = localStorage.getItem('heroTransitionDuration') || '5';
     
