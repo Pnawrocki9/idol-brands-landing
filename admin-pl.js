@@ -568,6 +568,94 @@ document.addEventListener('DOMContentLoaded', function() {
   // Load hero media on page load
   loadHeroMedia();
 
+  // ===== About Media Management =====
+  function loadAboutMedia() {
+    const mediaList = JSON.parse(localStorage.getItem('aboutMediaList') || '[]');
+    const duration = localStorage.getItem('aboutTransitionDuration') || '5';
+    
+    document.getElementById('about-transition-duration').value = duration;
+    
+    const listEl = document.getElementById('about-media-list');
+    if (!mediaList || mediaList.length === 0) {
+      listEl.innerHTML = '<p class="text-sm text-gray-500">Brak mediów. Dodaj pierwsze media powyżej.</p>';
+      return;
+    }
+    
+    listEl.innerHTML = '';
+    mediaList.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.className = 'flex items-center justify-between bg-white p-3 rounded border border-gray-200';
+      div.innerHTML = `
+        <div class="flex items-center gap-3 flex-1">
+          <span class="text-sm font-semibold text-gray-500">#${index + 1}</span>
+          <span class="text-sm text-gray-700 font-medium">${item.type === 'video' ? '🎥' : '🖼️'} ${item.type === 'video' ? 'Wideo' : 'Zdjęcie'}</span>
+          <span class="text-sm text-gray-600 truncate flex-1">${item.url}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          ${index > 0 ? `<button class="text-blue-600 hover:underline text-sm" onclick="moveAboutMedia(${index}, 'up')">↑</button>` : '<span class="w-4"></span>'}
+          ${index < mediaList.length - 1 ? `<button class="text-blue-600 hover:underline text-sm" onclick="moveAboutMedia(${index}, 'down')">↓</button>` : '<span class="w-4"></span>'}
+          <button class="text-red-600 hover:underline text-sm ml-2" onclick="deleteAboutMedia(${index})">Usuń</button>
+        </div>
+      `;
+      listEl.appendChild(div);
+    });
+  }
+  
+  window.moveAboutMedia = function(index, direction) {
+    const mediaList = JSON.parse(localStorage.getItem('aboutMediaList') || '[]');
+    if (direction === 'up' && index > 0) {
+      [mediaList[index], mediaList[index - 1]] = [mediaList[index - 1], mediaList[index]];
+    } else if (direction === 'down' && index < mediaList.length - 1) {
+      [mediaList[index], mediaList[index + 1]] = [mediaList[index + 1], mediaList[index]];
+    }
+    localStorage.setItem('aboutMediaList', JSON.stringify(mediaList));
+    loadAboutMedia();
+  };
+  
+  window.deleteAboutMedia = function(index) {
+    const mediaList = JSON.parse(localStorage.getItem('aboutMediaList') || '[]');
+    mediaList.splice(index, 1);
+    localStorage.setItem('aboutMediaList', JSON.stringify(mediaList));
+    loadAboutMedia();
+  };
+  
+  const addAboutMediaBtn = document.getElementById('add-about-media');
+  if (addAboutMediaBtn) {
+    addAboutMediaBtn.addEventListener('click', function() {
+      const url = document.getElementById('about-media-url').value.trim();
+      const type = document.getElementById('about-media-type').value;
+      
+      if (!url) {
+        alert('Proszę podać URL do pliku.');
+        return;
+      }
+      
+      const mediaList = JSON.parse(localStorage.getItem('aboutMediaList') || '[]');
+      mediaList.push({ url, type });
+      localStorage.setItem('aboutMediaList', JSON.stringify(mediaList));
+      
+      document.getElementById('about-media-url').value = '';
+      loadAboutMedia();
+    });
+  }
+  
+  const saveAboutMediaBtn = document.getElementById('save-about-media');
+  if (saveAboutMediaBtn) {
+    saveAboutMediaBtn.addEventListener('click', function() {
+      const duration = document.getElementById('about-transition-duration').value;
+      localStorage.setItem('aboutTransitionDuration', duration);
+      
+      const msg = document.getElementById('about-media-save-msg');
+      if (msg) {
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      }
+    });
+  }
+  
+  // Load about media on page load
+  loadAboutMedia();
+
   // ===== Blog Page (EN) =====
   loadField('admin-blog-title','blogTitle',null,'Blog');
   loadField('admin-blog-subtitle','blogSubtitle',null,'Read our latest articles and fashion inspiration.');
