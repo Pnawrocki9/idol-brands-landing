@@ -176,6 +176,7 @@
         posts.slice().reverse().forEach(function(post, idx) {
             const card = document.createElement('div');
             card.className = 'bg-white rounded-xl shadow overflow-hidden cursor-pointer';
+            card.style.transform = 'translateY(-33.33%)';
             // Add image if present
             if (post.img) {
                 const img = document.createElement('img');
