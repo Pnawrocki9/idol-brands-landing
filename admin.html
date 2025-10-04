@@ -6,6 +6,9 @@
     <title>Admin Dashboard – Idol Brands</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <!-- Authentication helper provides isLoggedIn, isAdmin and navigation toggling -->
     <script src="auth.js"></script>
     <script src="cms-sync.js"></script>
@@ -508,44 +511,18 @@
             </div>
             <!-- Blog post content -->
             <div class="mb-4">
-                <label for="blog-content" class="block text-sm font-medium text-gray-700 mb-1">Content</label>
-                <!-- Rich Text Formatting Toolbar -->
-                <div class="mb-2 p-3 bg-gray-50 border border-gray-300 rounded-lg flex flex-wrap gap-2 items-center">
-                    <select id="blog-font-family" class="border border-gray-300 rounded px-2 py-1 text-sm">
-                        <option value="">Font Family</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Courier New">Courier New</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Inter">Inter</option>
-                        <option value="Playfair Display">Playfair Display</option>
-                    </select>
-                    <input type="color" id="blog-text-color" class="border border-gray-300 rounded h-8 w-12 cursor-pointer" title="Text Color" />
-                    <button type="button" onclick="applyBlogFormat('bold')" class="px-3 py-1 bg-white border border-gray-300 rounded font-bold hover:bg-gray-100" title="Bold">B</button>
-                    <button type="button" onclick="applyBlogFormat('underline')" class="px-3 py-1 bg-white border border-gray-300 rounded underline hover:bg-gray-100" title="Underline">U</button>
-                    <span class="text-xs text-gray-600 ml-2">Select text then click format buttons</span>
-                </div>
-                <textarea id="blog-content" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black font-mono text-sm"></textarea>
-                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p class="text-sm font-semibold text-blue-900 mb-1">💡 How to add links (Internal Linking):</p>
-                    <p class="text-xs text-blue-800 mb-2">Use markdown-style syntax: <code class="bg-blue-100 px-1 py-0.5 rounded">[link text](url)</code></p>
-                    <p class="text-xs text-blue-700"><strong>Examples:</strong></p>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Content</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Rich Text Editor</p>
                     <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
-                        <li>Internal link: <code class="bg-blue-100 px-1 py-0.5 rounded">[Read our guide](about.html)</code></li>
-                        <li>Another post: <code class="bg-blue-100 px-1 py-0.5 rounded">[See this article](post.html?index=0)</code></li>
-                        <li>External link: <code class="bg-blue-100 px-1 py-0.5 rounded">[Visit Google](https://google.com)</code></li>
-                    </ul>
-                    <p class="text-xs text-blue-700 mt-2"><strong>Formatting:</strong> Use the toolbar above to format text. HTML tags are supported.</p>
-                </div>
-                <div class="mt-2 p-3 bg-green-50 border border-green-200 rounded-lg">
-                    <p class="text-sm font-semibold text-green-900 mb-1">✅ How readers will see your content:</p>
-                    <ul class="text-xs text-green-700 list-disc ml-4 space-y-1">
-                        <li><strong>Links:</strong> All hyperlinks will be displayed in <span class="text-blue-600 underline">blue, underlined text</span> and open in a new browser tab when clicked</li>
-                        <li><strong>Formatting:</strong> Bold, underline, font colors and font families will be preserved exactly as you format them</li>
-                        <li><strong>Mobile-friendly:</strong> All formatting and links work perfectly on mobile devices</li>
+                        <li>Use the toolbar to format text: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, headings, lists, links, etc.</li>
+                        <li>Paste content directly from ChatGPT, Word, or other sources - formatting will be preserved</li>
+                        <li>To add links: select text and click the link button in the toolbar</li>
+                        <li>All formatting (bold, bullet points, headings, colors) will be displayed exactly as you see it here</li>
                     </ul>
                 </div>
+                <!-- Quill Editor Container -->
+                <div id="blog-content" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <!-- SEO Meta Description -->
             <div class="mb-4">
@@ -600,44 +577,18 @@
             </div>
             <!-- Blog post content (PL) -->
             <div class="mb-4">
-                <label for="blog-content-pl" class="block text-sm font-medium text-gray-700 mb-1">Treść</label>
-                <!-- Rich Text Formatting Toolbar (PL) -->
-                <div class="mb-2 p-3 bg-gray-50 border border-gray-300 rounded-lg flex flex-wrap gap-2 items-center">
-                    <select id="blog-font-family-pl" class="border border-gray-300 rounded px-2 py-1 text-sm">
-                        <option value="">Rodzaj czcionki</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Courier New">Courier New</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Inter">Inter</option>
-                        <option value="Playfair Display">Playfair Display</option>
-                    </select>
-                    <input type="color" id="blog-text-color-pl" class="border border-gray-300 rounded h-8 w-12 cursor-pointer" title="Kolor tekstu" />
-                    <button type="button" onclick="applyBlogFormatPL('bold')" class="px-3 py-1 bg-white border border-gray-300 rounded font-bold hover:bg-gray-100" title="Pogrubienie">B</button>
-                    <button type="button" onclick="applyBlogFormatPL('underline')" class="px-3 py-1 bg-white border border-gray-300 rounded underline hover:bg-gray-100" title="Podkreślenie">U</button>
-                    <span class="text-xs text-gray-600 ml-2">Zaznacz tekst, a następnie kliknij przyciski formatowania</span>
-                </div>
-                <textarea id="blog-content-pl" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black font-mono text-sm"></textarea>
-                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p class="text-sm font-semibold text-blue-900 mb-1">💡 Jak dodawać linki (Internal Linking):</p>
-                    <p class="text-xs text-blue-800 mb-2">Użyj składni markdown: <code class="bg-blue-100 px-1 py-0.5 rounded">[tekst linku](url)</code></p>
-                    <p class="text-xs text-blue-700"><strong>Przykłady:</strong></p>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Treść</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Edytor tekstu</p>
                     <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
-                        <li>Link wewnętrzny: <code class="bg-blue-100 px-1 py-0.5 rounded">[Przeczytaj nasz przewodnik](about-pl.html)</code></li>
-                        <li>Inny post: <code class="bg-blue-100 px-1 py-0.5 rounded">[Zobacz ten artykuł](post-pl.html?index=0)</code></li>
-                        <li>Link zewnętrzny: <code class="bg-blue-100 px-1 py-0.5 rounded">[Odwiedź Google](https://google.com)</code></li>
-                    </ul>
-                    <p class="text-xs text-blue-700 mt-2"><strong>Formatowanie:</strong> Użyj paska narzędzi powyżej, aby sformatować tekst. Obsługiwane są tagi HTML.</p>
-                </div>
-                <div class="mt-2 p-3 bg-green-50 border border-green-200 rounded-lg">
-                    <p class="text-sm font-semibold text-green-900 mb-1">✅ Jak czytelnicy zobaczą twoją treść:</p>
-                    <ul class="text-xs text-green-700 list-disc ml-4 space-y-1">
-                        <li><strong>Linki:</strong> Wszystkie hiperlinki będą wyświetlane jako <span class="text-blue-600 underline">niebieski, podkreślony tekst</span> i otwierać się w nowej karcie przeglądarki po kliknięciu</li>
-                        <li><strong>Formatowanie:</strong> Pogrubienie, podkreślenie, kolory czcionek i rodzaje czcionek będą zachowane dokładnie tak, jak je sformatujesz</li>
-                        <li><strong>Przyjazne dla urządzeń mobilnych:</strong> Całe formatowanie i linki działają perfekcyjnie na urządzeniach mobilnych</li>
+                        <li>Użyj paska narzędzi do formatowania tekstu: <strong>pogrubienie</strong>, <em>kursywa</em>, <u>podkreślenie</u>, nagłówki, listy, linki, itp.</li>
+                        <li>Wklejaj treść bezpośrednio z ChatGPT, Worda lub innych źródeł - formatowanie zostanie zachowane</li>
+                        <li>Aby dodać linki: zaznacz tekst i kliknij przycisk linku na pasku narzędzi</li>
+                        <li>Całe formatowanie (pogrubienie, punktory, nagłówki, kolory) będzie wyświetlane dokładnie tak, jak widzisz tutaj</li>
                     </ul>
                 </div>
+                <!-- Quill Editor Container -->
+                <div id="blog-content-pl" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <!-- SEO Meta Description (PL) -->
             <div class="mb-4">
@@ -2144,142 +2095,43 @@
             setTimeout(() => msg.classList.add('hidden'), 2000);
         });
 
-        // ===== Rich Text Formatting Functions (EN) =====
-        window.applyBlogFormat = function(formatType) {
-            const textarea = document.getElementById('blog-content');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            
-            if (!selectedText) {
-                alert('Please select text first to apply formatting.');
-                return;
-            }
-            
-            let formattedText = '';
-            
-            if (formatType === 'bold') {
-                formattedText = '<strong>' + selectedText + '</strong>';
-            } else if (formatType === 'underline') {
-                formattedText = '<u>' + selectedText + '</u>';
-            }
-            
-            // Replace selected text with formatted version
-            textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
-            // Set cursor position after the inserted text
-            textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
-            textarea.focus();
-        };
-        
-        // Apply font family
-        document.getElementById('blog-font-family').addEventListener('change', function() {
-            const textarea = document.getElementById('blog-content');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            const fontFamily = this.value;
-            
-            if (!selectedText) {
-                alert('Please select text first to apply font family.');
-                this.value = '';
-                return;
-            }
-            
-            if (fontFamily) {
-                const formattedText = '<span style="font-family: ' + fontFamily + ';">' + selectedText + '</span>';
-                textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
-                textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
-                textarea.focus();
-                this.value = '';
+        // ===== Initialize Quill Rich Text Editors =====
+        // Initialize Quill for EN blog posts
+        var quillEN = new Quill('#blog-content', {
+            theme: 'snow',
+            placeholder: 'Write your blog post content here... You can paste from Word, ChatGPT, or any other source.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['blockquote', 'code-block'],
+                    ['clean']
+                ]
             }
         });
         
-        // Apply text color
-        document.getElementById('blog-text-color').addEventListener('change', function() {
-            const textarea = document.getElementById('blog-content');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            const color = this.value;
-            
-            if (!selectedText) {
-                alert('Please select text first to apply color.');
-                return;
+        // Initialize Quill for PL blog posts
+        var quillPL = new Quill('#blog-content-pl', {
+            theme: 'snow',
+            placeholder: 'Napisz treść swojego posta... Możesz wklejać z Worda, ChatGPT lub innego źródła.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['blockquote', 'code-block'],
+                    ['clean']
+                ]
             }
-            
-            const formattedText = '<span style="color: ' + color + ';">' + selectedText + '</span>';
-            textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
-            textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
-            textarea.focus();
-        });
-        
-        // ===== Rich Text Formatting Functions (PL) =====
-        window.applyBlogFormatPL = function(formatType) {
-            const textarea = document.getElementById('blog-content-pl');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            
-            if (!selectedText) {
-                alert('Najpierw zaznacz tekst, aby zastosować formatowanie.');
-                return;
-            }
-            
-            let formattedText = '';
-            
-            if (formatType === 'bold') {
-                formattedText = '<strong>' + selectedText + '</strong>';
-            } else if (formatType === 'underline') {
-                formattedText = '<u>' + selectedText + '</u>';
-            }
-            
-            // Replace selected text with formatted version
-            textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
-            // Set cursor position after the inserted text
-            textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
-            textarea.focus();
-        };
-        
-        // Apply font family (PL)
-        document.getElementById('blog-font-family-pl').addEventListener('change', function() {
-            const textarea = document.getElementById('blog-content-pl');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            const fontFamily = this.value;
-            
-            if (!selectedText) {
-                alert('Najpierw zaznacz tekst, aby zastosować rodzaj czcionki.');
-                this.value = '';
-                return;
-            }
-            
-            if (fontFamily) {
-                const formattedText = '<span style="font-family: ' + fontFamily + ';">' + selectedText + '</span>';
-                textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
-                textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
-                textarea.focus();
-                this.value = '';
-            }
-        });
-        
-        // Apply text color (PL)
-        document.getElementById('blog-text-color-pl').addEventListener('change', function() {
-            const textarea = document.getElementById('blog-content-pl');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            const color = this.value;
-            
-            if (!selectedText) {
-                alert('Najpierw zaznacz tekst, aby zastosować kolor.');
-                return;
-            }
-            
-            const formattedText = '<span style="color: ' + color + ';">' + selectedText + '</span>';
-            textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
-            textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
-            textarea.focus();
         });
 
         // ===== Blog management (EN) =====
@@ -2320,7 +2172,7 @@
             }
             // Reset input fields when reloading the list
             blogTitleField.value = '';
-            blogContentField.value = '';
+            quillEN.root.innerHTML = '';
             blogMetaDescField.value = '';
             blogFeaturedSnippetField.value = '';
             blogImageField.value = '';
@@ -2359,7 +2211,7 @@
                 editBtn.addEventListener('click', function() {
                     editingPostIndex = index;
                     blogTitleField.value = post.title;
-                    blogContentField.value = post.content;
+                    quillEN.root.innerHTML = post.content || '';
                     blogMetaDescField.value = post.metaDescription || '';
                     blogFeaturedSnippetField.value = post.featuredSnippet || '';
                     // Clear file input when editing to avoid confusion
@@ -2382,7 +2234,7 @@
                     localStorage.setItem('blogPostsEN', JSON.stringify(posts));
                     editingPostIndex = -1;
                     blogTitleField.value = '';
-                    blogContentField.value = '';
+                    quillEN.root.innerHTML = '';
                     blogMetaDescField.value = '';
                     blogImageField.value = '';
                     blogImagePreview.innerHTML = '';
@@ -2411,10 +2263,10 @@
                 posts = [];
             }
             const title = blogTitleField.value.trim();
-            const content = blogContentField.value.trim();
+            const content = quillEN.root.innerHTML.trim();
             const metaDescription = blogMetaDescField.value.trim();
             const featuredSnippet = blogFeaturedSnippetField.value.trim();
-            if (!title || !content) return; // require both fields
+            if (!title || !content || content === '<p><br></p>') return; // require both fields
             const now = new Date();
             const dateStr = now.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
             // Helper to finalize saving after image reading completes
@@ -2444,7 +2296,7 @@
                 }
                 localStorage.setItem('blogPostsEN', JSON.stringify(posts));
                 blogTitleField.value = '';
-                blogContentField.value = '';
+                quillEN.root.innerHTML = '';
                 blogMetaDescField.value = '';
                 blogImageField.value = '';
                 blogImagePreview.innerHTML = '';
@@ -2509,7 +2361,7 @@
             }
             // Reset input fields when reloading the list
             blogTitleFieldPL.value = '';
-            blogContentFieldPL.value = '';
+            quillPL.root.innerHTML = '';
             blogMetaDescFieldPL.value = '';
             blogFeaturedSnippetFieldPL.value = '';
             blogImageFieldPL.value = '';
@@ -2548,7 +2400,7 @@
                 editBtn.addEventListener('click', function() {
                     editingPostIndexPL = index;
                     blogTitleFieldPL.value = post.title;
-                    blogContentFieldPL.value = post.content;
+                    quillPL.root.innerHTML = post.content || '';
                     blogMetaDescFieldPL.value = post.metaDescription || '';
                     blogFeaturedSnippetFieldPL.value = post.featuredSnippet || '';
                     // Clear file input when editing to avoid confusion
@@ -2571,7 +2423,7 @@
                     localStorage.setItem('blogPostsPL', JSON.stringify(posts));
                     editingPostIndexPL = -1;
                     blogTitleFieldPL.value = '';
-                    blogContentFieldPL.value = '';
+                    quillPL.root.innerHTML = '';
                     blogMetaDescFieldPL.value = '';
                     blogImageFieldPL.value = '';
                     blogImagePreviewPL.innerHTML = '';
@@ -2600,10 +2452,10 @@
                 posts = [];
             }
             const title = blogTitleFieldPL.value.trim();
-            const content = blogContentFieldPL.value.trim();
+            const content = quillPL.root.innerHTML.trim();
             const metaDescription = blogMetaDescFieldPL.value.trim();
             const featuredSnippet = blogFeaturedSnippetFieldPL.value.trim();
-            if (!title || !content) return; // require both fields
+            if (!title || !content || content === '<p><br></p>') return; // require both fields
             const now = new Date();
             const dateStr = now.toLocaleDateString('pl-PL', { year: 'numeric', month: 'short', day: 'numeric' });
             // Helper to finalize saving after image reading completes
@@ -2633,7 +2485,7 @@
                 }
                 localStorage.setItem('blogPostsPL', JSON.stringify(posts));
                 blogTitleFieldPL.value = '';
-                blogContentFieldPL.value = '';
+                quillPL.root.innerHTML = '';
                 blogMetaDescFieldPL.value = '';
                 blogImageFieldPL.value = '';
                 blogImagePreviewPL.innerHTML = '';
