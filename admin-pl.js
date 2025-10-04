@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plBlogSubtitle', 'Czytaj nasze najnowsze artykuły i inspiracje dotyczące mody.');
   initDefaultIfEmpty('plBlogNoPostsMessage', 'Brak wpisów na blogu.');
   initDefaultIfEmpty('plLoginTitle', 'Logowanie influencera');
-  initDefaultIfEmpty('plLoginSubtitle', 'Wprowadź dane logowania z e-maila akceptacyjnego.');
+  initDefaultIfEmpty('plLoginSubtitle', 'Wprowadź dane logowania z e-maila akceptacyjnego.\nAby się zarejestrować, zapisz się na listę oczekujących, a wkrótce wyślemy Ci e-mail z danymi do logowania.');
   initDefaultIfEmpty('plLoginUsernameLabel', 'Nazwa użytkownika');
   initDefaultIfEmpty('plLoginPasswordLabel', 'Hasło');
   initDefaultIfEmpty('plLoginButtonText', 'Zaloguj się');
@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ===== Login Page (PL) =====
   // Load login page translations with no English fallback as they don't exist yet; provide sensible defaults
   loadField('admin-login-title-pl','plLoginTitle',null,'Logowanie influencera');
-  loadField('admin-login-subtitle-pl','plLoginSubtitle',null,'Wprowadź dane logowania z e-maila akceptacyjnego.');
+  loadField('admin-login-subtitle-pl','plLoginSubtitle',null,'Wprowadź dane logowania z e-maila akceptacyjnego.\nAby się zarejestrować, zapisz się na listę oczekujących, a wkrótce wyślemy Ci e-mail z danymi do logowania.');
   loadField('admin-login-username-label-pl','plLoginUsernameLabel',null,'Nazwa użytkownika');
   loadField('admin-login-password-label-pl','plLoginPasswordLabel',null,'Hasło');
   loadField('admin-login-button-text-pl','plLoginButtonText',null,'Zaloguj się');
@@ -678,7 +678,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Login Page (EN) =====
   loadField('admin-login-title','loginTitle',null,'Influencer Login');
-  loadField('admin-login-subtitle','loginSubtitle',null,'Enter your login credentials from your acceptance email.');
+  loadField('admin-login-subtitle','loginSubtitle',null,'Enter your login credentials from your acceptance email.\nTo register, sign up to waiting list and soon we will send you an email with login credentials.');
   loadField('admin-login-username-label','loginUsernameLabel',null,'Username');
   loadField('admin-login-password-label','loginPasswordLabel',null,'Password');
   loadField('admin-login-button-text','loginButtonText',null,'Login');

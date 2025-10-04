@@ -16,7 +16,8 @@
     </a>
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-3xl font-bold mb-6 text-center">Influencer Login</h1>
-        <p class="text-sm text-gray-600 mb-4 text-center">Enter the credentials provided in your acceptance email.</p>
+        <p id="login-subtitle" class="text-sm text-gray-600 mb-4 text-center" style="white-space: pre-line;">Enter your login credentials from your acceptance email.
+To register, sign up to waiting list and soon we will send you an email with login credentials.</p>
         <!-- Language switcher inside login card (English Login page) -->
         <div class="flex justify-center items-center text-sm mb-4">
             <span class="text-black font-semibold">EN</span>
@@ -42,6 +43,14 @@
     </div>
 
     <script>
+    // Load CMS content for login subtitle
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginSubtitle = localStorage.getItem('loginSubtitle');
+        if (loginSubtitle) {
+            document.getElementById('login-subtitle').textContent = loginSubtitle;
+        }
+    });
+    
     // Attach handler after DOM load.  This login form checks the list of
     // registered users in localStorage under the key "users".  Only users
     // with status "active" can log in.  The admin account is handled
