@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idol Brands Blog</title>
+    <title>Blog - Fashion Industry Insights for Influencers | Idol Brands</title>
+    <meta name="description" content="Discover expert insights, tips, and success stories for building your fashion brand as an influencer. Learn about live-selling, fashion entrepreneurship, and industry trends.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Idol Brands">
+    <meta property="og:title" content="Blog - Fashion Industry Insights for Influencers | Idol Brands">
+    <meta property="og:description" content="Discover expert insights, tips, and success stories for building your fashion brand as an influencer. Learn about live-selling, fashion entrepreneurship, and industry trends.">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog - Fashion Industry Insights for Influencers | Idol Brands">
+    <meta name="twitter:description" content="Discover expert insights, tips, and success stories for building your fashion brand as an influencer. Learn about live-selling, fashion entrepreneurship, and industry trends.">
+    <meta name="twitter:image" content="">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="">
+    
+    <!-- Robots meta -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -153,6 +175,35 @@
     <script src="auth.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // SEO: Set canonical URL and social media images
+        const currentUrl = window.location.href;
+        const defaultImage = window.location.origin + '/images/hero-market.jpg';
+        document.querySelector('link[rel="canonical"]').setAttribute('href', currentUrl);
+        document.querySelector('meta[property="og:url"]').setAttribute('content', currentUrl);
+        document.querySelector('meta[property="og:image"]').setAttribute('content', defaultImage);
+        document.querySelector('meta[name="twitter:image"]').setAttribute('content', defaultImage);
+        
+        // Add Blog structured data (JSON-LD)
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Idol Brands Blog",
+            "description": "Fashion industry insights, tips, and success stories for influencers building their own fashion brands",
+            "url": currentUrl,
+            "publisher": {
+                "@type": "Organization",
+                "name": "Idol Brands",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": window.location.origin + "/images/hero-market.jpg"
+                }
+            }
+        };
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(structuredData);
+        document.head.appendChild(script);
+        
         // Show copyright year
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
         // Load blog posts from localStorage

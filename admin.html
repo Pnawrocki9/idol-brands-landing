@@ -511,6 +511,12 @@
                 <label for="blog-content" class="block text-sm font-medium text-gray-700 mb-1">Content</label>
                 <textarea id="blog-content" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
             </div>
+            <!-- SEO Meta Description -->
+            <div class="mb-4">
+                <label for="blog-meta-description" class="block text-sm font-medium text-gray-700 mb-1">Meta Description (SEO)</label>
+                <textarea id="blog-meta-description" rows="3" maxlength="160" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Short description for search engines (150-160 characters recommended)"></textarea>
+                <p class="text-xs text-gray-500 mt-1">Optimal length: 150-160 characters. This appears in Google search results.</p>
+            </div>
             <button id="blog-save" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Blog Post</button>
             <p id="blog-save-msg" class="text-green-600 text-sm mt-3 hidden">Blog post saved.</p>
             <hr class="my-6">
@@ -554,6 +560,12 @@
             <div class="mb-4">
                 <label for="blog-content-pl" class="block text-sm font-medium text-gray-700 mb-1">Treść</label>
                 <textarea id="blog-content-pl" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <!-- SEO Meta Description (PL) -->
+            <div class="mb-4">
+                <label for="blog-meta-description-pl" class="block text-sm font-medium text-gray-700 mb-1">Meta opis (SEO)</label>
+                <textarea id="blog-meta-description-pl" rows="3" maxlength="160" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Krótki opis dla wyszukiwarek (zalecane 150-160 znaków)"></textarea>
+                <p class="text-xs text-gray-500 mt-1">Optymalna długość: 150-160 znaków. To pojawia się w wynikach wyszukiwania Google.</p>
             </div>
             <button id="blog-save-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz post bloga</button>
             <p id="blog-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Post bloga zapisany.</p>
@@ -2052,6 +2064,7 @@
         let editingPostIndex = -1;
         const blogTitleField = document.getElementById('blog-title');
         const blogContentField = document.getElementById('blog-content');
+        const blogMetaDescField = document.getElementById('blog-meta-description');
         const blogImageField = document.getElementById('blog-image');
         const blogImagePreview = document.getElementById('blog-image-preview');
         const blogListElem = document.getElementById('blog-posts-list');
@@ -2085,6 +2098,7 @@
             // Reset input fields when reloading the list
             blogTitleField.value = '';
             blogContentField.value = '';
+            blogMetaDescField.value = '';
             blogImageField.value = '';
             blogImagePreview.innerHTML = '';
             blogSaveBtn.textContent = 'Save Blog Post';
@@ -2122,6 +2136,7 @@
                     editingPostIndex = index;
                     blogTitleField.value = post.title;
                     blogContentField.value = post.content;
+                    blogMetaDescField.value = post.metaDescription || '';
                     // Clear file input when editing to avoid confusion
                     blogImageField.value = '';
                     blogImagePreview.innerHTML = '';
@@ -2143,6 +2158,7 @@
                     editingPostIndex = -1;
                     blogTitleField.value = '';
                     blogContentField.value = '';
+                    blogMetaDescField.value = '';
                     blogImageField.value = '';
                     blogImagePreview.innerHTML = '';
                     blogSaveBtn.textContent = 'Save Blog Post';
@@ -2171,6 +2187,7 @@
             }
             const title = blogTitleField.value.trim();
             const content = blogContentField.value.trim();
+            const metaDescription = blogMetaDescField.value.trim();
             if (!title || !content) return; // require both fields
             const now = new Date();
             const dateStr = now.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
@@ -2182,6 +2199,7 @@
                     posts[editingPostIndex] = {
                         title: title,
                         content: content,
+                        metaDescription: metaDescription,
                         date: dateStr,
                         img: imgDataUrl || existing.img || null
                     };
@@ -2191,6 +2209,7 @@
                     posts.push({
                         title: title,
                         content: content,
+                        metaDescription: metaDescription,
                         date: dateStr,
                         img: imgDataUrl || null
                     });
@@ -2198,6 +2217,7 @@
                 localStorage.setItem('blogPostsEN', JSON.stringify(posts));
                 blogTitleField.value = '';
                 blogContentField.value = '';
+                blogMetaDescField.value = '';
                 blogImageField.value = '';
                 blogImagePreview.innerHTML = '';
                 const msg = document.getElementById('blog-save-msg');
@@ -2227,6 +2247,7 @@
         let editingPostIndexPL = -1;
         const blogTitleFieldPL = document.getElementById('blog-title-pl');
         const blogContentFieldPL = document.getElementById('blog-content-pl');
+        const blogMetaDescFieldPL = document.getElementById('blog-meta-description-pl');
         const blogImageFieldPL = document.getElementById('blog-image-pl');
         const blogImagePreviewPL = document.getElementById('blog-image-preview-pl');
         const blogListElemPL = document.getElementById('blog-posts-list-pl');
@@ -2260,6 +2281,7 @@
             // Reset input fields when reloading the list
             blogTitleFieldPL.value = '';
             blogContentFieldPL.value = '';
+            blogMetaDescFieldPL.value = '';
             blogImageFieldPL.value = '';
             blogImagePreviewPL.innerHTML = '';
             blogSaveBtnPL.textContent = 'Zapisz post bloga';
@@ -2297,6 +2319,7 @@
                     editingPostIndexPL = index;
                     blogTitleFieldPL.value = post.title;
                     blogContentFieldPL.value = post.content;
+                    blogMetaDescFieldPL.value = post.metaDescription || '';
                     // Clear file input when editing to avoid confusion
                     blogImageFieldPL.value = '';
                     blogImagePreviewPL.innerHTML = '';
@@ -2318,6 +2341,7 @@
                     editingPostIndexPL = -1;
                     blogTitleFieldPL.value = '';
                     blogContentFieldPL.value = '';
+                    blogMetaDescFieldPL.value = '';
                     blogImageFieldPL.value = '';
                     blogImagePreviewPL.innerHTML = '';
                     blogSaveBtnPL.textContent = 'Zapisz post bloga';
@@ -2346,6 +2370,7 @@
             }
             const title = blogTitleFieldPL.value.trim();
             const content = blogContentFieldPL.value.trim();
+            const metaDescription = blogMetaDescFieldPL.value.trim();
             if (!title || !content) return; // require both fields
             const now = new Date();
             const dateStr = now.toLocaleDateString('pl-PL', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -2357,6 +2382,7 @@
                     posts[editingPostIndexPL] = {
                         title: title,
                         content: content,
+                        metaDescription: metaDescription,
                         date: dateStr,
                         img: imgDataUrl || existing.img || null
                     };
@@ -2366,6 +2392,7 @@
                     posts.push({
                         title: title,
                         content: content,
+                        metaDescription: metaDescription,
                         date: dateStr,
                         img: imgDataUrl || null
                     });
@@ -2373,6 +2400,7 @@
                 localStorage.setItem('blogPostsPL', JSON.stringify(posts));
                 blogTitleFieldPL.value = '';
                 blogContentFieldPL.value = '';
+                blogMetaDescFieldPL.value = '';
                 blogImageFieldPL.value = '';
                 blogImagePreviewPL.innerHTML = '';
                 const msg = document.getElementById('blog-save-msg-pl');
