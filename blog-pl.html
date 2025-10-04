@@ -175,7 +175,64 @@
     <!-- Scripts -->
     <script src="auth.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    // Helper function for Polish translations
+    function t(key, def) {
+        return localStorage.getItem(key) || def;
+    }
+    
+    // Function to load and display blog posts
+    function loadBlogPosts() {
+        const grid = document.getElementById('blog-posts-grid');
+        const noPostsMsg = document.getElementById('no-posts-msg');
+        let posts = [];
+        try {
+            const stored = localStorage.getItem('blogPostsPL');
+            if (stored) posts = JSON.parse(stored);
+        } catch (e) {
+            posts = [];
+        }
+        grid.innerHTML = '';
+        if (!posts || posts.length === 0) {
+            noPostsMsg.textContent = t('plBlogNoPostsMessage', noPostsMsg.textContent);
+            noPostsMsg.classList.remove('hidden');
+            return;
+        }
+        noPostsMsg.classList.add('hidden');
+        // Display all posts as cards with click handler to open full post
+        const total = posts.length;
+        posts.slice().reverse().forEach(function(post, idx) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow overflow-hidden cursor-pointer hover:shadow-lg transition-shadow';
+            // Add image if present
+            if (post.img) {
+                const img = document.createElement('img');
+                img.src = post.img;
+                img.alt = post.title || '';
+                img.className = 'w-full h-56 object-cover';
+                card.appendChild(img);
+            }
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'p-4';
+            const title = document.createElement('h3');
+            title.className = 'text-xl font-bold text-black';
+            title.textContent = post.title || 'Bez tytułu';
+            const date = document.createElement('p');
+            date.className = 'text-sm text-gray-500 mb-2';
+            date.textContent = post.date || '';
+            contentWrapper.appendChild(title);
+            if (post.date) contentWrapper.appendChild(date);
+            card.appendChild(contentWrapper);
+            // Determine the original index of this post in the posts array (not reversed)
+            const globalIndex = total - 1 - idx;
+            // Add click event to open full post (use Polish version)
+            card.addEventListener('click', function() {
+                window.open('post-pl.html?index=' + globalIndex, '_blank');
+            });
+            grid.appendChild(card);
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', async function() {
         // SEO: Set canonical URL and social media images
         const currentUrl = window.location.href;
         const defaultImage = window.location.origin + '/images/hero-market.jpg';
@@ -207,65 +264,23 @@
         document.head.appendChild(script);
         
         // Load Polish translations for blog page
-        function t(key, def) {
-            return localStorage.getItem(key) || def;
-        }
         const titleEl = document.querySelector('h1');
         if (titleEl) titleEl.textContent = t('plBlogTitle', titleEl.textContent);
         const subtitleEl = document.querySelector('section p.text-xl');
         if (subtitleEl) subtitleEl.textContent = t('plBlogSubtitle', subtitleEl.textContent);
         
         // Show copyright year
-        document.getElementById('copyright-year').textContent = new Date().getFullYear();
-        // Load blog posts from localStorage
-        const grid = document.getElementById('blog-posts-grid');
-        const noPostsMsg = document.getElementById('no-posts-msg');
-        let posts = [];
-        try {
-            const stored = localStorage.getItem('blogPostsPL');
-            if (stored) posts = JSON.parse(stored);
-        } catch (e) {
-            posts = [];
+        if (document.getElementById('copyright-year')) {
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
         }
-        grid.innerHTML = '';
-        if (!posts || posts.length === 0) {
-            noPostsMsg.textContent = t('plBlogNoPostsMessage', noPostsMsg.textContent);
-            noPostsMsg.classList.remove('hidden');
-            return;
+        
+        // Wait for CMS content to load from server, then display blog posts
+        if (window.cmsLoadFromServer) {
+            await window.cmsLoadFromServer();
         }
-        noPostsMsg.classList.add('hidden');
-        // Display all posts as cards with click handler to open full post
-        const total = posts.length;
-        posts.slice().reverse().forEach(function(post, idx) {
-            const card = document.createElement('div');
-            card.className = 'bg-white rounded-xl shadow overflow-hidden cursor-pointer';
-            // Add image if present
-            if (post.img) {
-                const img = document.createElement('img');
-                img.src = post.img;
-                img.alt = post.title || '';
-                img.className = 'w-full h-56 object-cover';
-                card.appendChild(img);
-            }
-            const contentWrapper = document.createElement('div');
-            contentWrapper.className = 'p-4';
-            const title = document.createElement('h3');
-            title.className = 'text-xl font-bold text-black';
-            title.textContent = post.title || 'Untitled';
-            const date = document.createElement('p');
-            date.className = 'text-sm text-gray-500 mb-2';
-            date.textContent = post.date || '';
-            contentWrapper.appendChild(title);
-            if (post.date) contentWrapper.appendChild(date);
-            card.appendChild(contentWrapper);
-            // Determine the original index of this post in the posts array (not reversed)
-            const globalIndex = total - 1 - idx;
-            // Add click event to open full post (use Polish version)
-            card.addEventListener('click', function() {
-                window.open('post-pl.html?index=' + globalIndex, '_blank');
-            });
-            grid.appendChild(card);
-        });
+        
+        // Load blog posts from localStorage (now populated by CMS sync)
+        loadBlogPosts();
     });
     </script>
 </body>

@@ -188,8 +188,16 @@
     </footer>
     <script src="auth.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', async function() {
+        if (document.getElementById('copyright-year')) {
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        }
+        
+        // Wait for CMS content to load from server
+        if (window.cmsLoadFromServer) {
+            await window.cmsLoadFromServer();
+        }
+        
         // Parse index parameter from query string
         const params = new URLSearchParams(window.location.search);
         const indexParam = params.get('index');
