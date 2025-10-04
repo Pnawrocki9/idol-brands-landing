@@ -99,8 +99,6 @@
         if (titleEl) titleEl.textContent = t('documentsTitle', 'Your Documents');
         
         const msgEl = document.getElementById('documents-message');
-        if (msgEl) msgEl.textContent = t('documentsMessage', 'Below you\'ll find any documents we\'ve shared with you, such as agreements, brochures and presentations. If nothing appears here you haven\'t been assigned any documents yet.');
-        
         const listElem = document.getElementById('documents-list');
         // Retrieve stored documents (an array of objects with name and data fields).
         const stored = localStorage.getItem('documents');
@@ -142,9 +140,14 @@
             }
         }
         
-        // If no documents, ensure the "no documents" message is displayed
+        // Update message based on whether documents exist
         if (!hasDocuments) {
-            listElem.innerHTML = '<li class="bg-white p-4 rounded-lg shadow text-gray-500">No documents available yet. Check back later.</li>';
+            // Show "no documents" message from CMS
+            if (msgEl) msgEl.textContent = t('documentsMessage', 'No documents available yet.');
+            listElem.innerHTML = '<li class="bg-white p-4 rounded-lg shadow text-gray-500">Check back later for updates.</li>';
+        } else {
+            // Show regular description when documents exist
+            if (msgEl) msgEl.textContent = 'Below you\'ll find any documents we\'ve shared with you, such as agreements, brochures and presentations.';
         }
     });
     </script>

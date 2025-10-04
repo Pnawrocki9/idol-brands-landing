@@ -99,8 +99,6 @@
         if (titleEl) titleEl.textContent = t('plDocumentsTitle', 'Twoje dokumenty');
         
         const msgEl = document.getElementById('documents-message');
-        if (msgEl) msgEl.textContent = t('plDocumentsMessage', 'Znajdziesz tutaj wszelkie dokumenty udostępnione Ci przez nas, takie jak umowy, broszury i prezentacje. Jeśli nic się nie pojawia, nie przydzieliliśmy Ci jeszcze żadnych dokumentów.');
-        
         const listElem = document.getElementById('documents-list');
         // Retrieve stored documents (an array of objects with name and data fields).
         const stored = localStorage.getItem('documents');
@@ -142,9 +140,14 @@
             }
         }
         
-        // If no documents, ensure the "no documents" message is displayed
+        // Update message based on whether documents exist
         if (!hasDocuments) {
-            listElem.innerHTML = '<li class="bg-white p-4 rounded-lg shadow text-gray-500">Brak dokumentów. Sprawdź ponownie później.</li>';
+            // Show "no documents" message from CMS
+            if (msgEl) msgEl.textContent = t('plDocumentsMessage', 'Brak dokumentów do wyświetlenia.');
+            listElem.innerHTML = '<li class="bg-white p-4 rounded-lg shadow text-gray-500">Sprawdź ponownie później.</li>';
+        } else {
+            // Show regular description when documents exist
+            if (msgEl) msgEl.textContent = 'Znajdziesz tutaj wszelkie dokumenty udostępnione Ci przez nas, takie jak umowy, broszury i prezentacje.';
         }
     });
     </script>
