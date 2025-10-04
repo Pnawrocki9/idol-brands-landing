@@ -223,7 +223,10 @@ function loadFooter() {
 // even if CSS layering or other scripts prevent the default <a> element
 // behaviour. The handler is attached only once per element using a dataset flag.
 function attachNavHandlers() {
+  // Handle both desktop and mobile calculator links
   const calcLink = document.getElementById('nav-calculator');
+  const calcLinkMobile = document.getElementById('nav-calculator-mobile');
+  
   if (calcLink && !calcLink.dataset.handler) {
     calcLink.dataset.handler = 'true';
     calcLink.addEventListener('click', function (e) {
@@ -235,6 +238,19 @@ function attachNavHandlers() {
       }
     });
   }
+  
+  if (calcLinkMobile && !calcLinkMobile.dataset.handler) {
+    calcLinkMobile.dataset.handler = 'true';
+    calcLinkMobile.addEventListener('click', function (e) {
+      const href = calcLinkMobile.getAttribute('href');
+      // If href is an in-page anchor (starts with '#'), allow default behaviour
+      if (href && !href.startsWith('#')) {
+        e.preventDefault();
+        window.location.href = href;
+      }
+    });
+  }
+  
   const loginLink = document.getElementById('nav-login');
   if (loginLink && !loginLink.dataset.handler) {
     loginLink.dataset.handler = 'true';
@@ -244,10 +260,31 @@ function attachNavHandlers() {
       window.location.href = 'login.html';
     });
   }
+  
+  const loginLinkMobile = document.getElementById('nav-login-mobile');
+  if (loginLinkMobile && !loginLinkMobile.dataset.handler) {
+    loginLinkMobile.dataset.handler = 'true';
+    loginLinkMobile.addEventListener('click', function (e) {
+      // Always navigate to the login page via assignment to avoid prevented default
+      e.preventDefault();
+      window.location.href = 'login.html';
+    });
+  }
+  
   const adminLink = document.getElementById('nav-admin');
   if (adminLink && !adminLink.dataset.handler) {
     adminLink.dataset.handler = 'true';
     adminLink.addEventListener('click', function (e) {
+      // Navigate to the admin dashboard regardless of default anchor behaviour.
+      e.preventDefault();
+      window.location.href = 'admin.html';
+    });
+  }
+  
+  const adminLinkMobile = document.getElementById('nav-admin-mobile');
+  if (adminLinkMobile && !adminLinkMobile.dataset.handler) {
+    adminLinkMobile.dataset.handler = 'true';
+    adminLinkMobile.addEventListener('click', function (e) {
       // Navigate to the admin dashboard regardless of default anchor behaviour.
       e.preventDefault();
       window.location.href = 'admin.html';
