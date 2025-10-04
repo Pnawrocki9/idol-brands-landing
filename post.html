@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post - Idol Brands</title>
+    <title id="page-title">Blog Post - Idol Brands</title>
+    <meta name="description" id="page-description" content="Read our latest fashion industry insights and tips for influencers building their own fashion brands.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Idol Brands">
+    <meta property="og:title" id="og-title" content="Blog Post - Idol Brands">
+    <meta property="og:description" id="og-description" content="Read our latest fashion industry insights and tips for influencers building their own fashion brands.">
+    <meta property="og:url" id="og-url" content="">
+    <meta property="og:image" id="og-image" content="">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitter-title" content="Blog Post - Idol Brands">
+    <meta name="twitter:description" id="twitter-description" content="Read our latest fashion industry insights and tips for influencers building their own fashion brands.">
+    <meta name="twitter:image" id="twitter-image" content="">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" id="canonical-url" href="">
+    
+    <!-- Robots meta -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -158,6 +180,66 @@
             return;
         }
         const post = posts[idx];
+        
+        // SEO: Update all meta tags dynamically
+        const postTitle = post.title || 'Untitled';
+        const postDescription = post.metaDescription || (post.content ? post.content.substring(0, 155) + '...' : 'Read our latest fashion industry insights and tips for influencers building their own fashion brands.');
+        const currentUrl = window.location.href;
+        const postImage = post.img || (window.location.origin + '/images/hero-market.jpg');
+        
+        // Update title
+        document.getElementById('page-title').textContent = postTitle + ' | Idol Brands Blog';
+        
+        // Update meta description
+        document.getElementById('page-description').setAttribute('content', postDescription);
+        
+        // Update Open Graph tags
+        document.getElementById('og-title').setAttribute('content', postTitle);
+        document.getElementById('og-description').setAttribute('content', postDescription);
+        document.getElementById('og-url').setAttribute('content', currentUrl);
+        document.getElementById('og-image').setAttribute('content', postImage);
+        
+        // Update Twitter Card tags
+        document.getElementById('twitter-title').setAttribute('content', postTitle);
+        document.getElementById('twitter-description').setAttribute('content', postDescription);
+        document.getElementById('twitter-image').setAttribute('content', postImage);
+        
+        // Update canonical URL
+        document.getElementById('canonical-url').setAttribute('href', currentUrl);
+        
+        // Add Structured Data (JSON-LD) for SEO
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": postTitle,
+            "description": postDescription,
+            "image": postImage,
+            "datePublished": post.date || new Date().toISOString(),
+            "dateModified": post.date || new Date().toISOString(),
+            "author": {
+                "@type": "Organization",
+                "name": "Idol Brands"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Idol Brands",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": window.location.origin + "/images/hero-market.jpg"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": currentUrl
+            }
+        };
+        
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(structuredData);
+        document.head.appendChild(script);
+        
+        // Render post content
         const container = document.getElementById('post-container');
         container.innerHTML = '';
         // Featured image
