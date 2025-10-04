@@ -169,7 +169,7 @@
         const noPostsMsg = document.getElementById('no-posts-msg');
         let posts = [];
         try {
-            const stored = localStorage.getItem('blogPosts');
+            const stored = localStorage.getItem('blogPostsPL');
             if (stored) posts = JSON.parse(stored);
         } catch (e) {
             posts = [];
