@@ -12,7 +12,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const defaults = {
             plLoginTitle: 'Logowanie influencera',
-            plLoginSubtitle: 'Wprowadź dane logowania z e‑maila akceptacyjnego.',
+            plLoginSubtitle: 'Wprowadź dane logowania z e‑maila akceptacyjnego.\nAby się zarejestrować, zapisz się na listę oczekujących, a wkrótce wyślemy Ci e-mail z danymi do logowania.',
             plLoginUsernameLabel: 'Nazwa użytkownika',
             plLoginPasswordLabel: 'Hasło',
             plLoginButtonText: 'Zaloguj się',
@@ -73,7 +73,7 @@
         const titleEl = document.getElementById('login-title');
         if (titleEl) titleEl.textContent = t('plLoginTitle','Logowanie influencera');
         const subtitleEl = document.getElementById('login-subtitle');
-        if (subtitleEl) subtitleEl.textContent = t('plLoginSubtitle','Wprowadź dane logowania z e-maila akceptacyjnego.');
+        if (subtitleEl) subtitleEl.textContent = t('plLoginSubtitle','Wprowadź dane logowania z e‑maila akceptacyjnego.\nAby się zarejestrować, zapisz się na listę oczekujących, a wkrótce wyślemy Ci e-mail z danymi do logowania.');
         const userLabel = document.getElementById('login-username-label');
         if (userLabel) userLabel.textContent = t('plLoginUsernameLabel','Nazwa użytkownika');
         const passLabel = document.getElementById('login-password-label');
