@@ -236,6 +236,15 @@
             "inLanguage": "pl-PL"
         };
         
+        // Add Featured Snippet if available (helps Google create featured snippets)
+        if (post.featuredSnippet && post.featuredSnippet.trim()) {
+            structuredData.speakable = {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [".featured-snippet"]
+            };
+            structuredData.abstract = post.featuredSnippet.trim();
+        }
+        
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.textContent = JSON.stringify(structuredData);
@@ -264,6 +273,16 @@
         title.className = 'text-4xl font-display font-bold text-black mb-4';
         title.textContent = post.title || 'Bez tytułu';
         container.appendChild(title);
+        // Featured Snippet (for Google indexing)
+        if (post.featuredSnippet && post.featuredSnippet.trim()) {
+            const snippetBox = document.createElement('div');
+            snippetBox.className = 'featured-snippet bg-gray-50 border-l-4 border-black p-4 mb-6 rounded';
+            const snippetText = document.createElement('p');
+            snippetText.className = 'text-base text-gray-800 font-medium';
+            snippetText.textContent = post.featuredSnippet.trim();
+            snippetBox.appendChild(snippetText);
+            container.appendChild(snippetBox);
+        }
         // Full content
         const paragraphs = (post.content || '').split(/\n+/).filter(l => l.trim() !== '');
         paragraphs.forEach(function(p) {
