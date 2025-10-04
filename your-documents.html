@@ -104,10 +104,13 @@
         const listElem = document.getElementById('documents-list');
         // Retrieve stored documents (an array of objects with name and data fields).
         const stored = localStorage.getItem('documents');
+        let hasDocuments = false;
+        
         if (stored) {
             try {
                 const docs = JSON.parse(stored);
                 if (Array.isArray(docs) && docs.length > 0) {
+                    hasDocuments = true;
                     // Clear placeholder
                     listElem.innerHTML = '';
                     docs.forEach(function(doc, index) {
@@ -137,6 +140,11 @@
             } catch (err) {
                 console.error('Failed to parse documents from localStorage', err);
             }
+        }
+        
+        // If no documents, ensure the "no documents" message is displayed
+        if (!hasDocuments) {
+            listElem.innerHTML = '<li class="bg-white p-4 rounded-lg shadow text-gray-500">No documents available yet. Check back later.</li>';
         }
     });
     </script>

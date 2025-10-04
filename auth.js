@@ -309,10 +309,34 @@ function attachNavHandlers() {
   }
 }
 
+// Handle hash navigation after page load. If the URL contains a hash (e.g.,
+// #calculator-section), ensure the target element is visible and scroll to it.
+// This fixes the issue where navigating from a subpage to index.html#calculator-section
+// wouldn't scroll properly because the calculator section was initially hidden.
+function handleHashNavigation() {
+  const hash = window.location.hash;
+  if (hash) {
+    // Remove the '#' to get the element ID
+    const targetId = hash.substring(1);
+    const target = document.getElementById(targetId);
+    
+    if (target) {
+      // Ensure the target is visible (remove 'hidden' class if present)
+      target.classList.remove('hidden');
+      
+      // Scroll to the target after a short delay to ensure rendering is complete
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
+}
+
 // Run on every page load to adjust navigation and calculator state.
 document.addEventListener('DOMContentLoaded', function () {
   updateNav();
   attachNavHandlers();
   setupMobileMenu();
   loadFooter();
+  handleHashNavigation();
 });
