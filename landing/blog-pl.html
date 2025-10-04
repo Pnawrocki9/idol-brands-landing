@@ -190,7 +190,7 @@
         const total = posts.length;
         posts.slice().reverse().forEach(function(post, idx) {
             const card = document.createElement('div');
-            card.className = 'bg-white rounded-xl shadow overflow-hidden cursor-pointer';
+            card.className = 'bg-white rounded-xl shadow-xl overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow';
             card.style.transform = 'translateY(-33.33%)';
             // Add image if present
             if (post.img) {
