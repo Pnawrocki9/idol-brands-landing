@@ -94,32 +94,16 @@ function updateNav() {
         }
         // Allow calculator link to anchor to the calculator section. Preserve the
         // original target (index.html#calculator-section or index-pl.html#calculator-section)
+        // Determine the correct index page based on current page language
+        const currentPage = window.location.pathname;
+        const isPolish = currentPage.includes('-pl.html');
+        const targetIndex = isPolish ? 'index-pl.html#calculator-section' : 'index.html#calculator-section';
+        
         if (calcLink) {
-            // store original href on first run
-            if (!calcLink.dataset.original) {
-                calcLink.dataset.original = calcLink.getAttribute('href');
-            }
-            const original = calcLink.dataset.original;
-            if (original && original.includes('index-pl.html')) {
-                calcLink.setAttribute('href', 'index-pl.html#calculator-section');
-            } else if (original && original.includes('index.html')) {
-                calcLink.setAttribute('href', 'index.html#calculator-section');
-            } else {
-                calcLink.setAttribute('href', '#calculator-section');
-            }
+            calcLink.setAttribute('href', targetIndex);
         }
         if (calcLinkMobile) {
-            if (!calcLinkMobile.dataset.original) {
-                calcLinkMobile.dataset.original = calcLinkMobile.getAttribute('href');
-            }
-            const original = calcLinkMobile.dataset.original;
-            if (original && original.includes('index-pl.html')) {
-                calcLinkMobile.setAttribute('href', 'index-pl.html#calculator-section');
-            } else if (original && original.includes('index.html')) {
-                calcLinkMobile.setAttribute('href', 'index.html#calculator-section');
-            } else {
-                calcLinkMobile.setAttribute('href', '#calculator-section');
-            }
+            calcLinkMobile.setAttribute('href', targetIndex);
         }
         // reveal calculator section if present
         if (calcSection) calcSection.classList.remove('hidden');

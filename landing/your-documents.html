@@ -85,6 +85,7 @@
             window.location.href = 'login.html';
             return;
         }
+        const msgEl = document.getElementById('documents-message');
         const listElem = document.getElementById('documents-list');
         // Retrieve stored documents (an array of objects with name and data fields).
         const stored = localStorage.getItem('documents');
@@ -126,9 +127,12 @@
             }
         }
         
-        // If no documents, ensure the "no documents" message is displayed
+        // Update message based on whether documents exist
         if (!hasDocuments) {
-            listElem.innerHTML = '<li class="bg-white p-4 rounded-lg shadow text-gray-500">No documents available yet. Check back later.</li>';
+            if (msgEl) msgEl.textContent = 'No documents available yet.';
+            listElem.innerHTML = '<li class="bg-white p-4 rounded-lg shadow text-gray-500">Check back later for updates.</li>';
+        } else {
+            if (msgEl) msgEl.textContent = 'Below you\'ll find any documents we\'ve shared with you, such as agreements, brochures and presentations.';
         }
     });
     </script>
