@@ -65,6 +65,17 @@
         #post-container u {
             text-decoration: underline;
         }
+        /* Quill editor content styles */
+        .blog-content h1 { font-size: 2em; font-weight: 700; margin: 1em 0 0.5em; }
+        .blog-content h2 { font-size: 1.5em; font-weight: 700; margin: 0.9em 0 0.4em; }
+        .blog-content h3 { font-size: 1.3em; font-weight: 600; margin: 0.8em 0 0.3em; }
+        .blog-content h4 { font-size: 1.1em; font-weight: 600; margin: 0.7em 0 0.3em; }
+        .blog-content ul, .blog-content ol { margin: 1em 0; padding-left: 2em; }
+        .blog-content li { margin: 0.5em 0; }
+        .blog-content p { margin: 1em 0; }
+        .blog-content blockquote { border-left: 4px solid #ddd; padding-left: 1em; margin: 1em 0; color: #666; }
+        .blog-content pre { background: #f4f4f4; padding: 1em; border-radius: 4px; overflow-x: auto; }
+        .blog-content code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; }
     </style>
     <script src="cms-sync.js"></script>
 </head>
@@ -301,40 +312,12 @@
             snippetBox.appendChild(snippetText);
             container.appendChild(snippetBox);
         }
-        // Full content with link parsing and HTML rendering
-        const paragraphs = (post.content || '').split(/\n+/).filter(l => l.trim() !== '');
-        paragraphs.forEach(function(p) {
-            const para = document.createElement('div');
-            para.className = 'text-lg text-gray-700 mb-4';
-            // Parse markdown-style links: [text](url) and render HTML formatting
-            para.innerHTML = parseLinksInText(p);
-            container.appendChild(para);
-        });
-        
-        // Function to parse markdown-style links and preserve HTML formatting
-        function parseLinksInText(text) {
-            // First, parse markdown-style links [text](url) but preserve HTML tags
-            // We need to be careful to not escape HTML tags that are meant for formatting
-            
-            // Process links by replacing [text](url) with actual <a> tags
-            let processedText = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
-                // Determine if it's an internal or external link
-                const isInternal = url.startsWith('/') || url.startsWith('./') || 
-                                   url.startsWith('../') || url.startsWith('index') || 
-                                   url.startsWith('about') || url.startsWith('blog') ||
-                                   url.startsWith('how-it-works') || url.startsWith('success-stories') ||
-                                   url.startsWith('post-pl.html') || url.startsWith('login');
-                
-                if (isInternal) {
-                    return '<a href="' + url + '" class="text-blue-600 hover:text-blue-800 underline font-medium">' + linkText + '</a>';
-                } else {
-                    return '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium">' + linkText + '</a>';
-                }
-            });
-            
-            // Return the processed text with HTML formatting intact
-            return processedText;
-        }
+        // Full content - render HTML directly from Quill editor
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'text-lg text-gray-700 blog-content';
+        // Post content is already HTML from Quill editor, so render it directly
+        contentDiv.innerHTML = post.content || '';
+        container.appendChild(contentDiv);
     });
     </script>
     <script>
