@@ -517,6 +517,12 @@
                 <textarea id="blog-meta-description" rows="3" maxlength="160" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Short description for search engines (150-160 characters recommended)"></textarea>
                 <p class="text-xs text-gray-500 mt-1">Optimal length: 150-160 characters. This appears in Google search results.</p>
             </div>
+            <!-- Featured Snippet for Google -->
+            <div class="mb-4">
+                <label for="blog-featured-snippet" class="block text-sm font-medium text-gray-700 mb-1">Featured Snippet (Google Indexing)</label>
+                <textarea id="blog-featured-snippet" rows="3" maxlength="300" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Concise answer for Google Featured Snippets (40-60 words, 250-300 characters recommended)"></textarea>
+                <p class="text-xs text-gray-500 mt-1">Optimal length: 40-60 words (250-300 characters). This helps Google create featured snippets in search results, improving visibility and click-through rates.</p>
+            </div>
             <button id="blog-save" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Blog Post</button>
             <p id="blog-save-msg" class="text-green-600 text-sm mt-3 hidden">Blog post saved.</p>
             <hr class="my-6">
@@ -566,6 +572,12 @@
                 <label for="blog-meta-description-pl" class="block text-sm font-medium text-gray-700 mb-1">Meta opis (SEO)</label>
                 <textarea id="blog-meta-description-pl" rows="3" maxlength="160" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Krótki opis dla wyszukiwarek (zalecane 150-160 znaków)"></textarea>
                 <p class="text-xs text-gray-500 mt-1">Optymalna długość: 150-160 znaków. To pojawia się w wynikach wyszukiwania Google.</p>
+            </div>
+            <!-- Featured Snippet dla Google (PL) -->
+            <div class="mb-4">
+                <label for="blog-featured-snippet-pl" class="block text-sm font-medium text-gray-700 mb-1">Featured Snippet (indeksowanie Google)</label>
+                <textarea id="blog-featured-snippet-pl" rows="3" maxlength="300" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Zwięzła odpowiedź dla Google Featured Snippets (40-60 słów, zalecane 250-300 znaków)"></textarea>
+                <p class="text-xs text-gray-500 mt-1">Optymalna długość: 40-60 słów (250-300 znaków). Pomaga Google tworzyć wyróżnione fragmenty w wynikach wyszukiwania, poprawiając widoczność i współczynnik klikalności.</p>
             </div>
             <button id="blog-save-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz post bloga</button>
             <p id="blog-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Post bloga zapisany.</p>
@@ -2065,6 +2077,7 @@
         const blogTitleField = document.getElementById('blog-title');
         const blogContentField = document.getElementById('blog-content');
         const blogMetaDescField = document.getElementById('blog-meta-description');
+        const blogFeaturedSnippetField = document.getElementById('blog-featured-snippet');
         const blogImageField = document.getElementById('blog-image');
         const blogImagePreview = document.getElementById('blog-image-preview');
         const blogListElem = document.getElementById('blog-posts-list');
@@ -2099,6 +2112,7 @@
             blogTitleField.value = '';
             blogContentField.value = '';
             blogMetaDescField.value = '';
+            blogFeaturedSnippetField.value = '';
             blogImageField.value = '';
             blogImagePreview.innerHTML = '';
             blogSaveBtn.textContent = 'Save Blog Post';
@@ -2137,6 +2151,7 @@
                     blogTitleField.value = post.title;
                     blogContentField.value = post.content;
                     blogMetaDescField.value = post.metaDescription || '';
+                    blogFeaturedSnippetField.value = post.featuredSnippet || '';
                     // Clear file input when editing to avoid confusion
                     blogImageField.value = '';
                     blogImagePreview.innerHTML = '';
@@ -2188,6 +2203,7 @@
             const title = blogTitleField.value.trim();
             const content = blogContentField.value.trim();
             const metaDescription = blogMetaDescField.value.trim();
+            const featuredSnippet = blogFeaturedSnippetField.value.trim();
             if (!title || !content) return; // require both fields
             const now = new Date();
             const dateStr = now.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
@@ -2200,6 +2216,7 @@
                         title: title,
                         content: content,
                         metaDescription: metaDescription,
+                        featuredSnippet: featuredSnippet,
                         date: dateStr,
                         img: imgDataUrl || existing.img || null
                     };
@@ -2210,6 +2227,7 @@
                         title: title,
                         content: content,
                         metaDescription: metaDescription,
+                        featuredSnippet: featuredSnippet,
                         date: dateStr,
                         img: imgDataUrl || null
                     });
@@ -2248,6 +2266,7 @@
         const blogTitleFieldPL = document.getElementById('blog-title-pl');
         const blogContentFieldPL = document.getElementById('blog-content-pl');
         const blogMetaDescFieldPL = document.getElementById('blog-meta-description-pl');
+        const blogFeaturedSnippetFieldPL = document.getElementById('blog-featured-snippet-pl');
         const blogImageFieldPL = document.getElementById('blog-image-pl');
         const blogImagePreviewPL = document.getElementById('blog-image-preview-pl');
         const blogListElemPL = document.getElementById('blog-posts-list-pl');
@@ -2282,6 +2301,7 @@
             blogTitleFieldPL.value = '';
             blogContentFieldPL.value = '';
             blogMetaDescFieldPL.value = '';
+            blogFeaturedSnippetFieldPL.value = '';
             blogImageFieldPL.value = '';
             blogImagePreviewPL.innerHTML = '';
             blogSaveBtnPL.textContent = 'Zapisz post bloga';
@@ -2320,6 +2340,7 @@
                     blogTitleFieldPL.value = post.title;
                     blogContentFieldPL.value = post.content;
                     blogMetaDescFieldPL.value = post.metaDescription || '';
+                    blogFeaturedSnippetFieldPL.value = post.featuredSnippet || '';
                     // Clear file input when editing to avoid confusion
                     blogImageFieldPL.value = '';
                     blogImagePreviewPL.innerHTML = '';
@@ -2371,6 +2392,7 @@
             const title = blogTitleFieldPL.value.trim();
             const content = blogContentFieldPL.value.trim();
             const metaDescription = blogMetaDescFieldPL.value.trim();
+            const featuredSnippet = blogFeaturedSnippetFieldPL.value.trim();
             if (!title || !content) return; // require both fields
             const now = new Date();
             const dateStr = now.toLocaleDateString('pl-PL', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -2383,6 +2405,7 @@
                         title: title,
                         content: content,
                         metaDescription: metaDescription,
+                        featuredSnippet: featuredSnippet,
                         date: dateStr,
                         img: imgDataUrl || existing.img || null
                     };
@@ -2393,6 +2416,7 @@
                         title: title,
                         content: content,
                         metaDescription: metaDescription,
+                        featuredSnippet: featuredSnippet,
                         date: dateStr,
                         img: imgDataUrl || null
                     });
