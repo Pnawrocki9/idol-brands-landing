@@ -231,12 +231,26 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   const saveHomePl = document.getElementById('save-home-pl');
   if (saveHomePl) {
-    saveHomePl.addEventListener('click', function() {
+    saveHomePl.addEventListener('click', async function() {
       saveFields(homeMap.map(item => [item[0], item[1]]));
       const msg = document.getElementById('home-save-msg-pl');
       if (msg) {
+        msg.textContent = 'Zapisywanie i publikowanie...';
         msg.classList.remove('hidden');
-        setTimeout(() => msg.classList.add('hidden'), 2000);
+        
+        // Auto-publish changes to server
+        if (window.cmsSyncToServer) {
+          const success = await window.cmsSyncToServer();
+          if (success) {
+            msg.textContent = 'Ustawienia strony głównej (PL) zapisane i opublikowane online!';
+          } else {
+            msg.textContent = 'Zapisano lokalnie. Proszę kliknąć "Publikuj Treści Online" aby opublikować.';
+          }
+        } else {
+          msg.textContent = 'Ustawienia strony głównej (PL) zapisane.';
+        }
+        
+        setTimeout(() => msg.classList.add('hidden'), 3000);
       }
     });
   }
