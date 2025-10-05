@@ -41,10 +41,32 @@
     </nav>
 
     <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-display font-bold mb-8">Admin Dashboard</h1>
+        <h1 id="cms-top" class="text-4xl font-display font-bold mb-8">Admin Dashboard</h1>
+        
+        <!-- CMS Module Navigation -->
+        <nav class="mb-8 bg-white border border-gray-200 rounded-lg p-6 sticky top-20 z-40 shadow-sm">
+            <h3 class="text-lg font-semibold mb-4 text-gray-900">CMS Modules / Moduły CMS</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+                <a href="#module-nav-settings" class="text-blue-600 hover:text-blue-800 hover:underline">Navigation Settings</a>
+                <a href="#module-home-hero" class="text-blue-600 hover:text-blue-800 hover:underline">Home Page Hero</a>
+                <a href="#module-about" class="text-blue-600 hover:text-blue-800 hover:underline">About Page</a>
+                <a href="#module-how-it-works" class="text-blue-600 hover:text-blue-800 hover:underline">How It Works Page</a>
+                <a href="#module-success-stories" class="text-blue-600 hover:text-blue-800 hover:underline">Success Stories Page</a>
+                <a href="#module-roi-calculator" class="text-blue-600 hover:text-blue-800 hover:underline">ROI Calculator</a>
+                <a href="#module-blog-en" class="text-blue-600 hover:text-blue-800 hover:underline">Blog Posts (EN)</a>
+                <a href="#module-blog-pl" class="text-blue-600 hover:text-blue-800 hover:underline">Blog Posts (PL)</a>
+                <a href="#module-home-content" class="text-blue-600 hover:text-blue-800 hover:underline">Home Page Content (EN)</a>
+                <a href="#module-content-pl" class="text-blue-600 hover:text-blue-800 hover:underline">Content Pages (PL)</a>
+                <a href="#module-documents" class="text-blue-600 hover:text-blue-800 hover:underline">Shared Documents</a>
+                <a href="#module-footer" class="text-blue-600 hover:text-blue-800 hover:underline">Footer Details</a>
+                <a href="#module-legal" class="text-blue-600 hover:text-blue-800 hover:underline">Legal Pages</a>
+                <a href="#module-users" class="text-blue-600 hover:text-blue-800 hover:underline">Registered Users</a>
+                <a href="#module-admins" class="text-blue-600 hover:text-blue-800 hover:underline">Administrators</a>
+            </div>
+        </nav>
         
         <!-- Global Navigation Settings -->
-        <section class="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <section id="module-nav-settings" class="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
             <h2 class="text-2xl font-semibold mb-4 text-blue-900">Navigation Settings</h2>
             <p class="text-sm text-gray-600 mb-4">Control which navigation items are visible to users on your website.</p>
             
@@ -66,7 +88,7 @@
         </section>
         
         <!-- Hero content editor -->
-        <section class="mb-12">
+        <section id="module-home-hero" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit Home Page Hero</h2>
             <p class="text-sm text-gray-600 mb-4">You can customise the hero heading and subtitle on the home page.  Use simple HTML (e.g. &lt;span class=&quot;text-gradient&quot;&gt;) to style parts of the heading.</p>
             <div class="mb-4">
@@ -82,7 +104,7 @@
         </section>
 
         <!-- About page editor -->
-        <section class="mb-12">
+        <section id="module-about" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit About Page</h2>
             <p class="text-sm text-gray-600 mb-4">Customise the hero and first sections of the About page.  These values will replace the default headings and paragraphs when the page loads.</p>
             <div class="mb-4">
@@ -301,7 +323,7 @@
         </section>
 
         <!-- How It Works page editor -->
-        <section class="mb-12">
+        <section id="module-how-it-works" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit How It Works Page</h2>
             <p class="text-sm text-gray-600 mb-4">Modify the main headings on the How It Works page.  Steps themselves remain static.</p>
             <div class="mb-4">
@@ -355,7 +377,7 @@
         </section>
 
         <!-- Success Stories page editor -->
-        <section class="mb-12">
+        <section id="module-success-stories" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit Success Stories Page</h2>
             <p class="text-sm text-gray-600 mb-4">Adjust the hero heading and subtitle for the Success Stories page.</p>
             <div class="mb-4">
@@ -410,7 +432,7 @@
         </section>
 
         <!-- ROI Calculator assumptions editor -->
-        <section class="mb-12">
+        <section id="module-roi-calculator" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit ROI Calculator Assumptions</h2>
             <p class="text-sm text-gray-600 mb-4">Configure the default assumptions used by the ROI calculator.  Percentages should be entered as numbers (e.g. enter <code>5</code> for 5%).</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -492,7 +514,7 @@
         </section>
 
         <!-- Blog management editor (EN) -->
-        <section class="mb-12">
+        <section id="module-blog-en" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Manage Blog Posts (EN)</h2>
             <p class="text-sm text-gray-600 mb-4">Create new English blog posts or edit existing ones. Posts are stored locally and shown on the English blog page.</p>
             <!-- Blog post image upload -->
@@ -561,7 +583,7 @@
         </section>
 
         <!-- Blog management editor (PL) -->
-        <section class="mb-12">
+        <section id="module-blog-pl" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Zarządzanie postami bloga (PL)</h2>
             <p class="text-sm text-gray-600 mb-4">Twórz nowe polskie posty blogowe lub edytuj istniejące. Posty są przechowywane lokalnie i wyświetlane na polskiej stronie bloga.</p>
             <!-- Blog post image upload (PL) -->
@@ -610,7 +632,7 @@
         </section>
 
         <!-- Home page content editor -->
-        <section class="mb-12">
+        <section id="module-home-content" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit Home Page Content</h2>
             <p class="text-sm text-gray-600 mb-4">Customize the key messages and feature section on the home page.</p>
             <!-- Metrics inputs -->
@@ -834,7 +856,7 @@
         </section>
 
         <!-- Polish translations editor -->
-        <section class="mb-12">
+        <section id="module-content-pl" class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edytuj treść stron (PL)</h2>
             <p class="text-sm text-gray-600 mb-6">Niniejsze pola pozwalają zarządzać tłumaczeniami na język polski. Zmiany zapisują się osobno, nie nadpisując wersji angielskiej.</p>
             <!-- Home hero (PL) -->
@@ -1465,7 +1487,7 @@
         </section>
 
         <!-- Document manager -->
-        <section>
+        <section id="module-documents">
             <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
                 <p class="text-sm text-blue-800">
@@ -1478,7 +1500,7 @@
         </section>
 
         <!-- Footer editor -->
-        <section class="mt-12">
+        <section id="module-footer" class="mt-12">
             <h2 class="text-2xl font-semibold mb-4">Edit Footer Details</h2>
             <p class="text-sm text-gray-600 mb-4">Update the company information and social links shown in the site footer.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1519,7 +1541,7 @@
         </section>
 
         <!-- Legal pages editor -->
-        <section class="mt-12">
+        <section id="module-legal" class="mt-12">
             <h2 class="text-2xl font-semibold mb-4">Edit Legal Pages</h2>
             <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages in both languages. Use basic HTML for formatting (e.g. &lt;h2&gt;,&lt;p&gt;,&lt;ul&gt;).</p>
             
@@ -1561,7 +1583,7 @@
         </section>
 
         <!-- Registered users management -->
-        <section class="mt-12">
+        <section id="module-users" class="mt-12">
             <h2 class="text-2xl font-semibold mb-4">Registered Users</h2>
             <p class="text-sm text-gray-600 mb-4">Here are the sign-ups from the waiting list. Activate users to assign them login credentials and manage their access.  You can also export the list to a CSV file for further processing.</p>
             <button id="export-users" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mb-4">Export to CSV</button>
@@ -1588,7 +1610,7 @@
         </section>
 
         <!-- Administrators management -->
-        <section class="mt-12">
+        <section id="module-admins" class="mt-12">
             <h2 class="text-2xl font-semibold mb-4">Administrators</h2>
             <p class="text-sm text-gray-600 mb-4">Manage admin accounts. Only active admins can log in. You can add, edit or deactivate administrators and export the list.</p>
             <div class="flex flex-wrap items-center space-x-4 mb-4">
@@ -3273,5 +3295,34 @@
     <script src="admin-manage.js"></script>
     <!-- Load Polish translation management script (handles saving and loading of PL content) -->
     <script src="admin-pl.js"></script>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="fixed bottom-6 right-6 bg-black text-white w-12 h-12 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300 flex items-center justify-center z-50" style="display: none;" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+    
+    <script>
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.style.display = 'flex';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+        
+        // Scroll to top when button is clicked
+        scrollToTopBtn.addEventListener('click', function() {
+            document.getElementById('cms-top').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    </script>
 </body>
 </html>
