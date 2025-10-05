@@ -204,13 +204,24 @@
     </footer>
     <script src="../auth.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Load the legal content from localStorage (PL version)
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Load the legal content from the API (PL version)
         const container = document.getElementById('legal-content');
-        const stored = localStorage.getItem('legalCookiesPL');
-        if (stored) {
-            container.innerHTML = stored;
-        } else {
+        
+        try {
+            const response = await fetch('/api/legal-content');
+            if (response.ok) {
+                const data = await response.json();
+                if (data.cookiesPL && data.cookiesPL.trim()) {
+                    container.innerHTML = data.cookiesPL;
+                } else {
+                    container.innerHTML = '<p>Polityka cookies nie została jeszcze opublikowana.</p>';
+                }
+            } else {
+                container.innerHTML = '<p>Polityka cookies nie została jeszcze opublikowana.</p>';
+            }
+        } catch (error) {
+            console.error('Error loading legal content:', error);
             container.innerHTML = '<p>Polityka cookies nie została jeszcze opublikowana.</p>';
         }
     });

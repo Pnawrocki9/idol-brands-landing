@@ -204,15 +204,25 @@
     </footer>
     <script src="../auth.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Load the legal content from localStorage.  The admin dashboard stores
-        // the terms & conditions in localStorage under the key 'legalTerms'.  If not
-        // present, we display a default placeholder.
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Load the legal content from the API. The admin dashboard stores
+        // the terms & conditions in legal-data.json via Netlify function.
         const container = document.getElementById('legal-content');
-        const stored = localStorage.getItem('legalTerms');
-        if (stored) {
-            container.innerHTML = stored;
-        } else {
+        
+        try {
+            const response = await fetch('/api/legal-content');
+            if (response.ok) {
+                const data = await response.json();
+                if (data.terms && data.terms.trim()) {
+                    container.innerHTML = data.terms;
+                } else {
+                    container.innerHTML = '<p>No terms and conditions have been published yet.</p>';
+                }
+            } else {
+                container.innerHTML = '<p>No terms and conditions have been published yet.</p>';
+            }
+        } catch (error) {
+            console.error('Error loading legal content:', error);
             container.innerHTML = '<p>No terms and conditions have been published yet.</p>';
         }
     });

@@ -2256,26 +2256,63 @@
         // Legal settings
         // Use Quill rich text editors for legal pages. These allow the admin to
         // define the content of the Terms & Conditions, Cookies Policy and
-        // Privacy/GDPR pages with full formatting. On load we populate them from localStorage.
+        // Privacy/GDPR pages with full formatting. On load we populate them from the API.
         const saveLegalBtn = document.getElementById('save-legal');
         const legalMsg = document.getElementById('legal-save-msg');
 
-        function loadLegalSettings() {
-            if (quillLegalTerms) quillLegalTerms.root.innerHTML = localStorage.getItem('legalTerms') || '';
-            if (quillLegalCookies) quillLegalCookies.root.innerHTML = localStorage.getItem('legalCookies') || '';
-            if (quillLegalGDPR) quillLegalGDPR.root.innerHTML = localStorage.getItem('legalGDPR') || '';
+        async function loadLegalSettings() {
+            try {
+                const response = await fetch('/api/legal-content');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (quillLegalTerms) quillLegalTerms.root.innerHTML = data.terms || '';
+                    if (quillLegalCookies) quillLegalCookies.root.innerHTML = data.cookies || '';
+                    if (quillLegalGDPR) quillLegalGDPR.root.innerHTML = data.gdpr || '';
+                }
+            } catch (error) {
+                console.error('Error loading legal settings:', error);
+            }
         }
 
         loadLegalSettings();
 
         if (saveLegalBtn) {
-            saveLegalBtn.addEventListener('click', function() {
-                if (quillLegalTerms) localStorage.setItem('legalTerms', quillLegalTerms.root.innerHTML || '');
-                if (quillLegalCookies) localStorage.setItem('legalCookies', quillLegalCookies.root.innerHTML || '');
-                if (quillLegalGDPR) localStorage.setItem('legalGDPR', quillLegalGDPR.root.innerHTML || '');
-                if (legalMsg) {
-                    legalMsg.classList.remove('hidden');
-                    setTimeout(() => legalMsg.classList.add('hidden'), 2000);
+            saveLegalBtn.addEventListener('click', async function() {
+                try {
+                    const legalData = {
+                        terms: quillLegalTerms ? quillLegalTerms.root.innerHTML || '' : '',
+                        cookies: quillLegalCookies ? quillLegalCookies.root.innerHTML || '' : '',
+                        gdpr: quillLegalGDPR ? quillLegalGDPR.root.innerHTML || '' : ''
+                    };
+                    
+                    // Load existing data to preserve PL content
+                    const existingResponse = await fetch('/api/legal-content');
+                    if (existingResponse.ok) {
+                        const existingData = await existingResponse.json();
+                        legalData.termsPL = existingData.termsPL || '';
+                        legalData.cookiesPL = existingData.cookiesPL || '';
+                        legalData.gdprPL = existingData.gdprPL || '';
+                    }
+                    
+                    const response = await fetch('/api/legal-content', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(legalData)
+                    });
+                    
+                    if (response.ok) {
+                        if (legalMsg) {
+                            legalMsg.classList.remove('hidden');
+                            setTimeout(() => legalMsg.classList.add('hidden'), 2000);
+                        }
+                    } else {
+                        alert('Error saving legal pages. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error saving legal settings:', error);
+                    alert('Error saving legal pages. Please try again.');
                 }
             });
         }
@@ -2283,26 +2320,63 @@
         // -------------------------------------------------------------------
         // Legal settings (PL)
         // Use Quill rich text editors for Polish legal pages. These allow the admin to
-        // define the content with full formatting. On load we populate them from localStorage.
+        // define the content with full formatting. On load we populate them from the API.
         const saveLegalBtnPL = document.getElementById('save-legal-pl');
         const legalMsgPL = document.getElementById('legal-save-msg-pl');
 
-        function loadLegalSettingsPL() {
-            if (quillLegalTermsPL) quillLegalTermsPL.root.innerHTML = localStorage.getItem('legalTermsPL') || '';
-            if (quillLegalCookiesPL) quillLegalCookiesPL.root.innerHTML = localStorage.getItem('legalCookiesPL') || '';
-            if (quillLegalGDPRPL) quillLegalGDPRPL.root.innerHTML = localStorage.getItem('legalGDPRPL') || '';
+        async function loadLegalSettingsPL() {
+            try {
+                const response = await fetch('/api/legal-content');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (quillLegalTermsPL) quillLegalTermsPL.root.innerHTML = data.termsPL || '';
+                    if (quillLegalCookiesPL) quillLegalCookiesPL.root.innerHTML = data.cookiesPL || '';
+                    if (quillLegalGDPRPL) quillLegalGDPRPL.root.innerHTML = data.gdprPL || '';
+                }
+            } catch (error) {
+                console.error('Error loading Polish legal settings:', error);
+            }
         }
 
         loadLegalSettingsPL();
 
         if (saveLegalBtnPL) {
-            saveLegalBtnPL.addEventListener('click', function() {
-                if (quillLegalTermsPL) localStorage.setItem('legalTermsPL', quillLegalTermsPL.root.innerHTML || '');
-                if (quillLegalCookiesPL) localStorage.setItem('legalCookiesPL', quillLegalCookiesPL.root.innerHTML || '');
-                if (quillLegalGDPRPL) localStorage.setItem('legalGDPRPL', quillLegalGDPRPL.root.innerHTML || '');
-                if (legalMsgPL) {
-                    legalMsgPL.classList.remove('hidden');
-                    setTimeout(() => legalMsgPL.classList.add('hidden'), 2000);
+            saveLegalBtnPL.addEventListener('click', async function() {
+                try {
+                    const legalData = {
+                        termsPL: quillLegalTermsPL ? quillLegalTermsPL.root.innerHTML || '' : '',
+                        cookiesPL: quillLegalCookiesPL ? quillLegalCookiesPL.root.innerHTML || '' : '',
+                        gdprPL: quillLegalGDPRPL ? quillLegalGDPRPL.root.innerHTML || '' : ''
+                    };
+                    
+                    // Load existing data to preserve EN content
+                    const existingResponse = await fetch('/api/legal-content');
+                    if (existingResponse.ok) {
+                        const existingData = await existingResponse.json();
+                        legalData.terms = existingData.terms || '';
+                        legalData.cookies = existingData.cookies || '';
+                        legalData.gdpr = existingData.gdpr || '';
+                    }
+                    
+                    const response = await fetch('/api/legal-content', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(legalData)
+                    });
+                    
+                    if (response.ok) {
+                        if (legalMsgPL) {
+                            legalMsgPL.classList.remove('hidden');
+                            setTimeout(() => legalMsgPL.classList.add('hidden'), 2000);
+                        }
+                    } else {
+                        alert('Błąd podczas zapisywania stron prawnych. Spróbuj ponownie.');
+                    }
+                } catch (error) {
+                    console.error('Error saving Polish legal settings:', error);
+                    alert('Błąd podczas zapisywania stron prawnych. Spróbuj ponownie.');
                 }
             });
         }
