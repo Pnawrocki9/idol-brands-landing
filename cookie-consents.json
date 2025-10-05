@@ -1,16 +1,30 @@
 {
-  "consents": [],
+  "consents": [
+    {
+      "necessary": true,
+      "analytics": true,
+      "marketing": true,
+      "language": "en",
+      "timestamp": 1759684995809,
+      "url": "https://idol-brands.netlify.app/",
+      "referrer": "direct",
+      "ip": "193.93.205.108, 3.78.178.35",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+    }
+  ],
   "stats": {
-    "total": 0,
-    "accepted": 0,
+    "total": 1,
+    "accepted": 1,
     "rejected": 0,
     "customized": 0,
-    "analytics": 0,
-    "marketing": 0,
+    "analytics": 1,
+    "marketing": 1,
     "byLanguage": {
-      "en": 0,
+      "en": 1,
       "pl": 0
     },
-    "byDate": {}
+    "byDate": {
+      "2025-10-05": 1
+    }
   }
 }
