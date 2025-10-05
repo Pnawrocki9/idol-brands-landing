@@ -6,6 +6,9 @@
     <title>Admin Dashboard – Idol Brands</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <!-- Authentication helper provides isLoggedIn, isAdmin and navigation toggling -->
     <script src="auth.js"></script>
 </head>
@@ -977,21 +980,48 @@
         <!-- Legal pages editor -->
         <section class="mt-12">
             <h2 class="text-2xl font-semibold mb-4">Edit Legal Pages</h2>
-            <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages in both languages. Use basic HTML for formatting (e.g. &lt;h2&gt;,&lt;p&gt;,&lt;ul&gt;).</p>
+            <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages in both languages using the rich text editor.</p>
             
             <!-- English versions -->
             <h3 class="text-xl font-semibold mb-2">English Versions</h3>
             <div class="mb-6">
-                <label for="legal-terms-field" class="block text-sm font-medium text-gray-700 mb-1">Terms &amp; Conditions (EN)</label>
-                <textarea id="legal-terms-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Terms &amp; Conditions (EN)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Rich Text Editor</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Use the toolbar to format text: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, headings, lists, links, etc.</li>
+                        <li>Paste content directly from Word or other sources - formatting will be preserved</li>
+                        <li>To add links: select text and click the link button in the toolbar</li>
+                        <li>All formatting will be displayed exactly as you see it here</li>
+                    </ul>
+                </div>
+                <div id="legal-terms-field" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <div class="mb-6">
-                <label for="legal-cookies-field" class="block text-sm font-medium text-gray-700 mb-1">Cookies Policy (EN)</label>
-                <textarea id="legal-cookies-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cookies Policy (EN)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Rich Text Editor</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Use the toolbar to format text: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, headings, lists, links, etc.</li>
+                        <li>Paste content directly from Word or other sources - formatting will be preserved</li>
+                        <li>To add links: select text and click the link button in the toolbar</li>
+                        <li>All formatting will be displayed exactly as you see it here</li>
+                    </ul>
+                </div>
+                <div id="legal-cookies-field" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <div class="mb-6">
-                <label for="legal-gdpr-field" class="block text-sm font-medium text-gray-700 mb-1">Privacy / GDPR (EN)</label>
-                <textarea id="legal-gdpr-field" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Privacy / GDPR (EN)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Rich Text Editor</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Use the toolbar to format text: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, headings, lists, links, etc.</li>
+                        <li>Paste content directly from Word or other sources - formatting will be preserved</li>
+                        <li>To add links: select text and click the link button in the toolbar</li>
+                        <li>All formatting will be displayed exactly as you see it here</li>
+                    </ul>
+                </div>
+                <div id="legal-gdpr-field" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <button id="save-legal" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Legal Pages (EN)</button>
             <p id="legal-save-msg" class="text-green-600 text-sm mt-3 hidden">Legal pages saved.</p>
@@ -1001,16 +1031,43 @@
             <!-- Polish versions -->
             <h3 class="text-xl font-semibold mb-2">Wersje Polskie</h3>
             <div class="mb-6">
-                <label for="legal-terms-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Regulamin (PL)</label>
-                <textarea id="legal-terms-field-pl" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Regulamin (PL)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Edytor tekstu</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Użyj paska narzędzi do formatowania tekstu: <strong>pogrubienie</strong>, <em>kursywa</em>, <u>podkreślenie</u>, nagłówki, listy, linki, itp.</li>
+                        <li>Wklejaj treść bezpośrednio z Worda lub innych źródeł - formatowanie zostanie zachowane</li>
+                        <li>Aby dodać linki: zaznacz tekst i kliknij przycisk linku na pasku narzędzi</li>
+                        <li>Całe formatowanie będzie wyświetlane dokładnie tak, jak widzisz tutaj</li>
+                    </ul>
+                </div>
+                <div id="legal-terms-field-pl" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <div class="mb-6">
-                <label for="legal-cookies-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Polityka Cookies (PL)</label>
-                <textarea id="legal-cookies-field-pl" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Polityka Cookies (PL)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Edytor tekstu</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Użyj paska narzędzi do formatowania tekstu: <strong>pogrubienie</strong>, <em>kursywa</em>, <u>podkreślenie</u>, nagłówki, listy, linki, itp.</li>
+                        <li>Wklejaj treść bezpośrednio z Worda lub innych źródeł - formatowanie zostanie zachowane</li>
+                        <li>Aby dodać linki: zaznacz tekst i kliknij przycisk linku na pasku narzędzi</li>
+                        <li>Całe formatowanie będzie wyświetlane dokładnie tak, jak widzisz tutaj</li>
+                    </ul>
+                </div>
+                <div id="legal-cookies-field-pl" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <div class="mb-6">
-                <label for="legal-gdpr-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Prywatność / RODO (PL)</label>
-                <textarea id="legal-gdpr-field-pl" rows="8" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Prywatność / RODO (PL)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Edytor tekstu</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Użyj paska narzędzi do formatowania tekstu: <strong>pogrubienie</strong>, <em>kursywa</em>, <u>podkreślenie</u>, nagłówki, listy, linki, itp.</li>
+                        <li>Wklejaj treść bezpośrednio z Worda lub innych źródeł - formatowanie zostanie zachowane</li>
+                        <li>Aby dodać linki: zaznacz tekst i kliknij przycisk linku na pasku narzędzi</li>
+                        <li>Całe formatowanie będzie wyświetlane dokładnie tak, jak widzisz tutaj</li>
+                    </ul>
+                </div>
+                <div id="legal-gdpr-field-pl" class="bg-white" style="min-height: 300px;"></div>
             </div>
             <button id="save-legal-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz strony prawne (PL)</button>
             <p id="legal-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Strony prawne zapisane.</p>
@@ -2080,30 +2137,142 @@
             });
         }
 
+        // ===== Initialize Quill Rich Text Editors for Legal Documents =====
+        // Initialize Quill for Terms & Conditions (EN)
+        var quillLegalTerms = new Quill('#legal-terms-field', {
+            theme: 'snow',
+            placeholder: 'Enter your Terms & Conditions content here... You can paste from Word or any other source.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Cookies Policy (EN)
+        var quillLegalCookies = new Quill('#legal-cookies-field', {
+            theme: 'snow',
+            placeholder: 'Enter your Cookies Policy content here... You can paste from Word or any other source.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Privacy/GDPR (EN)
+        var quillLegalGDPR = new Quill('#legal-gdpr-field', {
+            theme: 'snow',
+            placeholder: 'Enter your Privacy/GDPR content here... You can paste from Word or any other source.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Terms & Conditions (PL)
+        var quillLegalTermsPL = new Quill('#legal-terms-field-pl', {
+            theme: 'snow',
+            placeholder: 'Wpisz treść Regulaminu... Możesz wklejać z Worda lub innego źródła.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Cookies Policy (PL)
+        var quillLegalCookiesPL = new Quill('#legal-cookies-field-pl', {
+            theme: 'snow',
+            placeholder: 'Wpisz treść Polityki Cookies... Możesz wklejać z Worda lub innego źródła.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Privacy/RODO (PL)
+        var quillLegalGDPRPL = new Quill('#legal-gdpr-field-pl', {
+            theme: 'snow',
+            placeholder: 'Wpisz treść Polityki Prywatności/RODO... Możesz wklejać z Worda lub innego źródła.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
         // -------------------------------------------------------------------
         // Legal settings
-        // Grab textarea fields for legal pages. These allow the admin to
+        // Use Quill rich text editors for legal pages. These allow the admin to
         // define the content of the Terms & Conditions, Cookies Policy and
-        // Privacy/GDPR pages.  On load we populate them from localStorage.
-        const legalTermsField = document.getElementById('legal-terms-field');
-        const legalCookiesField = document.getElementById('legal-cookies-field');
-        const legalGDPRField = document.getElementById('legal-gdpr-field');
+        // Privacy/GDPR pages with full formatting. On load we populate them from localStorage.
         const saveLegalBtn = document.getElementById('save-legal');
         const legalMsg = document.getElementById('legal-save-msg');
 
         function loadLegalSettings() {
-            if (legalTermsField) legalTermsField.value = localStorage.getItem('legalTerms') || '';
-            if (legalCookiesField) legalCookiesField.value = localStorage.getItem('legalCookies') || '';
-            if (legalGDPRField) legalGDPRField.value = localStorage.getItem('legalGDPR') || '';
+            if (quillLegalTerms) quillLegalTerms.root.innerHTML = localStorage.getItem('legalTerms') || '';
+            if (quillLegalCookies) quillLegalCookies.root.innerHTML = localStorage.getItem('legalCookies') || '';
+            if (quillLegalGDPR) quillLegalGDPR.root.innerHTML = localStorage.getItem('legalGDPR') || '';
         }
 
         loadLegalSettings();
 
         if (saveLegalBtn) {
             saveLegalBtn.addEventListener('click', function() {
-                if (legalTermsField) localStorage.setItem('legalTerms', legalTermsField.value || '');
-                if (legalCookiesField) localStorage.setItem('legalCookies', legalCookiesField.value || '');
-                if (legalGDPRField) localStorage.setItem('legalGDPR', legalGDPRField.value || '');
+                if (quillLegalTerms) localStorage.setItem('legalTerms', quillLegalTerms.root.innerHTML || '');
+                if (quillLegalCookies) localStorage.setItem('legalCookies', quillLegalCookies.root.innerHTML || '');
+                if (quillLegalGDPR) localStorage.setItem('legalGDPR', quillLegalGDPR.root.innerHTML || '');
                 if (legalMsg) {
                     legalMsg.classList.remove('hidden');
                     setTimeout(() => legalMsg.classList.add('hidden'), 2000);
@@ -2113,25 +2282,24 @@
 
         // -------------------------------------------------------------------
         // Legal settings (PL)
-        const legalTermsFieldPL = document.getElementById('legal-terms-field-pl');
-        const legalCookiesFieldPL = document.getElementById('legal-cookies-field-pl');
-        const legalGDPRFieldPL = document.getElementById('legal-gdpr-field-pl');
+        // Use Quill rich text editors for Polish legal pages. These allow the admin to
+        // define the content with full formatting. On load we populate them from localStorage.
         const saveLegalBtnPL = document.getElementById('save-legal-pl');
         const legalMsgPL = document.getElementById('legal-save-msg-pl');
 
         function loadLegalSettingsPL() {
-            if (legalTermsFieldPL) legalTermsFieldPL.value = localStorage.getItem('legalTermsPL') || '';
-            if (legalCookiesFieldPL) legalCookiesFieldPL.value = localStorage.getItem('legalCookiesPL') || '';
-            if (legalGDPRFieldPL) legalGDPRFieldPL.value = localStorage.getItem('legalGDPRPL') || '';
+            if (quillLegalTermsPL) quillLegalTermsPL.root.innerHTML = localStorage.getItem('legalTermsPL') || '';
+            if (quillLegalCookiesPL) quillLegalCookiesPL.root.innerHTML = localStorage.getItem('legalCookiesPL') || '';
+            if (quillLegalGDPRPL) quillLegalGDPRPL.root.innerHTML = localStorage.getItem('legalGDPRPL') || '';
         }
 
         loadLegalSettingsPL();
 
         if (saveLegalBtnPL) {
             saveLegalBtnPL.addEventListener('click', function() {
-                if (legalTermsFieldPL) localStorage.setItem('legalTermsPL', legalTermsFieldPL.value || '');
-                if (legalCookiesFieldPL) localStorage.setItem('legalCookiesPL', legalCookiesFieldPL.value || '');
-                if (legalGDPRFieldPL) localStorage.setItem('legalGDPRPL', legalGDPRFieldPL.value || '');
+                if (quillLegalTermsPL) localStorage.setItem('legalTermsPL', quillLegalTermsPL.root.innerHTML || '');
+                if (quillLegalCookiesPL) localStorage.setItem('legalCookiesPL', quillLegalCookiesPL.root.innerHTML || '');
+                if (quillLegalGDPRPL) localStorage.setItem('legalGDPRPL', quillLegalGDPRPL.root.innerHTML || '');
                 if (legalMsgPL) {
                     legalMsgPL.classList.remove('hidden');
                     setTimeout(() => legalMsgPL.classList.add('hidden'), 2000);
