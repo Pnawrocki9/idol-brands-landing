@@ -208,6 +208,8 @@
                 img.src = post.img;
                 img.alt = post.title || '';
                 img.className = 'w-full h-56 object-cover';
+                img.loading = 'lazy';
+                img.decoding = 'async';
                 card.appendChild(img);
             }
             const contentWrapper = document.createElement('div');
@@ -266,13 +268,17 @@
             document.getElementById('copyright-year').textContent = new Date().getFullYear();
         }
         
-        // Wait for CMS content to load from server, then display blog posts
-        if (window.cmsLoadFromServer) {
-            await window.cmsLoadFromServer();
-        }
-        
-        // Load blog posts from localStorage (now populated by CMS sync)
+        // Render immediately from localStorage if available (non-blocking)
         loadBlogPosts();
+
+        // Refresh in background and re-render when ready
+        if (window.cmsLoadFromServer) {
+            try {
+                window.cmsLoadFromServer().then(loadBlogPosts).catch(console.warn);
+            } catch (e) {
+                console.warn('cmsLoadFromServer failed', e);
+            }
+        }
     });
     </script>
 </body>
