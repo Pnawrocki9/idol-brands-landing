@@ -48,6 +48,15 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plAboutCtaDesc', 'Dołącz do setek influencerów, którzy przekształcili swoje wpływy w kwitnące marki modowe. Twoja podróż w stronę przedsiębiorczości modowej zaczyna się teraz.');
   initDefaultIfEmpty('plAboutCtaButton', 'Załóż Swoją Markę Modową Dzisiaj');
   initDefaultIfEmpty('plAboutCtaSubtext', 'Bezpłatna konsultacja • Bez zobowiązań • Wyniki w 8 tygodni');
+  // Home Page About Section (PL)
+  initDefaultIfEmpty('plHomeAboutTitle', 'Stworzeni przez insiderów mody');
+  initDefaultIfEmpty('plHomeAboutSubtitle', 'Rozumiemy wyzwania związane z budowaniem marki modowej, ponieważ tam byliśmy. Naszą misją jest demokratyzacja przedsiębiorczości modowej dla każdego influencera.');
+  initDefaultIfEmpty('plHomeAboutExpertiseTitle', 'Doświadczenie w produkcji');
+  initDefaultIfEmpty('plHomeAboutExpertiseDesc', 'Dziesięciolecia doświadczenia w produkcji mody, kontroli jakości i zarządzaniu łańcuchem dostaw na rynkach globalnych.');
+  initDefaultIfEmpty('plHomeAboutLogisticsTitle', 'Mistrzostwo logistyki');
+  initDefaultIfEmpty('plHomeAboutLogisticsDesc', 'Kompleksowe rozwiązania logistyczne od magazynowania po dostawę ostatniej mili, zoptymalizowane dla influencerskich marek modowych.');
+  initDefaultIfEmpty('plHomeAboutInnovationTitle', 'Innowacje technologiczne');
+  initDefaultIfEmpty('plHomeAboutInnovationDesc', 'Najnowocześniejsza platforma live-commerce z analizą w czasie rzeczywistym, rekomendacjami AI i bezproblemową integracją.');
   initDefaultIfEmpty('plHowTitle', 'Poznaj Live-Selling');
   initDefaultIfEmpty('plHowSubtitle', 'Zobacz, jak nasza platforma live-selling przekształca Twoje pokazy mody w wydarzenia sprzedażowe.');
   initDefaultIfEmpty('plReadyTitle', 'Gotowy Na Start Z Live-Selling?');
@@ -198,14 +207,14 @@ document.addEventListener('DOMContentLoaded', function() {
     ['solution-step4-title-field-pl','plSolutionStep4Title','solutionStep4Title','Marketing & Growth'],
     ['solution-step4-desc-field-pl','plSolutionStep4Desc','solutionStep4Desc','Data-driven marketing campaigns and growth strategies to scale your brand.'],
     // Home Page About Section (PL)
-    ['home-about-title-field-pl','plHomeAboutTitle','homeAboutTitle','Built by Fashion Insiders'],
-    ['home-about-subtitle-field-pl','plHomeAboutSubtitle','homeAboutSubtitle','We understand the challenges of building a fashion brand because we\'ve been there. Our mission is to democratize fashion entrepreneurship for every influencer.'],
-    ['home-about-expertise-title-field-pl','plHomeAboutExpertiseTitle','homeAboutExpertiseTitle','Manufacturing Expertise'],
-    ['home-about-expertise-desc-field-pl','plHomeAboutExpertiseDesc','homeAboutExpertiseDesc','Decades of experience in fashion production, quality control, and supply chain management across global markets.'],
-    ['home-about-logistics-title-field-pl','plHomeAboutLogisticsTitle','homeAboutLogisticsTitle','Logistics Mastery'],
-    ['home-about-logistics-desc-field-pl','plHomeAboutLogisticsDesc','homeAboutLogisticsDesc','End-to-end logistics solutions from warehousing to last-mile delivery, optimized for influencer fashion brands.'],
-    ['home-about-innovation-title-field-pl','plHomeAboutInnovationTitle','homeAboutInnovationTitle','Technology Innovation'],
-    ['home-about-innovation-desc-field-pl','plHomeAboutInnovationDesc','homeAboutInnovationDesc','Cutting-edge live-commerce platform with real-time analytics, AI-powered recommendations, and seamless integration.'],
+    ['home-about-title-field-pl','plHomeAboutTitle',null,'Stworzeni przez insiderów mody'],
+    ['home-about-subtitle-field-pl','plHomeAboutSubtitle',null,'Rozumiemy wyzwania związane z budowaniem marki modowej, ponieważ tam byliśmy. Naszą misją jest demokratyzacja przedsiębiorczości modowej dla każdego influencera.'],
+    ['home-about-expertise-title-field-pl','plHomeAboutExpertiseTitle',null,'Doświadczenie w produkcji'],
+    ['home-about-expertise-desc-field-pl','plHomeAboutExpertiseDesc',null,'Dziesięciolecia doświadczenia w produkcji mody, kontroli jakości i zarządzaniu łańcuchem dostaw na rynkach globalnych.'],
+    ['home-about-logistics-title-field-pl','plHomeAboutLogisticsTitle',null,'Mistrzostwo logistyki'],
+    ['home-about-logistics-desc-field-pl','plHomeAboutLogisticsDesc',null,'Kompleksowe rozwiązania logistyczne od magazynowania po dostawę ostatniej mili, zoptymalizowane dla influencerskich marek modowych.'],
+    ['home-about-innovation-title-field-pl','plHomeAboutInnovationTitle',null,'Innowacje technologiczne'],
+    ['home-about-innovation-desc-field-pl','plHomeAboutInnovationDesc',null,'Najnowocześniejsza platforma live-commerce z analizą w czasie rzeczywistym, rekomendacjami AI i bezproblemową integracją.'],
     // Success Timeline (PL)
     ['timeline-title-field-pl','plTimelineTitle','timelineTitle','Success Timeline'],
     ['timeline1-period-field-pl','plTimeline1Period','timeline1Period','Week 1-2'],
