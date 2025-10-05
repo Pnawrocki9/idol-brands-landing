@@ -501,7 +501,7 @@
                 <button class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
                     Stwórz Swój Sklep Live-Selling
                 </button>
-                <p class="text-gray-500 text-sm mt-4">
+                <p id="how-cta-subtext" class="text-gray-500 text-sm mt-4">
                     Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 1 tydzień
                 </p>
             </div>
@@ -594,13 +594,16 @@
         const howTitleElem = document.getElementById('how-title');
         const howSubtitleElem = document.getElementById('how-subtitle');
         const readyTitleElem = document.getElementById('ready-title');
+        const howCtaSubtextElem = document.getElementById('how-cta-subtext');
         // Prefer Polish values for How It Works page
         const storedHowTitle = localStorage.getItem('plHowTitle') || localStorage.getItem('howTitle');
         const storedHowSubtitle = localStorage.getItem('plHowSubtitle') || localStorage.getItem('howSubtitle');
         const storedReadyTitle = localStorage.getItem('plReadyTitle') || localStorage.getItem('readyTitle');
+        const storedHowCtaSubtext = localStorage.getItem('plHowCtaSubtext') || localStorage.getItem('howCtaSubtext');
         if (storedHowTitle) howTitleElem.textContent = storedHowTitle;
         if (storedHowSubtitle) howSubtitleElem.textContent = storedHowSubtitle;
         if (storedReadyTitle) readyTitleElem.textContent = storedReadyTitle;
+        if (storedHowCtaSubtext) howCtaSubtextElem.textContent = storedHowCtaSubtext;
     });
     </script>
 </body>
