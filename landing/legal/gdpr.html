@@ -204,12 +204,23 @@
     </footer>
     <script src="../auth.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
         const container = document.getElementById('legal-content');
-        const stored = localStorage.getItem('legalGDPR');
-        if (stored) {
-            container.innerHTML = stored;
-        } else {
+        
+        try {
+            const response = await fetch('/api/legal-content');
+            if (response.ok) {
+                const data = await response.json();
+                if (data.gdpr && data.gdpr.trim()) {
+                    container.innerHTML = data.gdpr;
+                } else {
+                    container.innerHTML = '<p>No privacy policy has been published yet.</p>';
+                }
+            } else {
+                container.innerHTML = '<p>No privacy policy has been published yet.</p>';
+            }
+        } catch (error) {
+            console.error('Error loading legal content:', error);
             container.innerHTML = '<p>No privacy policy has been published yet.</p>';
         }
     });
