@@ -311,7 +311,7 @@
                 <button class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
                     Załóż Swoją Markę Modową Dzisiaj
                 </button>
-                <p class="text-gray-500 text-sm mt-4">
+                <p id="about-cta-subtext" class="text-gray-500 text-sm mt-4">
                     Bezpłatna konsultacja • Bez zobowiązań • Wyniki w 8 tygodni
                 </p>
             </div>
@@ -451,6 +451,13 @@
         const storedImpactSubtitle = localStorage.getItem('plImpactSubtitle') || localStorage.getItem('impactSubtitle');
         if (storedImpactTitle) impactTitleElem.textContent = storedImpactTitle;
         if (storedImpactSubtitle) impactSubtitleElem.textContent = storedImpactSubtitle;
+        
+        // CTA Section
+        const aboutCtaSubtextElem = document.getElementById('about-cta-subtext');
+        const storedAboutCtaSubtext = localStorage.getItem('plAboutCtaSubtext') || localStorage.getItem('aboutCtaSubtext');
+        if (storedAboutCtaSubtext && aboutCtaSubtextElem) {
+            aboutCtaSubtextElem.textContent = storedAboutCtaSubtext;
+        }
     });
     </script>
 </body>
