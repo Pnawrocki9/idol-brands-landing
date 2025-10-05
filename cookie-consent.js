@@ -252,6 +252,35 @@ class CookieConsent {
         expiryDate.setDate(expiryDate.getDate() + this.cookieExpiry);
         
         document.cookie = `${this.cookieName}=${consentString};expires=${expiryDate.toUTCString()};path=/;SameSite=Lax`;
+        
+        // Send consent data to backend for analytics
+        this.sendConsentToBackend(consent);
+    }
+
+    async sendConsentToBackend(consent) {
+        try {
+            const response = await fetch('/.netlify/functions/cookie-consents', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    necessary: consent.necessary,
+                    analytics: consent.analytics,
+                    marketing: consent.marketing,
+                    language: this.lang,
+                    timestamp: consent.timestamp,
+                    url: window.location.href,
+                    referrer: document.referrer || 'direct'
+                })
+            });
+            
+            if (!response.ok) {
+                console.warn('Failed to record consent to backend');
+            }
+        } catch (error) {
+            console.warn('Error sending consent to backend:', error);
+        }
     }
 
     getConsent() {

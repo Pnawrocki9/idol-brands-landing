@@ -1,0 +1,16 @@
+{
+  "consents": [],
+  "stats": {
+    "total": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "customized": 0,
+    "analytics": 0,
+    "marketing": 0,
+    "byLanguage": {
+      "en": 0,
+      "pl": 0
+    },
+    "byDate": {}
+  }
+}
