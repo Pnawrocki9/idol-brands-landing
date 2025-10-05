@@ -142,21 +142,32 @@
       "referrer": "https://idol-brands.netlify.app/blog-pl",
       "ip": "193.93.205.108, 63.178.53.27",
       "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+    },
+    {
+      "necessary": true,
+      "analytics": true,
+      "marketing": true,
+      "language": "en",
+      "timestamp": 1759699579884,
+      "url": "https://idol-brands.netlify.app/",
+      "referrer": "android-app://com.google.android.googlequicksearchbox/",
+      "ip": "193.93.205.108, 63.177.138.6",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
     }
   ],
   "stats": {
-    "total": 13,
-    "accepted": 13,
+    "total": 14,
+    "accepted": 14,
     "rejected": 0,
     "customized": 0,
-    "analytics": 13,
-    "marketing": 13,
+    "analytics": 14,
+    "marketing": 14,
     "byLanguage": {
-      "en": 11,
+      "en": 12,
       "pl": 2
     },
     "byDate": {
-      "2025-10-05": 13
+      "2025-10-05": 14
     }
   }
 }
