@@ -236,6 +236,77 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-success {
+            border-color: #28a745;
+            color: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-info {
+            border-color: #17a2b8;
+            color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .consent-table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .consent-table-header h2 {
+            margin: 0;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .view-toggle label {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
         .pie-chart {
             display: flex;
             justify-content: center;
@@ -290,6 +361,12 @@
 
         <button class="refresh-btn" onclick="loadDashboard()">🔄 Refresh Data</button>
 
+        <div class="action-buttons">
+            <button class="btn btn-success" onclick="exportToCSV()">📊 Export to CSV (Audit)</button>
+            <button class="btn btn-info" onclick="exportToJSON()">📄 Export to JSON</button>
+            <button class="btn" onclick="viewAllConsents()">👁️ View All Consents</button>
+        </div>
+
         <div id="loading" class="loading">Loading dashboard data...</div>
         <div id="error" class="error" style="display: none;"></div>
 
@@ -342,19 +419,29 @@
             </div>
 
             <div class="recent-consents">
-                <h2>Recent Consents</h2>
-                <table class="consent-table">
-                    <thead>
-                        <tr>
-                            <th>Date & Time</th>
-                            <th>Language</th>
-                            <th>Analytics</th>
-                            <th>Marketing</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody id="consents-tbody"></tbody>
-                </table>
+                <div class="consent-table-header">
+                    <h2 id="consents-title">Recent Consents (Last 20)</h2>
+                    <div class="view-toggle">
+                        <label>
+                            <input type="checkbox" id="show-details-toggle" onchange="toggleDetailsView()">
+                            Show detailed info (IP, URL)
+                        </label>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="consent-table">
+                        <thead id="consents-thead">
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Language</th>
+                                <th>Analytics</th>
+                                <th>Marketing</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody id="consents-tbody"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
