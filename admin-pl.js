@@ -184,6 +184,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ['home-feature3-title-field-pl','plHomeFeature3Title','homeFeature3Title','Proven Results'],
     ['home-feature3-desc-field-pl','plHomeFeature3Desc','homeFeature3Desc','Join the 10% who succeed'],
     ['home-cta-field-pl','plHomeCtaText','homeCtaText','See How It Works'],
+    ['home-cta-subtext1-field-pl','plHomeCtaSubtext1','homeCtaSubtext1','Free consultation • No commitment • Results in 8 weeks'],
+    ['home-cta-subtext2-field-pl','plHomeCtaSubtext2','homeCtaSubtext2','Limited spots available • Join 500+ influencers on the waiting list'],
     // Complete Solution Section (PL)
     ['solution-title-field-pl','plSolutionTitle','solutionTitle','Our Complete Solution'],
     ['solution-subtitle-field-pl','plSolutionSubtitle','solutionSubtitle','Everything you need to launch and scale your fashion brand, all in one platform.'],
