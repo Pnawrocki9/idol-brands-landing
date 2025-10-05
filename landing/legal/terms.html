@@ -5,6 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms &amp; Conditions – Idol Brands</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                maxWidth: 'none',
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [
+                function({ addBase }) {
+                    addBase({
+                        '.prose': {
+                            '--tw-prose-body': '#374151',
+                            '--tw-prose-headings': '#111827',
+                            '--tw-prose-lead': '#4b5563',
+                            '--tw-prose-links': '#000000',
+                            '--tw-prose-bold': '#111827',
+                            '--tw-prose-counters': '#6b7280',
+                            '--tw-prose-bullets': '#d1d5db',
+                            '--tw-prose-hr': '#e5e7eb',
+                            '--tw-prose-quotes': '#111827',
+                            '--tw-prose-quote-borders': '#e5e7eb',
+                            '--tw-prose-captions': '#6b7280',
+                            '--tw-prose-code': '#111827',
+                            '--tw-prose-pre-code': '#e5e7eb',
+                            '--tw-prose-pre-bg': '#1f2937',
+                            '--tw-prose-th-borders': '#d1d5db',
+                            '--tw-prose-td-borders': '#e5e7eb',
+                        },
+                        '.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6': {
+                            color: 'var(--tw-prose-headings)',
+                            fontWeight: '700',
+                            marginTop: '1.5em',
+                            marginBottom: '0.75em',
+                            lineHeight: '1.3',
+                        },
+                        '.prose h1': { fontSize: '2em' },
+                        '.prose h2': { fontSize: '1.5em' },
+                        '.prose h3': { fontSize: '1.25em' },
+                        '.prose p': {
+                            marginTop: '1em',
+                            marginBottom: '1em',
+                            lineHeight: '1.75',
+                        },
+                        '.prose ul, .prose ol': {
+                            marginTop: '1em',
+                            marginBottom: '1em',
+                            paddingLeft: '1.5em',
+                        },
+                        '.prose ul': {
+                            listStyleType: 'disc',
+                        },
+                        '.prose ol': {
+                            listStyleType: 'decimal',
+                        },
+                        '.prose li': {
+                            marginTop: '0.5em',
+                            marginBottom: '0.5em',
+                        },
+                        '.prose strong': {
+                            color: 'var(--tw-prose-bold)',
+                            fontWeight: '600',
+                        },
+                        '.prose em': {
+                            fontStyle: 'italic',
+                        },
+                        '.prose blockquote': {
+                            fontStyle: 'italic',
+                            borderLeftWidth: '4px',
+                            borderLeftColor: 'var(--tw-prose-quote-borders)',
+                            paddingLeft: '1em',
+                            marginTop: '1.5em',
+                            marginBottom: '1.5em',
+                        },
+                        '.prose a': {
+                            color: 'var(--tw-prose-links)',
+                            textDecoration: 'underline',
+                            fontWeight: '500',
+                        },
+                        '.prose a:hover': {
+                            color: '#374151',
+                        },
+                    });
+                }
+            ]
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
