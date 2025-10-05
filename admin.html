@@ -2939,7 +2939,7 @@
 
         loadHomeSettings();
 
-        saveHomeBtn.addEventListener('click', function() {
+        saveHomeBtn.addEventListener('click', async function() {
             // Save metrics
             localStorage.setItem('metricMarketSizeValue', homeMarketValueField.value);
             localStorage.setItem('metricMarketSizeLabel', homeMarketLabelField.value);
@@ -2993,9 +2993,24 @@
             localStorage.setItem('homeAboutLogisticsDesc', homeAboutLogisticsDescField.value);
             localStorage.setItem('homeAboutInnovationTitle', homeAboutInnovationTitleField.value);
             localStorage.setItem('homeAboutInnovationDesc', homeAboutInnovationDescField.value);
+            
+            // Auto-publish changes to server
             const msg = document.getElementById('home-save-msg');
+            msg.textContent = 'Saving and publishing...';
             msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 2000);
+            
+            if (window.cmsSyncToServer) {
+                const success = await window.cmsSyncToServer();
+                if (success) {
+                    msg.textContent = 'Home page settings saved and published online!';
+                } else {
+                    msg.textContent = 'Saved locally. Please click "Publikuj Treści Online" to publish.';
+                }
+            } else {
+                msg.textContent = 'Home page settings saved.';
+            }
+            
+            setTimeout(() => msg.classList.add('hidden'), 3000);
         });
         
         // ===== Waiting List Form (EN) =====
