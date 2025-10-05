@@ -197,6 +197,15 @@ document.addEventListener('DOMContentLoaded', function() {
     ['solution-step3-desc-field-pl','plSolutionStep3Desc','solutionStep3Desc','Custom online store with integrated payment processing and inventory management.'],
     ['solution-step4-title-field-pl','plSolutionStep4Title','solutionStep4Title','Marketing & Growth'],
     ['solution-step4-desc-field-pl','plSolutionStep4Desc','solutionStep4Desc','Data-driven marketing campaigns and growth strategies to scale your brand.'],
+    // Home Page About Section (PL)
+    ['home-about-title-field-pl','plHomeAboutTitle','homeAboutTitle','Built by Fashion Insiders'],
+    ['home-about-subtitle-field-pl','plHomeAboutSubtitle','homeAboutSubtitle','We understand the challenges of building a fashion brand because we\'ve been there. Our mission is to democratize fashion entrepreneurship for every influencer.'],
+    ['home-about-expertise-title-field-pl','plHomeAboutExpertiseTitle','homeAboutExpertiseTitle','Manufacturing Expertise'],
+    ['home-about-expertise-desc-field-pl','plHomeAboutExpertiseDesc','homeAboutExpertiseDesc','Decades of experience in fashion production, quality control, and supply chain management across global markets.'],
+    ['home-about-logistics-title-field-pl','plHomeAboutLogisticsTitle','homeAboutLogisticsTitle','Logistics Mastery'],
+    ['home-about-logistics-desc-field-pl','plHomeAboutLogisticsDesc','homeAboutLogisticsDesc','End-to-end logistics solutions from warehousing to last-mile delivery, optimized for influencer fashion brands.'],
+    ['home-about-innovation-title-field-pl','plHomeAboutInnovationTitle','homeAboutInnovationTitle','Technology Innovation'],
+    ['home-about-innovation-desc-field-pl','plHomeAboutInnovationDesc','homeAboutInnovationDesc','Cutting-edge live-commerce platform with real-time analytics, AI-powered recommendations, and seamless integration.'],
     // Success Timeline (PL)
     ['timeline-title-field-pl','plTimelineTitle','timelineTitle','Success Timeline'],
     ['timeline1-period-field-pl','plTimeline1Period','timeline1Period','Week 1-2'],
