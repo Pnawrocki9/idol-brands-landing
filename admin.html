@@ -13,6 +13,10 @@
     <script src="auth.js"></script>
     <script src="cms-sync.js"></script>
     <script src="documents-sync.js"></script>
+    <style>
+      /* Smooth anchor scrolling */
+      html { scroll-behavior: smooth; }
+    </style>
 </head>
 <body class="bg-gray-100 font-sans">
     <!-- Navigation: reuse same structure as other pages.  updateNav() will show/hide links appropriately. -->
@@ -42,6 +46,25 @@
 
     <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-4xl font-display font-bold mb-8">Admin Dashboard</h1>
+
+        <!-- CMS Modules Menu (EN & PL) -->
+        <section id="cms-modules-menu" class="mb-8 bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+            <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+                <h2 class="text-2xl font-semibold">CMS Modules · Moduły CMS</h2>
+                <a href="#" onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;return false;" class="text-sm text-blue-700 hover:underline">Top</a>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Quick links to all CMS modules. Szybkie linki do wszystkich modułów CMS.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">EN</h3>
+                    <ul id="cms-toc-en" class="list-disc pl-5 space-y-1"></ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">PL</h3>
+                    <ul id="cms-toc-pl" class="list-disc pl-5 space-y-1"></ul>
+                </div>
+            </div>
+        </section>
         
         <!-- Global Navigation Settings -->
         <section class="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
@@ -3265,6 +3288,87 @@
 
         // Initialize navigation settings on page load
         loadNavigationSettings();
+
+        // -------------------------------------------------------------------
+        // CMS Modules Menu (TOC) + Back-to-Top
+        // Build a table of contents from all top-level h2 headings, grouped EN/PL
+        (function buildCmsTocAndBackToTop(){
+            const tocEn = document.getElementById('cms-toc-en');
+            const tocPl = document.getElementById('cms-toc-pl');
+            const tocContainer = document.getElementById('cms-modules-menu');
+            if (!tocEn || !tocPl || !tocContainer) return;
+
+            function slugify(text) {
+                const noDiacritics = text
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '');
+                return noDiacritics
+                    .replace(/[^a-zA-Z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '')
+                    .toLowerCase();
+            }
+
+            function isPolishHeading(text) {
+                const lower = text.toLowerCase();
+                return /(\(pl\))/.test(lower)
+                    || /[ąćęłńóśźż]/i.test(lower)
+                    || /(strona|zarządzanie|karta|kalkulator|treść|zdjęcia|wideo|formularz|lista|oczekujących|wersje|edytuj|użytkownik|zapisz|polskie|polski)/i.test(lower);
+            }
+
+            const headings = Array.from(document.querySelectorAll('h2'));
+            const existingIds = new Set();
+
+            headings.forEach((heading) => {
+                if (heading.closest('#cms-modules-menu')) return; // skip TOC own heading
+                const title = (heading.textContent || '').trim();
+                if (!title) return;
+
+                // Ensure each heading has a stable id
+                if (heading.id) {
+                    existingIds.add(heading.id);
+                } else {
+                    const base = slugify(title.replace(/\s*\((EN|PL)\)\s*$/i, '')) || 'section';
+                    let candidate = base;
+                    let counter = 2;
+                    while (document.getElementById(candidate) || existingIds.has(candidate)) {
+                        candidate = `${base}-${counter++}`;
+                    }
+                    heading.id = candidate;
+                    existingIds.add(candidate);
+                }
+
+                // Account for fixed navbar when scrolling to anchors
+                heading.style.scrollMarginTop = '100px';
+
+                const listItem = document.createElement('li');
+                listItem.className = 'leading-tight';
+                const link = document.createElement('a');
+                link.href = `#${heading.id}`;
+                link.textContent = title;
+                link.className = 'text-blue-700 hover:underline';
+                listItem.appendChild(link);
+
+                const targetList = isPolishHeading(title) ? tocPl : tocEn;
+                targetList.appendChild(listItem);
+            });
+
+            // Add a persistent back-to-top button
+            const backBtn = document.createElement('button');
+            backBtn.id = 'back-to-top';
+            backBtn.type = 'button';
+            backBtn.setAttribute('aria-label', 'Back to top');
+            backBtn.title = 'Back to top';
+            backBtn.className = 'fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full bg-black text-white shadow-lg flex items-center justify-center hover:bg-gray-800';
+            backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>';
+            backBtn.addEventListener('click', () => {
+                if (tocContainer) {
+                    tocContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            document.body.appendChild(backBtn);
+        })();
     });
     </script>
     <!-- Load CMS sync script for server persistence -->
