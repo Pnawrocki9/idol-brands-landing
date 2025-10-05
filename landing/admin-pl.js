@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initDefaultIfEmpty('plHowCtaFeature3Title', 'Wbudowana Publiczność');
   initDefaultIfEmpty('plHowCtaFeature3Desc', 'Dostęp do ruchu marketplace');
   initDefaultIfEmpty('plHowCtaButton', 'Stwórz Swój Sklep Live-Selling');
-  initDefaultIfEmpty('plHowCtaSubtext', 'Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 1 tydzień');
+  initDefaultIfEmpty('plHowCtaSubtext', 'Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 6 miesięcy');
   initDefaultIfEmpty('plSuccessTitle', 'Historie Sukcesu');
   initDefaultIfEmpty('plSuccessSubtitle', 'Prawdziwi influencerzy, prawdziwe wyniki. Zobacz, jak przekształciliśmy ich wpływy w kwitnące marki modowe dzięki naszemu sprawdzonemu systemowi.');
   initDefaultIfEmpty('plSuccessCtaTitle', 'Twoja Historia Sukcesu Zaczyna Się Tutaj');
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ['admin-how-cta-feature3-title-pl','plHowCtaFeature3Title','howCtaFeature3Title','Wbudowana Publiczność'],
     ['admin-how-cta-feature3-desc-pl','plHowCtaFeature3Desc','howCtaFeature3Desc','Dostęp do ruchu marketplace'],
     ['admin-how-cta-button-pl','plHowCtaButton','howCtaButton','Stwórz Swój Sklep Live-Selling'],
-    ['admin-how-cta-subtext-pl','plHowCtaSubtext','howCtaSubtext','Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 1 tydzień']
+    ['admin-how-cta-subtext-pl','plHowCtaSubtext','howCtaSubtext','Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 6 miesięcy']
   ];
   loadField('admin-how-title-pl','plHowTitle','howTitle');
   loadField('admin-how-subtitle-pl','plHowSubtitle','howSubtitle');
