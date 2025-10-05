@@ -501,7 +501,7 @@
                 <button id="cta-button" class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
                     Create Your Live-Selling Shop
                 </button>
-                <p class="text-gray-500 text-sm mt-4">
+                <p id="how-cta-subtext" class="text-gray-500 text-sm mt-4">
                     Free consultation • No setup fees • Start earning in 1 week
                 </p>
             </div>
@@ -595,12 +595,15 @@
         const howTitleElem = document.getElementById('how-title');
         const howSubtitleElem = document.getElementById('how-subtitle');
         const readyTitleElem = document.getElementById('ready-title');
+        const howCtaSubtextElem = document.getElementById('how-cta-subtext');
         const storedHowTitle = localStorage.getItem('howTitle');
         const storedHowSubtitle = localStorage.getItem('howSubtitle');
         const storedReadyTitle = localStorage.getItem('readyTitle');
+        const storedHowCtaSubtext = localStorage.getItem('howCtaSubtext');
         if (storedHowTitle) howTitleElem.textContent = storedHowTitle;
         if (storedHowSubtitle) howSubtitleElem.textContent = storedHowSubtitle;
         if (storedReadyTitle) readyTitleElem.textContent = storedReadyTitle;
+        if (storedHowCtaSubtext) howCtaSubtextElem.textContent = storedHowCtaSubtext;
     });
     </script>
 </body>
