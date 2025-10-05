@@ -236,8 +236,8 @@
                     <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-industry text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-black mb-4">Manufacturing Expertise</h3>
-                    <p class="text-gray-600">
+                    <h3 id="about-card1-title" class="text-2xl font-bold text-black mb-4">Manufacturing Expertise</h3>
+                    <p id="about-card1-desc" class="text-gray-600">
                         Decades of experience in fashion production, quality control, and supply chain management 
                         across global markets.
                     </p>
@@ -246,8 +246,8 @@
                     <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-shipping-fast text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-black mb-4">Logistics Mastery</h3>
-                    <p class="text-gray-600">
+                    <h3 id="about-card2-title" class="text-2xl font-bold text-black mb-4">Logistics Mastery</h3>
+                    <p id="about-card2-desc" class="text-gray-600">
                         End-to-end logistics solutions from warehousing to last-mile delivery, 
                         optimized for influencer fashion brands.
                     </p>
@@ -256,8 +256,8 @@
                     <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-laptop-code text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-black mb-4">Technology Innovation</h3>
-                    <p class="text-gray-600">
+                    <h3 id="about-card3-title" class="text-2xl font-bold text-black mb-4">Technology Innovation</h3>
+                    <p id="about-card3-desc" class="text-gray-600">
                         Cutting-edge live-commerce platform with real-time analytics, 
                         AI-powered recommendations, and seamless integration.
                     </p>
@@ -491,6 +491,28 @@
         const storedTeamSubtitle = localStorage.getItem('teamSubtitle');
         if (storedTeamTitle) teamTitleElem.textContent = storedTeamTitle;
         if (storedTeamSubtitle) teamSubtitleElem.textContent = storedTeamSubtitle;
+        
+        // Team About Cards (1-3)
+        const aboutCard1Title = document.getElementById('about-card1-title');
+        const aboutCard1Desc = document.getElementById('about-card1-desc');
+        const aboutCard2Title = document.getElementById('about-card2-title');
+        const aboutCard2Desc = document.getElementById('about-card2-desc');
+        const aboutCard3Title = document.getElementById('about-card3-title');
+        const aboutCard3Desc = document.getElementById('about-card3-desc');
+        
+        const storedCard1Title = localStorage.getItem('aboutCard1Title') || localStorage.getItem('homeAboutExpertiseTitle');
+        const storedCard1Desc = localStorage.getItem('aboutCard1Desc') || localStorage.getItem('homeAboutExpertiseDesc');
+        const storedCard2Title = localStorage.getItem('aboutCard2Title') || localStorage.getItem('homeAboutLogisticsTitle');
+        const storedCard2Desc = localStorage.getItem('aboutCard2Desc') || localStorage.getItem('homeAboutLogisticsDesc');
+        const storedCard3Title = localStorage.getItem('aboutCard3Title') || localStorage.getItem('homeAboutInnovationTitle');
+        const storedCard3Desc = localStorage.getItem('aboutCard3Desc') || localStorage.getItem('homeAboutInnovationDesc');
+        
+        if (storedCard1Title && aboutCard1Title) aboutCard1Title.textContent = storedCard1Title;
+        if (storedCard1Desc && aboutCard1Desc) aboutCard1Desc.textContent = storedCard1Desc;
+        if (storedCard2Title && aboutCard2Title) aboutCard2Title.textContent = storedCard2Title;
+        if (storedCard2Desc && aboutCard2Desc) aboutCard2Desc.textContent = storedCard2Desc;
+        if (storedCard3Title && aboutCard3Title) aboutCard3Title.textContent = storedCard3Title;
+        if (storedCard3Desc && aboutCard3Desc) aboutCard3Desc.textContent = storedCard3Desc;
         // Impact
         const impactTitleElem = document.getElementById('impact-title');
         const impactSubtitleElem = document.getElementById('impact-subtitle');
