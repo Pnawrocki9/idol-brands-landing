@@ -681,10 +681,10 @@
                 </div>
                 
                 <div class="text-center mt-8">
-                    <p class="text-gray-500 text-sm">
+                    <p id="home-cta-subtext1" class="text-gray-500 text-sm">
                         Free consultation • No commitment • Results in 8 weeks
                     </p>
-                    <p class="text-gray-400 text-xs mt-2">
+                    <p id="home-cta-subtext2" class="text-gray-400 text-xs mt-2">
                         Limited spots available • Join 500+ influencers on the waiting list
                     </p>
                 </div>
@@ -1012,6 +1012,12 @@
         // CTA button
         const cta = document.getElementById('home-cta-text');
         if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
+        
+        // Consultation text below CTA
+        const ctaSubtext1 = document.getElementById('home-cta-subtext1');
+        if (ctaSubtext1) ctaSubtext1.textContent = getItem('homeCtaSubtext1', ctaSubtext1.textContent);
+        const ctaSubtext2 = document.getElementById('home-cta-subtext2');
+        if (ctaSubtext2) ctaSubtext2.textContent = getItem('homeCtaSubtext2', ctaSubtext2.textContent);
     });
     </script>
     <!-- Authentication helper to control login state, navigation and calculator visibility -->

@@ -147,7 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
     ['home-feature2-desc-field-pl','plHomeFeature2Desc','homeFeature2Desc','We handle everything, you focus on content'],
     ['home-feature3-title-field-pl','plHomeFeature3Title','homeFeature3Title','Proven Results'],
     ['home-feature3-desc-field-pl','plHomeFeature3Desc','homeFeature3Desc','Join the 10% who succeed'],
-    ['home-cta-field-pl','plHomeCtaText','homeCtaText','See How It Works']
+    ['home-cta-field-pl','plHomeCtaText','homeCtaText','See How It Works'],
+    ['home-cta-subtext1-field-pl','plHomeCtaSubtext1','homeCtaSubtext1','Free consultation • No commitment • Results in 8 weeks'],
+    ['home-cta-subtext2-field-pl','plHomeCtaSubtext2','homeCtaSubtext2','Limited spots available • Join 500+ influencers on the waiting list']
   ];
   homeMap.forEach(function(entry) {
     loadField(entry[0], entry[1], entry[2], entry[3]);

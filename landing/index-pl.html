@@ -696,10 +696,10 @@
                 </div>
                 
                 <div class="text-center mt-8">
-                    <p class="text-gray-500 text-sm">
+                    <p id="home-cta-subtext1" class="text-gray-500 text-sm">
                         Bezpłatna konsultacja • Brak zobowiązań • Wyniki w 8&nbsp;tygodni
                     </p>
-                    <p class="text-gray-400 text-xs mt-2">
+                    <p id="home-cta-subtext2" class="text-gray-400 text-xs mt-2">
                         Ograniczona liczba miejsc • Dołącz do&nbsp;500+ influencerów na liście oczekujących
                     </p>
                 </div>
@@ -1028,6 +1028,12 @@
         // CTA button: prefer Polish translation
         const cta = document.getElementById('home-cta-text');
         if (cta) cta.textContent = getItem('plHomeCtaText', getItem('homeCtaText', cta.textContent));
+        
+        // Consultation text below CTA: prefer Polish translation
+        const ctaSubtext1 = document.getElementById('home-cta-subtext1');
+        if (ctaSubtext1) ctaSubtext1.textContent = getItem('plHomeCtaSubtext1', getItem('homeCtaSubtext1', ctaSubtext1.textContent));
+        const ctaSubtext2 = document.getElementById('home-cta-subtext2');
+        if (ctaSubtext2) ctaSubtext2.textContent = getItem('plHomeCtaSubtext2', getItem('homeCtaSubtext2', ctaSubtext2.textContent));
     });
     </script>
     <!-- Initialize default Polish translations for Home page -->
@@ -1049,7 +1055,9 @@
             plHomeFeature2Desc: 'Zajmujemy się wszystkim, Ty skupiasz się na treściach',
             plHomeFeature3Title: 'Sprawdzone wyniki',
             plHomeFeature3Desc: 'Dołącz do 10% odnoszących sukces',
-            plHomeCtaText: 'Zobacz, jak to działa'
+            plHomeCtaText: 'Zobacz, jak to działa',
+            plHomeCtaSubtext1: 'Bezpłatna konsultacja • Brak zobowiązań • Wyniki w 8 tygodni',
+            plHomeCtaSubtext2: 'Ograniczona liczba miejsc • Dołącz do 500+ influencerów na liście oczekujących'
         };
         for (const key in defaults) {
             if (!localStorage.getItem(key)) {

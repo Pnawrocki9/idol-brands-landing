@@ -503,6 +503,18 @@
                 <label for="home-cta-field" class="block text-sm font-medium text-gray-700 mb-1">Home Page CTA Text</label>
                 <input id="home-cta-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Text for 'See How It Works' button" />
             </div>
+
+            <!-- Consultation Text Below CTA -->
+            <h3 class="text-xl font-semibold mb-2 mt-8 md:col-span-2">Consultation Text (Below CTA Button)</h3>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext1-field" class="block text-sm font-medium text-gray-700 mb-1">Consultation Line 1</label>
+                <input id="home-cta-subtext1-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Free consultation • No commitment • Results in 8 weeks" />
+            </div>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext2-field" class="block text-sm font-medium text-gray-700 mb-1">Consultation Line 2</label>
+                <input id="home-cta-subtext2-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Limited spots available • Join 500+ influencers on the waiting list" />
+            </div>
+
             <button id="save-home" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Home Settings</button>
             <p id="home-save-msg" class="text-green-600 text-sm mt-3 hidden">Home page settings saved.</p>
         </section>
@@ -595,6 +607,18 @@
                 <label for="home-cta-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku CTA (PL)</label>
                 <input id="home-cta-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Tekst przycisku 'Zobacz, jak to działa'" />
             </div>
+
+            <!-- Consultation Text Below CTA (PL) -->
+            <h3 class="text-xl font-semibold mb-2 mt-8 md:col-span-2">Tekst Konsultacji (Pod przyciskiem CTA) (PL)</h3>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext1-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Linia Konsultacji 1 (PL)</label>
+                <input id="home-cta-subtext1-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Bezpłatna konsultacja • Brak zobowiązań • Wyniki w 8 tygodni" />
+            </div>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext2-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Linia Konsultacji 2 (PL)</label>
+                <input id="home-cta-subtext2-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Ograniczona liczba miejsc • Dołącz do 500+ influencerów na liście oczekujących" />
+            </div>
+
             <button id="save-home-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Zapisz ustawienia strony głównej (PL)</button>
             <p id="home-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Ustawienia strony głównej (PL) zapisane.</p>
             <hr class="my-6" />
@@ -1705,6 +1729,9 @@
         const homeFeature3DescField = document.getElementById('home-feature3-desc-field');
         // CTA text field for home page
         const homeCtaField = document.getElementById('home-cta-field');
+        // Consultation text fields (below CTA)
+        const homeCtaSubtext1Field = document.getElementById('home-cta-subtext1-field');
+        const homeCtaSubtext2Field = document.getElementById('home-cta-subtext2-field');
         const saveHomeBtn = document.getElementById('save-home');
 
         function loadHomeSettings() {
@@ -1726,6 +1753,9 @@
             homeFeature3DescField.value = localStorage.getItem('homeFeature3Desc') || document.getElementById('home-feature3-desc')?.textContent || 'Join the 10% who succeed';
             // CTA button text default
             homeCtaField.value = localStorage.getItem('homeCtaText') || document.getElementById('home-cta-text')?.textContent || 'See How It Works';
+            // Consultation text defaults
+            homeCtaSubtext1Field.value = localStorage.getItem('homeCtaSubtext1') || 'Free consultation • No commitment • Results in 8 weeks';
+            homeCtaSubtext2Field.value = localStorage.getItem('homeCtaSubtext2') || 'Limited spots available • Join 500+ influencers on the waiting list';
         }
 
         loadHomeSettings();
@@ -1751,6 +1781,9 @@
             localStorage.setItem('homeFeature3Desc', homeFeature3DescField.value);
             // Save CTA text
             if (homeCtaField) localStorage.setItem('homeCtaText', homeCtaField.value);
+            // Save consultation text
+            if (homeCtaSubtext1Field) localStorage.setItem('homeCtaSubtext1', homeCtaSubtext1Field.value);
+            if (homeCtaSubtext2Field) localStorage.setItem('homeCtaSubtext2', homeCtaSubtext2Field.value);
             const msg = document.getElementById('home-save-msg');
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 2000);
