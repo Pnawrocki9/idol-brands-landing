@@ -311,7 +311,7 @@
                 <button id="cta-button" class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
                     Start Your Fashion Brand Today
                 </button>
-                <p class="text-gray-500 text-sm mt-4">
+                <p id="about-cta-subtext" class="text-gray-500 text-sm mt-4">
                     Free consultation • No commitment • Results in 8 weeks
                 </p>
             </div>
@@ -447,6 +447,13 @@
         const storedImpactSubtitle = localStorage.getItem('impactSubtitle');
         if (storedImpactTitle) impactTitleElem.textContent = storedImpactTitle;
         if (storedImpactSubtitle) impactSubtitleElem.textContent = storedImpactSubtitle;
+        
+        // CTA Section
+        const aboutCtaSubtextElem = document.getElementById('about-cta-subtext');
+        const storedAboutCtaSubtext = localStorage.getItem('aboutCtaSubtext');
+        if (storedAboutCtaSubtext && aboutCtaSubtextElem) {
+            aboutCtaSubtextElem.textContent = storedAboutCtaSubtext;
+        }
     });
     </script>
 </body>
