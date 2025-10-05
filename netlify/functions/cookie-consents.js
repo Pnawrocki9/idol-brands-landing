@@ -160,6 +160,50 @@ exports.handler = async (event, context) => {
             const data = await loadConsentData();
             const stats = calculateStats(data.consents || []);
             
+            // Check if full export is requested
+            const queryParams = event.queryStringParameters || {};
+            const exportAll = queryParams.export === 'all';
+            const format = queryParams.format || 'json';
+            
+            if (exportAll) {
+                // Return all consents for audit/export
+                const allConsents = (data.consents || []).reverse();
+                
+                if (format === 'csv') {
+                    // Convert to CSV format
+                    const csvHeaders = 'Timestamp,Date,Language,Necessary,Analytics,Marketing,Type,URL,Referrer,IP,User Agent\n';
+                    const csvRows = allConsents.map(c => {
+                        const date = new Date(c.timestamp).toISOString();
+                        const type = (c.analytics && c.marketing) ? 'Accepted All' : 
+                                   (!c.analytics && !c.marketing) ? 'Rejected All' : 'Customized';
+                        return `${c.timestamp},"${date}",${c.language || 'en'},${c.necessary || true},${c.analytics || false},${c.marketing || false},"${type}","${c.url || ''}","${c.referrer || ''}","${c.ip || ''}","${c.userAgent || ''}"`;
+                    }).join('\n');
+                    
+                    return {
+                        statusCode: 200,
+                        headers: {
+                            ...headers,
+                            'Content-Type': 'text/csv',
+                            'Content-Disposition': `attachment; filename="cookie-consents-${Date.now()}.csv"`
+                        },
+                        body: csvHeaders + csvRows
+                    };
+                } else {
+                    // Return JSON format with all data
+                    return {
+                        statusCode: 200,
+                        headers,
+                        body: JSON.stringify({
+                            stats: stats,
+                            totalConsents: allConsents.length,
+                            consents: allConsents,
+                            exportDate: new Date().toISOString()
+                        }, null, 2)
+                    };
+                }
+            }
+            
+            // Default: return stats and recent consents only
             return {
                 statusCode: 200,
                 headers,
