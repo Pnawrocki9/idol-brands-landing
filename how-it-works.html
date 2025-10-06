@@ -139,8 +139,8 @@
     <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="fade-in">
-                <h1 class="text-6xl font-display font-bold text-black mb-6">How Live-Selling Marketplace Works</h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h1 id="how-hero-title" class="text-6xl font-display font-bold text-black mb-6">How Live-Selling Marketplace Works</h1>
+                <p id="how-hero-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
                     The world's first live-selling marketplace for influencer fashion brands. 
                     Your own shop, your own live shows, your own community - all in one platform.
                 </p>
@@ -598,6 +598,15 @@
     <!-- Apply admin-defined headings for How It Works page from localStorage -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Hero section
+        const howHeroTitleElem = document.getElementById('how-hero-title');
+        const howHeroSubtitleElem = document.getElementById('how-hero-subtitle');
+        const storedHowHeroTitle = localStorage.getItem('howHeroTitle');
+        const storedHowHeroSubtitle = localStorage.getItem('howHeroSubtitle');
+        if (storedHowHeroTitle && howHeroTitleElem) howHeroTitleElem.textContent = storedHowHeroTitle;
+        if (storedHowHeroSubtitle && howHeroSubtitleElem) howHeroSubtitleElem.textContent = storedHowHeroSubtitle;
+        
+        // Live-selling demo section
         const howTitleElem = document.getElementById('how-title');
         const howSubtitleElem = document.getElementById('how-subtitle');
         const readyTitleElem = document.getElementById('ready-title');
