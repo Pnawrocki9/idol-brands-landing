@@ -155,9 +155,9 @@
                     <div class="ml-12 step-card bg-white p-8 rounded-2xl shadow-lg flex-1">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-store text-2xl text-black mr-4"></i>
-                            <h3 class="text-2xl font-bold text-black">Konfiguracja Twojego Sklepu</h3>
+                            <h3 id="how-step1-title" class="text-2xl font-bold text-black">Konfiguracja Twojego Sklepu</h3>
                         </div>
-                        <p class="text-gray-600 text-lg mb-4">
+                        <p id="how-step1-desc" class="text-gray-600 text-lg mb-4">
                             Tworzymy Twój spersonalizowany sklep na rynku Idol Brands. 
                             Nie potrzebujesz oddzielnych stron internetowych ani złożonych platform e-commerce - wszystko jest zintegrowane.
                         </p>
@@ -190,9 +190,9 @@
                     <div class="ml-12 step-card bg-white p-8 rounded-2xl shadow-lg flex-1">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-video text-2xl text-black mr-4"></i>
-                            <h3 class="text-2xl font-bold text-black">Konfiguracja Studia Live-Selling</h3>
+                            <h3 id="how-step2-title" class="text-2xl font-bold text-black">Konfiguracja Studia Live-Selling</h3>
                         </div>
-                        <p class="text-gray-600 text-lg mb-4">
+                        <p id="how-step2-desc" class="text-gray-600 text-lg mb-4">
                             Profesjonalna konfiguracja transmisji na żywo z interaktywnymi funkcjami. 
                             Zapewniamy wszystko, czego potrzebujesz do angażujących sesji live-selling.
                         </p>
@@ -222,9 +222,9 @@
                     <div class="ml-12 step-card bg-white p-8 rounded-2xl shadow-lg flex-1">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-tshirt text-2xl text-black mr-4"></i>
-                            <h3 class="text-2xl font-bold text-black">Rozwój Produktu i Kontrola Jakości</h3>
+                            <h3 id="how-step3-title" class="text-2xl font-bold text-black">Rozwój Produktu i Kontrola Jakości</h3>
                         </div>
-                        <p class="text-gray-600 text-lg mb-4">
+                        <p id="how-step3-desc" class="text-gray-600 text-lg mb-4">
                             Projektujemy i rozwijamy Twoją linię produktów z myślą o live-selling. 
                             Skupiamy się na produktach, które wzbudzają emocje i napędzają zakupy impulsowe.
                         </p>
@@ -260,9 +260,9 @@
                     <div class="ml-12 step-card bg-white p-8 rounded-2xl shadow-lg flex-1">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-rocket text-2xl text-black mr-4"></i>
-                            <h3 class="text-2xl font-bold text-black">Start i Wydarzenia Live-Selling</h3>
+                            <h3 id="how-step4-title" class="text-2xl font-bold text-black">Start i Wydarzenia Live-Selling</h3>
                         </div>
-                        <p class="text-gray-600 text-lg mb-4">
+                        <p id="how-step4-desc" class="text-gray-600 text-lg mb-4">
                             Realizujemy kompleksową strategię startu wykorzystując wydarzenia live-selling. 
                             Budujemy ekscytację, tworzymy poczucie pilności i napędzamy natychmiastową sprzedaż.
                         </p>
@@ -301,9 +301,9 @@
                     <div class="ml-12 step-card bg-white p-8 rounded-2xl shadow-lg flex-1">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-users text-2xl text-black mr-4"></i>
-                            <h3 class="text-2xl font-bold text-black">Budowanie Społeczności i Wzrost</h3>
+                            <h3 id="how-step5-title" class="text-2xl font-bold text-black">Budowanie Społeczności i Wzrost</h3>
                         </div>
-                        <p class="text-gray-600 text-lg mb-4">
+                        <p id="how-step5-desc" class="text-gray-600 text-lg mb-4">
                             Buduj lojalną społeczność wokół swojej marki poprzez regularne interakcje na żywo. 
                             Przekształć obserwujących w klientów, a klientów w ambasadorów marki.
                         </p>
@@ -336,9 +336,9 @@
                     <div class="ml-12 step-card bg-white p-8 rounded-2xl shadow-lg flex-1">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-chart-bar text-2xl text-black mr-4"></i>
-                            <h3 class="text-2xl font-bold text-black">Skalowanie i Optymalizacja</h3>
+                            <h3 id="how-step6-title" class="text-2xl font-bold text-black">Skalowanie i Optymalizacja</h3>
                         </div>
-                        <p class="text-gray-600 text-lg mb-4">
+                        <p id="how-step6-desc" class="text-gray-600 text-lg mb-4">
                             Ciągła optymalizacja oparta na danych wydajności live-selling. 
                             Skaluj swój sukces i maksymalizuj długoterminowy wzrost.
                         </p>
@@ -604,6 +604,27 @@
         if (storedHowSubtitle) howSubtitleElem.textContent = storedHowSubtitle;
         if (storedReadyTitle) readyTitleElem.textContent = storedReadyTitle;
         if (storedHowCtaSubtext) howCtaSubtextElem.textContent = storedHowCtaSubtext;
+        // Apply editable steps (prefer PL with EN fallback)
+        function applyText(id, keys) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            for (const k of keys) {
+                const v = localStorage.getItem(k);
+                if (v) { el.textContent = v; return; }
+            }
+        }
+        applyText('how-step1-title', ['plHowStep1Title','howStep1Title']);
+        applyText('how-step1-desc', ['plHowStep1Desc','howStep1Desc']);
+        applyText('how-step2-title', ['plHowStep2Title','howStep2Title']);
+        applyText('how-step2-desc', ['plHowStep2Desc','howStep2Desc']);
+        applyText('how-step3-title', ['plHowStep3Title','howStep3Title']);
+        applyText('how-step3-desc', ['plHowStep3Desc','howStep3Desc']);
+        applyText('how-step4-title', ['plHowStep4Title','howStep4Title']);
+        applyText('how-step4-desc', ['plHowStep4Desc','howStep4Desc']);
+        applyText('how-step5-title', ['plHowStep5Title','howStep5Title']);
+        applyText('how-step5-desc', ['plHowStep5Desc','howStep5Desc']);
+        applyText('how-step6-title', ['plHowStep6Title','howStep6Title']);
+        applyText('how-step6-desc', ['plHowStep6Desc','howStep6Desc']);
     });
     </script>
 </body>
