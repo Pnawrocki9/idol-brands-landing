@@ -175,22 +175,33 @@
       "referrer": "direct",
       "ip": "31.61.167.21, 18.196.127.175",
       "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0"
+    },
+    {
+      "necessary": true,
+      "analytics": true,
+      "marketing": true,
+      "language": "en",
+      "timestamp": 1759767129232,
+      "url": "https://idol-brands.netlify.app/",
+      "referrer": "direct",
+      "ip": "2a00:f41:1c11:dc54:5030:a0ff:fe8f:56d5, 3.126.42.106",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"
     }
   ],
   "stats": {
-    "total": 16,
-    "accepted": 16,
+    "total": 17,
+    "accepted": 17,
     "rejected": 0,
     "customized": 0,
-    "analytics": 16,
-    "marketing": 16,
+    "analytics": 17,
+    "marketing": 17,
     "byLanguage": {
-      "en": 13,
+      "en": 14,
       "pl": 3
     },
     "byDate": {
       "2025-10-05": 15,
-      "2025-10-06": 1
+      "2025-10-06": 2
     }
   }
 }
