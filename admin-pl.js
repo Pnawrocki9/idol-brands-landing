@@ -368,6 +368,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   // ===== How It Works (PL) =====
+  // Map for How It Works Steps (PL)
+  const howStepsPairsPL = [
+    ['how-step1-title-field-pl','plHowStep1Title','howStep1Title','Konfiguracja Twojego Sklepu'],
+    ['how-step1-desc-field-pl','plHowStep1Desc','howStep1Desc','Tworzymy Twój spersonalizowany sklep na rynku Idol Brands. Nie potrzebujesz oddzielnych stron internetowych ani złożonych platform e-commerce - wszystko jest zintegrowane.'],
+    ['how-step2-title-field-pl','plHowStep2Title','howStep2Title','Konfiguracja Studia Live-Selling'],
+    ['how-step2-desc-field-pl','plHowStep2Desc','howStep2Desc','Profesjonalna konfiguracja transmisji na żywo z interaktywnymi funkcjami. Zapewniamy wszystko, czego potrzebujesz do angażujących sesji live-selling.'],
+    ['how-step3-title-field-pl','plHowStep3Title','howStep3Title','Rozwój Produktu i Kontrola Jakości'],
+    ['how-step3-desc-field-pl','plHowStep3Desc','howStep3Desc','Projektujemy i rozwijamy Twoją linię produktów z myślą o live-selling. Skupiamy się na produktach, które wzbudzają emocje i napędzają zakupy impulsowe.'],
+    ['how-step4-title-field-pl','plHowStep4Title','howStep4Title','Start i Wydarzenia Live-Selling'],
+    ['how-step4-desc-field-pl','plHowStep4Desc','howStep4Desc','Realizujemy kompleksową strategię startu wykorzystując wydarzenia live-selling. Budujemy ekscytację, tworzymy poczucie pilności i napędzamy natychmiastową sprzedaż.'],
+    ['how-step5-title-field-pl','plHowStep5Title','howStep5Title','Budowanie Społeczności i Wzrost'],
+    ['how-step5-desc-field-pl','plHowStep5Desc','howStep5Desc','Buduj lojalną społeczność wokół swojej marki poprzez regularne interakcje na żywo. Przekształć obserwujących w klientów, a klientów w ambasadorów marki.'],
+    ['how-step6-title-field-pl','plHowStep6Title','howStep6Title','Skalowanie i Optymalizacja'],
+    ['how-step6-desc-field-pl','plHowStep6Desc','howStep6Desc','Ciągła optymalizacja oparta na danych wydajności live-selling. Skaluj swój sukces i maksymalizuj długoterminowy wzrost.']
+  ];
+  howStepsPairsPL.forEach(function(p) { loadField(p[0], p[1], p[2], p[3]); });
   const howCtaPairs = [
     ['admin-how-cta-desc-pl','plHowCtaDesc','howCtaDesc','Dołącz do setek influencerów, którzy przekształcili swoje wpływy w kwitnące marki modowe poprzez live-selling. Twoja podróż na marketplace zaczyna się tutaj.'],
     ['admin-how-cta-feature1-title-pl','plHowCtaFeature1Title','howCtaFeature1Title','Szybka Konfiguracja'],
@@ -393,6 +409,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ['admin-how-subtitle-pl','plHowSubtitle'],
         ['admin-ready-title-pl','plReadyTitle']
       ]);
+      saveFields(howStepsPairsPL.map(item => [item[0], item[1]]));
       saveFields(howCtaPairs.map(item => [item[0], item[1]]));
       const msg = document.getElementById('how-save-msg-pl');
       if (msg) {

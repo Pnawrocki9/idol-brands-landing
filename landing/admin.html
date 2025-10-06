@@ -197,7 +197,7 @@
         <!-- How It Works page editor -->
         <section class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit How It Works Page</h2>
-            <p class="text-sm text-gray-600 mb-4">Modify the main headings on the How It Works page.  Steps themselves remain static.</p>
+            <p class="text-sm text-gray-600 mb-4">Modify the main headings and steps on the How It Works page.</p>
             <div class="mb-4">
                 <label for="admin-how-title" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Title</label>
                 <input id="admin-how-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
@@ -209,6 +209,45 @@
             <div class="mb-4">
                 <label for="admin-ready-title" class="block text-sm font-medium text-gray-700 mb-1">Ready Section Title</label>
                 <input id="admin-ready-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <h4 class="text-lg font-semibold mb-2 mt-4">How It Works Steps (1-6) (EN)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="how-step1-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 1 Title</label>
+                    <input id="how-step1-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Your Personal Shop Setup" />
+                    <label for="how-step1-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 1 Description</label>
+                    <textarea id="how-step1-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step2-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 2 Title</label>
+                    <input id="how-step2-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Live-Selling Studio Setup" />
+                    <label for="how-step2-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 2 Description</label>
+                    <textarea id="how-step2-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step3-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 3 Title</label>
+                    <input id="how-step3-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Product Development & Quality Control" />
+                    <label for="how-step3-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 3 Description</label>
+                    <textarea id="how-step3-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                    <div>
+                    <label for="how-step4-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 4 Title</label>
+                    <input id="how-step4-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Launch & Live-Selling Events" />
+                    <label for="how-step4-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 4 Description</label>
+                    <textarea id="how-step4-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step5-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 5 Title</label>
+                    <input id="how-step5-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Community Building & Growth" />
+                    <label for="how-step5-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 5 Description</label>
+                    <textarea id="how-step5-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step6-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 6 Title</label>
+                    <input id="how-step6-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Scale & Optimize" />
+                    <label for="how-step6-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 6 Description</label>
+                    <textarea id="how-step6-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
             </div>
             <!-- How It Works CTA Section (EN) -->
             <h4 class="text-lg font-semibold mt-6 mb-2">How It Works CTA Section (EN)</h4>
@@ -747,6 +786,45 @@
             <div class="mb-4">
                 <label for="admin-ready-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji 'Gotowi?' (PL)</label>
                 <input id="admin-ready-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <h4 class="text-lg font-semibold mt-6 mb-2">Kroki (1-6) (PL)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="how-step1-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 1 (PL)</label>
+                    <input id="how-step1-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Konfiguracja Twojego Sklepu" />
+                    <label for="how-step1-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 1 (PL)</label>
+                    <textarea id="how-step1-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step2-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 2 (PL)</label>
+                    <input id="how-step2-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Konfiguracja Studia Live-Selling" />
+                    <label for="how-step2-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 2 (PL)</label>
+                    <textarea id="how-step2-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step3-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 3 (PL)</label>
+                    <input id="how-step3-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Rozwój Produktu i Kontrola Jakości" />
+                    <label for="how-step3-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 3 (PL)</label>
+                    <textarea id="how-step3-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step4-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 4 (PL)</label>
+                    <input id="how-step4-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Start i Wydarzenia Live-Selling" />
+                    <label for="how-step4-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 4 (PL)</label>
+                    <textarea id="how-step4-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step5-title-field-pl" class="block text sm font-medium text-gray-700 mb-1">Tytuł kroku 5 (PL)</label>
+                    <input id="how-step5-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Budowanie Społeczności i Wzrost" />
+                    <label for="how-step5-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 5 (PL)</label>
+                    <textarea id="how-step5-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step6-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 6 (PL)</label>
+                    <input id="how-step6-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Skalowanie i Optymalizacja" />
+                    <label for="how-step6-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 6 (PL)</label>
+                    <textarea id="how-step6-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
             </div>
             <!-- How It Works CTA Section (PL) -->
             <h4 class="text-lg font-semibold mt-6 mb-2">Sekcja CTA 'Jak to działa' (PL)</h4>
@@ -1368,6 +1446,31 @@
         howTitleField.value = localStorage.getItem('howTitle') || 'Experience Live-Selling';
         howSubtitleField.value = localStorage.getItem('howSubtitle') || 'See how our live-selling platform transforms your fashion shows into sales events.';
         readyTitleField.value = localStorage.getItem('readyTitle') || 'Ready to Start Live-Selling?';
+        // How It Works Steps (EN)
+        const howStep1TitleField = document.getElementById('how-step1-title-field');
+        const howStep1DescField = document.getElementById('how-step1-desc-field');
+        const howStep2TitleField = document.getElementById('how-step2-title-field');
+        const howStep2DescField = document.getElementById('how-step2-desc-field');
+        const howStep3TitleField = document.getElementById('how-step3-title-field');
+        const howStep3DescField = document.getElementById('how-step3-desc-field');
+        const howStep4TitleField = document.getElementById('how-step4-title-field');
+        const howStep4DescField = document.getElementById('how-step4-desc-field');
+        const howStep5TitleField = document.getElementById('how-step5-title-field');
+        const howStep5DescField = document.getElementById('how-step5-desc-field');
+        const howStep6TitleField = document.getElementById('how-step6-title-field');
+        const howStep6DescField = document.getElementById('how-step6-desc-field');
+        if (howStep1TitleField) howStep1TitleField.value = localStorage.getItem('howStep1Title') || 'Your Personal Shop Setup';
+        if (howStep1DescField) howStep1DescField.value = localStorage.getItem('howStep1Desc') || 'We create your personalized shop within the Idol Brands marketplace. No need for separate websites or complex e-commerce platforms - everything is integrated.';
+        if (howStep2TitleField) howStep2TitleField.value = localStorage.getItem('howStep2Title') || 'Live-Selling Studio Setup';
+        if (howStep2DescField) howStep2DescField.value = localStorage.getItem('howStep2Desc') || 'Professional live-streaming setup with interactive features. We provide everything you need for engaging live-selling sessions.';
+        if (howStep3TitleField) howStep3TitleField.value = localStorage.getItem('howStep3Title') || 'Product Development & Quality Control';
+        if (howStep3DescField) howStep3DescField.value = localStorage.getItem('howStep3Desc') || 'We design and develop your product line with live-selling in mind. Focus on pieces that create excitement and drive impulse purchases.';
+        if (howStep4TitleField) howStep4TitleField.value = localStorage.getItem('howStep4Title') || 'Launch & Live-Selling Events';
+        if (howStep4DescField) howStep4DescField.value = localStorage.getItem('howStep4Desc') || 'We execute comprehensive launch strategy using live-selling events. Build excitement, create urgency, and drive immediate sales.';
+        if (howStep5TitleField) howStep5TitleField.value = localStorage.getItem('howStep5Title') || 'Community Building & Growth';
+        if (howStep5DescField) howStep5DescField.value = localStorage.getItem('howStep5Desc') || 'Build loyal community around your brand through regular live interactions. Turn followers into customers and customers into brand advocates.';
+        if (howStep6TitleField) howStep6TitleField.value = localStorage.getItem('howStep6Title') || 'Scale & Optimize';
+        if (howStep6DescField) howStep6DescField.value = localStorage.getItem('howStep6Desc') || 'Continuous optimization based on live-selling performance data. Scale your success and maximize long-term growth.';
         // How It Works CTA defaults (EN)
         howCtaDescField.value = localStorage.getItem('howCtaDesc') || 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands through live-selling. Your marketplace journey starts here.';
         howCtaFeature1TitleField.value = localStorage.getItem('howCtaFeature1Title') || 'Fast Setup';
@@ -1382,6 +1485,19 @@
             localStorage.setItem('howTitle', howTitleField.value);
             localStorage.setItem('howSubtitle', howSubtitleField.value);
             localStorage.setItem('readyTitle', readyTitleField.value);
+            // Save How It Works Steps (EN)
+            if (howStep1TitleField) localStorage.setItem('howStep1Title', howStep1TitleField.value);
+            if (howStep1DescField) localStorage.setItem('howStep1Desc', howStep1DescField.value);
+            if (howStep2TitleField) localStorage.setItem('howStep2Title', howStep2TitleField.value);
+            if (howStep2DescField) localStorage.setItem('howStep2Desc', howStep2DescField.value);
+            if (howStep3TitleField) localStorage.setItem('howStep3Title', howStep3TitleField.value);
+            if (howStep3DescField) localStorage.setItem('howStep3Desc', howStep3DescField.value);
+            if (howStep4TitleField) localStorage.setItem('howStep4Title', howStep4TitleField.value);
+            if (howStep4DescField) localStorage.setItem('howStep4Desc', howStep4DescField.value);
+            if (howStep5TitleField) localStorage.setItem('howStep5Title', howStep5TitleField.value);
+            if (howStep5DescField) localStorage.setItem('howStep5Desc', howStep5DescField.value);
+            if (howStep6TitleField) localStorage.setItem('howStep6Title', howStep6TitleField.value);
+            if (howStep6DescField) localStorage.setItem('howStep6Desc', howStep6DescField.value);
             // Save How It Works CTA (EN)
             localStorage.setItem('howCtaDesc', howCtaDescField.value);
             localStorage.setItem('howCtaFeature1Title', howCtaFeature1TitleField.value);
