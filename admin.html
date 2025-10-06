@@ -365,6 +365,16 @@
         <section class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit How It Works Page</h2>
             <p class="text-sm text-gray-600 mb-4">Modify the main headings and steps on the How It Works page.</p>
+            <h4 class="text-lg font-semibold mb-2">Hero Section (EN)</h4>
+            <div class="mb-4">
+                <label for="admin-how-hero-title" class="block text-sm font-medium text-gray-700 mb-1">Hero Title (EN)</label>
+                <input id="admin-how-hero-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="How Live-Selling Marketplace Works" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-hero-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle (EN)</label>
+                <textarea id="admin-how-hero-subtitle" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="The world's first live-selling marketplace for influencer fashion brands..."></textarea>
+            </div>
+            <h4 class="text-lg font-semibold mb-2 mt-6">Live-Selling Demo Section (EN)</h4>
             <div class="mb-4">
                 <label for="admin-how-title" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Title</label>
                 <input id="admin-how-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
@@ -1435,6 +1445,16 @@
             <hr class="my-6" />
             <!-- How It Works (PL) -->
             <h3 class="text-xl font-semibold mb-2">Strona 'Jak to działa' (PL)</h3>
+            <h4 class="text-lg font-semibold mb-2">Sekcja Hero (PL)</h4>
+            <div class="mb-4">
+                <label for="admin-how-hero-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł Hero (PL)</label>
+                <input id="admin-how-hero-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Jak Działa Rynek Live-Selling" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł Hero (PL)</label>
+                <textarea id="admin-how-hero-subtitle-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Pierwszy na świecie rynek live-selling dla influencerskich marek modowych..."></textarea>
+            </div>
+            <h4 class="text-lg font-semibold mb-2 mt-6">Sekcja Demo Live-Selling (PL)</h4>
             <div class="mb-4">
                 <label for="admin-how-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji live-selling (PL)</label>
                 <input id="admin-how-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
@@ -2190,6 +2210,13 @@
         });
 
         // Populate How It Works page fields
+        // Hero section fields (EN)
+        const howHeroTitleField = document.getElementById('admin-how-hero-title');
+        const howHeroSubtitleField = document.getElementById('admin-how-hero-subtitle');
+        if (howHeroTitleField) howHeroTitleField.value = localStorage.getItem('howHeroTitle') || 'How Live-Selling Marketplace Works';
+        if (howHeroSubtitleField) howHeroSubtitleField.value = localStorage.getItem('howHeroSubtitle') || 'The world\'s first live-selling marketplace for influencer fashion brands. Your own shop, your own live shows, your own community - all in one platform.';
+        
+        // Live-selling demo section fields (EN)
         const howTitleField = document.getElementById('admin-how-title');
         const howSubtitleField = document.getElementById('admin-how-subtitle');
         const readyTitleField = document.getElementById('admin-ready-title');
@@ -2242,6 +2269,11 @@
         howCtaButtonField.value = localStorage.getItem('howCtaButton') || 'Create Your Live-Selling Shop';
         howCtaSubtextField.value = localStorage.getItem('howCtaSubtext') || 'Free consultation • No setup fees • Start earning in 1 week';
         document.getElementById('save-how').addEventListener('click', function() {
+            // Save Hero section (EN)
+            if (howHeroTitleField) localStorage.setItem('howHeroTitle', howHeroTitleField.value);
+            if (howHeroSubtitleField) localStorage.setItem('howHeroSubtitle', howHeroSubtitleField.value);
+            
+            // Save Live-selling demo section (EN)
             localStorage.setItem('howTitle', howTitleField.value);
             localStorage.setItem('howSubtitle', howSubtitleField.value);
             localStorage.setItem('readyTitle', readyTitleField.value);
@@ -2269,6 +2301,105 @@
             localStorage.setItem('howCtaButton', howCtaButtonField.value);
             localStorage.setItem('howCtaSubtext', howCtaSubtextField.value);
             const msg = document.getElementById('how-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate How It Works page fields (PL)
+        const howHeroTitleFieldPl = document.getElementById('admin-how-hero-title-pl');
+        const howHeroSubtitleFieldPl = document.getElementById('admin-how-hero-subtitle-pl');
+        if (howHeroTitleFieldPl) howHeroTitleFieldPl.value = localStorage.getItem('plHowHeroTitle') || 'Jak Działa Rynek Live-Selling';
+        if (howHeroSubtitleFieldPl) howHeroSubtitleFieldPl.value = localStorage.getItem('plHowHeroSubtitle') || 'Pierwszy na świecie rynek live-selling dla influencerskich marek modowych. Twój własny sklep, własne transmisje na żywo, własna społeczność - wszystko na jednej platformie.';
+        
+        const howTitleFieldPl = document.getElementById('admin-how-title-pl');
+        const howSubtitleFieldPl = document.getElementById('admin-how-subtitle-pl');
+        const readyTitleFieldPl = document.getElementById('admin-ready-title-pl');
+        if (howTitleFieldPl) howTitleFieldPl.value = localStorage.getItem('plHowTitle') || 'Doświadcz Live-Selling';
+        if (howSubtitleFieldPl) howSubtitleFieldPl.value = localStorage.getItem('plHowSubtitle') || 'Zobacz, jak nasza platforma live-selling przekształca twoje pokazy mody w wydarzenia sprzedażowe.';
+        if (readyTitleFieldPl) readyTitleFieldPl.value = localStorage.getItem('plReadyTitle') || 'Gotowy na rozpoczęcie Live-Selling?';
+        
+        // How It Works Steps (PL)
+        const howStep1TitleFieldPl = document.getElementById('how-step1-title-field-pl');
+        const howStep1DescFieldPl = document.getElementById('how-step1-desc-field-pl');
+        const howStep2TitleFieldPl = document.getElementById('how-step2-title-field-pl');
+        const howStep2DescFieldPl = document.getElementById('how-step2-desc-field-pl');
+        const howStep3TitleFieldPl = document.getElementById('how-step3-title-field-pl');
+        const howStep3DescFieldPl = document.getElementById('how-step3-desc-field-pl');
+        const howStep4TitleFieldPl = document.getElementById('how-step4-title-field-pl');
+        const howStep4DescFieldPl = document.getElementById('how-step4-desc-field-pl');
+        const howStep5TitleFieldPl = document.getElementById('how-step5-title-field-pl');
+        const howStep5DescFieldPl = document.getElementById('how-step5-desc-field-pl');
+        const howStep6TitleFieldPl = document.getElementById('how-step6-title-field-pl');
+        const howStep6DescFieldPl = document.getElementById('how-step6-desc-field-pl');
+        if (howStep1TitleFieldPl) howStep1TitleFieldPl.value = localStorage.getItem('plHowStep1Title') || 'Konfiguracja Twojego Sklepu';
+        if (howStep1DescFieldPl) howStep1DescFieldPl.value = localStorage.getItem('plHowStep1Desc') || 'Tworzymy Twój spersonalizowany sklep w marketplace Idol Brands. Nie potrzebujesz osobnej strony internetowej ani skomplikowanych platform e-commerce - wszystko jest zintegrowane.';
+        if (howStep2TitleFieldPl) howStep2TitleFieldPl.value = localStorage.getItem('plHowStep2Title') || 'Konfiguracja Studia Live-Selling';
+        if (howStep2DescFieldPl) howStep2DescFieldPl.value = localStorage.getItem('plHowStep2Desc') || 'Profesjonalna konfiguracja transmisji na żywo z interaktywnymi funkcjami. Zapewniamy wszystko, czego potrzebujesz do angażujących sesji live-selling.';
+        if (howStep3TitleFieldPl) howStep3TitleFieldPl.value = localStorage.getItem('plHowStep3Title') || 'Rozwój Produktu i Kontrola Jakości';
+        if (howStep3DescFieldPl) howStep3DescFieldPl.value = localStorage.getItem('plHowStep3Desc') || 'Projektujemy i rozwijamy Twoją linię produktów z myślą o live-sellingu. Koncentrujemy się na elementach, które tworzą ekscytację i napędzają zakupy impulsywne.';
+        if (howStep4TitleFieldPl) howStep4TitleFieldPl.value = localStorage.getItem('plHowStep4Title') || 'Start i Wydarzenia Live-Selling';
+        if (howStep4DescFieldPl) howStep4DescFieldPl.value = localStorage.getItem('plHowStep4Desc') || 'Realizujemy kompleksową strategię startu używając wydarzeń live-selling. Budujemy ekscytację, tworzymy pilność i napędzamy natychmiastową sprzedaż.';
+        if (howStep5TitleFieldPl) howStep5TitleFieldPl.value = localStorage.getItem('plHowStep5Title') || 'Budowanie Społeczności i Wzrost';
+        if (howStep5DescFieldPl) howStep5DescFieldPl.value = localStorage.getItem('plHowStep5Desc') || 'Buduj lojalną społeczność wokół Twojej marki poprzez regularne interakcje na żywo. Przekształć obserwatorów w klientów, a klientów w ambasadorów marki.';
+        if (howStep6TitleFieldPl) howStep6TitleFieldPl.value = localStorage.getItem('plHowStep6Title') || 'Skalowanie i Optymalizacja';
+        if (howStep6DescFieldPl) howStep6DescFieldPl.value = localStorage.getItem('plHowStep6Desc') || 'Ciągła optymalizacja oparta na danych wydajności live-selling. Skaluj swój sukces i maksymalizuj długoterminowy wzrost.';
+        
+        // How It Works CTA fields (PL)
+        const howCtaDescFieldPl = document.getElementById('admin-how-cta-desc-pl');
+        const howCtaFeature1TitleFieldPl = document.getElementById('admin-how-cta-feature1-title-pl');
+        const howCtaFeature1DescFieldPl = document.getElementById('admin-how-cta-feature1-desc-pl');
+        const howCtaFeature2TitleFieldPl = document.getElementById('admin-how-cta-feature2-title-pl');
+        const howCtaFeature2DescFieldPl = document.getElementById('admin-how-cta-feature2-desc-pl');
+        const howCtaFeature3TitleFieldPl = document.getElementById('admin-how-cta-feature3-title-pl');
+        const howCtaFeature3DescFieldPl = document.getElementById('admin-how-cta-feature3-desc-pl');
+        const howCtaButtonFieldPl = document.getElementById('admin-how-cta-button-pl');
+        const howCtaSubtextFieldPl = document.getElementById('admin-how-cta-subtext-pl');
+        if (howCtaDescFieldPl) howCtaDescFieldPl.value = localStorage.getItem('plHowCtaDesc') || 'Dołącz do setek influencerów, którzy przekształcili swój wpływ w kwitnące marki modowe poprzez live-selling. Twoja podróż na marketplace zaczyna się tutaj.';
+        if (howCtaFeature1TitleFieldPl) howCtaFeature1TitleFieldPl.value = localStorage.getItem('plHowCtaFeature1Title') || 'Szybka Konfiguracja';
+        if (howCtaFeature1DescFieldPl) howCtaFeature1DescFieldPl.value = localStorage.getItem('plHowCtaFeature1Desc') || 'Twój sklep działa w 1 tydzień';
+        if (howCtaFeature2TitleFieldPl) howCtaFeature2TitleFieldPl.value = localStorage.getItem('plHowCtaFeature2Title') || 'Gotowy do Live-Selling';
+        if (howCtaFeature2DescFieldPl) howCtaFeature2DescFieldPl.value = localStorage.getItem('plHowCtaFeature2Desc') || 'Profesjonalna konfiguracja streamingu';
+        if (howCtaFeature3TitleFieldPl) howCtaFeature3TitleFieldPl.value = localStorage.getItem('plHowCtaFeature3Title') || 'Wbudowana Publiczność';
+        if (howCtaFeature3DescFieldPl) howCtaFeature3DescFieldPl.value = localStorage.getItem('plHowCtaFeature3Desc') || 'Dostęp do ruchu marketplace';
+        if (howCtaButtonFieldPl) howCtaButtonFieldPl.value = localStorage.getItem('plHowCtaButton') || 'Utwórz Swój Sklep Live-Selling';
+        if (howCtaSubtextFieldPl) howCtaSubtextFieldPl.value = localStorage.getItem('plHowCtaSubtext') || 'Bezpłatna konsultacja • Brak opłat za konfigurację • Zacznij zarabiać w 1 tydzień';
+        
+        document.getElementById('save-how-pl').addEventListener('click', function() {
+            // Save Hero section (PL)
+            if (howHeroTitleFieldPl) localStorage.setItem('plHowHeroTitle', howHeroTitleFieldPl.value);
+            if (howHeroSubtitleFieldPl) localStorage.setItem('plHowHeroSubtitle', howHeroSubtitleFieldPl.value);
+            
+            // Save Live-selling demo section (PL)
+            if (howTitleFieldPl) localStorage.setItem('plHowTitle', howTitleFieldPl.value);
+            if (howSubtitleFieldPl) localStorage.setItem('plHowSubtitle', howSubtitleFieldPl.value);
+            if (readyTitleFieldPl) localStorage.setItem('plReadyTitle', readyTitleFieldPl.value);
+            
+            // Save How It Works Steps (PL)
+            if (howStep1TitleFieldPl) localStorage.setItem('plHowStep1Title', howStep1TitleFieldPl.value);
+            if (howStep1DescFieldPl) localStorage.setItem('plHowStep1Desc', howStep1DescFieldPl.value);
+            if (howStep2TitleFieldPl) localStorage.setItem('plHowStep2Title', howStep2TitleFieldPl.value);
+            if (howStep2DescFieldPl) localStorage.setItem('plHowStep2Desc', howStep2DescFieldPl.value);
+            if (howStep3TitleFieldPl) localStorage.setItem('plHowStep3Title', howStep3TitleFieldPl.value);
+            if (howStep3DescFieldPl) localStorage.setItem('plHowStep3Desc', howStep3DescFieldPl.value);
+            if (howStep4TitleFieldPl) localStorage.setItem('plHowStep4Title', howStep4TitleFieldPl.value);
+            if (howStep4DescFieldPl) localStorage.setItem('plHowStep4Desc', howStep4DescFieldPl.value);
+            if (howStep5TitleFieldPl) localStorage.setItem('plHowStep5Title', howStep5TitleFieldPl.value);
+            if (howStep5DescFieldPl) localStorage.setItem('plHowStep5Desc', howStep5DescFieldPl.value);
+            if (howStep6TitleFieldPl) localStorage.setItem('plHowStep6Title', howStep6TitleFieldPl.value);
+            if (howStep6DescFieldPl) localStorage.setItem('plHowStep6Desc', howStep6DescFieldPl.value);
+            
+            // Save How It Works CTA (PL)
+            if (howCtaDescFieldPl) localStorage.setItem('plHowCtaDesc', howCtaDescFieldPl.value);
+            if (howCtaFeature1TitleFieldPl) localStorage.setItem('plHowCtaFeature1Title', howCtaFeature1TitleFieldPl.value);
+            if (howCtaFeature1DescFieldPl) localStorage.setItem('plHowCtaFeature1Desc', howCtaFeature1DescFieldPl.value);
+            if (howCtaFeature2TitleFieldPl) localStorage.setItem('plHowCtaFeature2Title', howCtaFeature2TitleFieldPl.value);
+            if (howCtaFeature2DescFieldPl) localStorage.setItem('plHowCtaFeature2Desc', howCtaFeature2DescFieldPl.value);
+            if (howCtaFeature3TitleFieldPl) localStorage.setItem('plHowCtaFeature3Title', howCtaFeature3TitleFieldPl.value);
+            if (howCtaFeature3DescFieldPl) localStorage.setItem('plHowCtaFeature3Desc', howCtaFeature3DescFieldPl.value);
+            if (howCtaButtonFieldPl) localStorage.setItem('plHowCtaButton', howCtaButtonFieldPl.value);
+            if (howCtaSubtextFieldPl) localStorage.setItem('plHowCtaSubtext', howCtaSubtextFieldPl.value);
+            
+            const msg = document.getElementById('how-save-msg-pl');
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 2000);
         });
