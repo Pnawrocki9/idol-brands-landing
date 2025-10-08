@@ -17,7 +17,7 @@ A new "Strategic Partners" section has been added to both English and Polish ver
 ### 1. Upload the PAKO LORENTE Logo
 Upload your PAKO LORENTE logo to the `/images/` directory with the filename:
 ```
-pako-lorente-logo.png
+pakolorente.png
 ```
 
 The logo should be:
@@ -41,7 +41,7 @@ The logo should be:
 #### Add a New Partner
 1. In the "Add New Partner" section, fill in:
    - **Partner Name**: e.g., "PAKO LORENTE"
-   - **Logo Path**: e.g., "images/pako-lorente-logo.png"
+   - **Logo Path**: e.g., "images/pakolorente.png"
    - **Website URL**: (optional) e.g., "https://pakolorente.com"
 2. Click "Add Partner"
 
@@ -72,7 +72,7 @@ All partner data is stored in localStorage:
 ```javascript
 {
   "name": "PAKO LORENTE",
-  "logo": "images/pako-lorente-logo.png",
+  "logo": "images/pakolorente.png",
   "url": "https://pakolorente.com" // optional
 }
 ```
