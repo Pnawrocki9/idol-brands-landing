@@ -202,8 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ['solution-step1-desc-field-pl','plSolutionStep1Desc','solutionStep1Desc','We develop your unique brand identity, positioning, and go-to-market strategy.'],
     ['solution-step2-title-field-pl','plSolutionStep2Title','solutionStep2Title','Product Development'],
     ['solution-step2-desc-field-pl','plSolutionStep2Desc','solutionStep2Desc','From concept to final product, we handle design, sampling, and production.'],
-    ['solution-step3-title-field-pl','plSolutionStep3Title','solutionStep3Title','E-commerce Platform'],
-    ['solution-step3-desc-field-pl','plSolutionStep3Desc','solutionStep3Desc','Custom online store with integrated payment processing and inventory management.'],
+    ['solution-step3-title-field-pl','plSolutionStep3Title','solutionStep3Title','LIVE-commerce Platform'],
+    ['solution-step3-desc-field-pl','plSolutionStep3Desc','solutionStep3Desc','Custom marketplace store with LiveSell social media channels, analytics, chat, and inventory management.'],
     ['solution-step4-title-field-pl','plSolutionStep4Title','solutionStep4Title','Marketing & Growth'],
     ['solution-step4-desc-field-pl','plSolutionStep4Desc','solutionStep4Desc','Data-driven marketing campaigns and growth strategies to scale your brand.'],
     // Home Page About Section (PL)
