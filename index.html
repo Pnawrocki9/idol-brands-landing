@@ -586,10 +586,10 @@
                     Working with industry leaders to bring you the best fashion solutions
                 </p>
             </div>
-            <div id="partners-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
+            <div id="partners-grid" class="inline-grid grid-cols-1 gap-8 items-center justify-items-center mx-auto">
                 <!-- Partners will be loaded dynamically from CMS -->
                 <div class="partner-item bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <img src="images/pakolorente.png" alt="PAKO LORENTE" class="w-full h-auto max-h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="images/pakolorente.png" alt="PAKO LORENTE" class="w-full h-auto max-h-[6.5rem] object-contain grayscale hover:grayscale-0 transition-all duration-300">
                 </div>
             </div>
         </div>
@@ -1283,13 +1283,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const partners = JSON.parse(localStorage.getItem('strategicPartners') || '[]');
         if (partners.length > 0) {
             partnersGrid.innerHTML = '';
+            // Adjust layout based on number of partners
+            if (partners.length === 1) {
+                partnersGrid.className = 'inline-grid grid-cols-1 gap-8 items-center justify-items-center mx-auto';
+            } else if (partners.length === 2) {
+                partnersGrid.className = 'inline-grid grid-cols-2 gap-8 items-center justify-items-center mx-auto';
+            } else {
+                partnersGrid.className = 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center';
+            }
             partners.forEach(partner => {
                 const partnerDiv = document.createElement('div');
                 partnerDiv.className = 'partner-item bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow';
                 if (partner.url) {
-                    partnerDiv.innerHTML = `<a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="block"><img src="${partner.logo}" alt="${partner.name}" class="w-full h-auto max-h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-gray-400 text-sm\\'>${partner.name}</span>';"></a>`;
+                    partnerDiv.innerHTML = `<a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="block"><img src="${partner.logo}" alt="${partner.name}" class="w-full h-auto max-h-[6.5rem] object-contain grayscale hover:grayscale-0 transition-all duration-300" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-gray-400 text-sm\\'>${partner.name}</span>';"></a>`;
                 } else {
-                    partnerDiv.innerHTML = `<img src="${partner.logo}" alt="${partner.name}" class="w-full h-auto max-h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-gray-400 text-sm\\'>${partner.name}</span>';">`;
+                    partnerDiv.innerHTML = `<img src="${partner.logo}" alt="${partner.name}" class="w-full h-auto max-h-[6.5rem] object-contain grayscale hover:grayscale-0 transition-all duration-300" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-gray-400 text-sm\\'>${partner.name}</span>';">`;
                 }
                 partnersGrid.appendChild(partnerDiv);
             });
