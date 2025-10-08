@@ -142,6 +142,61 @@
             <p id="hero-save-msg" class="text-green-600 text-sm mt-3 hidden">Hero content saved.</p>
         </section>
 
+        <!-- Strategic Partners Section -->
+        <section class="mb-12 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-900">🤝 Strategic Partners</h2>
+            <p class="text-sm text-gray-600 mb-4">Manage strategic partners displayed on the Fashion homepage (EN & PL versions).</p>
+            
+            <!-- Section Titles -->
+            <div class="bg-white rounded-lg p-4 mb-4">
+                <h3 class="text-lg font-semibold mb-3">Section Titles</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="partners-title-en" class="block text-sm font-medium text-gray-700 mb-1">Title (EN)</label>
+                        <input id="partners-title-en" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Strategic Partners" />
+                    </div>
+                    <div>
+                        <label for="partners-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Title (PL)</label>
+                        <input id="partners-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Strategiczni Partnerzy" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div>
+                        <label for="partners-subtitle-en" class="block text-sm font-medium text-gray-700 mb-1">Subtitle (EN)</label>
+                        <input id="partners-subtitle-en" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Working with industry leaders..." />
+                    </div>
+                    <div>
+                        <label for="partners-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Subtitle (PL)</label>
+                        <input id="partners-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Współpracujemy z liderami branży..." />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partners List -->
+            <div class="bg-white rounded-lg p-4 mb-4">
+                <h3 class="text-lg font-semibold mb-3">Partners List</h3>
+                <div id="partners-list" class="space-y-3">
+                    <!-- Partners will be loaded here dynamically -->
+                </div>
+                
+                <!-- Add New Partner Form -->
+                <div class="mt-4 border-t border-gray-200 pt-4">
+                    <h4 class="font-semibold mb-3 text-gray-700">Add New Partner</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <input id="new-partner-name" type="text" class="border border-gray-300 rounded-lg p-2" placeholder="Partner Name (e.g., PAKO LORENTE)" />
+                        <input id="new-partner-logo" type="text" class="border border-gray-300 rounded-lg p-2" placeholder="Logo Path (e.g., images/logo.png)" />
+                        <input id="new-partner-url" type="text" class="border border-gray-300 rounded-lg p-2" placeholder="Website URL (optional)" />
+                    </div>
+                    <button id="add-partner-btn" class="mt-3 bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700">
+                        Add Partner
+                    </button>
+                </div>
+            </div>
+
+            <button id="save-partners" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save All Changes</button>
+            <p id="partners-save-msg" class="text-green-600 text-sm mt-3 hidden">Partners saved successfully.</p>
+        </section>
+
         <!-- About page editor -->
         <section class="mb-12">
             <h2 class="text-2xl font-semibold mb-4">Edit About Page</h2>
@@ -4040,5 +4095,147 @@
     <script src="admin-manage.js"></script>
     <!-- Load Polish translation management script (handles saving and loading of PL content) -->
     <script src="admin-pl.js"></script>
+    
+    <!-- Strategic Partners Management Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Strategic Partners Management
+        const partnersList = document.getElementById('partners-list');
+        const addPartnerBtn = document.getElementById('add-partner-btn');
+        const savePartnersBtn = document.getElementById('save-partners');
+        const partnersSaveMsg = document.getElementById('partners-save-msg');
+        
+        // Form fields
+        const titleEnField = document.getElementById('partners-title-en');
+        const titlePlField = document.getElementById('partners-title-pl');
+        const subtitleEnField = document.getElementById('partners-subtitle-en');
+        const subtitlePlField = document.getElementById('partners-subtitle-pl');
+        const newPartnerNameField = document.getElementById('new-partner-name');
+        const newPartnerLogoField = document.getElementById('new-partner-logo');
+        const newPartnerUrlField = document.getElementById('new-partner-url');
+        
+        if (!partnersList || !addPartnerBtn || !savePartnersBtn) return;
+        
+        // Load partners from localStorage
+        function loadPartners() {
+            // Load titles
+            titleEnField.value = localStorage.getItem('partnersTitle') || 'Strategic Partners';
+            titlePlField.value = localStorage.getItem('partnersTitlePl') || 'Strategiczni Partnerzy';
+            subtitleEnField.value = localStorage.getItem('partnersSubtitle') || 'Working with industry leaders to bring you the best fashion solutions';
+            subtitlePlField.value = localStorage.getItem('partnersSubtitlePl') || 'Współpracujemy z liderami branży, aby zapewnić Ci najlepsze rozwiązania modowe';
+            
+            // Load partners list
+            const partners = JSON.parse(localStorage.getItem('strategicPartners') || '[]');
+            
+            // If empty, add default PAKO LORENTE
+            if (partners.length === 0) {
+                partners.push({
+                    name: 'PAKO LORENTE',
+                    logo: 'images/pako-lorente-logo.png',
+                    url: ''
+                });
+                localStorage.setItem('strategicPartners', JSON.stringify(partners));
+            }
+            
+            renderPartners(partners);
+        }
+        
+        // Render partners list
+        function renderPartners(partners) {
+            partnersList.innerHTML = '';
+            
+            if (partners.length === 0) {
+                partnersList.innerHTML = '<p class="text-gray-500 text-sm">No partners yet. Add your first partner below.</p>';
+                return;
+            }
+            
+            partners.forEach((partner, index) => {
+                const partnerDiv = document.createElement('div');
+                partnerDiv.className = 'border border-gray-200 rounded-lg p-3 bg-gray-50';
+                partnerDiv.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${partner.logo}" alt="${partner.name}" class="w-16 h-16 object-contain" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2214%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+                        <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-2">
+                            <input type="text" class="border border-gray-300 rounded px-2 py-1 partner-name" data-index="${index}" value="${partner.name}" placeholder="Partner Name">
+                            <input type="text" class="border border-gray-300 rounded px-2 py-1 partner-logo" data-index="${index}" value="${partner.logo}" placeholder="Logo Path">
+                            <input type="text" class="border border-gray-300 rounded px-2 py-1 partner-url" data-index="${index}" value="${partner.url || ''}" placeholder="Website URL">
+                        </div>
+                        <button class="delete-partner text-red-600 hover:text-red-800 font-semibold px-3" data-index="${index}">
+                            🗑️
+                        </button>
+                    </div>
+                `;
+                partnersList.appendChild(partnerDiv);
+            });
+            
+            // Add event listeners for delete buttons
+            document.querySelectorAll('.delete-partner').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const partners = JSON.parse(localStorage.getItem('strategicPartners') || '[]');
+                    partners.splice(index, 1);
+                    localStorage.setItem('strategicPartners', JSON.stringify(partners));
+                    renderPartners(partners);
+                });
+            });
+        }
+        
+        // Add new partner
+        addPartnerBtn.addEventListener('click', function() {
+            const name = newPartnerNameField.value.trim();
+            const logo = newPartnerLogoField.value.trim();
+            const url = newPartnerUrlField.value.trim();
+            
+            if (!name || !logo) {
+                alert('Please enter at least Partner Name and Logo Path');
+                return;
+            }
+            
+            const partners = JSON.parse(localStorage.getItem('strategicPartners') || '[]');
+            partners.push({ name, logo, url });
+            localStorage.setItem('strategicPartners', JSON.stringify(partners));
+            
+            // Clear fields
+            newPartnerNameField.value = '';
+            newPartnerLogoField.value = '';
+            newPartnerUrlField.value = '';
+            
+            renderPartners(partners);
+        });
+        
+        // Save all changes
+        savePartnersBtn.addEventListener('click', function() {
+            // Save titles
+            localStorage.setItem('partnersTitle', titleEnField.value);
+            localStorage.setItem('partnersTitlePl', titlePlField.value);
+            localStorage.setItem('partnersSubtitle', subtitleEnField.value);
+            localStorage.setItem('partnersSubtitlePl', subtitlePlField.value);
+            
+            // Update partners from input fields
+            const partners = [];
+            document.querySelectorAll('.partner-name').forEach((nameInput, index) => {
+                const logoInput = document.querySelector(`.partner-logo[data-index="${index}"]`);
+                const urlInput = document.querySelector(`.partner-url[data-index="${index}"]`);
+                
+                if (nameInput.value.trim() && logoInput.value.trim()) {
+                    partners.push({
+                        name: nameInput.value.trim(),
+                        logo: logoInput.value.trim(),
+                        url: urlInput.value.trim()
+                    });
+                }
+            });
+            
+            localStorage.setItem('strategicPartners', JSON.stringify(partners));
+            
+            // Show success message
+            partnersSaveMsg.classList.remove('hidden');
+            setTimeout(() => partnersSaveMsg.classList.add('hidden'), 3000);
+        });
+        
+        // Initialize on load
+        loadPartners();
+    });
+    </script>
 </body>
 </html>
