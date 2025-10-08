@@ -584,7 +584,7 @@
                     Working with industry leaders to bring you the best fashion solutions
                 </p>
             </div>
-            <div id="partners-grid" class="inline-grid grid-cols-1 gap-8 items-center justify-items-center mx-auto">
+            <div id="partners-grid" class="grid grid-cols-1 gap-8 items-center justify-items-center justify-center mx-auto">
                 <!-- Partners will be loaded dynamically from CMS -->
                 <div class="partner-item bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <img src="images/pakolorente.png" alt="PAKO LORENTE" class="mx-auto h-auto max-h-[7.8rem] object-contain grayscale hover:grayscale-0 transition-all duration-300">
@@ -1274,9 +1274,9 @@ document.addEventListener('DOMContentLoaded', function() {
             partnersGrid.innerHTML = ''; // Clear default content
             // Use explicit Tailwind classes to support Play CDN (no dynamic classes)
             if (partners.length === 1) {
-                partnersGrid.className = 'inline-grid grid-cols-1 gap-8 items-center justify-items-center mx-auto';
+                partnersGrid.className = 'grid grid-cols-1 gap-8 items-center justify-items-center justify-center mx-auto';
             } else if (partners.length === 2) {
-                partnersGrid.className = 'inline-grid grid-cols-2 gap-8 items-center justify-items-center mx-auto';
+                partnersGrid.className = 'grid grid-cols-2 gap-8 items-center justify-items-center justify-center mx-auto';
             } else {
                 partnersGrid.className = 'grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center justify-center';
             }
