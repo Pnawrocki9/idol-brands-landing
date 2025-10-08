@@ -212,6 +212,19 @@
             object-fit: cover;
             border-radius: 0.5rem;
         }
+        
+        /* Fix for Font Awesome icon aspect ratio */
+        #about .fas {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        
+        #about .w-24.h-24 {
+            aspect-ratio: 1 / 1;
+        }
     </style>
     
     <!-- Cookie Consent -->
