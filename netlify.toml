@@ -1,8 +1,7 @@
-[build]
-  publish = "."
-  functions = "netlify/functions"
-
+# WWW -> apex (idolbrands.com)
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+  from = "/*"
+  to = "https://idolbrands.com/:splat"
+  status = 301
+  force = true
+  conditions = { Host = ["www.idolbrands.com"] }
