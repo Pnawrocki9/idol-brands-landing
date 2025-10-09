@@ -1,0 +1,40 @@
+# Idol Brands
+
+> Idol Brands is a LiveSelling marketplace that helps influencers and celebrities launch private-label fashion brands in ~6 months. We handle design, production, logistics, fulfillment, and CX; creators focus on community and live shows.
+
+**Audience:** influencers & celebrities (≥500k followers), Gen Z–skewed, agents & partners.
+
+---
+
+## Start Here
+- [About Idol Brands](https://www.idolbrands.com/about) — mission, vision, and our unique approach to LiveSelling.
+- [How It Works](https://www.idolbrands.com/how-it-works) — step-by-step process to launch a brand with Idol.
+- [For Creators](https://www.idolbrands.com/creators) — opportunities and earnings model for influencers.
+- [For Fans](https://www.idolbrands.com/fans) — fan experience, purchasing and supporting creators.
+- [Why LiveSelling](https://www.idolbrands.com/liveselling) — benefits of live, interactive e-commerce.
+
+## Product & Operations
+- [Operations (Paco Lorente)](https://www.idolbrands.com/operations) — supply chain operations and production details.
+- [Revenue Share](https://www.idolbrands.com/revenue-share) — transparent revenue share model for creators.
+
+## Partners
+- [For Agents & Partners](https://www.idolbrands.com/agents) — collaboration opportunities and terms for talent agents and partners.
+
+## Benchmarks & Playbooks
+- [KPI Benchmarks](https://www.idolbrands.com/kpi-benchmarks) — key performance indicators and targets.
+- [Drop Playbook](https://www.idolbrands.com/drop-playbook) — strategy for limited-edition drops and pricing.
+
+---
+
+## Preferred Summary (short)
+Idol Brands is a LiveSelling platform that turns influence into owned fashion brands in ~6 months. We run design-to-delivery; creators earn 15–20% on sales.
+
+## Canonical & Discovery
+- Canonical homepage: https://www.idolbrands.com/
+- Sitemap: https://www.idolbrands.com/sitemap.xml
+
+## Contact
+- hello@idolbrands.com · creators@idolbrands.com · press@idolbrands.com
+
+## Metadata
+- Last updated: 2025-10-09
