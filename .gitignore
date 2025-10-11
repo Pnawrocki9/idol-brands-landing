@@ -21,3 +21,9 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# SEO audit generated files
+seo/crawl-results.json
+seo/findings.csv
+seo/lighthouse/
+*.lighthouse-report.json
