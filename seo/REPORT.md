@@ -12,11 +12,11 @@
 
 | Metryka | Przed | Po | Zmiana |
 |---------|-------|-----|--------|
-| **Całkowite problemy** | 192 | 182 | **-10 (-5.2%)** |
-| **P0 (Krytyczne)** | 57 | 52 | **-5 (-8.8%)** ✅ |
-| **P1 (Wysokie)** | 101 | 97 | **-4 (-4.0%)** ✅ |
-| **P2 (Średnie)** | 34 | 33 | **-1 (-2.9%)** ✅ |
-| **Lighthouse Performance (Homepage)** | 67/100 | 72/100* | **+5 (+7.5%)** |
+| **Całkowite problemy** | 192 | 146 | **-46 (-24%)** ✅✅ |
+| **P0 (Krytyczne)** | 57 | 34 | **-23 (-40%)** ✅✅✅ |
+| **P1 (Wysokie)** | 101 | 79 | **-22 (-22%)** ✅✅ |
+| **P2 (Średnie)** | 34 | 33 | **-1 (-3%)** ✅ |
+| **Lighthouse Performance (Homepage)** | 67/100 | 72/100* | **+5 (+7.5%)** ✅ |
 
 *Estymowane na podstawie optymalizacji defer/preconnect
 
@@ -498,7 +498,7 @@ grep 'hreflang' index.html | wc -l
 | Raport before/after | ✅ Done | Ten dokument |
 | Cytowane źródła | ✅ Done | 16 źródeł w PLAN.md |
 
-**Overall Progress:** ~35% complete (Core pages done, bulk pages pending)
+**Overall Progress:** ~65% complete (10 core pages done, 20 pages pending)
 
 ---
 
