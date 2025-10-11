@@ -1,0 +1,955 @@
+[
+  {
+    "file": "/workspace/about-pl.html",
+    "title": "About Us - Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 7,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 22
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/about.html",
+    "title": "About Us - Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 7,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 22
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/blog-pl.html",
+    "title": "Blog - Inspiracje Modowe dla Influencer\u00f3w | Idol Brands",
+    "meta_description": "Odkryj eksperckie porady, wskaz\u00f3wki i historie sukcesu dotycz\u0105ce budowania marki modowej jako influencer. Dowiedz si\u0119 o live-sellingu, przedsi\u0119biorczo\u015bci modowej i trendach bran\u017cowych.",
+    "canonical": "",
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {
+      "og:type": "website",
+      "og:site_name": "Idol Brands",
+      "og:title": "Blog - Inspiracje Modowe dla Influencer\u00f3w | Idol Brands",
+      "og:description": "Odkryj eksperckie porady, wskaz\u00f3wki i historie sukcesu dotycz\u0105ce budowania marki modowej jako influencer. Dowiedz si\u0119 o live-sellingu, przedsi\u0119biorczo\u015bci modowej i trendach bran\u017cowych.",
+      "og:url": "",
+      "og:image": "",
+      "og:locale": "pl_PL"
+    },
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "meta_description_too_long",
+        "severity": "warning",
+        "value": 184
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_url",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/blog.html",
+    "title": "Blog - Fashion Industry Insights for Influencers | Idol Brands",
+    "meta_description": "Discover expert insights, tips, and success stories for building your fashion brand as an influencer. Learn about live-selling, fashion entrepreneurship, and industry trends.",
+    "canonical": "",
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {
+      "og:type": "website",
+      "og:site_name": "Idol Brands",
+      "og:title": "Blog - Fashion Industry Insights for Influencers | Idol Brands",
+      "og:description": "Discover expert insights, tips, and success stories for building your fashion brand as an influencer. Learn about live-selling, fashion entrepreneurship, and industry trends.",
+      "og:url": "",
+      "og:image": ""
+    },
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_long",
+        "severity": "warning",
+        "value": 62
+      },
+      {
+        "type": "meta_description_too_long",
+        "severity": "warning",
+        "value": 174
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_url",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/how-it-works-pl.html",
+    "title": "How It Works - Idol Brands Live-Selling Marketplace",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 2,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/how-it-works.html",
+    "title": "How It Works - Idol Brands Live-Selling Marketplace",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 2,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/index-fashion-pl.html",
+    "title": "Idol Brands Fashion - Live-Selling Marketplace for Influencers",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 8,
+    "h2_count": 5,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_long",
+        "severity": "warning",
+        "value": 62
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "multiple_h1",
+        "severity": "warning",
+        "count": 8
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/index-fashion.html",
+    "title": "Idol Brands Fashion - Live-Selling Marketplace for Influencers",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 8,
+    "h2_count": 5,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_long",
+        "severity": "warning",
+        "value": 62
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "multiple_h1",
+        "severity": "warning",
+        "count": 8
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/index-pl.html",
+    "title": "Idol Brands 2.0 - Zamie\u0144 sw\u00f3j wp\u0142yw w imperium mody",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 10,
+    "h2_count": 5,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "multiple_h1",
+        "severity": "warning",
+        "count": 10
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/index.html",
+    "title": "Idol Brands 2.0 - Turn Your Influence Into a Fashion Empire",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 8,
+    "h2_count": 5,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "multiple_h1",
+        "severity": "warning",
+        "count": 8
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/legal/cookies-pl.html",
+    "title": "Polityka Cookies \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/legal/cookies.html",
+    "title": "Cookies Policy \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 28
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/legal/gdpr-pl.html",
+    "title": "Prywatno\u015b\u0107 / RODO \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/legal/gdpr.html",
+    "title": "Privacy / GDPR Policy \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/legal/terms-pl.html",
+    "title": "Regulamin \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 23
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/legal/terms.html",
+    "title": "Terms & Conditions \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/login-pl.html",
+    "title": "Login \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 19
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/login.html",
+    "title": "Login \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 19
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/post-pl.html",
+    "title": "Post bloga - Idol Brands",
+    "meta_description": "Czytaj nasze najnowsze artyku\u0142y i inspiracje dotycz\u0105ce mody dla influencer\u00f3w buduj\u0105cych w\u0142asne marki modowe.",
+    "canonical": "",
+    "h1_count": 0,
+    "h2_count": 0,
+    "og_tags": {
+      "og:type": "article",
+      "og:site_name": "Idol Brands",
+      "og:title": "Post bloga - Idol Brands",
+      "og:description": "Czytaj nasze najnowsze artyku\u0142y i inspiracje dotycz\u0105ce mody dla influencer\u00f3w buduj\u0105cych w\u0142asne marki modowe.",
+      "og:url": "",
+      "og:image": "",
+      "og:locale": "pl_PL"
+    },
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 24
+      },
+      {
+        "type": "meta_description_too_short",
+        "severity": "warning",
+        "value": 108
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_h1",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_url",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/post.html",
+    "title": "Blog Post - Idol Brands",
+    "meta_description": "Read our latest fashion industry insights and tips for influencers building their own fashion brands.",
+    "canonical": "",
+    "h1_count": 0,
+    "h2_count": 0,
+    "og_tags": {
+      "og:type": "article",
+      "og:site_name": "Idol Brands",
+      "og:title": "Blog Post - Idol Brands",
+      "og:description": "Read our latest fashion industry insights and tips for influencers building their own fashion brands.",
+      "og:url": "",
+      "og:image": ""
+    },
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 23
+      },
+      {
+        "type": "meta_description_too_short",
+        "severity": "warning",
+        "value": 101
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_h1",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_url",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/success-stories-pl.html",
+    "title": "Success Stories - Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 1,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 29
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/success-stories.html",
+    "title": "Success Stories - Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 1,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 29
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/your-documents-pl.html",
+    "title": "Your Documents \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 28
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  },
+  {
+    "file": "/workspace/your-documents.html",
+    "title": "Your Documents \u2013 Idol Brands",
+    "meta_description": null,
+    "canonical": null,
+    "h1_count": 1,
+    "h2_count": 0,
+    "og_tags": {},
+    "has_schema": false,
+    "hreflang_count": 0,
+    "images_without_alt_count": 0,
+    "issues": [
+      {
+        "type": "title_too_short",
+        "severity": "warning",
+        "value": 28
+      },
+      {
+        "type": "missing_meta_description",
+        "severity": "critical"
+      },
+      {
+        "type": "missing_canonical",
+        "severity": "high"
+      },
+      {
+        "type": "missing_og_tags",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_schema",
+        "severity": "medium"
+      },
+      {
+        "type": "missing_hreflang",
+        "severity": "low"
+      }
+    ]
+  }
+]
