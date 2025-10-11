@@ -127,7 +127,15 @@
     <!-- Blog Posts Grid -->
     <section class="pb-16 bg-white" style="margin-top: -90px;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="blog-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="blog-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Static content for crawlers (hidden when JS loads) -->
+                <noscript>
+                    <div class="col-span-full text-center py-12">
+                        <p class="text-lg text-gray-600 mb-4">Enable JavaScript to see our latest blog posts, or visit our blog archive:</p>
+                        <a href="/blog/" class="text-blue-600 hover:underline font-medium">Browse All Posts</a>
+                    </div>
+                </noscript>
+            </div>
             <p id="no-posts-msg" class="text-gray-600 text-center mt-8 hidden">No blog posts available yet.</p>
         </div>
     </section>
@@ -180,6 +188,16 @@
     <!-- Scripts -->
     <script src="auth.js"></script>
     <script>
+    // Generate slug from title (matches server-side logic)
+    function generateSlug(title) {
+        return title
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .substring(0, 100);
+    }
+    
     // Function to load and display blog posts
     function loadBlogPosts() {
         const grid = document.getElementById('blog-posts-grid');
@@ -225,9 +243,12 @@
             card.appendChild(contentWrapper);
             // Determine the original index of this post in the posts array (not reversed)
             const globalIndex = total - 1 - idx;
-            // Add click event to open full post
+            // Generate SEO-friendly URL
+            const slug = generateSlug(post.title || 'post-' + globalIndex);
+            const postUrl = '/blog/' + slug;
+            // Add click event to open full post using SEO-friendly URL
             card.addEventListener('click', function() {
-                window.open('post.html?index=' + globalIndex, '_blank');
+                window.location.href = postUrl;
             });
             grid.appendChild(card);
         });
