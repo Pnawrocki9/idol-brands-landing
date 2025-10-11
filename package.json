@@ -2,6 +2,10 @@
   "name": "idol-brands-cms",
   "version": "1.0.0",
   "description": "CMS for Idol Brands",
+  "scripts": {
+    "build": "node scripts/build-blog.js",
+    "build:blog": "node scripts/build-blog.js"
+  },
   "dependencies": {
     "node-fetch": "^2.6.7"
   }

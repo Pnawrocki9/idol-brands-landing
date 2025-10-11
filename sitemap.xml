@@ -22,4 +22,56 @@
   <url><loc>https://www.idolbrands.com/agents.md</loc></url>
   <url><loc>https://www.idolbrands.com/kpi-benchmarks.md</loc></url>
   <url><loc>https://www.idolbrands.com/drop-playbook.md</loc></url>
+  <url>
+    <loc>https://www.idolbrands.com/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog-pl.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/success-stories.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/success-stories-pl.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- GENERATED BLOG POSTS START -->
+  <url>
+    <loc>https://www.idolbrands.com/blog/the-15m-exit-strategy-build-a-sellable-creator-brand-from-day-one-en.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog/how-creators-can-avoid-going-broke-before-launching-their-own-product-en.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog/the-billion-dollar-playbook-7-creator-brands-proving-your-fashion-empire-could-be-six-months-away-en.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog/strategia-na-15-milionw-jak-twrcy-mog-od-pocztku-budowa-mark-ktr-da-si-sprzeda-pl.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog/jak-twrcy-mog-nie-zbankrutowa-zanim-wypuszcz-wasny-produkt-pl.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog/klub-miliarderw-7-marek-twrcw-ktre-udowadniaj-e-twoje-modowe-imperium-moe-powsta-w-6-miesicy-pl.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- GENERATED BLOG POSTS END -->
 </urlset>
