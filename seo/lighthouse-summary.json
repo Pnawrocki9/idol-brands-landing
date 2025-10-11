@@ -1,0 +1,39 @@
+[
+  {
+    "url": "/",
+    "name": "index.html",
+    "performanceScore": 67,
+    "issues": [
+      "3 render-blocking scripts",
+      "4 images without lazy loading",
+      "Missing preconnect for external resources"
+    ]
+  },
+  {
+    "url": "/about.html",
+    "name": "about.html",
+    "performanceScore": 87,
+    "issues": [
+      "1 render-blocking scripts",
+      "Missing preconnect for external resources"
+    ]
+  },
+  {
+    "url": "/blog.html",
+    "name": "blog.html",
+    "performanceScore": 87,
+    "issues": [
+      "1 render-blocking scripts",
+      "Missing preconnect for external resources"
+    ]
+  },
+  {
+    "url": "/how-it-works.html",
+    "name": "how-it-works.html",
+    "performanceScore": 87,
+    "issues": [
+      "1 render-blocking scripts",
+      "Missing preconnect for external resources"
+    ]
+  }
+]

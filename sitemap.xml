@@ -1,25 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.idolbrands.com/</loc></url>
-  <url><loc>https://www.idolbrands.com/llms.txt</loc></url>
-  <url><loc>https://www.idolbrands.com/about</loc></url>
-  <url><loc>https://www.idolbrands.com/how-it-works</loc></url>
-  <url><loc>https://www.idolbrands.com/creators</loc></url>
-  <url><loc>https://www.idolbrands.com/fans</loc></url>
-  <url><loc>https://www.idolbrands.com/liveselling</loc></url>
-  <url><loc>https://www.idolbrands.com/operations</loc></url>
-  <url><loc>https://www.idolbrands.com/revenue-share</loc></url>
-  <url><loc>https://www.idolbrands.com/agents</loc></url>
-  <url><loc>https://www.idolbrands.com/kpi-benchmarks</loc></url>
-  <url><loc>https://www.idolbrands.com/drop-playbook</loc></url>
-  <url><loc>https://www.idolbrands.com/about.md</loc></url>
-  <url><loc>https://www.idolbrands.com/how-it-works.md</loc></url>
-  <url><loc>https://www.idolbrands.com/creators.md</loc></url>
-  <url><loc>https://www.idolbrands.com/fans.md</loc></url>
-  <url><loc>https://www.idolbrands.com/liveselling.md</loc></url>
-  <url><loc>https://www.idolbrands.com/operations.md</loc></url>
-  <url><loc>https://www.idolbrands.com/revenue-share.md</loc></url>
-  <url><loc>https://www.idolbrands.com/agents.md</loc></url>
-  <url><loc>https://www.idolbrands.com/kpi-benchmarks.md</loc></url>
-  <url><loc>https://www.idolbrands.com/drop-playbook.md</loc></url>
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.idolbrands.com/</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/index-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Main Pages - English -->
+  <url>
+    <loc>https://www.idolbrands.com/about.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/how-it-works.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/success-stories.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Main Pages - Polish -->
+  <url>
+    <loc>https://www.idolbrands.com/about-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/how-it-works-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/success-stories-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/blog-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Login Pages -->
+  <url>
+    <loc>https://www.idolbrands.com/login.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/login-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Legal Pages - English -->
+  <url>
+    <loc>https://www.idolbrands.com/legal/terms.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/legal/cookies.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/legal/gdpr.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Legal Pages - Polish -->
+  <url>
+    <loc>https://www.idolbrands.com/legal/terms-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/legal/cookies-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.idolbrands.com/legal/gdpr-pl.html</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>
