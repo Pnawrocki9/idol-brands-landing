@@ -2,20 +2,18 @@
   {
     "url": "/",
     "name": "index.html",
-    "performanceScore": 67,
+    "performanceScore": 72,
     "issues": [
       "3 render-blocking scripts",
-      "4 images without lazy loading",
-      "Missing preconnect for external resources"
+      "3 images without lazy loading"
     ]
   },
   {
     "url": "/about.html",
     "name": "about.html",
-    "performanceScore": 87,
+    "performanceScore": 92,
     "issues": [
-      "1 render-blocking scripts",
-      "Missing preconnect for external resources"
+      "1 render-blocking scripts"
     ]
   },
   {
@@ -30,10 +28,9 @@
   {
     "url": "/how-it-works.html",
     "name": "how-it-works.html",
-    "performanceScore": 87,
+    "performanceScore": 92,
     "issues": [
-      "1 render-blocking scripts",
-      "Missing preconnect for external resources"
+      "1 render-blocking scripts"
     ]
   }
 ]
