@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Idol Brands</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-D8x9m7Ka.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-100 font-sans">
+    <!-- Back arrow linking to home page -->
+    <a href="index.html" class="absolute top-4 left-4 text-black text-lg hover:underline flex items-center">
+        <!-- Unicode left arrow.  Font Awesome is not loaded on this page. -->
+        <span class="mr-2">&larr;</span> Home
+    </a>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-3xl font-bold mb-6 text-center">Influencer Login</h1>
+        <p id="login-subtitle" class="text-sm text-gray-600 mb-4 text-center" style="white-space: pre-line;">Enter your login credentials from your acceptance email.
+To register, sign up to waiting list and soon we will send you an email with login credentials.</p>
+        <!-- Language switcher inside login card (English Login page) -->
+        <div class="flex justify-center items-center text-sm mb-4">
+            <span class="text-black font-semibold">EN</span>
+            <span class="mx-1 text-black">|</span>
+            <a href="login-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+        </div>
+        <form id="login-form" class="space-y-4">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Enter your username" required>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="w-full bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800">Login</button>
+        </form>
+        <p id="error-message" class="text-red-600 text-sm mt-4 hidden text-center">Invalid username or password.</p>
+        <!-- Link to admin login for site administrators -->
+        <p class="mt-6 text-center text-sm text-gray-500">
+            Are you an administrator? <a href="admin-login.html" class="text-blue-600 hover:underline">Admin Login</a>
+        </p>
+    </div>
+
+    <script>
+    // Load CMS content for login subtitle
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginSubtitle = localStorage.getItem('loginSubtitle');
+        if (loginSubtitle) {
+            document.getElementById('login-subtitle').textContent = loginSubtitle;
+        }
+    });
+    
+    // Attach handler after DOM load.  This login form checks the list of
+    // registered users in localStorage under the key "users".  Only users
+    // with status "active" can log in.  The admin account is handled
+    // separately via admin-login.html.
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        // Load users from localStorage.  If none exist, there are no
+        // registered users yet and login will fail.
+        let users = [];
+        try {
+            const stored = localStorage.getItem('users');
+            if (stored) users = JSON.parse(stored);
+        } catch (err) {
+            users = [];
+        }
+        // Look for a user with matching login & password and active status
+        const match = users.find(function(u) {
+            return u.login === username && u.password === password && u.status === 'active';
+        });
+        if (match) {
+            // Successful login – set loggedIn flag and clear any admin flag
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.removeItem('adminLoggedIn');
+            // Optionally store current user info
+            localStorage.setItem('currentUser', match.login);
+            window.location.href = 'index.html';
+        } else {
+            const error = document.getElementById('error-message');
+            error.classList.remove('hidden');
+        }
+    });
+    </script>
+</body>
+</html>

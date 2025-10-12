@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Success Stories Toggle</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-D8x9m7Ka.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-3xl font-bold mb-6">🧪 Test ukrywania Success Stories</h1>
+        
+        <!-- Status Section -->
+        <div class="mb-6 p-4 bg-blue-50 rounded-lg">
+            <h2 class="text-xl font-semibold mb-3">Status localStorage:</h2>
+            <div class="space-y-2">
+                <p><strong>showSuccessStories:</strong> <span id="status-value" class="font-mono bg-gray-200 px-2 py-1 rounded"></span></p>
+                <p><strong>Success Stories powinny być:</strong> <span id="status-text" class="font-bold"></span></p>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="mb-6 p-4 bg-green-50 rounded-lg">
+            <h2 class="text-xl font-semibold mb-3">Panel sterowania (test):</h2>
+            <div class="flex gap-4">
+                <button onclick="hideSuccessStories()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                    ❌ Ukryj Success Stories
+                </button>
+                <button onclick="showSuccessStories()" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                    ✅ Pokaż Success Stories
+                </button>
+                <button onclick="location.reload()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                    🔄 Odśwież stronę
+                </button>
+            </div>
+        </div>
+
+        <!-- Test Links Section -->
+        <div class="mb-6 p-4 bg-yellow-50 rounded-lg">
+            <h2 class="text-xl font-semibold mb-3">Testowe linki Success Stories:</h2>
+            <p class="text-sm text-gray-600 mb-4">Poniższe linki powinny się ukrywać/pokazywać tak jak na prawdziwych stronach</p>
+            
+            <!-- Desktop Navigation (symulacja) -->
+            <div class="mb-4">
+                <h3 class="font-semibold mb-2">Menu Desktop:</h3>
+                <nav class="flex gap-4 p-3 bg-white border rounded">
+                    <a href="about.html" class="text-black hover:text-gray-600">About</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600">Success Stories (EN)</a>
+                    <a href="success-stories-pl.html" class="text-black hover:text-gray-600">Historie sukcesu (PL)</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600">Blog</a>
+                </nav>
+            </div>
+
+            <!-- Footer (symulacja) -->
+            <div class="mb-4">
+                <h3 class="font-semibold mb-2">Stopka (z elementami &lt;li&gt;):</h3>
+                <ul class="list-disc list-inside p-3 bg-white border rounded">
+                    <li><a href="about.html" class="hover:underline">About</a></li>
+                    <li><a href="success-stories.html" class="hover:underline">Success Stories (EN)</a></li>
+                    <li><a href="success-stories-pl.html" class="hover:underline">Historie sukcesu (PL)</a></li>
+                    <li><a href="blog.html" class="hover:underline">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Found Links Debug -->
+        <div class="mb-6 p-4 bg-purple-50 rounded-lg">
+            <h2 class="text-xl font-semibold mb-3">🔍 Debug - znalezione linki:</h2>
+            <div id="debug-output" class="bg-white p-3 rounded border font-mono text-sm"></div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="p-4 bg-gray-50 rounded-lg">
+            <h2 class="text-xl font-semibold mb-3">📋 Instrukcja:</h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>Kliknij "Ukryj Success Stories" - linki powinny zniknąć NATYCHMIAST (bez odświeżania)</li>
+                <li>Kliknij "Pokaż Success Stories" - linki powinny się pojawić NATYCHMIAST</li>
+                <li>Kliknij "Odśwież stronę" - stan powinien być zachowany (linki nadal ukryte/widoczne)</li>
+                <li>Sprawdź "Debug - znalezione linki" aby zobaczyć ile linków zostało znalezionych</li>
+            </ol>
+            <p class="mt-4 text-sm text-gray-600">
+                <strong>Uwaga:</strong> Ta strona używa dokładnie tej samej funkcji <code>updateSuccessStoriesVisibility()</code> 
+                co prawdziwe strony w <code>/landing/</code>
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+            <h2 class="text-xl font-semibold mb-3">🔗 Szybkie linki do testowania:</h2>
+            <div class="space-y-2">
+                <a href="landing/admin.html" class="block text-blue-600 hover:underline">→ Otwórz panel CMS (zmień ustawienie)</a>
+                <a href="landing/index.html" target="_blank" class="block text-blue-600 hover:underline">→ Strona angielska (index.html)</a>
+                <a href="landing/index-pl.html" target="_blank" class="block text-blue-600 hover:underline">→ Strona polska (index-pl.html)</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the same auth.js that real pages use -->
+    <script src="landing/auth.js"></script>
+
+    <script>
+        // Additional test functions
+        function hideSuccessStories() {
+            localStorage.setItem('showSuccessStories', 'false');
+            updateStatus();
+            updateSuccessStoriesVisibility();
+            updateDebug();
+        }
+
+        function showSuccessStories() {
+            localStorage.setItem('showSuccessStories', 'true');
+            updateStatus();
+            updateSuccessStoriesVisibility();
+            updateDebug();
+        }
+
+        function updateStatus() {
+            const value = localStorage.getItem('showSuccessStories');
+            const isVisible = value !== 'false';
+            
+            document.getElementById('status-value').textContent = value || '(nie ustawione - domyślnie true)';
+            document.getElementById('status-text').textContent = isVisible ? '✅ WIDOCZNE' : '❌ UKRYTE';
+            document.getElementById('status-text').className = isVisible ? 'font-bold text-green-600' : 'font-bold text-red-600';
+        }
+
+        function updateDebug() {
+            const allLinks = document.querySelectorAll('a[href*="success-stories"]');
+            const debugOutput = document.getElementById('debug-output');
+            
+            let html = `<p class="mb-2"><strong>Znaleziono ${allLinks.length} linków zawierających "success-stories":</strong></p>`;
+            html += '<ul class="list-disc list-inside space-y-1">';
+            
+            allLinks.forEach((link, index) => {
+                const parentLi = link.closest('li');
+                const elementToHide = parentLi || link;
+                const isHidden = elementToHide.style.display === 'none';
+                const status = isHidden ? '❌ UKRYTY' : '✅ WIDOCZNY';
+                
+                html += `<li>
+                    ${status} - "${link.textContent.trim()}" 
+                    (href: ${link.getAttribute('href')})
+                    ${parentLi ? '[w &lt;li&gt;]' : '[samodzielny]'}
+                </li>`;
+            });
+            
+            html += '</ul>';
+            debugOutput.innerHTML = html;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatus();
+            updateDebug();
+            
+            // Show a message after updateNav runs
+            setTimeout(() => {
+                console.log('✅ Funkcja updateSuccessStoriesVisibility() została wykonana przez auth.js');
+                console.log('Wartość showSuccessStories:', localStorage.getItem('showSuccessStories'));
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Idol Brands</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-D8x9m7Ka.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
+    
+    <!-- Cookie Consent -->
+    <script src="cookie-consent.js" defer></script>
+    
+    <script src="cms-sync.js" defer></script>
+  <script type="module" crossorigin src="/assets/gin-pl-B4HbAFgf.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/cookie-consent-DjRX6YmY.css">
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-100 font-sans">
+    <!-- Back arrow linking to Polish home page -->
+    <a href="index-pl.html" class="absolute top-4 left-4 text-black text-lg hover:underline flex items-center">
+        <span class="mr-2">&larr;</span> Strona&nbsp;główna
+    </a>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 id="login-title" class="text-2xl font-bold mb-6 text-center">Influencer Login</h1>
+        <p id="login-subtitle" class="text-sm text-gray-600 mb-4 text-center" style="white-space: pre-line;">Wprowadź dane logowania z e-maila akceptacyjnego.
+Aby się zarejestrować, zapisz się na listę oczekujących, a wkrótce wyślemy Ci e-mail z danymi do logowania.</p>
+        <!-- Language switcher inside login card -->
+        <div class="flex justify-center items-center text-sm mb-4">
+            <a href="login.html" class="text-black hover:text-gray-600 font-medium">EN</a>
+            <span class="mx-1 text-black">|</span>
+            <span class="text-black font-semibold">PL</span>
+        </div>
+        <form id="login-form" class="space-y-4">
+            <div>
+                <label id="login-username-label" for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="" required>
+            </div>
+            <div>
+                <label id="login-password-label" for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="" required>
+            </div>
+            <button id="login-button" type="submit" class="w-full bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800">Login</button>
+        </form>
+        <p id="login-error-message" class="text-red-600 text-sm mt-4 hidden text-center">Invalid username or password.</p>
+        <!-- Link to admin login for site administrators -->
+        <p class="mt-6 text-center text-sm text-gray-500">
+            Are you an administrator? <a href="admin-login.html" class="text-blue-600 hover:underline">Admin Login</a>
+        </p>
+    </div>
+
+    <!-- Firebase SDK -->
+
+    <script>
+    // Attach handler after DOM load.  This login form checks the list of
+    // registered users in Firebase and localStorage.  Only users
+    // with status "active" can log in.  The admin account is handled
+    // separately via admin-login.html.
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait for cms-sync.js to load data from server first
+        setTimeout(function() {
+            // Translation helper: use Polish key with fallback
+            function t(key, fallback) {
+                const v = localStorage.getItem(key);
+                return (v !== null && v !== undefined && v !== '') ? v : fallback;
+            }
+            // Update login page text using translations
+            const titleEl = document.getElementById('login-title');
+            if (titleEl) titleEl.textContent = t('plLoginTitle','Logowanie influencera');
+            const subtitleEl = document.getElementById('login-subtitle');
+            if (subtitleEl) {
+                subtitleEl.textContent = t('plLoginSubtitle','Wprowadź dane logowania z e-maila akceptacyjnego.\nAby się zarejestrować, zapisz się na listę oczekujących, a wkrótce wyślemy Ci e-mail z danymi do logowania.');
+                // Preserve pre-line style for line breaks
+                subtitleEl.style.whiteSpace = 'pre-line';
+            }
+            const userLabel = document.getElementById('login-username-label');
+            if (userLabel) userLabel.textContent = t('plLoginUsernameLabel','Nazwa użytkownika');
+            const passLabel = document.getElementById('login-password-label');
+            if (passLabel) passLabel.textContent = t('plLoginPasswordLabel','Hasło');
+            const userInput = document.getElementById('username');
+            if (userInput) userInput.placeholder = t('plLoginUsernameLabel','Nazwa użytkownika');
+            const passInput = document.getElementById('password');
+            if (passInput) passInput.placeholder = t('plLoginPasswordLabel','Hasło');
+            const button = document.getElementById('login-button');
+            if (button) button.textContent = t('plLoginButtonText','Zaloguj się');
+            const errEl = document.getElementById('login-error-message');
+            if (errEl) errEl.textContent = t('plLoginError','Nieprawidłowa nazwa użytkownika lub hasło.');
+            
+            console.log('Login page translations loaded:', {
+                title: t('plLoginTitle','Logowanie influencera'),
+                subtitle: t('plLoginSubtitle','Wprowadź dane...'),
+                username: t('plLoginUsernameLabel','Nazwa użytkownika'),
+                password: t('plLoginPasswordLabel','Hasło'),
+                button: t('plLoginButtonText','Zaloguj się'),
+                error: t('plLoginError','Nieprawidłowa nazwa...')
+            });
+        }, 500);
+        // Attach login form listener
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            let users = [];
+            
+            // Try to load users from Firebase first
+            if (window.firestoreDB && window.firestoreCollection && window.firestoreGetDocs) {
+                try {
+                    const querySnapshot = await window.firestoreGetDocs(window.firestoreCollection(window.firestoreDB, 'users'));
+                    querySnapshot.forEach((doc) => {
+                        users.push({ ...doc.data(), firebaseId: doc.id });
+                    });
+                    // Sync to localStorage for faster future access
+                    localStorage.setItem('users', JSON.stringify(users));
+                } catch (err) {
+                    console.error('Error loading from Firebase:', err);
+                }
+            }
+            
+            // Fallback to localStorage if Firebase fails or is empty
+            if (users.length === 0) {
+                try {
+                    const stored = localStorage.getItem('users');
+                    if (stored) users = JSON.parse(stored);
+                } catch (err) {
+                    users = [];
+                }
+            }
+            
+            // Look for a user with matching login & password and active status
+            const match = users.find(function(u) {
+                return u.login === username && u.password === password && u.status === 'active';
+            });
+            if (match) {
+                // Successful login – set loggedIn flag and clear any admin flag
+                localStorage.setItem('loggedIn', 'true');
+                localStorage.removeItem('adminLoggedIn');
+                // Optionally store current user info
+                localStorage.setItem('currentUser', match.login);
+                // After successful login on Polish page, redirect to Polish homepage
+                window.location.href = 'index-pl.html';
+            } else {
+                const errorEl = document.getElementById('login-error-message');
+                if (errorEl) errorEl.classList.remove('hidden');
+            }
+        });
+    });
+    </script>
+</body>
+</html>

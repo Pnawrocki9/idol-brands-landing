@@ -2,11 +2,20 @@
   "name": "idol-brands-cms",
   "version": "1.0.0",
   "description": "CMS for Idol Brands",
+  "type": "module",
   "scripts": {
-    "build": "node scripts/build-blog.js",
-    "build:blog": "node scripts/build-blog.js"
+    "dev": "vite",
+    "build": "node scripts/build-blog.cjs && vite build",
+    "build:blog": "node scripts/build-blog.cjs",
+    "preview": "vite preview"
   },
   "dependencies": {
     "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
+    "vite": "^7.1.9"
   }
 }

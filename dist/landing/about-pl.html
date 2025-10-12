@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Idol Brands</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-D8x9m7Ka.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --secondary-gray: #f5f5f5;
+            --accent-gray: #e5e5e5;
+            --text-gray: #666666;
+            --border-gray: #333333;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-white);
+            color: var(--primary-black);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center flex-shrink-0">
+                    <a href="index-pl.html" class="text-xl sm:text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-wrap">
+                    <a href="index-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">O&nbsp;nas</a>
+                    <a href="how-it-works-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Jak&nbsp;to&nbsp;działa</a>
+                    <a href="success-stories-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Historie&nbsp;sukcesu</a>
+                    <a href="blog-pl.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index-pl.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Kalkulator</a>
+                    <a href="your-documents-pl.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Twoje&nbsp;dokumenty</a>
+                    <!-- Admin dashboard link, shown only when an administrator is logged in -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login-pl.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Zaloguj&nbsp;się</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
+                    <!-- Language switcher (Polish About page) -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <a href="about.html" class="text-black hover:text-gray-600 font-medium">EN</a>
+                        <span class="text-black">|</span>
+                        <span class="text-black font-semibold">PL</span>
+                    </div>
+                    <a href="index-pl.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Załóż&nbsp;swoją&nbsp;markę</a>
+                </div>
+                <!-- Mobile hamburger toggler for about page -->
+                <div class="lg:hidden flex items-center">
+                    <button id="menuToggle" class="text-black p-2 focus:outline-none focus:ring-2 focus:ring-black rounded" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Mobile menu panel: hidden by default on desktop (md:hidden). Contains duplicate nav links for mobile users. -->
+    <div id="mobileMenu" class="lg:hidden hidden fixed top-16 left-0 right-0 shadow-lg z-40 max-h-screen overflow-y-auto border-t border-gray-200 bg-white/95 backdrop-blur-md">
+      <div class="px-4 py-4 space-y-4">
+        <a href="index-pl.html" class="block text-black font-medium">Strona główna</a>
+        <a href="about-pl.html" class="block text-black font-medium">O&nbsp;nas</a>
+        <a href="how-it-works-pl.html" class="block text-black font-medium">Jak&nbsp;to&nbsp;działa</a>
+        <a href="success-stories-pl.html" class="block text-black font-medium">Historie&nbsp;sukcesu</a>
+        <a href="blog-pl.html" class="block text-black font-medium">Blog</a>
+        <a href="index-pl.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Kalkulator</a>
+        <a href="your-documents-pl.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Twoje&nbsp;dokumenty</a>
+        <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+        <a href="login-pl.html" id="nav-login-mobile" class="block text-black font-medium">Zaloguj&nbsp;się</a>
+        <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Wyloguj&nbsp;się</a>
+        <!-- Language switcher for mobile on Polish About page -->
+        <div class="flex justify-center space-x-1 text-sm py-2">
+          <a href="about.html" class="text-black hover:text-gray-600 font-medium">EN</a>
+          <span class="text-black">|</span>
+          <span class="text-black font-semibold">PL</span>
+        </div>
+        <a href="index-pl.html#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Załóż&nbsp;swoją&nbsp;markę</a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in">
+                <h1 id="about-hero-title" class="text-6xl font-display font-bold text-black mb-6">O Idol Brands</h1>
+                <p id="about-hero-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Stworzone przez weteranów branży modowej. Zaprojektowane dla nowej generacji marek opartych na wpływach.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-display font-bold text-black mb-6">Nasza Historia</h2>
+            </div>
+            <!-- Assign an ID to the container so admin-edited paragraphs can be inserted on page load -->
+            <div id="about-story-content" class="space-y-8 text-lg text-gray-700 fade-in">
+                <p>
+                    Idol Brands zostało założone w 2024 roku przez zespół weteranów branży modowej, którzy obserwowali niezliczonych 
+                    influencerów zmagających się z uruchomieniem własnych marek modowych. Widzieliśmy, jak ta sama historia się powtarza: 
+                    pasjonaci z niesamowitymi pomysłami, którzy ponieśli porażkę, ponieważ nie potrafili poradzić sobie ze złożonością operacyjną.
+                </p>
+                <p>
+                    Po dekadach w produkcji mody, logistyce i handlu detalicznym zdaliśmy sobie sprawę, że tradycyjny 
+                    model branży modowej nie sprawdza się dla nowej generacji marek opartych na wpływach. Influencerzy 
+                    potrzebowali innego podejścia - takiego, które pozwala im skupić się na kreatywności i społeczności, podczas gdy eksperci 
+                    zajmują się operacjami.
+                </p>
+                <p>
+                    Połączyliśmy naszą głęboką wiedzę branżową w modzie z najnowocześniejszą technologią live-commerce, aby stworzyć 
+                    pierwszą platformę specjalnie zaprojektowaną dla influencerskich marek modowych. Dziś Idol Brands to więcej 
+                    niż tylko usługa - jesteśmy ruchem demokratyzującym przedsiębiorczość modową.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <h2 id="mission-title" class="text-4xl font-display font-bold text-black mb-8">Nasza Misja</h2>
+                    <p id="mission-desc1" class="text-xl text-gray-600 mb-6">
+                        Demokratyzacja przedsiębiorczości modowej poprzez zapewnienie influencerom narzędzi, 
+                        wiedzy i platformy, których potrzebują do budowania odnoszących sukcesy marek modowych.
+                    </p>
+                    <p id="mission-desc2" class="text-xl text-gray-600">
+                        Wierzymy, że każdy influencer z zaangażowaną społecznością zasługuje na możliwość 
+                        przekształcenia swoich wpływów w kwitnący biznes, bez ograniczeń wynikających z 
+                        złożoności operacyjnej.
+                    </p>
+                </div>
+                <div class="fade-in">
+                    <h2 id="vision-title" class="text-4xl font-display font-bold text-black mb-8">Nasza Wizja</h2>
+                    <p id="vision-desc1" class="text-xl text-gray-600 mb-6">
+                        Zostać wiodącym na świecie rynkiem live-selling dla influencerskich marek modowych, 
+                        gdzie kreatywność spotyka się z handlem w czasie rzeczywistym.
+                    </p>
+                    <p id="vision-desc2" class="text-xl text-gray-600">
+                        Budujemy przyszłość, w której marki modowe rodzą się z autentycznych społeczności, 
+                        a nie sal konferencyjnych - gdzie wpływy napędzają innowacje, a pasja tworzy zysk.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 id="team-title" class="text-4xl font-display font-bold text-black mb-6">Weterani Branży Modowej</h2>
+                <p id="team-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Nasz zespół łączy dekady doświadczenia w produkcji mody, logistyce, handlu detalicznym 
+                    i technologii, aby wspierać sukces Twojej marki.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-industry text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-black mb-4">Ekspertyza Produkcyjna</h3>
+                    <p class="text-gray-600">
+                        Dekady doświadczenia w produkcji mody, kontroli jakości i zarządzaniu łańcuchem dostaw 
+                        na rynkach globalnych.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shipping-fast text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-black mb-4">Mistrzostwo Logistyczne</h3>
+                    <p class="text-gray-600">
+                        Kompleksowe rozwiązania logistyczne od magazynowania po dostawę końcową, 
+                        zoptymalizowane dla influencerskich marek modowych.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-laptop-code text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-black mb-4">Innowacje Technologiczne</h3>
+                    <p class="text-gray-600">
+                        Najnowocześniejsza platforma live-commerce z analityką w czasie rzeczywistym, 
+                        rekomendacjami AI i bezproblemową integracją.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 id="impact-title" class="text-4xl font-display font-bold mb-6">Nasz Wpływ</h2>
+                <p id="impact-subtitle" class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Rzeczywiste wyniki od prawdziwych influencerów, którzy przekształcili swoją pasję w dochodowe marki modowe.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center fade-in">
+                <div>
+                    <div class="text-5xl font-bold text-white mb-2">500+</div>
+                    <p class="text-gray-300">Uruchomionych Marek Modowych</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-white mb-2">$50M</div>
+                    <p class="text-gray-300">Sprzedaż Marek</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-white mb-2">2.4M</div>
+                    <p class="text-gray-300">Sprzedanych Produktów</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-white mb-2">98%</div>
+                    <p class="text-gray-300">Wskaźnik Sukcesu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-display font-bold text-black mb-6">Nasze Wartości</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Zasady, które kierują wszystkim, co robimy i napędzają każdą podjętą przez nas decyzję.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heart text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Autentyczność</h3>
+                    <p class="text-gray-600">
+                        Wierzymy w prawdziwe wpływy, prawdziwe społeczności i prawdziwe wyniki. 
+                        Żadnych fałszywych metryk, żadnego sztucznego zaangażowania.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-handshake text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Partnerstwo</h3>
+                    <p class="text-gray-600">
+                        Twój sukces to nasz sukces. Pracujemy jako prawdziwi partnerzy, 
+                        zaangażowani w rozwój Twojej marki i długoterminowy sukces.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-rocket text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Innowacyjność</h3>
+                    <p class="text-gray-600">
+                        Nieustannie poszerzamy granice tego, co możliwe w live-commerce 
+                        i budowaniu influencerskich marek modowych.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Wyniki</h3>
+                    <p class="text-gray-600">
+                        Wszystko, co robimy, jest mierzone wynikami. Zobowiązujemy się do dostarczania 
+                        mierzalnego sukcesu dla każdej marki, z którą współpracujemy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in">
+                <h2 class="text-5xl font-display font-bold text-black mb-6">Gotowy, Aby Rozpocząć Swoją Modową Historię?</h2>
+                <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Dołącz do setek influencerów, którzy przekształcili swoje wpływy w kwitnące marki modowe. 
+                    Twoja podróż w stronę przedsiębiorczości modowej zaczyna się teraz.
+                </p>
+                <button class="bg-black text-white px-12 py-4 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors">
+                    Załóż Swoją Markę Modową Dzisiaj
+                </button>
+                <p id="about-cta-subtext" class="text-gray-500 text-sm mt-4">
+                    Bezpłatna konsultacja • Bez zobowiązań • Wyniki w 8 tygodni
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Firma</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about-pl.html" class="hover:underline">O&nbsp;nas</a></li>
+            <li><a href="how-it-works-pl.html" class="hover:underline">Jak&nbsp;to&nbsp;działa</a></li>
+            <li><a href="success-stories-pl.html" class="hover:underline">Historie&nbsp;sukcesu</a></li>
+            <li><a href="blog-pl.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Prawne</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Regulamin</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Polityka&nbsp;cookies</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Prywatność&nbsp;/&nbsp;RODO</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. Wszelkie prawa zastrzeżone.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+    <!-- Authentication helper to control login state and nav -->
+    <script src="auth.js"></script>
+    <!-- Apply admin-defined content for the About page.  Values saved in localStorage
+         are injected into the page on load.  Each element is updated only if a
+         corresponding key exists.  Multi-paragraph story content is stored with
+         blank lines separating paragraphs. -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hero
+        const aboutTitleElem = document.getElementById('about-hero-title');
+        const aboutSubtitleElem = document.getElementById('about-hero-subtitle');
+        // Prefer Polish values for hero if present
+        const storedAboutHeroTitle = localStorage.getItem('plAboutHeroTitle') || localStorage.getItem('aboutHeroTitle');
+        const storedAboutHeroSubtitle = localStorage.getItem('plAboutHeroSubtitle') || localStorage.getItem('aboutHeroSubtitle');
+        if (storedAboutHeroTitle) {
+            aboutTitleElem.textContent = storedAboutHeroTitle;
+        }
+        if (storedAboutHeroSubtitle) {
+            aboutSubtitleElem.textContent = storedAboutHeroSubtitle;
+        }
+        // Our Story
+        const storyContainer = document.getElementById('about-story-content');
+        // Prefer Polish story
+        const storedStory = localStorage.getItem('plAboutStory') || localStorage.getItem('aboutStory');
+        if (storedStory && storyContainer) {
+            // Clear current paragraphs and insert new ones.  Split on double newline.
+            storyContainer.innerHTML = '';
+            storedStory.split(/\n\s*\n/).forEach(function(paragraph) {
+                const p = document.createElement('p');
+                p.textContent = paragraph.trim();
+                storyContainer.appendChild(p);
+            });
+        }
+        // Mission & Vision
+        const missionTitleElem = document.getElementById('mission-title');
+        const missionDesc1Elem = document.getElementById('mission-desc1');
+        const missionDesc2Elem = document.getElementById('mission-desc2');
+        const visionTitleElem = document.getElementById('vision-title');
+        const visionDesc1Elem = document.getElementById('vision-desc1');
+        const visionDesc2Elem = document.getElementById('vision-desc2');
+        // Prefer Polish Mission & Vision
+        const storedMissionTitle = localStorage.getItem('plMissionTitle') || localStorage.getItem('missionTitle');
+        const storedMissionDesc1 = localStorage.getItem('plMissionDesc1') || localStorage.getItem('missionDesc1');
+        const storedMissionDesc2 = localStorage.getItem('plMissionDesc2') || localStorage.getItem('missionDesc2');
+        const storedVisionTitle = localStorage.getItem('plVisionTitle') || localStorage.getItem('visionTitle');
+        const storedVisionDesc1 = localStorage.getItem('plVisionDesc1') || localStorage.getItem('visionDesc1');
+        const storedVisionDesc2 = localStorage.getItem('plVisionDesc2') || localStorage.getItem('visionDesc2');
+        if (storedMissionTitle) missionTitleElem.textContent = storedMissionTitle;
+        if (storedMissionDesc1) missionDesc1Elem.textContent = storedMissionDesc1;
+        if (storedMissionDesc2) missionDesc2Elem.textContent = storedMissionDesc2;
+        if (storedVisionTitle) visionTitleElem.textContent = storedVisionTitle;
+        if (storedVisionDesc1) visionDesc1Elem.textContent = storedVisionDesc1;
+        if (storedVisionDesc2) visionDesc2Elem.textContent = storedVisionDesc2;
+        // Team
+        const teamTitleElem = document.getElementById('team-title');
+        const teamSubtitleElem = document.getElementById('team-subtitle');
+        // Prefer Polish Team values
+        const storedTeamTitle = localStorage.getItem('plTeamTitle') || localStorage.getItem('teamTitle');
+        const storedTeamSubtitle = localStorage.getItem('plTeamSubtitle') || localStorage.getItem('teamSubtitle');
+        if (storedTeamTitle) teamTitleElem.textContent = storedTeamTitle;
+        if (storedTeamSubtitle) teamSubtitleElem.textContent = storedTeamSubtitle;
+        // Impact
+        const impactTitleElem = document.getElementById('impact-title');
+        const impactSubtitleElem = document.getElementById('impact-subtitle');
+        // Prefer Polish Impact values
+        const storedImpactTitle = localStorage.getItem('plImpactTitle') || localStorage.getItem('impactTitle');
+        const storedImpactSubtitle = localStorage.getItem('plImpactSubtitle') || localStorage.getItem('impactSubtitle');
+        if (storedImpactTitle) impactTitleElem.textContent = storedImpactTitle;
+        if (storedImpactSubtitle) impactSubtitleElem.textContent = storedImpactSubtitle;
+        
+        // CTA Section
+        const aboutCtaSubtextElem = document.getElementById('about-cta-subtext');
+        const storedAboutCtaSubtext = localStorage.getItem('plAboutCtaSubtext') || localStorage.getItem('aboutCtaSubtext');
+        if (storedAboutCtaSubtext && aboutCtaSubtextElem) {
+            aboutCtaSubtextElem.textContent = storedAboutCtaSubtext;
+        }
+    });
+    </script>
+</body>
+</html>
