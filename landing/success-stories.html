@@ -92,7 +92,7 @@
                 </div>
                 <!-- Mobile hamburger toggler for small screens -->
                 <div class="md:hidden">
-                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                    <button id="menuToggle" class="text-black p-2 focus:outline-none focus:ring-2 focus:ring-black rounded" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
                         <i id="menuIcon" class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -101,7 +101,7 @@
     </nav>
 
     <!-- Mobile Menu: replicated nav links for small screens -->
-    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+    <div id="mobileMenu" class="lg:hidden hidden fixed top-16 left-0 right-0 shadow-lg z-40 max-h-screen overflow-y-auto border-t border-gray-200 bg-white/95 backdrop-blur-md">
         <div class="px-4 py-4 space-y-4">
             <a href="index.html" class="block text-black font-medium">Home</a>
             <a href="about.html" class="block text-black font-medium">About</a>
