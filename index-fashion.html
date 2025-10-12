@@ -1422,7 +1422,26 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(showNextMedia, transitionDuration);
     }
 });
-</script>
+    </script>
+
+    <!-- Error handling for Chrome extension compatibility -->
+    <script>
+    // Suppress Chrome extension runtime errors
+    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.lastError) {
+        // Clear the last error to prevent console spam
+        chrome.runtime.lastError;
+    }
+    
+    // Handle unhandled promise rejections gracefully
+    window.addEventListener('unhandledrejection', function(event) {
+        // Suppress errors related to Chrome extensions
+        if (event.reason && event.reason.message && 
+            (event.reason.message.includes('Extension context invalidated') ||
+             event.reason.message.includes('message port closed'))) {
+            event.preventDefault();
+        }
+    });
+    </script>
 
 </body>
 </html>
