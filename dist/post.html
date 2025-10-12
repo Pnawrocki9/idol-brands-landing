@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Blog Post - Idol Brands</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-D8x9m7Ka.svg">
+    <meta name="description" id="page-description" content="Read our latest fashion industry insights and tips for influencers building their own fashion brands.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Idol Brands">
+    <meta property="og:title" id="og-title" content="Blog Post - Idol Brands">
+    <meta property="og:description" id="og-description" content="Read our latest fashion industry insights and tips for influencers building their own fashion brands.">
+    <meta property="og:url" id="og-url" content="">
+    <meta property="og:image" id="og-image" content="">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitter-title" content="Blog Post - Idol Brands">
+    <meta name="twitter:description" id="twitter-description" content="Read our latest fashion industry insights and tips for influencers building their own fashion brands.">
+    <meta name="twitter:image" id="twitter-image" content="">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" id="canonical-url" href="">
+    
+    <!-- Robots meta -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #000;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Enhanced link styling for blog content */
+        #post-container a {
+            color: #2563eb;
+            text-decoration: underline;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        #post-container a:hover {
+            color: #1e40af;
+            text-decoration: underline;
+        }
+        /* Preserve inline styles for formatted text */
+        #post-container strong {
+            font-weight: 700;
+        }
+        #post-container u {
+            text-decoration: underline;
+        }
+        /* Quill editor content styles */
+        .blog-content h1 { font-size: 2em; font-weight: 700; margin: 1em 0 0.5em; }
+        .blog-content h2 { font-size: 1.5em; font-weight: 700; margin: 0.9em 0 0.4em; }
+        .blog-content h3 { font-size: 1.3em; font-weight: 600; margin: 0.8em 0 0.3em; }
+        .blog-content h4 { font-size: 1.1em; font-weight: 600; margin: 0.7em 0 0.3em; }
+        .blog-content ul, .blog-content ol { margin: 1em 0; padding-left: 2em; }
+        .blog-content li { margin: 0.5em 0; }
+        .blog-content p { margin: 1em 0; }
+        .blog-content blockquote { border-left: 4px solid #ddd; padding-left: 1em; margin: 1em 0; color: #666; }
+        .blog-content pre { background: #f4f4f4; padding: 1em; border-radius: 4px; overflow-x: auto; }
+        .blog-content code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; }
+    </style>
+    
+    <!-- Cookie Consent -->
+    <script src="cookie-consent.js" defer></script>
+    
+    <script src="cms-sync.js" defer></script>
+  <link rel="stylesheet" crossorigin href="/assets/cookie-consent-DjRX6YmY.css">
+</head>
+<body class="bg-white">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <!-- Language switcher (English Blog Post page) -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <span class="text-black font-semibold">EN</span>
+                        <span class="text-black">|</span>
+                        <a id="lang-pl-link" href="post-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+                    </div>
+                    <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
+                </div>
+                <!-- Mobile hamburger toggler -->
+                <div class="md:hidden">
+                    <button id="menuToggle" class="text-black" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+        <div class="px-4 py-4 space-y-4">
+            <a href="index.html" class="block text-black font-medium">Home</a>
+            <a href="about.html" class="block text-black font-medium">About</a>
+            <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
+            <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
+            <a href="blog.html" class="block text-black font-medium">Blog</a>
+            <a href="index.html#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+            <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
+            <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+            <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
+            <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
+            <!-- Language switcher for mobile on English Blog Post page -->
+            <div class="flex justify-center space-x-1 text-sm py-2">
+              <span class="text-black font-semibold">EN</span>
+              <span class="text-black">|</span>
+              <a id="lang-pl-link-mobile" href="post-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+            </div>
+            <a href="index.html#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+        </div>
+    </div>
+    <!-- Blog Post Content -->
+    <main class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <article id="post-container" class="max-w-4xl mx-auto"></article>
+    </main>
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. All rights reserved.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
+    </footer>
+    <script src="auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('copyright-year')) {
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        }
+
+        const params = new URLSearchParams(window.location.search);
+
+        function renderPost() {
+            const container = document.getElementById('post-container');
+            const indexParam = params.get('index');
+            const idx = parseInt(indexParam, 10);
+            if (isNaN(idx)) {
+                container.innerHTML = '<p class="text-gray-600">Invalid post.</p>';
+                return;
+            }
+
+            let posts = [];
+            try {
+                const stored = localStorage.getItem('blogPostsEN');
+                if (stored) posts = JSON.parse(stored);
+            } catch (e) {
+                posts = [];
+            }
+
+            if (!posts || idx < 0 || idx >= posts.length) {
+                container.innerHTML = '<p class="text-gray-600">Post not found.</p>';
+                return;
+            }
+
+            const post = posts[idx];
+
+            const postTitle = post.title || 'Untitled';
+            const postDescription = post.metaDescription || (post.content ? post.content.substring(0, 155) + '...' : 'Read our latest fashion industry insights and tips for influencers building their own fashion brands.');
+            const currentUrl = window.location.href;
+            const postImage = post.img || (window.location.origin + '/images/hero-market.jpg');
+
+            document.getElementById('page-title').textContent = postTitle + ' | Idol Brands Blog';
+            document.getElementById('page-description').setAttribute('content', postDescription);
+            document.getElementById('og-title').setAttribute('content', postTitle);
+            document.getElementById('og-description').setAttribute('content', postDescription);
+            document.getElementById('og-url').setAttribute('content', currentUrl);
+            document.getElementById('og-image').setAttribute('content', postImage);
+            document.getElementById('twitter-title').setAttribute('content', postTitle);
+            document.getElementById('twitter-description').setAttribute('content', postDescription);
+            document.getElementById('twitter-image').setAttribute('content', postImage);
+            document.getElementById('canonical-url').setAttribute('href', currentUrl);
+
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": postTitle,
+                "description": postDescription,
+                "image": postImage,
+                "datePublished": post.date || new Date().toISOString(),
+                "dateModified": post.date || new Date().toISOString(),
+                "author": { "@type": "Organization", "name": "Idol Brands" },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Idol Brands",
+                    "logo": { "@type": "ImageObject", "url": window.location.origin + "/images/hero-market.jpg" }
+                },
+                "mainEntityOfPage": { "@type": "WebPage", "@id": currentUrl }
+            };
+
+            if (post.featuredSnippet && post.featuredSnippet.trim()) {
+                structuredData.speakable = { "@type": "SpeakableSpecification", "cssSelector": [".featured-snippet"] };
+                structuredData.abstract = post.featuredSnippet.trim();
+            }
+
+            const existingLd = document.querySelector('script[type="application/ld+json"]');
+            if (existingLd) existingLd.remove();
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(structuredData);
+            document.head.appendChild(script);
+
+            container.innerHTML = '';
+            if (post.img) {
+                const img = document.createElement('img');
+                img.src = post.img;
+                img.alt = post.title || '';
+                img.className = 'w-full h-auto rounded-xl mb-6';
+                img.loading = 'lazy';
+                img.decoding = 'async';
+                container.appendChild(img);
+            }
+            if (post.date) {
+                const dateEl = document.createElement('p');
+                dateEl.className = 'text-sm text-gray-500 mb-2';
+                dateEl.textContent = post.date;
+                container.appendChild(dateEl);
+            }
+            const title = document.createElement('h1');
+            title.className = 'text-4xl font-display font-bold text-black mb-4';
+            title.textContent = post.title || 'Untitled';
+            container.appendChild(title);
+
+            if (post.featuredSnippet && post.featuredSnippet.trim()) {
+                const snippetBox = document.createElement('div');
+                snippetBox.className = 'featured-snippet bg-gray-50 border-l-4 border-black p-4 mb-6 rounded';
+                const snippetText = document.createElement('p');
+                snippetText.className = 'text-base text-gray-800 font-medium';
+                snippetText.textContent = post.featuredSnippet.trim();
+                snippetBox.appendChild(snippetText);
+                container.appendChild(snippetBox);
+            }
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'text-lg text-gray-700 blog-content';
+            contentDiv.innerHTML = post.content || '';
+            container.appendChild(contentDiv);
+        }
+
+        // Initial render from localStorage
+        renderPost();
+        // Refresh in background and re-render when ready
+        if (window.cmsLoadFromServer) {
+            try {
+                window.cmsLoadFromServer().then(renderPost).catch(console.warn);
+            } catch (e) {
+                console.warn('cmsLoadFromServer failed', e);
+            }
+        }
+    });
+    </script>
+    <script>
+    // Dynamically set the Polish link in the language switcher to preserve query string
+    document.addEventListener('DOMContentLoaded', function() {
+        const plLink = document.getElementById('lang-pl-link');
+        if (plLink) {
+            plLink.href = 'post-pl.html' + window.location.search;
+        }
+    });
+    </script>
+</body>
+</html>

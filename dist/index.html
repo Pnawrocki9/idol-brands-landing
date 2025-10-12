@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idol Brands - Turn Your Influence Into a Fashion Empire</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-D8x9m7Ka.svg">
+    <link rel="manifest" href="/assets/manifest-BT0Itmtn.json">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Turn your influence into a fashion empire. Idol Brands handles everything from design to delivery so you can focus on your story. Join 500+ successful influencers building their fashion brands.">
+    <meta name="keywords" content="influencer fashion brand, creator fashion line, live selling, fashion marketplace, influencer merch, brand building">
+    <link rel="canonical" href="https://idolbrands.com/">
+    
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://idolbrands.com/index.html">
+    <link rel="alternate" hreflang="pl" href="https://idolbrands.com/index-pl.html">
+    <link rel="alternate" hreflang="x-default" href="https://idolbrands.com/index.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://idolbrands.com/">
+    <meta property="og:title" content="Idol Brands - Turn Your Influence Into a Fashion Empire">
+    <meta property="og:description" content="Turn your influence into a fashion empire. Idol Brands handles everything from design to delivery. Join 500+ successful influencers building their fashion brands.">
+    <meta property="og:image" content="https://idolbrands.com/images/hero-market.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Influencer presenting his new fashion collection using livestreaming">
+    <meta property="og:site_name" content="Idol Brands">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="pl_PL">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://idolbrands.com/">
+    <meta name="twitter:title" content="Idol Brands - Turn Your Influence Into a Fashion Empire">
+    <meta name="twitter:description" content="Turn your influence into a fashion empire. Idol Brands handles everything from design to delivery. Join 500+ successful influencers.">
+    <meta name="twitter:image" content="https://idolbrands.com/images/hero-market.jpg">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --secondary-gray: #f5f5f5;
+            --accent-gray: #e5e5e5;
+            --text-gray: #666666;
+            --border-gray: #333333;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-white);
+            color: var(--primary-black);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+        
+        .vanta-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: var(--primary-black);
+            color: var(--primary-white);
+            border: 2px solid var(--primary-black);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary-black);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-black);
+            color: var(--primary-white);
+            transform: translateY(-2px);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-gray);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .stats-card {
+            background: var(--secondary-gray);
+            border: 1px solid var(--accent-gray);
+        }
+        
+        .calculator-section {
+            background: var(--secondary-gray);
+        }
+        
+        .input-field {
+            border: 2px solid var(--accent-gray);
+            background: var(--primary-white);
+            color: var(--primary-black);
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: var(--primary-black);
+            outline: none;
+        }
+        
+        .result-card {
+            background: var(--primary-white);
+            border: 2px solid var(--primary-black);
+        }
+        
+        .step-indicator {
+            background: var(--primary-black);
+            color: var(--primary-white);
+        }
+        
+        .step-indicator.active {
+            background: var(--primary-white);
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .gradient-border {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            padding: 2px;
+            border-radius: 12px;
+        }
+        
+        .gradient-border-inner {
+            background: var(--primary-white);
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+                line-height: 1.1;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Hero Media Carousel Styles */
+        #hero-media-container {
+            position: relative;
+            background: #f5f5f5;
+        }
+        
+        .hero-media-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+               object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            border-radius: 0.5rem;
+        }
+        
+        .hero-media-item.active {
+            opacity: 1;
+            position: relative;
+        }
+        
+        .hero-media-item.fallback {
+            display: none;
+        }
+        
+        .hero-media-item video {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+               object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        
+        /* Fix for Font Awesome icon aspect ratio */
+        #about .fas {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        
+        #about .w-24.h-24 {
+            aspect-ratio: 1 / 1;
+        }
+    </style>
+    
+    <!-- Cookie Consent -->
+    <script src="cookie-consent.js" defer></script>
+    
+    <script src="cms-sync.js" defer></script>
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Idol Brands",
+      "url": "https://idolbrands.com",
+      "logo": "https://idolbrands.com/images/logo.png",
+      "description": "Turn your influence into a fashion empire. Complete fashion brand building platform for influencers.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "contact@idolbrands.com"
+      },
+      "sameAs": [
+        "https://instagram.com/idolbrands",
+        "https://tiktok.com/@idolbrands",
+        "https://youtube.com/@idolbrands"
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Idol Brands",
+      "url": "https://idolbrands.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://idolbrands.com/blog.html?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+  <script type="module" crossorigin src="/assets/dex-9W8ffM8-.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/cookie-consent-DjRX6YmY.css">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded">Skip to main content</a>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center flex-shrink-0">
+                    <h1 class="text-xl sm:text-2xl font-display font-bold text-black">Idol Brands</h1>
+                </div>
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-wrap">
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <!-- Admin dashboard link is hidden by default; shown only when an admin is logged in -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;" onclick="logout()">Logout</a>
+                    <!-- Language switcher (English page) -->
+                    <div class="flex items-center space-x-1 text-sm mr-4">
+                        <span class="text-black font-semibold">EN</span>
+                        <span class="text-black">|</span>
+                        <a href="index-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+                    </div>
+                    <a href="#start" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <!-- Mobile hamburger toggler.  aria-* attributes improve accessibility. -->
+                    <button id="menuToggle" class="text-black p-2 focus:outline-none focus:ring-2 focus:ring-black rounded" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+                        <i id="menuIcon" class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Mobile menu panel: hidden by default on desktop (md:hidden). Contains duplicate nav links for mobile users. -->
+    <div id="mobileMenu" class="lg:hidden hidden fixed top-16 left-0 right-0 shadow-lg z-40 max-h-screen overflow-y-auto border-t border-gray-200 bg-white/95 backdrop-blur-md">
+      <div class="px-4 py-4 space-y-4">
+        <a href="about.html" class="block text-black font-medium">About</a>
+        <a href="how-it-works.html" class="block text-black font-medium">How It Works</a>
+        <a href="success-stories.html" class="block text-black font-medium">Success Stories</a>
+        <a href="blog.html" class="block text-black font-medium">Blog</a>
+        <a href="#calculator-section" id="nav-calculator-mobile" class="block text-black font-medium">Calculator</a>
+        <a href="your-documents.html" id="nav-documents-mobile" class="block text-black font-medium" style="display: none;">Your Documents</a>
+        <a href="admin.html" id="nav-admin-mobile" class="block text-black font-medium" style="display: none;">Admin</a>
+        <a href="login.html" id="nav-login-mobile" class="block text-black font-medium">Login</a>
+        <a href="#" id="nav-logout-mobile" class="block text-black font-medium" style="display: none;" onclick="logout()">Logout</a>
+        <!-- Language switcher for mobile -->
+        <div class="flex justify-center space-x-1 text-sm py-2">
+          <span class="text-black font-semibold">EN</span>
+          <span class="text-black">|</span>
+          <a href="index-pl.html" class="text-black hover:text-gray-600 font-medium">PL</a>
+        </div>
+        <a href="#start" class="inline-block w-full text-center btn-primary px-6 py-2 rounded-full text-sm font-semibold">Start Your Brand</a>
+      </div>
+    </div>
+
+    <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div id="vanta-bg" class="vanta-canvas"></div>
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="floating-element">
+                        <!-- The hero heading now has an id so it can be customised by an admin via localStorage. -->
+                        <h1 id="hero-title" class="hero-title text-6xl lg:text-7xl font-display font-bold leading-tight">
+                            <span class="text-gradient">Turn Your</span><br>
+                            <span class="text-black">Influence</span><br>
+                            <span class="text-gradient">Into Fashion</span>
+                        </h1>
+                    </div>
+                    <!-- Subtitle also has an id for CMS editing -->
+                    <p id="hero-subtitle" class="hero-subtitle text-xl text-gray-600 leading-relaxed max-w-lg">
+                        We handle everything from design to delivery so you can focus on your story. 
+                        The only platform that transforms influencers into fashion brand owners.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
+                            Start Your Fashion Brand
+                        </button>
+                        <!-- CTA button text wrapped in a span with an id so it can be customized via CMS -->
+                        <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold">
+                            <span id="home-cta-text">See How It Works</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- New hero image and metrics layout with dynamic media carousel -->
+                    <div class="w-4/5 mx-auto transform rotate-2">
+                        <div class="bg-white p-2 rounded-xl shadow-xl">
+                            <div id="hero-media-container" class="rounded-lg w-full relative overflow-hidden" style="min-height: 400px;">
+                                <!-- Default image - will be replaced by dynamic content -->
+                                <img src="/assets/hero-market-xnLY1wvy.jpg" alt="Live selling platform" class="rounded-lg w-full hero-media-item active fallback">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="flex flex-col items-center">
+                            <div id="metric-market-size-value" class="text-3xl font-bold text-black">27B</div>
+                            <div id="metric-market-size-label" class="text-sm text-gray-600">Market Size</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div id="metric-growth-rate-value" class="text-3xl font-bold text-black">39.9%</div>
+                            <div id="metric-growth-rate-label" class="text-sm text-gray-600">Growth Rate</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div id="metric-fail-rate-value" class="text-3xl font-bold text-black">90%</div>
+                            <div id="metric-fail-rate-label" class="text-sm text-gray-600">Brands Fail</div>
+                        </div>
+                    </div>
+                    <p id="metric-tagline" class="text-gray-600 italic mt-4 text-center">
+                        Unlock a $27B market growing 39.9% annually—be among the 10% who succeed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 id="about-title" class="text-5xl font-display font-bold text-black mb-6">Built by Fashion Insiders</h2>
+                <p id="about-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We understand the challenges of building a fashion brand because we've been there. 
+                    Our mission is to democratize fashion entrepreneurship for every influencer.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-industry text-white text-3xl"></i>
+                    </div>
+                    <h3 id="about-expertise-title" class="text-2xl font-bold text-black mb-4">Manufacturing Expertise</h3>
+                    <p id="about-expertise-desc" class="text-gray-600">
+                        Decades of experience in fashion production, quality control, and supply chain management 
+                        across global markets.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shipping-fast text-white text-3xl"></i>
+                    </div>
+                    <h3 id="about-logistics-title" class="text-2xl font-bold text-black mb-4">Logistics Mastery</h3>
+                    <p id="about-logistics-desc" class="text-gray-600">
+                        End-to-end logistics solutions from warehousing to last-mile delivery, 
+                        optimized for influencer fashion brands.
+                    </p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-laptop-code text-white text-3xl"></i>
+                    </div>
+                    <h3 id="about-innovation-title" class="text-2xl font-bold text-black mb-4">Technology Innovation</h3>
+                    <p id="about-innovation-desc" class="text-gray-600">
+                        Cutting-edge live-commerce platform with real-time analytics, 
+                        AI-powered recommendations, and seamless integration.
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mt-12 fade-in">
+                <a href="about.html" class="bg-black text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors inline-flex items-center">
+                    Read Our Full Story
+                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 id="solution-title" class="text-5xl font-display font-bold text-black mb-6">Our Complete Solution</h2>
+                <p id="solution-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Everything you need to launch and scale your fashion brand, all in one platform.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 fade-in">
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <div class="flex-1">
+                            <h3 id="solution-step1-title" class="text-3xl font-bold text-black mb-2">Brand&nbsp;Strategy</h3>
+                            <p id="solution-step1-desc" class="text-gray-600">We develop your unique brand identity, positioning, and go-to-market strategy.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <div class="flex-1">
+                            <h3 id="solution-step2-title" class="text-3xl font-bold text-black mb-2">Product&nbsp;Development</h3>
+                            <p id="solution-step2-desc" class="text-gray-600">From concept to final product, we handle design, sampling, and production.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <div class="flex-1">
+                            <h3 id="solution-step3-title" class="text-3xl font-bold text-black mb-2">LIVE-commerce&nbsp;Platform</h3>
+                            <p id="solution-step3-desc" class="text-gray-600">Custom marketplace store with LiveSell social media channels, analytics, chat, and inventory management.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+                        <div class="flex-1">
+                            <h3 id="solution-step4-title" class="text-3xl font-bold text-black mb-2">Marketing&nbsp;&&nbsp;Growth</h3>
+                            <p id="solution-step4-desc" class="text-gray-600">Data-driven marketing campaigns and growth strategies to scale your brand.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <h3 id="timeline-title" class="text-2xl font-bold text-black mb-6 text-center">Success Timeline</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span id="timeline1-period" class="font-semibold text-black">Week 1-2</span>
+                                <span id="timeline1-desc" class="text-gray-600">Brand Strategy & Design</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span id="timeline2-period" class="font-semibold text-black">Week 3-6</span>
+                                <span id="timeline2-desc" class="text-gray-600">Product Development</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span id="timeline3-period" class="font-semibold text-black">Week 7-8</span>
+                                <span id="timeline3-desc" class="text-gray-600">Store Setup & Launch</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span id="timeline4-period" class="font-semibold text-black">Month 3+</span>
+                                <span id="timeline4-desc" class="text-gray-600">Scale & Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator-section" class="py-20 calculator-section hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 id="calculator-title" class="text-5xl font-display font-bold text-black mb-6">ROI Calculator</h2>
+                <p id="calculator-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    See exactly how much revenue your fashion brand could generate. 
+                    All calculations are transparent and based on real market data.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-6 fade-in">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-black mb-6">Your Audience Profile</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Total Followers</label>
+                                <input type="number" id="followers" class="input-field w-full px-4 py-3 rounded-lg" placeholder="e.g., 100000" value="100000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Average Engagement Rate (%)</label>
+                                <input type="number" id="engagement" class="input-field w-full px-4 py-3 rounded-lg" placeholder="e.g., 3.5" value="3.5" step="0.1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Fashion Niche</label>
+                                <select id="niche-select" class="input-field w-full px-4 py-3 rounded-lg">
+                                    <option value="fashion">General Fashion</option>
+                                    <option value="streetwear">Streetwear</option>
+                                    <option value="luxury">Luxury Fashion</option>
+                                    <option value="accessories">Accessories</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Collection Type</label>
+                                <select id="collection-select" class="input-field w-full px-4 py-3 rounded-lg">
+                                    <option value="basic">Basic Collection</option>
+                                    <option value="seasonal">Seasonal Collection</option>
+                                    <option value="limited">Limited Edition</option>
+                                    <option value="premium">Premium Collection</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">LIVE Sessions per Month</label>
+                                <input type="number" id="live-sessions" class="input-field w-full px-4 py-3 rounded-lg" placeholder="e.g., 8" value="8" min="1" max="30">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-2xl">
+                        <h3 class="text-lg font-bold text-black mb-4">LIVE-Selling Funnel</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Followers to LIVE:</span>
+                                <span class="font-semibold">5%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">LIVE to Purchase:</span>
+                                <span class="font-semibold" id="market-conversion">15%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Avg. Order Value:</span>
+                                <span class="font-semibold" id="market-aov">$100</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Profit Margin:</span>
+                                <span class="font-semibold" id="market-margin">20%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">LIVE Participants:</span>
+                                <span class="font-semibold" id="live-participants">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Purchases per LIVE:</span>
+                                <span class="font-semibold" id="purchases-per-live">0</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4">
+                            *Based on verified live-selling industry data and conversion funnel analysis. 
+                            AOV varies by niche: Luxury $250, Streetwear $120, Fashion $100, Accessories $80. 
+                            Standard influencer commission: 20% for all niches.
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-6 fade-in">
+                    <div class="result-card p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-black mb-6">Revenue Projection</h3>
+                        <div class="space-y-4" id="results">
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Monthly Revenue</span>
+                                <span class="text-2xl font-bold text-black" id="monthlyRevenue">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <span class="font-semibold text-black">Monthly Profit</span>
+                                <span class="text-2xl font-bold text-black" id="monthlyProfit">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-black text-white rounded-lg">
+                                <span class="font-semibold">Annual Profit</span>
+                                <span class="text-3xl font-bold" id="annualRevenue">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="text-xl font-bold text-black mb-4">Calculation Breakdown</h3>
+                        <div class="space-y-2 text-sm" id="breakdown">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Engaged Audience:</span>
+                                <span class="font-semibold" id="engagedAudience">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Monthly Customers:</span>
+                                <span class="font-semibold" id="monthlyCustomers">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Revenue per Customer:</span>
+                                <span class="font-semibold" id="revenuePerCustomer">$0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Profit per Customer:</span>
+                                <span class="font-semibold" id="profitPerCustomer">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Partners Section -->
+    <section id="strategic-partners" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 id="partners-title" class="text-4xl font-display font-bold text-black mb-4">Strategic Partners</h2>
+                <p id="partners-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Working with industry leaders to bring you the best fashion solutions
+                </p>
+            </div>
+            <div id="partners-grid" class="grid grid-cols-1 gap-8 items-center justify-items-center justify-center mx-auto">
+                <!-- Partners will be loaded dynamically from CMS -->
+                <div class="partner-item bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src="/assets/pakolorente-DHROFEfL.png" alt="PAKO LORENTE" class="mx-auto h-auto max-h-[7.8rem] object-contain grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start Your Brand Section -->
+    <section id="start" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in">
+                <h2 id="home-start-title" class="text-5xl font-display font-bold text-black mb-6">Ready to Start Your Fashion Empire?</h2>
+                <p id="home-start-subtitle" class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Join hundreds of successful influencers who've transformed their influence into thriving fashion brands. 
+                    Your journey starts here.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-white text-3xl"></i>
+                        </div>
+                        <h3 id="home-feature1-title" class="text-xl font-bold text-black mb-2">Fast Launch</h3>
+                        <p id="home-feature1-desc" class="text-gray-600">Get your brand live in just 8 weeks</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-white text-3xl"></i>
+                        </div>
+                        <h3 id="home-feature2-title" class="text-xl font-bold text-black mb-2">Done For You</h3>
+                        <p id="home-feature2-desc" class="text-gray-600">We handle everything, you focus on content</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4" role="img" aria-label="Proven results icon">
+                            <i class="fas fa-chart-line text-white text-3xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 id="home-feature3-title" class="text-xl font-bold text-black mb-2">Proven Results</h3>
+                        <p id="home-feature3-desc" class="text-gray-600">Join the 10% who succeed</p>
+                    </div>
+                </div>
+                
+                <!-- Waiting List Form -->
+                <div class="max-w-2xl mx-auto mt-16">
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 shadow-lg border border-gray-200">
+                        <div class="text-center mb-8">
+                            <h3 id="waitlist-title" class="text-3xl font-bold text-black mb-4">Join the Waiting List</h3>
+                            <p id="waitlist-subtitle" class="text-gray-600 text-lg">
+                                Be the first to know when we launch. Get exclusive early access and special launch pricing.
+                            </p>
+                        </div>
+                        
+                        <form id="waiting-list-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstName" id="waitlist-firstname-label" class="block text-sm font-semibold text-black mb-2">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" required 
+                                           class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                           placeholder="Your first name">
+                                </div>
+                                <div>
+                                    <label for="lastName" id="waitlist-lastname-label" class="block text-sm font-semibold text-black mb-2">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" required 
+                                           class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                           placeholder="Your last name">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="email" id="waitlist-email-label" class="block text-sm font-semibold text-black mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required 
+                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                       placeholder="your@email.com">
+                            </div>
+                            
+                            <div>
+                                <label for="followers-range" id="waitlist-followers-label" class="block text-sm font-semibold text-black mb-2">Followers Count</label>
+                                <select id="followers-range" name="followersRange" required 
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors">
+                                    <option value="">Select your follower range</option>
+                                    <option value="10k-50k">10K - 50K followers</option>
+                                    <option value="50k-100k">50K - 100K followers</option>
+                                    <option value="100k-500k">100K - 500K followers</option>
+                                    <option value="500k-1m">500K - 1M followers</option>
+                                    <option value="1m+">1M+ followers</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="niche" id="waitlist-niche-label" class="block text-sm font-semibold text-black mb-2">Fashion Niche</label>
+                                <select id="niche" name="niche" required 
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors">
+                                    <option value="">Select your niche</option>
+                                    <option value="fashion">General Fashion</option>
+                                    <option value="streetwear">Streetwear</option>
+                                    <option value="luxury">Luxury Fashion</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="activewear">Activewear</option>
+                                    <option value="beauty">Beauty & Lifestyle</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="instagram" id="waitlist-instagram-label" class="block text-sm font-semibold text-black mb-2">Instagram Handle (Optional)</label>
+                                <input type="text" id="instagram" name="instagram" 
+                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                                       placeholder="@yourhandle">
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <input type="checkbox" id="newsletter" name="newsletter" class="mt-1 mr-3">
+                                <label for="newsletter" class="text-sm text-gray-600">
+                                    I want to receive updates about Idol Brands, live-selling tips, and exclusive influencer opportunities.
+                                </label>
+                            </div>
+                            <!-- GDPR consent checkboxes -->
+                            <div class="space-y-4 text-sm text-gray-700">
+                                <label class="flex items-start space-x-3">
+                                    <input id="consent-required" type="checkbox" class="mt-1" />
+                                    <span>
+                                        I consent to the processing of my personal data by Idol Brands to handle my enquiry. See our <a href="legal/gdpr.html" target="_blank" class="underline">Privacy Policy (GDPR)</a>.
+                                    </span>
+                                </label>
+                                <label class="flex items-start space-x-3">
+                                    <input id="consent-marketing" type="checkbox" class="mt-1" />
+                                    <span>I agree to receive marketing communications and promotional offers (optional).</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" id="waitlist-submit-btn"
+                                    class="w-full bg-black text-white py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
+                                Join the Waiting List
+                            </button>
+                        </form>
+                        
+                        <div id="success-message" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                <div>
+                                    <h4 id="waitlist-success-title" class="font-semibold text-green-800">Thank you for joining!</h4>
+                                    <p id="waitlist-success-message" class="text-green-700 text-sm">You're on the waiting list. We'll notify you when spots become available.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <p id="home-cta-subtext1" class="text-gray-500 text-sm">
+                        Free consultation • No commitment • Results in 8 weeks
+                    </p>
+                    <p id="home-cta-subtext2" class="text-gray-400 text-xs mt-2">
+                        Limited spots available • Join 500+ influencers on the waiting list
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer: dynamic company & legal info loaded via auth.js -->
+    <footer class="bg-black text-white mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold">Idol Brands</h3>
+          <p id="footer-company" class="text-sm text-gray-300"></p>
+          <p id="footer-address" class="text-sm text-gray-300"></p>
+          <p id="footer-reg" class="text-sm text-gray-300"></p>
+          <a id="footer-email" href="" class="text-sm underline"></a>
+          <p id="footer-phone" class="text-sm text-gray-300"></p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="about.html" class="hover:underline">About</a></li>
+            <li><a href="how-it-works.html" class="hover:underline">How It Works</a></li>
+            <li><a href="success-stories.html" class="hover:underline">Success Stories</a></li>
+            <li><a href="blog.html" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="legal/terms.html" class="hover:underline" rel="nofollow">Terms &amp; Conditions</a></li>
+            <li><a href="legal/cookies.html" class="hover:underline" rel="nofollow">Cookies Policy</a></li>
+            <li><a href="legal/gdpr.html" class="hover:underline" rel="nofollow">Privacy / GDPR</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Follow</h4>
+          <div class="flex items-center space-x-4 text-xl">
+            <a id="social-ig" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a id="social-tt" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a id="social-yt" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 flex justify-between">
+          <span>© <span id="footer-year"></span> <span id="footer-company-bottom"></span>. All rights reserved.</span>
+          <span id="footer-extra"></span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    const isExpanded = !mobileMenu.classList.contains('hidden');
+                    menuToggle.setAttribute('aria-expanded', isExpanded);
+                    
+                    // Toggle icon between bars and times
+                    if (menuIcon) {
+                        if (isExpanded) {
+                            menuIcon.classList.remove('fa-bars');
+                            menuIcon.classList.add('fa-times');
+                        } else {
+                            menuIcon.classList.remove('fa-times');
+                            menuIcon.classList.add('fa-bars');
+                        }
+                    }
+                });
+                
+                // Close mobile menu when clicking on a link
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        if (menuIcon) {
+                            menuIcon.classList.remove('fa-times');
+                            menuIcon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+        });
+
+        // Initialize Vanta.js background - wait for library to load
+        function initVanta() {
+            if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined') {
+                VANTA.BIRDS({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    backgroundColor: 0xf8f9fa,
+                    color1: 0x000000,
+                    color2: 0x333333,
+                    birdSize: 1.20,
+                    wingSpan: 20.00,
+                    speedLimit: 4.00,
+                    separation: 20.00,
+                    alignment: 20.00,
+                    cohesion: 20.00,
+                    quantity: 3.00
+                });
+            }
+        }
+        
+        // Wait for window load to ensure all deferred scripts are loaded
+        if (document.readyState === 'complete') {
+            initVanta();
+        } else {
+            window.addEventListener('load', initVanta);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Live-Selling ROI Calculator - Updated with LIVE conversion funnel
+        function calculateROI() {
+            const followers = parseFloat(document.getElementById('followers').value) || 0;
+            const engagement = parseFloat(document.getElementById('engagement').value) || 0;
+            const niche = document.getElementById('niche-select').value;
+            const collection = document.getElementById('collection-select').value;
+            const liveSessions = parseFloat(document.getElementById('live-sessions').value) || 8;
+
+            // LIVE conversion funnel - allow admin-defined values from localStorage
+            let followersToLiveConversion;
+            let liveToPurchaseConversion;
+            {
+                const storedFollowersConv = parseFloat(localStorage.getItem('followersToLiveConversion'));
+                followersToLiveConversion = isNaN(storedFollowersConv) ? 0.05 : storedFollowersConv;
+                const storedLiveConv = parseFloat(localStorage.getItem('liveToPurchaseConversion'));
+                liveToPurchaseConversion = isNaN(storedLiveConv) ? 0.15 : storedLiveConv;
+            }
+
+            // Niche-specific AOV with admin overrides
+            let nicheData = {
+                fashion: { aov: 100 },
+                streetwear: { aov: 120 },
+                luxury: { aov: 250 },
+                accessories: { aov: 80 }
+            };
+            {
+                const storedNicheAOV = localStorage.getItem('nicheAOV');
+                if (storedNicheAOV) {
+                    try {
+                        const obj = JSON.parse(storedNicheAOV);
+                        nicheData = {
+                            fashion: { aov: obj.fashion || 100 },
+                            streetwear: { aov: obj.streetwear || 120 },
+                            luxury: { aov: obj.luxury || 250 },
+                            accessories: { aov: obj.accessories || 80 }
+                        };
+                    } catch (e) {
+                        // ignore parse errors and keep defaults
+                    }
+                }
+            }
+            const avgOrderValue = nicheData[niche].aov;
+            // Profit margin (commission) may be overridden by admin
+            let profitMargin;
+            {
+                const storedProfit = parseFloat(localStorage.getItem('profitMargin'));
+                profitMargin = isNaN(storedProfit) ? 0.20 : storedProfit;
+            }
+
+            // Collection type multipliers with admin overrides
+            let collectionMultipliers = {
+                basic: 1.0,
+                seasonal: 1.2,
+                limited: 1.5,
+                premium: 1.8
+            };
+            {
+                const storedCollection = localStorage.getItem('collectionMultipliers');
+                if (storedCollection) {
+                    try {
+                        const obj = JSON.parse(storedCollection);
+                        collectionMultipliers = {
+                            basic: obj.basic || 1.0,
+                            seasonal: obj.seasonal || 1.2,
+                            limited: obj.limited || 1.5,
+                            premium: obj.premium || 1.8
+                        };
+                    } catch (e) {
+                        // ignore parse errors
+                    }
+                }
+            }
+            // Niche engagement multipliers with admin overrides
+            let nicheMultipliers = {
+                fashion: 1.0,
+                streetwear: 1.1,
+                luxury: 0.8,
+                accessories: 1.3
+            };
+            {
+                const storedNicheMult = localStorage.getItem('nicheMultipliers');
+                if (storedNicheMult) {
+                    try {
+                        const obj = JSON.parse(storedNicheMult);
+                        nicheMultipliers = {
+                            fashion: obj.fashion || 1.0,
+                            streetwear: obj.streetwear || 1.1,
+                            luxury: obj.luxury || 0.8,
+                            accessories: obj.accessories || 1.3
+                        };
+                    } catch (e) {
+                        // ignore parse errors
+                    }
+                }
+            }
+
+            // Calculations
+            const engagedAudience = Math.round(followers * (engagement / 100));
+            const liveParticipantsPerSession = Math.round(engagedAudience * followersToLiveConversion * nicheMultipliers[niche]);
+            const purchasesPerSession = Math.round(liveParticipantsPerSession * liveToPurchaseConversion * collectionMultipliers[collection]);
+            
+            const monthlyCustomers = purchasesPerSession * liveSessions;
+            const revenuePerCustomer = avgOrderValue;
+            const profitPerCustomer = revenuePerCustomer * profitMargin;
+            
+            const monthlyRevenue = monthlyCustomers * revenuePerCustomer;
+            const monthlyProfit = monthlyCustomers * profitPerCustomer;
+            const annualProfit = monthlyProfit * 12;
+
+
+            // Update results
+            document.getElementById('monthlyRevenue').textContent = `$${monthlyRevenue.toLocaleString()}`;
+            document.getElementById('monthlyProfit').textContent = `$${monthlyProfit.toLocaleString()}`;
+            document.getElementById('annualRevenue').textContent = `$${annualProfit.toLocaleString()}`;
+
+            // Update market data display with LIVE funnel data
+            document.getElementById('market-conversion').textContent = `${(liveToPurchaseConversion * 100).toFixed(0)}%`;
+            document.getElementById('market-aov').textContent = `$${avgOrderValue}`;
+            document.getElementById('market-margin').textContent = `${(profitMargin * 100).toFixed(0)}%`;
+            
+            // Update AOV display based on niche
+            document.getElementById('market-aov').textContent = `$${avgOrderValue}`;
+
+            // Update breakdown with LIVE funnel
+            document.getElementById('engagedAudience').textContent = engagedAudience.toLocaleString();
+            document.getElementById('monthlyCustomers').textContent = monthlyCustomers.toLocaleString();
+            document.getElementById('revenuePerCustomer').textContent = `$${revenuePerCustomer.toFixed(2)}`;
+            document.getElementById('profitPerCustomer').textContent = `$${profitPerCustomer.toFixed(2)}`;
+
+            // Update additional LIVE metrics
+            document.getElementById('live-participants').textContent = liveParticipantsPerSession.toLocaleString();
+            document.getElementById('purchases-per-live').textContent = purchasesPerSession.toLocaleString();
+        }
+
+        // Add event listeners for calculator inputs
+        document.querySelectorAll('#calculator-section input, #calculator-section select').forEach(input => {
+            input.addEventListener('input', calculateROI);
+            input.addEventListener('change', calculateROI);
+        });
+
+        // Initial calculation
+        calculateROI();
+
+
+        // Button click handlers
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('Start Your Fashion Brand') || this.textContent.includes('Start Your Fashion Brand Today')) {
+                    document.getElementById('start').scrollIntoView({ behavior: 'smooth' });
+                } else if (this.textContent.includes('See How It Works')) {
+                    document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Waiting List Form Handler
+        document.getElementById('waiting-list-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide form
+                this.style.display = 'none';
+                
+                // Show success message
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Log data (in real implementation, this would be sent to server)
+                console.log('Waiting list submission:', data);
+            }, 1000);
+        });
+    </script>
+    <!-- Home page dynamic content loader: updates metrics and CTA text from localStorage if available -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function getItem(key, def) {
+            const val = localStorage.getItem(key);
+            return val !== null ? val : def;
+        }
+        // Metrics
+        const msVal = document.getElementById('metric-market-size-value');
+        if (msVal) msVal.textContent = getItem('metricMarketSizeValue', msVal.textContent);
+        const msLabel = document.getElementById('metric-market-size-label');
+        if (msLabel) msLabel.textContent = getItem('metricMarketSizeLabel', msLabel.textContent);
+        const grVal = document.getElementById('metric-growth-rate-value');
+        if (grVal) grVal.textContent = getItem('metricGrowthRateValue', grVal.textContent);
+        const grLabel = document.getElementById('metric-growth-rate-label');
+        if (grLabel) grLabel.textContent = getItem('metricGrowthRateLabel', grLabel.textContent);
+        const frVal = document.getElementById('metric-fail-rate-value');
+        if (frVal) frVal.textContent = getItem('metricFailRateValue', frVal.textContent);
+        const frLabel = document.getElementById('metric-fail-rate-label');
+        if (frLabel) frLabel.textContent = getItem('metricFailRateLabel', frLabel.textContent);
+        const tagEl = document.getElementById('metric-tagline');
+        if (tagEl) tagEl.textContent = getItem('metricTagline', tagEl.textContent);
+        // Start section
+        const startTitle = document.getElementById('home-start-title');
+        if (startTitle) startTitle.textContent = getItem('homeStartTitle', startTitle.textContent);
+        const startSub = document.getElementById('home-start-subtitle');
+        if (startSub) startSub.textContent = getItem('homeStartSubtitle', startSub.textContent);
+        // Feature cards
+        const f1Title = document.getElementById('home-feature1-title');
+        if (f1Title) f1Title.textContent = getItem('homeFeature1Title', f1Title.textContent);
+        const f1Desc = document.getElementById('home-feature1-desc');
+        if (f1Desc) f1Desc.textContent = getItem('homeFeature1Desc', f1Desc.textContent);
+        const f2Title = document.getElementById('home-feature2-title');
+        if (f2Title) f2Title.textContent = getItem('homeFeature2Title', f2Title.textContent);
+        const f2Desc = document.getElementById('home-feature2-desc');
+        if (f2Desc) f2Desc.textContent = getItem('homeFeature2Desc', f2Desc.textContent);
+        const f3Title = document.getElementById('home-feature3-title');
+        if (f3Title) f3Title.textContent = getItem('homeFeature3Title', f3Title.textContent);
+        const f3Desc = document.getElementById('home-feature3-desc');
+        if (f3Desc) f3Desc.textContent = getItem('homeFeature3Desc', f3Desc.textContent);
+
+        // CTA button
+        const cta = document.getElementById('home-cta-text');
+        if (cta) cta.textContent = getItem('homeCtaText', cta.textContent);
+        
+        // Consultation text below CTA
+        const ctaSubtext1 = document.getElementById('home-cta-subtext1');
+        if (ctaSubtext1) ctaSubtext1.textContent = getItem('homeCtaSubtext1', ctaSubtext1.textContent);
+        const ctaSubtext2 = document.getElementById('home-cta-subtext2');
+        if (ctaSubtext2) ctaSubtext2.textContent = getItem('homeCtaSubtext2', ctaSubtext2.textContent);
+
+        // Home Page About Section
+        const aboutTitle = document.getElementById('about-title');
+        if (aboutTitle) aboutTitle.textContent = getItem('homeAboutTitle', aboutTitle.textContent);
+        const aboutSubtitle = document.getElementById('about-subtitle');
+        if (aboutSubtitle) aboutSubtitle.textContent = getItem('homeAboutSubtitle', aboutSubtitle.textContent);
+        const aboutExpertiseTitle = document.getElementById('about-expertise-title');
+        if (aboutExpertiseTitle) aboutExpertiseTitle.textContent = getItem('homeAboutExpertiseTitle', aboutExpertiseTitle.textContent);
+        const aboutExpertiseDesc = document.getElementById('about-expertise-desc');
+        if (aboutExpertiseDesc) aboutExpertiseDesc.textContent = getItem('homeAboutExpertiseDesc', aboutExpertiseDesc.textContent);
+        const aboutLogisticsTitle = document.getElementById('about-logistics-title');
+        if (aboutLogisticsTitle) aboutLogisticsTitle.textContent = getItem('homeAboutLogisticsTitle', aboutLogisticsTitle.textContent);
+        const aboutLogisticsDesc = document.getElementById('about-logistics-desc');
+        if (aboutLogisticsDesc) aboutLogisticsDesc.textContent = getItem('homeAboutLogisticsDesc', aboutLogisticsDesc.textContent);
+        const aboutInnovationTitle = document.getElementById('about-innovation-title');
+        if (aboutInnovationTitle) aboutInnovationTitle.textContent = getItem('homeAboutInnovationTitle', aboutInnovationTitle.textContent);
+        const aboutInnovationDesc = document.getElementById('about-innovation-desc');
+        if (aboutInnovationDesc) aboutInnovationDesc.textContent = getItem('homeAboutInnovationDesc', aboutInnovationDesc.textContent);
+
+        // Complete Solution Section
+        const solutionTitle = document.getElementById('solution-title');
+        if (solutionTitle) solutionTitle.textContent = getItem('solutionTitle', solutionTitle.textContent);
+        const solutionSubtitle = document.getElementById('solution-subtitle');
+        if (solutionSubtitle) solutionSubtitle.textContent = getItem('solutionSubtitle', solutionSubtitle.textContent);
+        const step1Title = document.getElementById('solution-step1-title');
+        if (step1Title) step1Title.textContent = getItem('solutionStep1Title', step1Title.textContent);
+        const step1Desc = document.getElementById('solution-step1-desc');
+        if (step1Desc) step1Desc.textContent = getItem('solutionStep1Desc', step1Desc.textContent);
+        const step2Title = document.getElementById('solution-step2-title');
+        if (step2Title) step2Title.textContent = getItem('solutionStep2Title', step2Title.textContent);
+        const step2Desc = document.getElementById('solution-step2-desc');
+        if (step2Desc) step2Desc.textContent = getItem('solutionStep2Desc', step2Desc.textContent);
+        const step3Title = document.getElementById('solution-step3-title');
+        if (step3Title) step3Title.textContent = getItem('solutionStep3Title', step3Title.textContent);
+        const step3Desc = document.getElementById('solution-step3-desc');
+        if (step3Desc) step3Desc.textContent = getItem('solutionStep3Desc', step3Desc.textContent);
+        const step4Title = document.getElementById('solution-step4-title');
+        if (step4Title) step4Title.textContent = getItem('solutionStep4Title', step4Title.textContent);
+        const step4Desc = document.getElementById('solution-step4-desc');
+        if (step4Desc) step4Desc.textContent = getItem('solutionStep4Desc', step4Desc.textContent);
+
+        // Success Timeline
+        const timelineTitle = document.getElementById('timeline-title');
+        if (timelineTitle) timelineTitle.textContent = getItem('timelineTitle', timelineTitle.textContent);
+        const timeline1Period = document.getElementById('timeline1-period');
+        if (timeline1Period) timeline1Period.textContent = getItem('timeline1Period', timeline1Period.textContent);
+        const timeline1Desc = document.getElementById('timeline1-desc');
+        if (timeline1Desc) timeline1Desc.textContent = getItem('timeline1Desc', timeline1Desc.textContent);
+        const timeline2Period = document.getElementById('timeline2-period');
+        if (timeline2Period) timeline2Period.textContent = getItem('timeline2Period', timeline2Period.textContent);
+        const timeline2Desc = document.getElementById('timeline2-desc');
+        if (timeline2Desc) timeline2Desc.textContent = getItem('timeline2Desc', timeline2Desc.textContent);
+        const timeline3Period = document.getElementById('timeline3-period');
+        if (timeline3Period) timeline3Period.textContent = getItem('timeline3Period', timeline3Period.textContent);
+        const timeline3Desc = document.getElementById('timeline3-desc');
+        if (timeline3Desc) timeline3Desc.textContent = getItem('timeline3Desc', timeline3Desc.textContent);
+        const timeline4Period = document.getElementById('timeline4-period');
+        if (timeline4Period) timeline4Period.textContent = getItem('timeline4Period', timeline4Period.textContent);
+        const timeline4Desc = document.getElementById('timeline4-desc');
+        if (timeline4Desc) timeline4Desc.textContent = getItem('timeline4Desc', timeline4Desc.textContent);
+
+        // Waiting List Form
+        const waitlistTitle = document.getElementById('waitlist-title');
+        if (waitlistTitle) waitlistTitle.textContent = getItem('waitlistTitle', waitlistTitle.textContent);
+        const waitlistSubtitle = document.getElementById('waitlist-subtitle');
+        if (waitlistSubtitle) waitlistSubtitle.textContent = getItem('waitlistSubtitle', waitlistSubtitle.textContent);
+        const waitlistFirstName = document.getElementById('waitlist-firstname-label');
+        if (waitlistFirstName) waitlistFirstName.textContent = getItem('waitlistFirstNameLabel', waitlistFirstName.textContent);
+        const waitlistLastName = document.getElementById('waitlist-lastname-label');
+        if (waitlistLastName) waitlistLastName.textContent = getItem('waitlistLastNameLabel', waitlistLastName.textContent);
+        const waitlistEmail = document.getElementById('waitlist-email-label');
+        if (waitlistEmail) waitlistEmail.textContent = getItem('waitlistEmailLabel', waitlistEmail.textContent);
+        const waitlistFollowers = document.getElementById('waitlist-followers-label');
+        if (waitlistFollowers) waitlistFollowers.textContent = getItem('waitlistFollowersLabel', waitlistFollowers.textContent);
+        const waitlistNiche = document.getElementById('waitlist-niche-label');
+        if (waitlistNiche) waitlistNiche.textContent = getItem('waitlistNicheLabel', waitlistNiche.textContent);
+        const waitlistInstagram = document.getElementById('waitlist-instagram-label');
+        if (waitlistInstagram) waitlistInstagram.textContent = getItem('waitlistInstagramLabel', waitlistInstagram.textContent);
+        const waitlistSubmitBtn = document.getElementById('waitlist-submit-btn');
+        if (waitlistSubmitBtn) waitlistSubmitBtn.textContent = getItem('waitlistSubmitButton', waitlistSubmitBtn.textContent);
+        const waitlistSuccessTitle = document.getElementById('waitlist-success-title');
+        if (waitlistSuccessTitle) waitlistSuccessTitle.textContent = getItem('waitlistSuccessTitle', waitlistSuccessTitle.textContent);
+        const waitlistSuccessMsg = document.getElementById('waitlist-success-message');
+        if (waitlistSuccessMsg) waitlistSuccessMsg.textContent = getItem('waitlistSuccessMessage', waitlistSuccessMsg.textContent);
+
+        // Calculator Section
+        const calculatorTitle = document.getElementById('calculator-title');
+        if (calculatorTitle) calculatorTitle.textContent = getItem('calculatorTitle', calculatorTitle.textContent);
+        const calculatorSubtitle = document.getElementById('calculator-subtitle');
+        if (calculatorSubtitle) calculatorSubtitle.textContent = getItem('calculatorSubtitle', calculatorSubtitle.textContent);
+    });
+    </script>
+    <!-- Authentication helper to control login state, navigation and calculator visibility -->
+    <script src="auth.js"></script>
+    <!-- Apply any custom hero text stored by the admin.  When an administrator edits
+         the hero title or subtitle in the admin dashboard, it is saved in
+         localStorage.  On page load we replace the default headings with those values. -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElem = document.getElementById('hero-title');
+        const subtitleElem = document.getElementById('hero-subtitle');
+        const storedTitle = localStorage.getItem('heroTitle');
+        const storedSubtitle = localStorage.getItem('heroSubtitle');
+        if (storedTitle && titleElem) {
+            // heroTitle may contain HTML spans and line breaks so use innerHTML
+            titleElem.innerHTML = storedTitle;
+        }
+        if (storedSubtitle && subtitleElem) {
+            subtitleElem.textContent = storedSubtitle;
+        }
+    });
+</script>
+
+    <!-- Firebase SDK -->
+
+    <!-- Consent validation script for waiting list form -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('waiting-list-form');
+        if (form) {
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault(); // Prevent form submission
+                
+                const requiredConsent = document.getElementById('consent-required');
+                if (requiredConsent && !requiredConsent.checked) {
+                    alert('Please consent to data processing to join the waiting list.');
+                    return false;
+                }
+                
+                // Collect form data and save as a new user record in localStorage
+                const firstName = document.getElementById('firstName')?.value || '';
+                const lastName = document.getElementById('lastName')?.value || '';
+                const email = document.getElementById('email')?.value || '';
+                const followersRange = document.getElementById('followers-range')?.value || '';
+                const niche = document.getElementById('niche')?.value || '';
+                const instagram = document.getElementById('instagram')?.value || '';
+                const newsletter = document.getElementById('newsletter')?.checked || false;
+                
+                const user = {
+                    id: Date.now(),
+                    firstName: firstName.trim(),
+                    lastName: lastName.trim(),
+                    email: email.trim(),
+                    followersRange: followersRange,
+                    niche: niche,
+                    instagram: instagram.trim(),
+                    newsletter: newsletter,
+                    status: 'inactive',
+                    login: '',
+                    password: ''
+                };
+                
+                try {
+                    // Save to Firebase Firestore
+                    if (window.firestoreDB && window.firestoreAddDoc && window.firestoreCollection) {
+                        await window.firestoreAddDoc(window.firestoreCollection(window.firestoreDB, 'users'), user);
+                    }
+                    
+                    // Also save to localStorage for backward compatibility
+                    const stored = localStorage.getItem('users');
+                    let users = [];
+                    if (stored) users = JSON.parse(stored);
+                    users.push(user);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    
+                    // Show success message and reset form
+                    alert('Thank you for registering! We will contact you soon.');
+                    form.reset();
+                } catch (err) {
+                    console.error('Could not save user record', err);
+                    alert('An error occurred while saving. Please try again.');
+                }
+            });
+        }
+    });
+    </script>
+
+<!-- Strategic Partners Loader Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const partnersTitle = document.getElementById('partners-title');
+    const partnersSubtitle = document.getElementById('partners-subtitle');
+    const partnersGrid = document.getElementById('partners-grid');
+    if (partnersTitle && partnersSubtitle && partnersGrid) {
+        const title = localStorage.getItem('partnersTitle') || 'Strategic Partners';
+        const subtitle = localStorage.getItem('partnersSubtitle') || 'Working with industry leaders to bring you the best fashion solutions';
+        partnersTitle.textContent = title;
+        partnersSubtitle.textContent = subtitle;
+        const partners = JSON.parse(localStorage.getItem('strategicPartners') || '[]');
+        if (partners.length > 0) {
+            partnersGrid.innerHTML = '';
+            // Use explicit Tailwind classes to support Play CDN (no dynamic classes)
+            if (partners.length === 1) {
+                partnersGrid.className = 'grid grid-cols-1 gap-8 items-center justify-items-center justify-center mx-auto';
+            } else if (partners.length === 2) {
+                partnersGrid.className = 'grid grid-cols-2 gap-8 items-center justify-items-center justify-center mx-auto';
+            } else {
+                partnersGrid.className = 'grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center justify-center';
+            }
+            partners.forEach(partner => {
+                const partnerDiv = document.createElement('div');
+                partnerDiv.className = 'partner-item bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow';
+                if (partner.url) {
+                    partnerDiv.innerHTML = `<a href="${partner.url}" target="_blank" rel="noopener noreferrer" class="block"><img src="${partner.logo}" alt="${partner.name}" class="mx-auto h-auto max-h-[7.8rem] object-contain grayscale hover:grayscale-0 transition-all duration-300" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-gray-400 text-sm\\'>${partner.name}</span>';"></a>`;
+                } else {
+                    partnerDiv.innerHTML = `<img src="${partner.logo}" alt="${partner.name}" class="mx-auto h-auto max-h-[7.8rem] object-contain grayscale hover:grayscale-0 transition-all duration-300" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-gray-400 text-sm\\'>${partner.name}</span>';">`;
+                }
+                partnersGrid.appendChild(partnerDiv);
+            });
+        }
+    }
+});
+</script>
+<!-- Hero Media Carousel Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('hero-media-container');
+    if (!container) return;
+    
+    // Load media list from localStorage or use default videos
+    const defaultMediaList = [
+        { url: 'images/grok-video-159173c8-5359-49a7-97d7-e2eecbce1f37-1.mp4', type: 'video' },
+        { url: 'images/grok-video-202b544e-4cd8-4965-bd0e-8f83c7e7f26b-2.mp4', type: 'video' },
+        { url: 'images/grok-video-2747edf2-5b8d-4a0e-8b7d-f7e678e61921-4.mp4', type: 'video' },
+        { url: 'images/grok-video-ff39249d-79da-4763-a118-695b61c880f6.mp4', type: 'video' }
+    ];
+    const mediaList = JSON.parse(localStorage.getItem('heroMediaList') || JSON.stringify(defaultMediaList));
+    const transitionDuration = parseInt(localStorage.getItem('heroTransitionDuration') || '5') * 1000;
+    
+    // If no media configured, keep default image
+    if (!mediaList || mediaList.length === 0) {
+        return;
+    }
+    
+    // Clear container and build media items
+    container.innerHTML = '';
+    let currentIndex = 0;
+    const items = [];
+    
+    mediaList.forEach((media, index) => {
+        let element;
+        
+        if (media.type === 'video') {
+            element = document.createElement('video');
+            element.src = media.url;
+            element.className = 'hero-media-item';
+            element.muted = true;
+            element.playsInline = true;
+            element.loop = false;
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.objectFit = 'cover';
+            
+            // When video ends, move to next item
+            element.addEventListener('ended', function() {
+                showNextMedia();
+            });
+        } else {
+            element = document.createElement('img');
+            element.src = media.url;
+            element.alt = 'Hero media';
+            element.className = 'hero-media-item';
+        }
+        
+        if (index === 0) {
+            element.classList.add('active');
+        }
+        
+        container.appendChild(element);
+        items.push({ element, media });
+    });
+    
+    // Auto-adjust container height based on first media
+    if (items.length > 0) {
+        const firstElement = items[0].element;
+        if (firstElement.tagName === 'IMG') {
+            firstElement.onload = function() {
+                container.style.minHeight = firstElement.offsetHeight + 'px';
+            };
+        } else {
+            firstElement.onloadedmetadata = function() {
+                container.style.minHeight = firstElement.offsetHeight + 'px';
+            };
+        }
+    }
+    
+    function showNextMedia() {
+        if (items.length <= 1) return;
+        
+        // Pause current video if it's playing
+        const currentItem = items[currentIndex];
+        if (currentItem.element.tagName === 'VIDEO') {
+            currentItem.element.pause();
+            currentItem.element.currentTime = 0;
+        }
+        
+        // Remove active class from current
+        currentItem.element.classList.remove('active');
+        
+        // Move to next
+        currentIndex = (currentIndex + 1) % items.length;
+        const nextItem = items[currentIndex];
+        
+        // Add active class to next
+        nextItem.element.classList.add('active');
+        
+        // If next item is video, play it
+        if (nextItem.media.type === 'video') {
+            nextItem.element.play().catch(err => {
+                console.log('Video autoplay failed:', err);
+                // If video can't play, skip to next after duration
+                setTimeout(showNextMedia, transitionDuration);
+            });
+        } else {
+            // If image, auto-advance after duration
+            setTimeout(showNextMedia, transitionDuration);
+        }
+    }
+    
+    // Start the first video if applicable
+    if (items.length > 0 && items[0].media.type === 'video') {
+        items[0].element.play().catch(err => {
+            console.log('First video autoplay failed:', err);
+            setTimeout(showNextMedia, transitionDuration);
+        });
+    } else if (items.length > 1) {
+        // Start carousel for images
+        setTimeout(showNextMedia, transitionDuration);
+    }
+});
+    </script>
+
+    <!-- Error handling for Chrome extension compatibility -->
+    <script>
+    // Handle unhandled promise rejections and runtime errors gracefully
+    window.addEventListener('unhandledrejection', function(event) {
+        // Suppress errors related to Chrome extensions
+        if (event.reason && event.reason.message && 
+            (event.reason.message.includes('Extension context invalidated') ||
+             event.reason.message.includes('message port closed') ||
+             event.reason.message.includes('The message port closed before a response was received'))) {
+            event.preventDefault();
+            return;
+        }
+    });
+    
+    // Override console.error to filter Chrome extension errors
+    const originalError = console.error;
+    console.error = function() {
+        const args = Array.from(arguments);
+        const message = args.join(' ');
+        
+        // Filter out Chrome extension-related errors
+        if (message.includes('runtime.lastError') || 
+            message.includes('message port closed') ||
+            message.includes('Extension context invalidated')) {
+            return;
+        }
+        
+        originalError.apply(console, args);
+    };
+    </script>
+
+</body>
+</html>

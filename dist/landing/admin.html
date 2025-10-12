@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard – Idol Brands</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-D8x9m7Ka.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Authentication helper provides isLoggedIn, isAdmin and navigation toggling -->
+    <script src="auth.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation: reuse same structure as other pages.  updateNav() will show/hide links appropriately. -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-display font-bold text-black">Idol Brands</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-600 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-black hover:text-gray-600 transition-colors font-medium">About</a>
+                    <a href="how-it-works.html" class="text-black hover:text-gray-600 transition-colors font-medium">How It Works</a>
+                    <a href="success-stories.html" class="text-black hover:text-gray-600 transition-colors font-medium">Success Stories</a>
+                    <a href="blog.html" class="text-black hover:text-gray-600 transition-colors font-medium">Blog</a>
+                    <a href="index.html#calculator-section" id="nav-calculator" class="text-black hover:text-gray-600 transition-colors font-medium">Calculator</a>
+                    <a href="your-documents.html" id="nav-documents" class="text-black hover:text-gray-600 transition-colors font-medium" style="display: none;">Your Documents</a>
+                    <!-- Admin link itself is visible because we are on the admin page.  updateNav() may hide it on other pages. -->
+                    <a href="admin.html" id="nav-admin" class="text-black hover:text-gray-600 transition-colors font-medium">Admin</a>
+                    <a href="login.html" id="nav-login" class="text-black hover:text-gray-600 transition-colors font-medium">Login</a>
+                    <a href="#" id="nav-logout" class="text-black hover:text-gray-600 transition-colors font-medium" onclick="logout()">Logout</a>
+                    <a href="index.html#start" class="bg-black text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">Start Your Brand</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-display font-bold mb-8">Admin Dashboard</h1>
+        
+        <!-- Global Navigation Settings -->
+        <section class="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-900">Navigation Settings</h2>
+            <p class="text-sm text-gray-600 mb-4">Control which navigation items are visible to users on your website.</p>
+            
+            <div class="bg-white rounded-lg p-4 mb-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Success Stories Page</h3>
+                        <p class="text-sm text-gray-600">Show or hide the Success Stories tab in both EN and PL versions</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="toggle-success-stories" class="sr-only peer" checked>
+                        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-black"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-900" id="toggle-success-stories-label">Visible</span>
+                    </label>
+                </div>
+            </div>
+            
+            <p id="nav-settings-save-msg" class="text-green-600 text-sm mt-3 hidden">Navigation settings saved automatically.</p>
+        </section>
+        
+        <!-- Hero content editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Home Page Hero</h2>
+            <p class="text-sm text-gray-600 mb-4">You can customise the hero heading and subtitle on the home page.  Use simple HTML (e.g. &lt;span class=&quot;text-gradient&quot;&gt;) to style parts of the heading.</p>
+            <div class="mb-4">
+                <label for="admin-hero-title" class="block text-sm font-medium text-gray-700 mb-1">Hero Title (HTML allowed)</label>
+                <textarea id="admin-hero-title" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" rows="4"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-hero-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle</label>
+                <input type="text" id="admin-hero-subtitle" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-hero" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Hero Content</button>
+            <p id="hero-save-msg" class="text-green-600 text-sm mt-3 hidden">Hero content saved.</p>
+        </section>
+
+        <!-- About page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit About Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Customise the hero and first sections of the About page.  These values will replace the default headings and paragraphs when the page loads.</p>
+            <div class="mb-4">
+                <label for="admin-about-hero-title" class="block text-sm font-medium text-gray-700 mb-1">About Hero Title</label>
+                <input id="admin-about-hero-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-hero-subtitle" class="block text-sm font-medium text-gray-700 mb-1">About Hero Subtitle</label>
+                <input id="admin-about-hero-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-story" class="block text-sm font-medium text-gray-700 mb-1">Our Story (one paragraph per line)</label>
+                <textarea id="admin-about-story" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" rows="6"></textarea>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-mission-title" class="block text-sm font-medium text-gray-700 mb-1">Mission Section Title</label>
+                    <input id="admin-mission-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc1" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Mission Description Line 1</label>
+                    <input id="admin-mission-desc1" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc2" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Mission Description Line 2</label>
+                    <input id="admin-mission-desc2" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-vision-title" class="block text-sm font-medium text-gray-700 mb-1">Vision Section Title</label>
+                    <input id="admin-vision-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc1" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Vision Description Line 1</label>
+                    <input id="admin-vision-desc1" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc2" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Vision Description Line 2</label>
+                    <input id="admin-vision-desc2" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-team-title" class="block text-sm font-medium text-gray-700 mb-1">Team Section Title</label>
+                    <input id="admin-team-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-team-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Team Section Subtitle</label>
+                    <input id="admin-team-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-impact-title" class="block text-sm font-medium text-gray-700 mb-1">Impact Section Title</label>
+                    <input id="admin-impact-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-impact-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Impact Section Subtitle</label>
+                    <input id="admin-impact-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- About Values Section (EN) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">Values Section (EN)</h4>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-values-title" class="block text-sm font-medium text-gray-700 mb-1">Values Section Title (EN)</label>
+                    <input id="admin-values-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-values-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Values Section Subtitle (EN)</label>
+                    <input id="admin-values-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- 4 Values (EN) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="admin-value1-title" class="block text-sm font-medium text-gray-700 mb-1">Value 1 - Title (EN)</label>
+                    <input id="admin-value1-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value1-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Value 1 - Description (EN)</label>
+                    <textarea id="admin-value1-desc" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="admin-value2-title" class="block text-sm font-medium text-gray-700 mb-1">Value 2 - Title (EN)</label>
+                    <input id="admin-value2-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value2-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Value 2 - Description (EN)</label>
+                    <textarea id="admin-value2-desc" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="admin-value3-title" class="block text-sm font-medium text-gray-700 mb-1">Value 3 - Title (EN)</label>
+                    <input id="admin-value3-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value3-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Value 3 - Description (EN)</label>
+                    <textarea id="admin-value3-desc" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="admin-value4-title" class="block text-sm font-medium text-gray-700 mb-1">Value 4 - Title (EN)</label>
+                    <input id="admin-value4-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value4-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Value 4 - Description (EN)</label>
+                    <textarea id="admin-value4-desc" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+            </div>
+            <!-- About CTA Section (EN) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">About CTA Section (EN)</h4>
+            <div class="mb-4">
+                <label for="admin-about-cta-title" class="block text-sm font-medium text-gray-700 mb-1">CTA Title (EN)</label>
+                <input id="admin-about-cta-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-cta-desc" class="block text-sm font-medium text-gray-700 mb-1">CTA Description (EN)</label>
+                <textarea id="admin-about-cta-desc" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-cta-button" class="block text-sm font-medium text-gray-700 mb-1">CTA Button Text (EN)</label>
+                <input id="admin-about-cta-button" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-cta-subtext" class="block text-sm font-medium text-gray-700 mb-1">CTA Subtext (EN)</label>
+                <input id="admin-about-cta-subtext" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-about" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save About Content</button>
+            <p id="about-save-msg" class="text-green-600 text-sm mt-3 hidden">About page content saved.</p>
+        </section>
+
+        <!-- How It Works page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit How It Works Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Modify the main headings and steps on the How It Works page.</p>
+            <div class="mb-4">
+                <label for="admin-how-title" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Title</label>
+                <input id="admin-how-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Live-Selling Section Subtitle</label>
+                <input id="admin-how-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-ready-title" class="block text-sm font-medium text-gray-700 mb-1">Ready Section Title</label>
+                <input id="admin-ready-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <h4 class="text-lg font-semibold mb-2 mt-4">How It Works Steps (1-6) (EN)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="how-step1-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 1 Title</label>
+                    <input id="how-step1-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Your Personal Shop Setup" />
+                    <label for="how-step1-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 1 Description</label>
+                    <textarea id="how-step1-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step2-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 2 Title</label>
+                    <input id="how-step2-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Live-Selling Studio Setup" />
+                    <label for="how-step2-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 2 Description</label>
+                    <textarea id="how-step2-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step3-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 3 Title</label>
+                    <input id="how-step3-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Product Development & Quality Control" />
+                    <label for="how-step3-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 3 Description</label>
+                    <textarea id="how-step3-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                    <div>
+                    <label for="how-step4-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 4 Title</label>
+                    <input id="how-step4-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Launch & Live-Selling Events" />
+                    <label for="how-step4-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 4 Description</label>
+                    <textarea id="how-step4-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step5-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 5 Title</label>
+                    <input id="how-step5-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Community Building & Growth" />
+                    <label for="how-step5-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 5 Description</label>
+                    <textarea id="how-step5-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step6-title-field" class="block text-sm font-medium text-gray-700 mb-1">Step 6 Title</label>
+                    <input id="how-step6-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Scale & Optimize" />
+                    <label for="how-step6-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Step 6 Description</label>
+                    <textarea id="how-step6-desc-field" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+            </div>
+            <!-- How It Works CTA Section (EN) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">How It Works CTA Section (EN)</h4>
+            <div class="mb-4">
+                <label for="admin-how-cta-desc" class="block text-sm font-medium text-gray-700 mb-1">CTA Description (EN)</label>
+                <textarea id="admin-how-cta-desc" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="admin-how-cta-feature1-title" class="block text-sm font-medium text-gray-700 mb-1">Feature 1 - Title (EN)</label>
+                    <input id="admin-how-cta-feature1-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-how-cta-feature1-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 1 - Description (EN)</label>
+                    <input id="admin-how-cta-feature1-desc" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-how-cta-feature2-title" class="block text-sm font-medium text-gray-700 mb-1">Feature 2 - Title (EN)</label>
+                    <input id="admin-how-cta-feature2-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-how-cta-feature2-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 2 - Description (EN)</label>
+                    <input id="admin-how-cta-feature2-desc" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-how-cta-feature3-title" class="block text-sm font-medium text-gray-700 mb-1">Feature 3 - Title (EN)</label>
+                    <input id="admin-how-cta-feature3-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-how-cta-feature3-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 3 - Description (EN)</label>
+                    <input id="admin-how-cta-feature3-desc" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-cta-button" class="block text-sm font-medium text-gray-700 mb-1">CTA Button Text (EN)</label>
+                <input id="admin-how-cta-button" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-cta-subtext" class="block text-sm font-medium text-gray-700 mb-1">CTA Subtext (EN)</label>
+                <input id="admin-how-cta-subtext" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-how" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save How It Works Content</button>
+            <p id="how-save-msg" class="text-green-600 text-sm mt-3 hidden">How It Works page content saved.</p>
+        </section>
+
+        <!-- Success Stories page editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Success Stories Page</h2>
+            <p class="text-sm text-gray-600 mb-4">Adjust the hero heading and subtitle for the Success Stories page.</p>
+            <div class="mb-4">
+                <label for="admin-success-title" class="block text-sm font-medium text-gray-700 mb-1">Success Stories Title</label>
+                <input id="admin-success-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Success Stories Subtitle</label>
+                <input id="admin-success-subtitle" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <!-- Success Stories CTA Section (EN) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">Success Stories CTA Section (EN)</h4>
+            <div class="mb-4">
+                <label for="admin-success-cta-title" class="block text-sm font-medium text-gray-700 mb-1">CTA Title (EN)</label>
+                <input id="admin-success-cta-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-cta-desc" class="block text-sm font-medium text-gray-700 mb-1">CTA Description (EN)</label>
+                <textarea id="admin-success-cta-desc" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="admin-success-cta-feature1-title" class="block text-sm font-medium text-gray-700 mb-1">Feature 1 - Title (EN)</label>
+                    <input id="admin-success-cta-feature1-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-success-cta-feature1-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 1 - Description (EN)</label>
+                    <input id="admin-success-cta-feature1-desc" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-success-cta-feature2-title" class="block text-sm font-medium text-gray-700 mb-1">Feature 2 - Title (EN)</label>
+                    <input id="admin-success-cta-feature2-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-success-cta-feature2-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 2 - Description (EN)</label>
+                    <input id="admin-success-cta-feature2-desc" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-success-cta-feature3-title" class="block text-sm font-medium text-gray-700 mb-1">Feature 3 - Title (EN)</label>
+                    <input id="admin-success-cta-feature3-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-success-cta-feature3-desc" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 3 - Description (EN)</label>
+                    <input id="admin-success-cta-feature3-desc" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-cta-button" class="block text-sm font-medium text-gray-700 mb-1">CTA Button Text (EN)</label>
+                <input id="admin-success-cta-button" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-cta-subtext" class="block text-sm font-medium text-gray-700 mb-1">CTA Subtext (EN)</label>
+                <input id="admin-success-cta-subtext" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-success" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Success Content</button>
+            <p id="success-save-msg" class="text-green-600 text-sm mt-3 hidden">Success Stories content saved.</p>
+        </section>
+
+        <!-- ROI Calculator assumptions editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit ROI Calculator Assumptions</h2>
+            <p class="text-sm text-gray-600 mb-4">Configure the default assumptions used by the ROI calculator.  Percentages should be entered as numbers (e.g. enter <code>5</code> for 5%).</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-followers-conv" class="block text-sm font-medium text-gray-700 mb-1">Followers → Live Conversion (%)</label>
+                    <input id="calc-followers-conv" type="number" step="0.1" min="0" max="100" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-live-purchase-conv" class="block text-sm font-medium text-gray-700 mb-1">Live → Purchase Conversion (%)</label>
+                    <input id="calc-live-purchase-conv" type="number" step="0.1" min="0" max="100" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-profit-margin" class="block text-sm font-medium text-gray-700 mb-1">Profit Margin / Commission (%)</label>
+                    <input id="calc-profit-margin" type="number" step="0.1" min="0" max="100" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- AOV by niche -->
+            <h3 class="text-lg font-semibold mt-6 mb-2">Average Order Value (AOV) by Niche</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-aov-fashion" class="block text-sm font-medium text-gray-700 mb-1">Fashion AOV ($)</label>
+                    <input id="calc-aov-fashion" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-aov-streetwear" class="block text-sm font-medium text-gray-700 mb-1">Streetwear AOV ($)</label>
+                    <input id="calc-aov-streetwear" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-aov-luxury" class="block text-sm font-medium text-gray-700 mb-1">Luxury AOV ($)</label>
+                    <input id="calc-aov-luxury" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-aov-accessories" class="block text-sm font-medium text-gray-700 mb-1">Accessories AOV ($)</label>
+                    <input id="calc-aov-accessories" type="number" step="1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Collection multipliers -->
+            <h3 class="text-lg font-semibold mt-6 mb-2">Collection Type Multipliers</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-multiplier-basic" class="block text-sm font-medium text-gray-700 mb-1">Basic</label>
+                    <input id="calc-multiplier-basic" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-multiplier-seasonal" class="block text-sm font-medium text-gray-700 mb-1">Seasonal</label>
+                    <input id="calc-multiplier-seasonal" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-multiplier-limited" class="block text-sm font-medium text-gray-700 mb-1">Limited</label>
+                    <input id="calc-multiplier-limited" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-multiplier-premium" class="block text-sm font-medium text-gray-700 mb-1">Premium</label>
+                    <input id="calc-multiplier-premium" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Niche engagement multipliers -->
+            <h3 class="text-lg font-semibold mt-6 mb-2">Niche Engagement Multipliers</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="calc-niche-multiplier-fashion" class="block text-sm font-medium text-gray-700 mb-1">Fashion</label>
+                    <input id="calc-niche-multiplier-fashion" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-niche-multiplier-streetwear" class="block text-sm font-medium text-gray-700 mb-1">Streetwear</label>
+                    <input id="calc-niche-multiplier-streetwear" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-niche-multiplier-luxury" class="block text-sm font-medium text-gray-700 mb-1">Luxury</label>
+                    <input id="calc-niche-multiplier-luxury" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="calc-niche-multiplier-accessories" class="block text-sm font-medium text-gray-700 mb-1">Accessories</label>
+                    <input id="calc-niche-multiplier-accessories" type="number" step="0.1" min="0" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-calc" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Calculator Settings</button>
+            <p id="calc-save-msg" class="text-green-600 text-sm mt-3 hidden">Calculator settings saved.</p>
+        </section>
+
+        <!-- Blog management editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Manage Blog Posts</h2>
+            <p class="text-sm text-gray-600 mb-4">Create new blog posts or edit existing ones.  Posts are stored locally and shown on the home page.</p>
+            <!-- Blog post image upload -->
+            <div class="mb-4">
+                <label for="blog-image" class="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
+                <!--
+                  The admin should upload an image first.  The image will be shown at the top of the blog card and full post.  It is stored as a Base64 data URL in localStorage.
+                -->
+                <input id="blog-image" type="file" accept="image/*" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                <div id="blog-image-preview" class="mt-2"></div>
+            </div>
+            <!-- Blog post title -->
+            <div class="mb-4">
+                <label for="blog-title" class="block text-sm font-medium text-gray-700 mb-1">Post Title</label>
+                <input id="blog-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <!-- Blog post content -->
+            <div class="mb-4">
+                <label for="blog-content" class="block text-sm font-medium text-gray-700 mb-1">Content</label>
+                <textarea id="blog-content" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="blog-save" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Blog Post</button>
+            <p id="blog-save-msg" class="text-green-600 text-sm mt-3 hidden">Blog post saved.</p>
+            <hr class="my-6">
+            <h3 class="text-xl font-semibold mb-2">Existing Posts</h3>
+            <ul id="blog-posts-list" class="space-y-4"></ul>
+            <hr class="my-6">
+            <!-- Blog Page Settings (EN) -->
+            <h3 class="text-xl font-semibold mb-2">Blog Page Settings (EN)</h3>
+            <div class="mb-4">
+                <label for="admin-blog-title" class="block text-sm font-medium text-gray-700 mb-1">Blog Title (EN)</label>
+                <input id="admin-blog-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-blog-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Blog Subtitle (EN)</label>
+                <textarea id="admin-blog-subtitle" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-blog-noposts" class="block text-sm font-medium text-gray-700 mb-1">No Posts Message (EN)</label>
+                <input id="admin-blog-noposts" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-blog-settings" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Blog Settings (EN)</button>
+            <p id="blog-settings-save-msg" class="text-green-600 text-sm mt-3 hidden">Blog settings saved.</p>
+        </section>
+
+        <!-- Home page content editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Home Page Content</h2>
+            <p class="text-sm text-gray-600 mb-4">Customize the key messages and feature section on the home page.</p>
+            <!-- Metrics inputs -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="home-metric-market-value" class="block text-sm font-medium text-gray-700 mb-1">Market Size Value</label>
+                    <input id="home-metric-market-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-market-label" class="block text-sm font-medium text-gray-700 mb-1">Market Size Label</label>
+                    <input id="home-metric-market-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-value" class="block text-sm font-medium text-gray-700 mb-1">Growth Rate Value</label>
+                    <input id="home-metric-growth-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-label" class="block text-sm font-medium text-gray-700 mb-1">Growth Rate Label</label>
+                    <input id="home-metric-growth-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-value" class="block text-sm font-medium text-gray-700 mb-1">Fail Rate Value</label>
+                    <input id="home-metric-fail-value" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-label" class="block text-sm font-medium text-gray-700 mb-1">Fail Rate Label</label>
+                    <input id="home-metric-fail-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div class="md:col-span-2">
+                    <label for="home-metric-tagline" class="block text-sm font-medium text-gray-700 mb-1">Metrics Tagline</label>
+                    <input id="home-metric-tagline" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Start section inputs -->
+            <div class="mb-6">
+                <label for="home-start-title-field" class="block text-sm font-medium text-gray-700 mb-1">Start Section Title</label>
+                <input id="home-start-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-6">
+                <label for="home-start-subtitle-field" class="block text-sm font-medium text-gray-700 mb-1">Start Section Subtitle</label>
+                <textarea id="home-start-subtitle-field" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <!-- Feature card inputs -->
+            <h3 class="text-xl font-semibold mb-2">Feature Cards</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="home-feature1-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 1 Title</label>
+                    <input id="home-feature1-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature1-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 1 Description</label>
+                    <input id="home-feature1-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature2-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 2 Title</label>
+                    <input id="home-feature2-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature2-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 2 Description</label>
+                    <input id="home-feature2-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature3-title-field" class="block text-sm font-medium text-gray-700 mb-1">Feature 3 Title</label>
+                    <input id="home-feature3-title-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature3-desc-field" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 3 Description</label>
+                    <input id="home-feature3-desc-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+
+            <!-- CTA button text input -->
+            <div class="mb-6 mt-6 md:col-span-2">
+                <label for="home-cta-field" class="block text-sm font-medium text-gray-700 mb-1">Home Page CTA Text</label>
+                <input id="home-cta-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Text for 'See How It Works' button" />
+            </div>
+
+            <!-- Consultation Text Below CTA -->
+            <h3 class="text-xl font-semibold mb-2 mt-8 md:col-span-2">Consultation Text (Below CTA Button)</h3>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext1-field" class="block text-sm font-medium text-gray-700 mb-1">Consultation Line 1</label>
+                <input id="home-cta-subtext1-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Free consultation • No commitment • Results in 8 weeks" />
+            </div>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext2-field" class="block text-sm font-medium text-gray-700 mb-1">Consultation Line 2</label>
+                <input id="home-cta-subtext2-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Limited spots available • Join 500+ influencers on the waiting list" />
+            </div>
+
+            <button id="save-home" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Home Settings</button>
+            <p id="home-save-msg" class="text-green-600 text-sm mt-3 hidden">Home page settings saved.</p>
+        </section>
+
+        <!-- Polish translations editor -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Edytuj treść stron (PL)</h2>
+            <p class="text-sm text-gray-600 mb-6">Niniejsze pola pozwalają zarządzać tłumaczeniami na język polski. Zmiany zapisują się osobno, nie nadpisując wersji angielskiej.</p>
+            <!-- Home hero (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Hero Strony Głównej</h3>
+            <div class="mb-4">
+                <label for="admin-hero-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Hero Title (PL)</label>
+                <textarea id="admin-hero-title-pl" rows="4" data-default="<span class=\"text-gradient\">Zamień swój</span><br><span class=\"text-black\">wpływ</span><br><span class=\"text-gradient\">w modowe imperium</span>" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Hero Subtitle (PL)</label>
+                <!-- Use a textarea instead of input so longer subtitles with line breaks can be edited -->
+                <textarea id="admin-hero-subtitle-pl" rows="4" data-default="Zajmujemy się wszystkim od projektu po dostawę, abyś Ty mógł skupić się na swojej historii. Jedyna platforma, która zamienia influencerów w właścicieli marek modowych." class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-hero-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz Hero (PL)</button>
+            <p id="hero-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treść hero (PL) została zapisana.</p>
+            <hr class="my-6" />
+            <!-- Home page content (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona Główna – treść</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia sekcji statystyk, sekcji startowej i kart funkcjonalnych.</p>
+            <!-- Metrics inputs (PL) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="home-metric-market-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość rynku (PL)</label>
+                    <input id="home-metric-market-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-market-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta rynku (PL)</label>
+                    <input id="home-metric-market-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość wzrostu (PL)</label>
+                    <input id="home-metric-growth-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-growth-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta wzrostu (PL)</label>
+                    <input id="home-metric-growth-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-value-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość niepowodzeń (PL)</label>
+                    <input id="home-metric-fail-value-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-metric-fail-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta niepowodzeń (PL)</label>
+                    <input id="home-metric-fail-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div class="md:col-span-2">
+                    <label for="home-metric-tagline-pl" class="block text-sm font-medium text-gray-700 mb-1">Slogan pod statystykami (PL)</label>
+                    <input id="home-metric-tagline-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Start section inputs (PL) -->
+            <div class="mb-6">
+                <label for="home-start-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji startowej (PL)</label>
+                <input id="home-start-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-6">
+                <label for="home-start-subtitle-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji startowej (PL)</label>
+                <textarea id="home-start-subtitle-field-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <!-- Feature card inputs (PL) -->
+            <h4 class="text-lg font-semibold mb-2">Karty funkcjonalne (PL)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="home-feature1-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 1 (PL)</label>
+                    <input id="home-feature1-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature1-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 1 (PL)</label>
+                    <input id="home-feature1-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature2-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 2 (PL)</label>
+                    <input id="home-feature2-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature2-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 2 (PL)</label>
+                    <input id="home-feature2-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="home-feature3-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł karty 3 (PL)</label>
+                    <input id="home-feature3-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="home-feature3-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis karty 3 (PL)</label>
+                    <input id="home-feature3-desc-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- CTA text (PL) -->
+            <div class="mb-6 mt-6 md:col-span-2">
+                <label for="home-cta-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku CTA (PL)</label>
+                <input id="home-cta-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Tekst przycisku 'Zobacz, jak to działa'" />
+            </div>
+
+            <!-- Consultation Text Below CTA (PL) -->
+            <h3 class="text-xl font-semibold mb-2 mt-8 md:col-span-2">Tekst Konsultacji (Pod przyciskiem CTA) (PL)</h3>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext1-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Linia Konsultacji 1 (PL)</label>
+                <input id="home-cta-subtext1-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Bezpłatna konsultacja • Brak zobowiązań • Wyniki w 8 tygodni" />
+            </div>
+            <div class="mb-4 md:col-span-2">
+                <label for="home-cta-subtext2-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Linia Konsultacji 2 (PL)</label>
+                <input id="home-cta-subtext2-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Ograniczona liczba miejsc • Dołącz do 500+ influencerów na liście oczekujących" />
+            </div>
+
+            <button id="save-home-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Zapisz ustawienia strony głównej (PL)</button>
+            <p id="home-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Ustawienia strony głównej (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- About page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'O nas' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-about-hero-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł hero (PL)</label>
+                <input id="admin-about-hero-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-hero-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł hero (PL)</label>
+                <input id="admin-about-hero-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-story-pl" class="block text-sm font-medium text-gray-700 mb-1">Nasza historia (PL) – jeden akapit w linii</label>
+                <textarea id="admin-about-story-pl" rows="6" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-mission-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Misja (PL)</label>
+                    <input id="admin-mission-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc1-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis misji – linia 1 (PL)</label>
+                    <input id="admin-mission-desc1-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-mission-desc2-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis misji – linia 2 (PL)</label>
+                    <input id="admin-mission-desc2-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-vision-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Wizja (PL)</label>
+                    <input id="admin-vision-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc1-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis wizji – linia 1 (PL)</label>
+                    <input id="admin-vision-desc1-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-vision-desc2-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Opis wizji – linia 2 (PL)</label>
+                    <input id="admin-vision-desc2-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-team-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Zespół (PL)</label>
+                    <input id="admin-team-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-team-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji Zespół (PL)</label>
+                    <input id="admin-team-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-impact-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Wpływ (PL)</label>
+                    <input id="admin-impact-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-impact-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji Wpływ (PL)</label>
+                    <input id="admin-impact-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- About Values Section (PL) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">Sekcja Wartości (PL)</h4>
+            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-values-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji Wartości (PL)</label>
+                    <input id="admin-values-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-values-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji Wartości (PL)</label>
+                    <input id="admin-values-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- 4 Values -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="admin-value1-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość 1 - Tytuł (PL)</label>
+                    <input id="admin-value1-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value1-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Wartość 1 - Opis (PL)</label>
+                    <textarea id="admin-value1-desc-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="admin-value2-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość 2 - Tytuł (PL)</label>
+                    <input id="admin-value2-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value2-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Wartość 2 - Opis (PL)</label>
+                    <textarea id="admin-value2-desc-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="admin-value3-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość 3 - Tytuł (PL)</label>
+                    <input id="admin-value3-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value3-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Wartość 3 - Opis (PL)</label>
+                    <textarea id="admin-value3-desc-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="admin-value4-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Wartość 4 - Tytuł (PL)</label>
+                    <input id="admin-value4-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-value4-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Wartość 4 - Opis (PL)</label>
+                    <textarea id="admin-value4-desc-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+            </div>
+            <!-- About CTA Section (PL) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">Sekcja CTA 'O nas' (PL)</h4>
+            <div class="mb-4">
+                <label for="admin-about-cta-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł CTA (PL)</label>
+                <input id="admin-about-cta-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-cta-desc-pl" class="block text-sm font-medium text-gray-700 mb-1">Opis CTA (PL)</label>
+                <textarea id="admin-about-cta-desc-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-cta-button-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku CTA (PL)</label>
+                <input id="admin-about-cta-button-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-about-cta-subtext-pl" class="block text-sm font-medium text-gray-700 mb-1">Podpis pod przyciskiem (PL)</label>
+                <input id="admin-about-cta-subtext-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-about-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'O nas' (PL)</button>
+            <p id="about-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści strony 'O nas' (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- How It Works (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Jak to działa' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-how-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji live-selling (PL)</label>
+                <input id="admin-how-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł sekcji live-selling (PL)</label>
+                <input id="admin-how-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-ready-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji 'Gotowi?' (PL)</label>
+                <input id="admin-ready-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <h4 class="text-lg font-semibold mt-6 mb-2">Kroki (1-6) (PL)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="how-step1-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 1 (PL)</label>
+                    <input id="how-step1-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Konfiguracja Twojego Sklepu" />
+                    <label for="how-step1-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 1 (PL)</label>
+                    <textarea id="how-step1-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step2-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 2 (PL)</label>
+                    <input id="how-step2-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Konfiguracja Studia Live-Selling" />
+                    <label for="how-step2-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 2 (PL)</label>
+                    <textarea id="how-step2-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step3-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 3 (PL)</label>
+                    <input id="how-step3-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Rozwój Produktu i Kontrola Jakości" />
+                    <label for="how-step3-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 3 (PL)</label>
+                    <textarea id="how-step3-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step4-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 4 (PL)</label>
+                    <input id="how-step4-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Start i Wydarzenia Live-Selling" />
+                    <label for="how-step4-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 4 (PL)</label>
+                    <textarea id="how-step4-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step5-title-field-pl" class="block text sm font-medium text-gray-700 mb-1">Tytuł kroku 5 (PL)</label>
+                    <input id="how-step5-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Budowanie Społeczności i Wzrost" />
+                    <label for="how-step5-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 5 (PL)</label>
+                    <textarea id="how-step5-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+                <div>
+                    <label for="how-step6-title-field-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł kroku 6 (PL)</label>
+                    <input id="how-step6-title-field-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Skalowanie i Optymalizacja" />
+                    <label for="how-step6-desc-field-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Opis kroku 6 (PL)</label>
+                    <textarea id="how-step6-desc-field-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+                </div>
+            </div>
+            <!-- How It Works CTA Section (PL) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">Sekcja CTA 'Jak to działa' (PL)</h4>
+            <div class="mb-4">
+                <label for="admin-how-cta-desc-pl" class="block text-sm font-medium text-gray-700 mb-1">Opis CTA (PL)</label>
+                <textarea id="admin-how-cta-desc-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="admin-how-cta-feature1-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Feature 1 - Tytuł (PL)</label>
+                    <input id="admin-how-cta-feature1-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-how-cta-feature1-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 1 - Opis (PL)</label>
+                    <input id="admin-how-cta-feature1-desc-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-how-cta-feature2-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Feature 2 - Tytuł (PL)</label>
+                    <input id="admin-how-cta-feature2-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-how-cta-feature2-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 2 - Opis (PL)</label>
+                    <input id="admin-how-cta-feature2-desc-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-how-cta-feature3-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Feature 3 - Tytuł (PL)</label>
+                    <input id="admin-how-cta-feature3-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-how-cta-feature3-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 3 - Opis (PL)</label>
+                    <input id="admin-how-cta-feature3-desc-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-cta-button-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku CTA (PL)</label>
+                <input id="admin-how-cta-button-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-how-cta-subtext-pl" class="block text-sm font-medium text-gray-700 mb-1">Podpis pod przyciskiem (PL)</label>
+                <input id="admin-how-cta-subtext-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-how-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'Jak to działa' (PL)</button>
+            <p id="how-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści 'Jak to działa' (PL) zapisane.</p>
+            <hr class="my-6" />
+            <!-- Success Stories (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Historie sukcesu' (PL)</h3>
+            <div class="mb-4">
+                <label for="admin-success-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł hero (PL)</label>
+                <input id="admin-success-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł hero (PL)</label>
+                <input id="admin-success-subtitle-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <!-- Success Stories CTA Section (PL) -->
+            <h4 class="text-lg font-semibold mt-6 mb-2">Sekcja CTA 'Historie sukcesu' (PL)</h4>
+            <div class="mb-4">
+                <label for="admin-success-cta-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł CTA (PL)</label>
+                <input id="admin-success-cta-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-cta-desc-pl" class="block text-sm font-medium text-gray-700 mb-1">Opis CTA (PL)</label>
+                <textarea id="admin-success-cta-desc-pl" rows="2" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="admin-success-cta-feature1-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Feature 1 - Tytuł (PL)</label>
+                    <input id="admin-success-cta-feature1-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-success-cta-feature1-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 1 - Opis (PL)</label>
+                    <input id="admin-success-cta-feature1-desc-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-success-cta-feature2-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Feature 2 - Tytuł (PL)</label>
+                    <input id="admin-success-cta-feature2-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-success-cta-feature2-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 2 - Opis (PL)</label>
+                    <input id="admin-success-cta-feature2-desc-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-success-cta-feature3-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Feature 3 - Tytuł (PL)</label>
+                    <input id="admin-success-cta-feature3-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="admin-success-cta-feature3-desc-pl" class="block text-sm font-medium text-gray-700 mb-1 mt-2">Feature 3 - Opis (PL)</label>
+                    <input id="admin-success-cta-feature3-desc-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-cta-button-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku CTA (PL)</label>
+                <input id="admin-success-cta-button-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-success-cta-subtext-pl" class="block text-sm font-medium text-gray-700 mb-1">Podpis pod przyciskiem (PL)</label>
+                <input id="admin-success-cta-subtext-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-success-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści 'Historie sukcesu' (PL)</button>
+            <p id="success-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści 'Historie sukcesu' (PL) zapisane.</p>
+            <hr class="my-6" />
+
+            <!-- Login page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona logowania (PL)</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia pól formularza logowania dla influencerów.</p>
+            <div class="mb-4">
+                <label for="admin-login-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł logowania (PL)</label>
+                <input id="admin-login-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-login-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł logowania (PL)</label>
+                <textarea id="admin-login-subtitle-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-login-username-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta pola użytkownik (PL)</label>
+                    <input id="admin-login-username-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-login-password-label-pl" class="block text-sm font-medium text-gray-700 mb-1">Etykieta pola hasło (PL)</label>
+                    <input id="admin-login-password-label-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 mt-4">
+                <label for="admin-login-button-text-pl" class="block text-sm font-medium text-gray-700 mb-1">Tekst przycisku logowania (PL)</label>
+                <input id="admin-login-button-text-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-login-error-pl" class="block text-sm font-medium text-gray-700 mb-1">Komunikat błędu logowania (PL)</label>
+                <input id="admin-login-error-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-login-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści logowania (PL)</button>
+            <p id="login-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści logowania (PL) zapisane.</p>
+            <hr class="my-6" />
+            
+            <!-- Login page (EN) -->
+            <h3 class="text-xl font-semibold mb-2">Login Page (EN)</h3>
+            <p class="text-sm text-gray-600 mb-4">English version of login form labels and messages.</p>
+            <div class="mb-4">
+                <label for="admin-login-title" class="block text-sm font-medium text-gray-700 mb-1">Login Title (EN)</label>
+                <input id="admin-login-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-login-subtitle" class="block text-sm font-medium text-gray-700 mb-1">Login Subtitle (EN)</label>
+                <textarea id="admin-login-subtitle" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="admin-login-username-label" class="block text-sm font-medium text-gray-700 mb-1">Username Label (EN)</label>
+                    <input id="admin-login-username-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="admin-login-password-label" class="block text-sm font-medium text-gray-700 mb-1">Password Label (EN)</label>
+                    <input id="admin-login-password-label" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <div class="mb-4 mt-4">
+                <label for="admin-login-button-text" class="block text-sm font-medium text-gray-700 mb-1">Login Button Text (EN)</label>
+                <input id="admin-login-button-text" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-login-error" class="block text-sm font-medium text-gray-700 mb-1">Login Error Message (EN)</label>
+                <input id="admin-login-error" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-login" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Login Content (EN)</button>
+            <p id="login-save-msg" class="text-green-600 text-sm mt-3 hidden">Login content saved.</p>
+            <hr class="my-6" />
+
+            <!-- Documents page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona 'Twoje dokumenty' (PL)</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia nagłówka i treści sekcji dokumentów.</p>
+            <div class="mb-4">
+                <label for="admin-documents-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł sekcji dokumentów (PL)</label>
+                <input id="admin-documents-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-documents-message-pl" class="block text-sm font-medium text-gray-700 mb-1">Komunikat o braku dokumentów (PL)</label>
+                <textarea id="admin-documents-message-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-documents-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści dokumentów (PL)</button>
+            <p id="documents-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści dokumentów (PL) zapisane.</p>
+            <hr class="my-6" />
+            
+            <!-- Documents page (EN) -->
+            <h3 class="text-xl font-semibold mb-2">Your Documents Page (EN)</h3>
+            <p class="text-sm text-gray-600 mb-4">English version of documents page content.</p>
+            <div class="mb-4">
+                <label for="admin-documents-title" class="block text-sm font-medium text-gray-700 mb-1">Documents Title (EN)</label>
+                <input id="admin-documents-title" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-documents-message" class="block text-sm font-medium text-gray-700 mb-1">No Documents Message (EN)</label>
+                <textarea id="admin-documents-message" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <button id="save-documents" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Documents Content (EN)</button>
+            <p id="documents-save-msg" class="text-green-600 text-sm mt-3 hidden">Documents content saved.</p>
+            <hr class="my-6" />
+
+            <!-- Blog page (PL) -->
+            <h3 class="text-xl font-semibold mb-2">Strona bloga (PL)</h3>
+            <p class="text-sm text-gray-600 mb-4">Tłumaczenia nagłówka bloga i wiadomości o braku postów.</p>
+            <div class="mb-4">
+                <label for="admin-blog-title-pl" class="block text-sm font-medium text-gray-700 mb-1">Tytuł bloga (PL)</label>
+                <input id="admin-blog-title-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <div class="mb-4">
+                <label for="admin-blog-subtitle-pl" class="block text-sm font-medium text-gray-700 mb-1">Podtytuł bloga (PL)</label>
+                <textarea id="admin-blog-subtitle-pl" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="admin-blog-noposts-pl" class="block text-sm font-medium text-gray-700 mb-1">Komunikat o braku postów (PL)</label>
+                <input id="admin-blog-noposts-pl" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+            </div>
+            <button id="save-blog-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz treści bloga (PL)</button>
+            <p id="blog-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Treści bloga (PL) zapisane.</p>
+        </section>
+
+        <!-- Document manager -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Manage Shared Documents</h2>
+            <p class="text-sm text-gray-600 mb-4">Upload files here to share them with approved influencers.  Files are stored in the browser and will persist across sessions on this device.  Each upload will appear below with a link and a delete button.</p>
+            <input type="file" id="document-upload" multiple class="mb-4" />
+            <ul id="admin-doc-list" class="space-y-2"></ul>
+        </section>
+
+        <!-- Footer editor -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Footer Details</h2>
+            <p class="text-sm text-gray-600 mb-4">Update the company information and social links shown in the site footer.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="footer-company-field" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                    <input id="footer-company-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-address-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Address</label>
+                    <input id="footer-address-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-reg-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Registration / Tax Info</label>
+                    <input id="footer-reg-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-email-field" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input id="footer-email-field" type="email" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-phone-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Phone</label>
+                    <input id="footer-phone-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                    <label for="footer-extra-field" class="block text-sm font-medium text-gray-700 mb-1 mt-3">Footer Tagline</label>
+                    <input id="footer-extra-field" type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <!-- Social links -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div>
+                    <label for="footer-instagram-field" class="block text-sm font-medium text-gray-700 mb-1">Instagram URL</label>
+                    <input id="footer-instagram-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-tiktok-field" class="block text-sm font-medium text-gray-700 mb-1">TikTok URL</label>
+                    <input id="footer-tiktok-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+                <div>
+                    <label for="footer-youtube-field" class="block text-sm font-medium text-gray-700 mb-1">YouTube URL</label>
+                    <input id="footer-youtube-field" type="url" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black" />
+                </div>
+            </div>
+            <button id="save-footer" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mt-6">Save Footer</button>
+            <p id="footer-save-msg" class="text-green-600 text-sm mt-3 hidden">Footer details saved.</p>
+        </section>
+
+        <!-- Legal pages editor -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Edit Legal Pages</h2>
+            <p class="text-sm text-gray-600 mb-4">Provide the content for your Terms &amp; Conditions, Cookies Policy and Privacy/GDPR pages in both languages using the rich text editor.</p>
+            
+            <!-- English versions -->
+            <h3 class="text-xl font-semibold mb-2">English Versions</h3>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Terms &amp; Conditions (EN)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Rich Text Editor</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Use the toolbar to format text: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, headings, lists, links, etc.</li>
+                        <li>Paste content directly from Word or other sources - formatting will be preserved</li>
+                        <li>To add links: select text and click the link button in the toolbar</li>
+                        <li>All formatting will be displayed exactly as you see it here</li>
+                    </ul>
+                </div>
+                <div id="legal-terms-field" class="bg-white" style="min-height: 300px;"></div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cookies Policy (EN)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Rich Text Editor</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Use the toolbar to format text: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, headings, lists, links, etc.</li>
+                        <li>Paste content directly from Word or other sources - formatting will be preserved</li>
+                        <li>To add links: select text and click the link button in the toolbar</li>
+                        <li>All formatting will be displayed exactly as you see it here</li>
+                    </ul>
+                </div>
+                <div id="legal-cookies-field" class="bg-white" style="min-height: 300px;"></div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Privacy / GDPR (EN)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Rich Text Editor</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Use the toolbar to format text: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, headings, lists, links, etc.</li>
+                        <li>Paste content directly from Word or other sources - formatting will be preserved</li>
+                        <li>To add links: select text and click the link button in the toolbar</li>
+                        <li>All formatting will be displayed exactly as you see it here</li>
+                    </ul>
+                </div>
+                <div id="legal-gdpr-field" class="bg-white" style="min-height: 300px;"></div>
+            </div>
+            <button id="save-legal" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Save Legal Pages (EN)</button>
+            <p id="legal-save-msg" class="text-green-600 text-sm mt-3 hidden">Legal pages saved.</p>
+            
+            <hr class="my-6" />
+            
+            <!-- Polish versions -->
+            <h3 class="text-xl font-semibold mb-2">Wersje Polskie</h3>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Regulamin (PL)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Edytor tekstu</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Użyj paska narzędzi do formatowania tekstu: <strong>pogrubienie</strong>, <em>kursywa</em>, <u>podkreślenie</u>, nagłówki, listy, linki, itp.</li>
+                        <li>Wklejaj treść bezpośrednio z Worda lub innych źródeł - formatowanie zostanie zachowane</li>
+                        <li>Aby dodać linki: zaznacz tekst i kliknij przycisk linku na pasku narzędzi</li>
+                        <li>Całe formatowanie będzie wyświetlane dokładnie tak, jak widzisz tutaj</li>
+                    </ul>
+                </div>
+                <div id="legal-terms-field-pl" class="bg-white" style="min-height: 300px;"></div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Polityka Cookies (PL)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Edytor tekstu</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Użyj paska narzędzi do formatowania tekstu: <strong>pogrubienie</strong>, <em>kursywa</em>, <u>podkreślenie</u>, nagłówki, listy, linki, itp.</li>
+                        <li>Wklejaj treść bezpośrednio z Worda lub innych źródeł - formatowanie zostanie zachowane</li>
+                        <li>Aby dodać linki: zaznacz tekst i kliknij przycisk linku na pasku narzędzi</li>
+                        <li>Całe formatowanie będzie wyświetlane dokładnie tak, jak widzisz tutaj</li>
+                    </ul>
+                </div>
+                <div id="legal-cookies-field-pl" class="bg-white" style="min-height: 300px;"></div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Prywatność / RODO (PL)</label>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3">
+                    <p class="text-sm font-semibold text-blue-900 mb-1">📝 Edytor tekstu</p>
+                    <ul class="text-xs text-blue-700 list-disc ml-4 space-y-1">
+                        <li>Użyj paska narzędzi do formatowania tekstu: <strong>pogrubienie</strong>, <em>kursywa</em>, <u>podkreślenie</u>, nagłówki, listy, linki, itp.</li>
+                        <li>Wklejaj treść bezpośrednio z Worda lub innych źródeł - formatowanie zostanie zachowane</li>
+                        <li>Aby dodać linki: zaznacz tekst i kliknij przycisk linku na pasku narzędzi</li>
+                        <li>Całe formatowanie będzie wyświetlane dokładnie tak, jak widzisz tutaj</li>
+                    </ul>
+                </div>
+                <div id="legal-gdpr-field-pl" class="bg-white" style="min-height: 300px;"></div>
+            </div>
+            <button id="save-legal-pl" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Zapisz strony prawne (PL)</button>
+            <p id="legal-save-msg-pl" class="text-green-600 text-sm mt-3 hidden">Strony prawne zapisane.</p>
+        </section>
+
+        <!-- Registered users management -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Registered Users</h2>
+            <p class="text-sm text-gray-600 mb-4">Here are the sign-ups from the waiting list. Activate users to assign them login credentials and manage their access.  You can also export the list to a CSV file for further processing.</p>
+            <button id="export-users" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mb-4">Export to CSV</button>
+            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Name</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Email</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Followers</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Niche</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Instagram</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Newsletter</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Status</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Login</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Password</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <p id="users-msg" class="text-green-600 text-sm mt-3 hidden">User updated.</p>
+        </section>
+
+        <!-- Administrators management -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-4">Administrators</h2>
+            <p class="text-sm text-gray-600 mb-4">Manage admin accounts. Only active admins can log in. You can add, edit or deactivate administrators and export the list.</p>
+            <div class="flex flex-wrap items-center space-x-4 mb-4">
+                <input type="text" id="admin-add-username" placeholder="Username" class="border border-gray-300 rounded-lg px-3 py-2 w-40" />
+                <input type="text" id="admin-add-password" placeholder="Password" class="border border-gray-300 rounded-lg px-3 py-2 w-40" />
+                <button id="add-admin-btn" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800">Add Admin</button>
+            </div>
+            <button id="export-admins" class="bg-black text-white py-2 px-6 rounded-lg font-semibold hover:bg-gray-800 mb-4">Export Admins to CSV</button>
+            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Username</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Password</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Status</th>
+                            <th class="px-3 py-2 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admins-table-body" class="divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+            <p id="admins-msg" class="text-green-600 text-sm mt-3 hidden">Admin updated.</p>
+        </section>
+    </div>
+
+    <script>
+    // Admin page script.  Only administrators should access this page; redirect others.
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-initialize localStorage with default values if not already set
+        function initDefaultIfEmpty(key, defaultValue) {
+            if (!localStorage.getItem(key)) {
+                localStorage.setItem(key, defaultValue);
+            }
+        }
+
+        // Initialize all default EN values
+        initDefaultIfEmpty('heroTitle', '<span class="text-gradient">Turn Your</span><br><span class="text-black">Influence</span><br><span class="text-gradient">Into Fashion</span>');
+        initDefaultIfEmpty('heroSubtitle', 'We handle everything from design to delivery so you can focus on your story. The only platform that transforms influencers into fashion brand owners.');
+        initDefaultIfEmpty('aboutHeroTitle', 'About Idol Brands');
+        initDefaultIfEmpty('aboutHeroSubtitle', 'Built by fashion industry veterans. Designed for the new generation of influence-driven brands.');
+        initDefaultIfEmpty('aboutStory', 'Idol Brands was founded in 2024 by a team of fashion industry veterans who watched countless influencers struggle to launch their own fashion brands. We saw the same story repeat itself: passionate creators with amazing ideas who failed because they couldn\'t handle the operational complexity.\n\nAfter decades in fashion manufacturing, logistics, and retail, we realized that the traditional fashion industry model was broken for the new generation of influence-driven brands. Influencers needed a different approach - one that let them focus on creativity and community while experts handled the operations.\n\nWe combined our deep fashion industry expertise with cutting-edge live-commerce technology to create the first platform specifically designed for influencer fashion brands. Today, Idol Brands is more than just a service - we\'re a movement to democratize fashion entrepreneurship.');
+        initDefaultIfEmpty('missionTitle', 'Our Mission');
+        initDefaultIfEmpty('missionDesc1', 'To democratize fashion entrepreneurship by providing influencers with the tools, expertise, and platform they need to build successful fashion brands.');
+        initDefaultIfEmpty('missionDesc2', 'We believe that every influencer with a passionate community deserves the opportunity to turn their influence into a thriving business, without being held back by operational complexity.');
+        initDefaultIfEmpty('visionTitle', 'Our Vision');
+        initDefaultIfEmpty('visionDesc1', 'To become the world\'s leading live-selling marketplace for influencer fashion brands, where creativity meets commerce in real-time.');
+        initDefaultIfEmpty('visionDesc2', 'We\'re building a future where fashion brands are born from authentic communities, not boardrooms - where influence drives innovation and passion creates profit.');
+        initDefaultIfEmpty('teamTitle', 'Fashion Industry Veterans');
+        initDefaultIfEmpty('teamSubtitle', 'Our team combines decades of experience in fashion manufacturing, logistics, retail, and technology to support your brand\'s success.');
+        initDefaultIfEmpty('impactTitle', 'Our Impact');
+        initDefaultIfEmpty('impactSubtitle', 'Real results from real influencers who\'ve transformed their passion into profitable fashion brands.');
+        initDefaultIfEmpty('valuesTitle', 'Our Values');
+        initDefaultIfEmpty('valuesSubtitle', 'The principles that guide everything we do and drive every decision we make.');
+        initDefaultIfEmpty('value1Title', 'Authenticity');
+        initDefaultIfEmpty('value1Desc', 'We believe in real influence, real communities, and real results. No fake metrics, no artificial engagement.');
+        initDefaultIfEmpty('value2Title', 'Partnership');
+        initDefaultIfEmpty('value2Desc', 'Your success is our success. We work as true partners, invested in your brand\'s growth and long-term success.');
+        initDefaultIfEmpty('value3Title', 'Innovation');
+        initDefaultIfEmpty('value3Desc', 'We\'re constantly pushing the boundaries of what\'s possible in live-commerce and influencer fashion brand building.');
+        initDefaultIfEmpty('value4Title', 'Results');
+        initDefaultIfEmpty('value4Desc', 'Everything we do is measured by results. We\'re committed to delivering measurable success for every brand we partner with.');
+        initDefaultIfEmpty('aboutCtaTitle', 'Ready to Start Your Fashion Story?');
+        initDefaultIfEmpty('aboutCtaDesc', 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands. Your journey to fashion entrepreneurship begins now.');
+        initDefaultIfEmpty('aboutCtaButton', 'Start Your Fashion Brand Today');
+        initDefaultIfEmpty('aboutCtaSubtext', 'Free consultation • No commitment • Results in 8 weeks');
+        initDefaultIfEmpty('howTitle', 'Experience Live-Selling');
+        initDefaultIfEmpty('howSubtitle', 'See how our live-selling platform transforms your fashion shows into sales events.');
+        initDefaultIfEmpty('readyTitle', 'Ready to Start Live-Selling?');
+        initDefaultIfEmpty('howCtaDesc', 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands through live-selling. Your marketplace journey starts here.');
+        initDefaultIfEmpty('howCtaFeature1Title', 'Fast Setup');
+        initDefaultIfEmpty('howCtaFeature1Desc', 'Your shop live in 1 week');
+        initDefaultIfEmpty('howCtaFeature2Title', 'Live-Selling Ready');
+        initDefaultIfEmpty('howCtaFeature2Desc', 'Professional streaming setup');
+        initDefaultIfEmpty('howCtaFeature3Title', 'Built-in Audience');
+        initDefaultIfEmpty('howCtaFeature3Desc', 'Access to marketplace traffic');
+        initDefaultIfEmpty('howCtaButton', 'Create Your Live-Selling Shop');
+        initDefaultIfEmpty('howCtaSubtext', 'Free consultation • No setup fees • Start earning in 1 week');
+        initDefaultIfEmpty('successTitle', 'Success Stories');
+        initDefaultIfEmpty('successSubtitle', 'Real influencers, real results. See how we\'ve transformed their influence into thriving fashion brands with our proven system.');
+        initDefaultIfEmpty('successCtaTitle', 'Your Success Story Starts Here');
+        initDefaultIfEmpty('successCtaDesc', 'Join these successful influencers who transformed their passion into profitable fashion brands. Your journey to fashion entrepreneurship begins now.');
+        initDefaultIfEmpty('successCtaFeature1Title', 'Free Consultation');
+        initDefaultIfEmpty('successCtaFeature1Desc', '60-minute strategy session');
+        initDefaultIfEmpty('successCtaFeature2Title', 'Custom Strategy');
+        initDefaultIfEmpty('successCtaFeature2Desc', 'Tailored to your audience');
+        initDefaultIfEmpty('successCtaFeature3Title', '8-Week Launch');
+        initDefaultIfEmpty('successCtaFeature3Desc', 'From idea to live brand');
+        initDefaultIfEmpty('successCtaButton', 'Start Your Fashion Brand');
+        initDefaultIfEmpty('successCtaSubtext', 'Join 500+ successful influencers • No commitment required • Results in 8 weeks');
+        initDefaultIfEmpty('blogTitle', 'Blog');
+        initDefaultIfEmpty('blogSubtitle', 'Read our latest articles and fashion inspiration.');
+        initDefaultIfEmpty('blogNoPostsMessage', 'No blog posts yet.');
+        initDefaultIfEmpty('loginTitle', 'Influencer Login');
+        initDefaultIfEmpty('loginSubtitle', 'Enter your login credentials from your acceptance email.\nTo register, sign up to waiting list and soon we will send you an email with login credentials.');
+        initDefaultIfEmpty('loginUsernameLabel', 'Username');
+        initDefaultIfEmpty('loginPasswordLabel', 'Password');
+        initDefaultIfEmpty('loginButtonText', 'Login');
+        initDefaultIfEmpty('loginError', 'Invalid username or password.');
+        initDefaultIfEmpty('documentsTitle', 'Your Documents');
+        initDefaultIfEmpty('documentsMessage', 'No documents available yet.');
+
+        // Populate hero fields
+        // Verify admin credentials.  If not, send to admin login.
+        if (!isAdmin()) {
+            window.location.href = 'admin-login.html';
+            return;
+        }
+        // Ensure loggedIn flag is set so nav shows appropriate options
+        updateNav();
+        // Populate hero fields for home page
+        const heroTitleField = document.getElementById('admin-hero-title');
+        const heroSubtitleField = document.getElementById('admin-hero-subtitle');
+        const defaultHeroTitle = '<span class="text-gradient">Turn Your</span><br><span class="text-black">Influence</span><br><span class="text-gradient">Into Fashion</span>';
+        const defaultHeroSubtitle = 'We handle everything from design to delivery so you can focus on your story. The only platform that transforms influencers into fashion brand owners.';
+        heroTitleField.value = localStorage.getItem('heroTitle') || defaultHeroTitle;
+        heroSubtitleField.value = localStorage.getItem('heroSubtitle') || defaultHeroSubtitle;
+        document.getElementById('save-hero').addEventListener('click', function() {
+            localStorage.setItem('heroTitle', heroTitleField.value);
+            localStorage.setItem('heroSubtitle', heroSubtitleField.value);
+            const msg = document.getElementById('hero-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate About page fields
+        const aboutHeroTitleField = document.getElementById('admin-about-hero-title');
+        const aboutHeroSubtitleField = document.getElementById('admin-about-hero-subtitle');
+        const aboutStoryField = document.getElementById('admin-about-story');
+        const missionTitleField = document.getElementById('admin-mission-title');
+        const missionDesc1Field = document.getElementById('admin-mission-desc1');
+        const missionDesc2Field = document.getElementById('admin-mission-desc2');
+        const visionTitleField = document.getElementById('admin-vision-title');
+        const visionDesc1Field = document.getElementById('admin-vision-desc1');
+        const visionDesc2Field = document.getElementById('admin-vision-desc2');
+        const teamTitleField = document.getElementById('admin-team-title');
+        const teamSubtitleField = document.getElementById('admin-team-subtitle');
+        const impactTitleField = document.getElementById('admin-impact-title');
+        const impactSubtitleField = document.getElementById('admin-impact-subtitle');
+        // Values section fields (EN)
+        const valuesTitleField = document.getElementById('admin-values-title');
+        const valuesSubtitleField = document.getElementById('admin-values-subtitle');
+        const value1TitleField = document.getElementById('admin-value1-title');
+        const value1DescField = document.getElementById('admin-value1-desc');
+        const value2TitleField = document.getElementById('admin-value2-title');
+        const value2DescField = document.getElementById('admin-value2-desc');
+        const value3TitleField = document.getElementById('admin-value3-title');
+        const value3DescField = document.getElementById('admin-value3-desc');
+        const value4TitleField = document.getElementById('admin-value4-title');
+        const value4DescField = document.getElementById('admin-value4-desc');
+        // About CTA fields (EN)
+        const aboutCtaTitleField = document.getElementById('admin-about-cta-title');
+        const aboutCtaDescField = document.getElementById('admin-about-cta-desc');
+        const aboutCtaButtonField = document.getElementById('admin-about-cta-button');
+        const aboutCtaSubtextField = document.getElementById('admin-about-cta-subtext');
+        // Set defaults based on current hard-coded content
+        aboutHeroTitleField.value = localStorage.getItem('aboutHeroTitle') || 'About Idol Brands';
+        aboutHeroSubtitleField.value = localStorage.getItem('aboutHeroSubtitle') || 'Built by fashion industry veterans. Designed for the new generation of influence-driven brands.';
+        // Our Story paragraphs stored as newline separated string
+        const defaultAboutStory = [
+            'Idol Brands was founded in 2024 by a team of fashion industry veterans who watched countless influencers struggle to launch their own fashion brands. We saw the same story repeat itself: passionate creators with amazing ideas who failed because they couldn\'t handle the operational complexity.',
+            'After decades in fashion manufacturing, logistics, and retail, we realized that the traditional fashion industry model was broken for the new generation of influence-driven brands. Influencers needed a different approach - one that let them focus on creativity and community while experts handled the operations.',
+            'We combined our deep fashion industry expertise with cutting-edge live-commerce technology to create the first platform specifically designed for influencer fashion brands. Today, Idol Brands is more than just a service - we\'re a movement to democratize fashion entrepreneurship.'
+        ].join('\n\n');
+        aboutStoryField.value = localStorage.getItem('aboutStory') || defaultAboutStory;
+        missionTitleField.value = localStorage.getItem('missionTitle') || 'Our Mission';
+        missionDesc1Field.value = localStorage.getItem('missionDesc1') || 'To democratize fashion entrepreneurship by providing influencers with the tools, expertise, and platform they need to build successful fashion brands.';
+        missionDesc2Field.value = localStorage.getItem('missionDesc2') || 'We believe that every influencer with a passionate community deserves the opportunity to turn their influence into a thriving business, without being held back by operational complexity.';
+        visionTitleField.value = localStorage.getItem('visionTitle') || 'Our Vision';
+        visionDesc1Field.value = localStorage.getItem('visionDesc1') || 'To become the world\'s leading live-selling marketplace for influencer fashion brands, where creativity meets commerce in real-time.';
+        visionDesc2Field.value = localStorage.getItem('visionDesc2') || 'We\'re building a future where fashion brands are born from authentic communities, not boardrooms - where influence drives innovation and passion creates profit.';
+        teamTitleField.value = localStorage.getItem('teamTitle') || 'Fashion Industry Veterans';
+        teamSubtitleField.value = localStorage.getItem('teamSubtitle') || 'Our team combines decades of experience in fashion manufacturing, logistics, retail, and technology to support your brand\'s success.';
+        impactTitleField.value = localStorage.getItem('impactTitle') || 'Our Impact';
+        impactSubtitleField.value = localStorage.getItem('impactSubtitle') || 'Real results from real influencers who\'ve transformed their passion into profitable fashion brands.';
+        // Values section defaults (EN)
+        valuesTitleField.value = localStorage.getItem('valuesTitle') || 'Our Values';
+        valuesSubtitleField.value = localStorage.getItem('valuesSubtitle') || 'The principles that guide everything we do and drive every decision we make.';
+        value1TitleField.value = localStorage.getItem('value1Title') || 'Authenticity';
+        value1DescField.value = localStorage.getItem('value1Desc') || 'We believe in real influence, real communities, and real results. No fake metrics, no artificial engagement.';
+        value2TitleField.value = localStorage.getItem('value2Title') || 'Partnership';
+        value2DescField.value = localStorage.getItem('value2Desc') || 'Your success is our success. We work as true partners, invested in your brand\'s growth and long-term success.';
+        value3TitleField.value = localStorage.getItem('value3Title') || 'Innovation';
+        value3DescField.value = localStorage.getItem('value3Desc') || 'We\'re constantly pushing the boundaries of what\'s possible in live-commerce and influencer fashion brand building.';
+        value4TitleField.value = localStorage.getItem('value4Title') || 'Results';
+        value4DescField.value = localStorage.getItem('value4Desc') || 'Everything we do is measured by results. We\'re committed to delivering measurable success for every brand we partner with.';
+        // About CTA defaults (EN)
+        aboutCtaTitleField.value = localStorage.getItem('aboutCtaTitle') || 'Ready to Start Your Fashion Story?';
+        aboutCtaDescField.value = localStorage.getItem('aboutCtaDesc') || 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands. Your journey to fashion entrepreneurship begins now.';
+        aboutCtaButtonField.value = localStorage.getItem('aboutCtaButton') || 'Start Your Fashion Brand Today';
+        aboutCtaSubtextField.value = localStorage.getItem('aboutCtaSubtext') || 'Free consultation • No commitment • Results in 8 weeks';
+        document.getElementById('save-about').addEventListener('click', function() {
+            localStorage.setItem('aboutHeroTitle', aboutHeroTitleField.value);
+            localStorage.setItem('aboutHeroSubtitle', aboutHeroSubtitleField.value);
+            localStorage.setItem('aboutStory', aboutStoryField.value);
+            localStorage.setItem('missionTitle', missionTitleField.value);
+            localStorage.setItem('missionDesc1', missionDesc1Field.value);
+            localStorage.setItem('missionDesc2', missionDesc2Field.value);
+            localStorage.setItem('visionTitle', visionTitleField.value);
+            localStorage.setItem('visionDesc1', visionDesc1Field.value);
+            localStorage.setItem('visionDesc2', visionDesc2Field.value);
+            localStorage.setItem('teamTitle', teamTitleField.value);
+            localStorage.setItem('teamSubtitle', teamSubtitleField.value);
+            localStorage.setItem('impactTitle', impactTitleField.value);
+            localStorage.setItem('impactSubtitle', impactSubtitleField.value);
+            // Save Values section (EN)
+            localStorage.setItem('valuesTitle', valuesTitleField.value);
+            localStorage.setItem('valuesSubtitle', valuesSubtitleField.value);
+            localStorage.setItem('value1Title', value1TitleField.value);
+            localStorage.setItem('value1Desc', value1DescField.value);
+            localStorage.setItem('value2Title', value2TitleField.value);
+            localStorage.setItem('value2Desc', value2DescField.value);
+            localStorage.setItem('value3Title', value3TitleField.value);
+            localStorage.setItem('value3Desc', value3DescField.value);
+            localStorage.setItem('value4Title', value4TitleField.value);
+            localStorage.setItem('value4Desc', value4DescField.value);
+            // Save About CTA (EN)
+            localStorage.setItem('aboutCtaTitle', aboutCtaTitleField.value);
+            localStorage.setItem('aboutCtaDesc', aboutCtaDescField.value);
+            localStorage.setItem('aboutCtaButton', aboutCtaButtonField.value);
+            localStorage.setItem('aboutCtaSubtext', aboutCtaSubtextField.value);
+            const msg = document.getElementById('about-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate How It Works page fields
+        const howTitleField = document.getElementById('admin-how-title');
+        const howSubtitleField = document.getElementById('admin-how-subtitle');
+        const readyTitleField = document.getElementById('admin-ready-title');
+        // How It Works CTA fields (EN)
+        const howCtaDescField = document.getElementById('admin-how-cta-desc');
+        const howCtaFeature1TitleField = document.getElementById('admin-how-cta-feature1-title');
+        const howCtaFeature1DescField = document.getElementById('admin-how-cta-feature1-desc');
+        const howCtaFeature2TitleField = document.getElementById('admin-how-cta-feature2-title');
+        const howCtaFeature2DescField = document.getElementById('admin-how-cta-feature2-desc');
+        const howCtaFeature3TitleField = document.getElementById('admin-how-cta-feature3-title');
+        const howCtaFeature3DescField = document.getElementById('admin-how-cta-feature3-desc');
+        const howCtaButtonField = document.getElementById('admin-how-cta-button');
+        const howCtaSubtextField = document.getElementById('admin-how-cta-subtext');
+        howTitleField.value = localStorage.getItem('howTitle') || 'Experience Live-Selling';
+        howSubtitleField.value = localStorage.getItem('howSubtitle') || 'See how our live-selling platform transforms your fashion shows into sales events.';
+        readyTitleField.value = localStorage.getItem('readyTitle') || 'Ready to Start Live-Selling?';
+        // How It Works Steps (EN)
+        const howStep1TitleField = document.getElementById('how-step1-title-field');
+        const howStep1DescField = document.getElementById('how-step1-desc-field');
+        const howStep2TitleField = document.getElementById('how-step2-title-field');
+        const howStep2DescField = document.getElementById('how-step2-desc-field');
+        const howStep3TitleField = document.getElementById('how-step3-title-field');
+        const howStep3DescField = document.getElementById('how-step3-desc-field');
+        const howStep4TitleField = document.getElementById('how-step4-title-field');
+        const howStep4DescField = document.getElementById('how-step4-desc-field');
+        const howStep5TitleField = document.getElementById('how-step5-title-field');
+        const howStep5DescField = document.getElementById('how-step5-desc-field');
+        const howStep6TitleField = document.getElementById('how-step6-title-field');
+        const howStep6DescField = document.getElementById('how-step6-desc-field');
+        if (howStep1TitleField) howStep1TitleField.value = localStorage.getItem('howStep1Title') || 'Your Personal Shop Setup';
+        if (howStep1DescField) howStep1DescField.value = localStorage.getItem('howStep1Desc') || 'We create your personalized shop within the Idol Brands marketplace. No need for separate websites or complex e-commerce platforms - everything is integrated.';
+        if (howStep2TitleField) howStep2TitleField.value = localStorage.getItem('howStep2Title') || 'Live-Selling Studio Setup';
+        if (howStep2DescField) howStep2DescField.value = localStorage.getItem('howStep2Desc') || 'Professional live-streaming setup with interactive features. We provide everything you need for engaging live-selling sessions.';
+        if (howStep3TitleField) howStep3TitleField.value = localStorage.getItem('howStep3Title') || 'Product Development & Quality Control';
+        if (howStep3DescField) howStep3DescField.value = localStorage.getItem('howStep3Desc') || 'We design and develop your product line with live-selling in mind. Focus on pieces that create excitement and drive impulse purchases.';
+        if (howStep4TitleField) howStep4TitleField.value = localStorage.getItem('howStep4Title') || 'Launch & Live-Selling Events';
+        if (howStep4DescField) howStep4DescField.value = localStorage.getItem('howStep4Desc') || 'We execute comprehensive launch strategy using live-selling events. Build excitement, create urgency, and drive immediate sales.';
+        if (howStep5TitleField) howStep5TitleField.value = localStorage.getItem('howStep5Title') || 'Community Building & Growth';
+        if (howStep5DescField) howStep5DescField.value = localStorage.getItem('howStep5Desc') || 'Build loyal community around your brand through regular live interactions. Turn followers into customers and customers into brand advocates.';
+        if (howStep6TitleField) howStep6TitleField.value = localStorage.getItem('howStep6Title') || 'Scale & Optimize';
+        if (howStep6DescField) howStep6DescField.value = localStorage.getItem('howStep6Desc') || 'Continuous optimization based on live-selling performance data. Scale your success and maximize long-term growth.';
+        // How It Works CTA defaults (EN)
+        howCtaDescField.value = localStorage.getItem('howCtaDesc') || 'Join hundreds of influencers who\'ve transformed their influence into thriving fashion brands through live-selling. Your marketplace journey starts here.';
+        howCtaFeature1TitleField.value = localStorage.getItem('howCtaFeature1Title') || 'Fast Setup';
+        howCtaFeature1DescField.value = localStorage.getItem('howCtaFeature1Desc') || 'Your shop live in 1 week';
+        howCtaFeature2TitleField.value = localStorage.getItem('howCtaFeature2Title') || 'Live-Selling Ready';
+        howCtaFeature2DescField.value = localStorage.getItem('howCtaFeature2Desc') || 'Professional streaming setup';
+        howCtaFeature3TitleField.value = localStorage.getItem('howCtaFeature3Title') || 'Built-in Audience';
+        howCtaFeature3DescField.value = localStorage.getItem('howCtaFeature3Desc') || 'Access to marketplace traffic';
+        howCtaButtonField.value = localStorage.getItem('howCtaButton') || 'Create Your Live-Selling Shop';
+        howCtaSubtextField.value = localStorage.getItem('howCtaSubtext') || 'Free consultation • No setup fees • Start earning in 1 week';
+        document.getElementById('save-how').addEventListener('click', function() {
+            localStorage.setItem('howTitle', howTitleField.value);
+            localStorage.setItem('howSubtitle', howSubtitleField.value);
+            localStorage.setItem('readyTitle', readyTitleField.value);
+            // Save How It Works Steps (EN)
+            if (howStep1TitleField) localStorage.setItem('howStep1Title', howStep1TitleField.value);
+            if (howStep1DescField) localStorage.setItem('howStep1Desc', howStep1DescField.value);
+            if (howStep2TitleField) localStorage.setItem('howStep2Title', howStep2TitleField.value);
+            if (howStep2DescField) localStorage.setItem('howStep2Desc', howStep2DescField.value);
+            if (howStep3TitleField) localStorage.setItem('howStep3Title', howStep3TitleField.value);
+            if (howStep3DescField) localStorage.setItem('howStep3Desc', howStep3DescField.value);
+            if (howStep4TitleField) localStorage.setItem('howStep4Title', howStep4TitleField.value);
+            if (howStep4DescField) localStorage.setItem('howStep4Desc', howStep4DescField.value);
+            if (howStep5TitleField) localStorage.setItem('howStep5Title', howStep5TitleField.value);
+            if (howStep5DescField) localStorage.setItem('howStep5Desc', howStep5DescField.value);
+            if (howStep6TitleField) localStorage.setItem('howStep6Title', howStep6TitleField.value);
+            if (howStep6DescField) localStorage.setItem('howStep6Desc', howStep6DescField.value);
+            // Save How It Works CTA (EN)
+            localStorage.setItem('howCtaDesc', howCtaDescField.value);
+            localStorage.setItem('howCtaFeature1Title', howCtaFeature1TitleField.value);
+            localStorage.setItem('howCtaFeature1Desc', howCtaFeature1DescField.value);
+            localStorage.setItem('howCtaFeature2Title', howCtaFeature2TitleField.value);
+            localStorage.setItem('howCtaFeature2Desc', howCtaFeature2DescField.value);
+            localStorage.setItem('howCtaFeature3Title', howCtaFeature3TitleField.value);
+            localStorage.setItem('howCtaFeature3Desc', howCtaFeature3DescField.value);
+            localStorage.setItem('howCtaButton', howCtaButtonField.value);
+            localStorage.setItem('howCtaSubtext', howCtaSubtextField.value);
+            const msg = document.getElementById('how-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // Populate Success Stories page fields
+        const successTitleField = document.getElementById('admin-success-title');
+        const successSubtitleField = document.getElementById('admin-success-subtitle');
+        // Success Stories CTA fields (EN)
+        const successCtaTitleField = document.getElementById('admin-success-cta-title');
+        const successCtaDescField = document.getElementById('admin-success-cta-desc');
+        const successCtaFeature1TitleField = document.getElementById('admin-success-cta-feature1-title');
+        const successCtaFeature1DescField = document.getElementById('admin-success-cta-feature1-desc');
+        const successCtaFeature2TitleField = document.getElementById('admin-success-cta-feature2-title');
+        const successCtaFeature2DescField = document.getElementById('admin-success-cta-feature2-desc');
+        const successCtaFeature3TitleField = document.getElementById('admin-success-cta-feature3-title');
+        const successCtaFeature3DescField = document.getElementById('admin-success-cta-feature3-desc');
+        const successCtaButtonField = document.getElementById('admin-success-cta-button');
+        const successCtaSubtextField = document.getElementById('admin-success-cta-subtext');
+        successTitleField.value = localStorage.getItem('successTitle') || 'Success Stories';
+        successSubtitleField.value = localStorage.getItem('successSubtitle') || 'Real influencers, real results. See how we\'ve transformed their influence into thriving fashion brands with our proven system.';
+        // Success Stories CTA defaults (EN)
+        successCtaTitleField.value = localStorage.getItem('successCtaTitle') || 'Your Success Story Starts Here';
+        successCtaDescField.value = localStorage.getItem('successCtaDesc') || 'Join these successful influencers who transformed their passion into profitable fashion brands. Your journey to fashion entrepreneurship begins now.';
+        successCtaFeature1TitleField.value = localStorage.getItem('successCtaFeature1Title') || 'Free Consultation';
+        successCtaFeature1DescField.value = localStorage.getItem('successCtaFeature1Desc') || '60-minute strategy session';
+        successCtaFeature2TitleField.value = localStorage.getItem('successCtaFeature2Title') || 'Custom Strategy';
+        successCtaFeature2DescField.value = localStorage.getItem('successCtaFeature2Desc') || 'Tailored to your audience';
+        successCtaFeature3TitleField.value = localStorage.getItem('successCtaFeature3Title') || '8-Week Launch';
+        successCtaFeature3DescField.value = localStorage.getItem('successCtaFeature3Desc') || 'From idea to live brand';
+        successCtaButtonField.value = localStorage.getItem('successCtaButton') || 'Start Your Fashion Brand';
+        successCtaSubtextField.value = localStorage.getItem('successCtaSubtext') || 'Join 500+ successful influencers • No commitment required • Results in 8 weeks';
+        document.getElementById('save-success').addEventListener('click', function() {
+            localStorage.setItem('successTitle', successTitleField.value);
+            localStorage.setItem('successSubtitle', successSubtitleField.value);
+            // Save Success Stories CTA (EN)
+            localStorage.setItem('successCtaTitle', successCtaTitleField.value);
+            localStorage.setItem('successCtaDesc', successCtaDescField.value);
+            localStorage.setItem('successCtaFeature1Title', successCtaFeature1TitleField.value);
+            localStorage.setItem('successCtaFeature1Desc', successCtaFeature1DescField.value);
+            localStorage.setItem('successCtaFeature2Title', successCtaFeature2TitleField.value);
+            localStorage.setItem('successCtaFeature2Desc', successCtaFeature2DescField.value);
+            localStorage.setItem('successCtaFeature3Title', successCtaFeature3TitleField.value);
+            localStorage.setItem('successCtaFeature3Desc', successCtaFeature3DescField.value);
+            localStorage.setItem('successCtaButton', successCtaButtonField.value);
+            localStorage.setItem('successCtaSubtext', successCtaSubtextField.value);
+            const msg = document.getElementById('success-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // ===== ROI Calculator assumptions =====
+        // Get references to calculator inputs
+        const followersConvField = document.getElementById('calc-followers-conv');
+        const livePurchaseConvField = document.getElementById('calc-live-purchase-conv');
+        const profitMarginField = document.getElementById('calc-profit-margin');
+        const aovFashionField = document.getElementById('calc-aov-fashion');
+        const aovStreetwearField = document.getElementById('calc-aov-streetwear');
+        const aovLuxuryField = document.getElementById('calc-aov-luxury');
+        const aovAccessoriesField = document.getElementById('calc-aov-accessories');
+        const multiBasicField = document.getElementById('calc-multiplier-basic');
+        const multiSeasonalField = document.getElementById('calc-multiplier-seasonal');
+        const multiLimitedField = document.getElementById('calc-multiplier-limited');
+        const multiPremiumField = document.getElementById('calc-multiplier-premium');
+        const nicheMultiFashionField = document.getElementById('calc-niche-multiplier-fashion');
+        const nicheMultiStreetwearField = document.getElementById('calc-niche-multiplier-streetwear');
+        const nicheMultiLuxuryField = document.getElementById('calc-niche-multiplier-luxury');
+        const nicheMultiAccessoriesField = document.getElementById('calc-niche-multiplier-accessories');
+        // Set defaults from localStorage or fallback values (convert decimals to percentages for display)
+        const storedFollowersConv = parseFloat(localStorage.getItem('followersToLiveConversion'));
+        followersConvField.value = isNaN(storedFollowersConv) ? 5 : (storedFollowersConv * 100);
+        const storedLiveConv = parseFloat(localStorage.getItem('liveToPurchaseConversion'));
+        livePurchaseConvField.value = isNaN(storedLiveConv) ? 15 : (storedLiveConv * 100);
+        const storedProfit = parseFloat(localStorage.getItem('profitMargin'));
+        profitMarginField.value = isNaN(storedProfit) ? 20 : (storedProfit * 100);
+        // AOV by niche
+        let storedNicheAOV;
+        try {
+            storedNicheAOV = JSON.parse(localStorage.getItem('nicheAOV'));
+        } catch (e) {
+            storedNicheAOV = null;
+        }
+        aovFashionField.value = storedNicheAOV && storedNicheAOV.fashion ? storedNicheAOV.fashion : 100;
+        aovStreetwearField.value = storedNicheAOV && storedNicheAOV.streetwear ? storedNicheAOV.streetwear : 120;
+        aovLuxuryField.value = storedNicheAOV && storedNicheAOV.luxury ? storedNicheAOV.luxury : 250;
+        aovAccessoriesField.value = storedNicheAOV && storedNicheAOV.accessories ? storedNicheAOV.accessories : 80;
+        // Collection multipliers
+        let storedCollectionMult;
+        try {
+            storedCollectionMult = JSON.parse(localStorage.getItem('collectionMultipliers'));
+        } catch (e) {
+            storedCollectionMult = null;
+        }
+        multiBasicField.value = storedCollectionMult && storedCollectionMult.basic ? storedCollectionMult.basic : 1.0;
+        multiSeasonalField.value = storedCollectionMult && storedCollectionMult.seasonal ? storedCollectionMult.seasonal : 1.2;
+        multiLimitedField.value = storedCollectionMult && storedCollectionMult.limited ? storedCollectionMult.limited : 1.5;
+        multiPremiumField.value = storedCollectionMult && storedCollectionMult.premium ? storedCollectionMult.premium : 1.8;
+        // Niche multipliers
+        let storedNicheMult;
+        try {
+            storedNicheMult = JSON.parse(localStorage.getItem('nicheMultipliers'));
+        } catch (e) {
+            storedNicheMult = null;
+        }
+        nicheMultiFashionField.value = storedNicheMult && storedNicheMult.fashion ? storedNicheMult.fashion : 1.0;
+        nicheMultiStreetwearField.value = storedNicheMult && storedNicheMult.streetwear ? storedNicheMult.streetwear : 1.1;
+        nicheMultiLuxuryField.value = storedNicheMult && storedNicheMult.luxury ? storedNicheMult.luxury : 0.8;
+        nicheMultiAccessoriesField.value = storedNicheMult && storedNicheMult.accessories ? storedNicheMult.accessories : 1.3;
+        // Save handler
+        document.getElementById('save-calc').addEventListener('click', function() {
+            // Parse percentages into decimals
+            const followersConvDec = parseFloat(followersConvField.value) / 100;
+            const liveConvDec = parseFloat(livePurchaseConvField.value) / 100;
+            const profitMarginDec = parseFloat(profitMarginField.value) / 100;
+            if (!isNaN(followersConvDec)) localStorage.setItem('followersToLiveConversion', followersConvDec);
+            if (!isNaN(liveConvDec)) localStorage.setItem('liveToPurchaseConversion', liveConvDec);
+            if (!isNaN(profitMarginDec)) localStorage.setItem('profitMargin', profitMarginDec);
+            // Compose objects for AOV and multipliers
+            const aovObj = {
+                fashion: parseFloat(aovFashionField.value) || 100,
+                streetwear: parseFloat(aovStreetwearField.value) || 120,
+                luxury: parseFloat(aovLuxuryField.value) || 250,
+                accessories: parseFloat(aovAccessoriesField.value) || 80
+            };
+            localStorage.setItem('nicheAOV', JSON.stringify(aovObj));
+            const collectionObj = {
+                basic: parseFloat(multiBasicField.value) || 1.0,
+                seasonal: parseFloat(multiSeasonalField.value) || 1.2,
+                limited: parseFloat(multiLimitedField.value) || 1.5,
+                premium: parseFloat(multiPremiumField.value) || 1.8
+            };
+            localStorage.setItem('collectionMultipliers', JSON.stringify(collectionObj));
+            const nicheObj = {
+                fashion: parseFloat(nicheMultiFashionField.value) || 1.0,
+                streetwear: parseFloat(nicheMultiStreetwearField.value) || 1.1,
+                luxury: parseFloat(nicheMultiLuxuryField.value) || 0.8,
+                accessories: parseFloat(nicheMultiAccessoriesField.value) || 1.3
+            };
+            localStorage.setItem('nicheMultipliers', JSON.stringify(nicheObj));
+            const msg = document.getElementById('calc-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+
+        // ===== Blog management =====
+        let editingPostIndex = -1;
+        const blogTitleField = document.getElementById('blog-title');
+        const blogContentField = document.getElementById('blog-content');
+        const blogImageField = document.getElementById('blog-image');
+        const blogImagePreview = document.getElementById('blog-image-preview');
+        const blogListElem = document.getElementById('blog-posts-list');
+        const blogSaveBtn = document.getElementById('blog-save');
+
+        // When the admin selects an image file, display a preview of the uploaded image
+        blogImageField.addEventListener('change', function() {
+            blogImagePreview.innerHTML = '';
+            const file = this.files && this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Preview';
+                    img.className = 'w-full mb-2 rounded';
+                    blogImagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function loadBlogPosts() {
+            let posts = [];
+            try {
+                const stored = localStorage.getItem('blogPosts');
+                if (stored) posts = JSON.parse(stored);
+            } catch (e) {
+                posts = [];
+            }
+            // Reset input fields when reloading the list
+            blogTitleField.value = '';
+            blogContentField.value = '';
+            blogImageField.value = '';
+            blogImagePreview.innerHTML = '';
+            blogSaveBtn.textContent = 'Save Blog Post';
+            blogListElem.innerHTML = '';
+            if (!posts || posts.length === 0) {
+                const li = document.createElement('li');
+                li.className = 'text-gray-500';
+                li.textContent = 'No posts yet.';
+                blogListElem.appendChild(li);
+                return;
+            }
+            posts.forEach(function(post, index) {
+                const li = document.createElement('li');
+                li.className = 'bg-white p-4 rounded-lg shadow';
+                const title = document.createElement('h4');
+                title.className = 'font-semibold text-black';
+                title.textContent = post.title || 'Untitled';
+                const date = document.createElement('p');
+                date.className = 'text-xs text-gray-500 mb-2';
+                date.textContent = post.date || '';
+                // Optionally display a small thumbnail in the admin list
+                if (post.img) {
+                    const thumb = document.createElement('img');
+                    thumb.src = post.img;
+                    thumb.alt = post.title || '';
+                    thumb.className = 'w-full mb-2 rounded';
+                    li.appendChild(thumb);
+                }
+                const actions = document.createElement('div');
+                actions.className = 'mt-2';
+                const editBtn = document.createElement('button');
+                editBtn.textContent = 'Edit';
+                editBtn.className = 'text-blue-600 hover:underline mr-4 text-sm';
+                editBtn.addEventListener('click', function() {
+                    editingPostIndex = index;
+                    blogTitleField.value = post.title;
+                    blogContentField.value = post.content;
+                    // Clear file input when editing to avoid confusion
+                    blogImageField.value = '';
+                    blogImagePreview.innerHTML = '';
+                    if (post.img) {
+                        const imgPrev = document.createElement('img');
+                        imgPrev.src = post.img;
+                        imgPrev.alt = post.title || '';
+                        imgPrev.className = 'w-full mb-2 rounded';
+                        blogImagePreview.appendChild(imgPrev);
+                    }
+                    blogSaveBtn.textContent = 'Update Blog Post';
+                });
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'text-red-600 hover:underline text-sm';
+                deleteBtn.addEventListener('click', function() {
+                    posts.splice(index, 1);
+                    localStorage.setItem('blogPosts', JSON.stringify(posts));
+                    editingPostIndex = -1;
+                    blogTitleField.value = '';
+                    blogContentField.value = '';
+                    blogImageField.value = '';
+                    blogImagePreview.innerHTML = '';
+                    blogSaveBtn.textContent = 'Save Blog Post';
+                    loadBlogPosts();
+                });
+                actions.appendChild(editBtn);
+                actions.appendChild(deleteBtn);
+                li.appendChild(title);
+                li.appendChild(date);
+                li.appendChild(actions);
+                blogListElem.appendChild(li);
+            });
+        }
+
+        // Initial load of blog posts
+        loadBlogPosts();
+
+        blogSaveBtn.addEventListener('click', function() {
+            // Retrieve existing posts from storage
+            let posts = [];
+            try {
+                const stored = localStorage.getItem('blogPosts');
+                if (stored) posts = JSON.parse(stored);
+            } catch (e) {
+                posts = [];
+            }
+            const title = blogTitleField.value.trim();
+            const content = blogContentField.value.trim();
+            if (!title || !content) return; // require both fields
+            const now = new Date();
+            const dateStr = now.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            // Helper to finalize saving after image reading completes
+            function finalizeSave(imgDataUrl) {
+                if (editingPostIndex >= 0 && editingPostIndex < posts.length) {
+                    // update existing post, preserving old image if new one not provided
+                    const existing = posts[editingPostIndex] || {};
+                    posts[editingPostIndex] = {
+                        title: title,
+                        content: content,
+                        date: dateStr,
+                        img: imgDataUrl || existing.img || null
+                    };
+                    editingPostIndex = -1;
+                    blogSaveBtn.textContent = 'Save Blog Post';
+                } else {
+                    posts.push({
+                        title: title,
+                        content: content,
+                        date: dateStr,
+                        img: imgDataUrl || null
+                    });
+                }
+                localStorage.setItem('blogPosts', JSON.stringify(posts));
+                blogTitleField.value = '';
+                blogContentField.value = '';
+                blogImageField.value = '';
+                blogImagePreview.innerHTML = '';
+                const msg = document.getElementById('blog-save-msg');
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 2000);
+                loadBlogPosts();
+            }
+            // If a new image file is selected, read it; otherwise save immediately
+            const file = blogImageField.files && blogImageField.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgDataUrl = e.target.result;
+                    finalizeSave(imgDataUrl);
+                };
+                reader.onerror = function() {
+                    // If reading fails, proceed without image
+                    finalizeSave(null);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                finalizeSave(null);
+            }
+        });
+
+        // ===== Home page content management =====
+        const homeMarketValueField = document.getElementById('home-metric-market-value');
+        const homeMarketLabelField = document.getElementById('home-metric-market-label');
+        const homeGrowthValueField = document.getElementById('home-metric-growth-value');
+        const homeGrowthLabelField = document.getElementById('home-metric-growth-label');
+        const homeFailValueField = document.getElementById('home-metric-fail-value');
+        const homeFailLabelField = document.getElementById('home-metric-fail-label');
+        const homeTaglineField = document.getElementById('home-metric-tagline');
+        const homeStartTitleField = document.getElementById('home-start-title-field');
+        const homeStartSubtitleField = document.getElementById('home-start-subtitle-field');
+        const homeFeature1TitleField = document.getElementById('home-feature1-title-field');
+        const homeFeature1DescField = document.getElementById('home-feature1-desc-field');
+        const homeFeature2TitleField = document.getElementById('home-feature2-title-field');
+        const homeFeature2DescField = document.getElementById('home-feature2-desc-field');
+        const homeFeature3TitleField = document.getElementById('home-feature3-title-field');
+        const homeFeature3DescField = document.getElementById('home-feature3-desc-field');
+        // CTA text field for home page
+        const homeCtaField = document.getElementById('home-cta-field');
+        // Consultation text fields (below CTA)
+        const homeCtaSubtext1Field = document.getElementById('home-cta-subtext1-field');
+        const homeCtaSubtext2Field = document.getElementById('home-cta-subtext2-field');
+        const saveHomeBtn = document.getElementById('save-home');
+
+        function loadHomeSettings() {
+            // Load or set defaults
+            homeMarketValueField.value = localStorage.getItem('metricMarketSizeValue') || document.getElementById('metric-market-size-value')?.textContent || '27B';
+            homeMarketLabelField.value = localStorage.getItem('metricMarketSizeLabel') || document.getElementById('metric-market-size-label')?.textContent || 'Market Size';
+            homeGrowthValueField.value = localStorage.getItem('metricGrowthRateValue') || document.getElementById('metric-growth-rate-value')?.textContent || '39.9%';
+            homeGrowthLabelField.value = localStorage.getItem('metricGrowthRateLabel') || document.getElementById('metric-growth-rate-label')?.textContent || 'Growth Rate';
+            homeFailValueField.value = localStorage.getItem('metricFailRateValue') || document.getElementById('metric-fail-rate-value')?.textContent || '90%';
+            homeFailLabelField.value = localStorage.getItem('metricFailRateLabel') || document.getElementById('metric-fail-rate-label')?.textContent || 'Brands Fail';
+            homeTaglineField.value = localStorage.getItem('metricTagline') || document.getElementById('metric-tagline')?.textContent || 'Unlock a $27B market growing 39.9% annually—be among the 10% who succeed.';
+            homeStartTitleField.value = localStorage.getItem('homeStartTitle') || document.getElementById('home-start-title')?.textContent || 'Ready to Start Your Fashion Empire?';
+            homeStartSubtitleField.value = localStorage.getItem('homeStartSubtitle') || document.getElementById('home-start-subtitle')?.textContent || "Join hundreds of successful influencers who've transformed their influence into thriving fashion brands. Your journey starts here.";
+            homeFeature1TitleField.value = localStorage.getItem('homeFeature1Title') || document.getElementById('home-feature1-title')?.textContent || 'Fast Launch';
+            homeFeature1DescField.value = localStorage.getItem('homeFeature1Desc') || document.getElementById('home-feature1-desc')?.textContent || 'Get your brand live in just 8 weeks';
+            homeFeature2TitleField.value = localStorage.getItem('homeFeature2Title') || document.getElementById('home-feature2-title')?.textContent || 'Done For You';
+            homeFeature2DescField.value = localStorage.getItem('homeFeature2Desc') || document.getElementById('home-feature2-desc')?.textContent || 'We handle everything, you focus on content';
+            homeFeature3TitleField.value = localStorage.getItem('homeFeature3Title') || document.getElementById('home-feature3-title')?.textContent || 'Proven Results';
+            homeFeature3DescField.value = localStorage.getItem('homeFeature3Desc') || document.getElementById('home-feature3-desc')?.textContent || 'Join the 10% who succeed';
+            // CTA button text default
+            homeCtaField.value = localStorage.getItem('homeCtaText') || document.getElementById('home-cta-text')?.textContent || 'See How It Works';
+            // Consultation text defaults
+            homeCtaSubtext1Field.value = localStorage.getItem('homeCtaSubtext1') || 'Free consultation • No commitment • Results in 8 weeks';
+            homeCtaSubtext2Field.value = localStorage.getItem('homeCtaSubtext2') || 'Limited spots available • Join 500+ influencers on the waiting list';
+        }
+
+        loadHomeSettings();
+
+        saveHomeBtn.addEventListener('click', function() {
+            // Save metrics
+            localStorage.setItem('metricMarketSizeValue', homeMarketValueField.value);
+            localStorage.setItem('metricMarketSizeLabel', homeMarketLabelField.value);
+            localStorage.setItem('metricGrowthRateValue', homeGrowthValueField.value);
+            localStorage.setItem('metricGrowthRateLabel', homeGrowthLabelField.value);
+            localStorage.setItem('metricFailRateValue', homeFailValueField.value);
+            localStorage.setItem('metricFailRateLabel', homeFailLabelField.value);
+            localStorage.setItem('metricTagline', homeTaglineField.value);
+            // Save start section
+            localStorage.setItem('homeStartTitle', homeStartTitleField.value);
+            localStorage.setItem('homeStartSubtitle', homeStartSubtitleField.value);
+            // Save feature cards
+            localStorage.setItem('homeFeature1Title', homeFeature1TitleField.value);
+            localStorage.setItem('homeFeature1Desc', homeFeature1DescField.value);
+            localStorage.setItem('homeFeature2Title', homeFeature2TitleField.value);
+            localStorage.setItem('homeFeature2Desc', homeFeature2DescField.value);
+            localStorage.setItem('homeFeature3Title', homeFeature3TitleField.value);
+            localStorage.setItem('homeFeature3Desc', homeFeature3DescField.value);
+            // Save CTA text
+            if (homeCtaField) localStorage.setItem('homeCtaText', homeCtaField.value);
+            // Save consultation text
+            if (homeCtaSubtext1Field) localStorage.setItem('homeCtaSubtext1', homeCtaSubtext1Field.value);
+            if (homeCtaSubtext2Field) localStorage.setItem('homeCtaSubtext2', homeCtaSubtext2Field.value);
+            const msg = document.getElementById('home-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        });
+        // Document management
+        function loadAdminDocs() {
+            let docs = [];
+            try {
+                const stored = localStorage.getItem('documents');
+                if (stored) docs = JSON.parse(stored);
+            } catch (e) {
+                console.error('Could not parse documents', e);
+            }
+            const list = document.getElementById('admin-doc-list');
+            list.innerHTML = '';
+            if (docs && docs.length > 0) {
+                docs.forEach(function(doc, index) {
+                    const li = document.createElement('li');
+                    li.className = 'bg-white p-4 rounded-lg shadow flex justify-between items-center';
+                    const link = document.createElement('a');
+                    link.href = doc.data;
+                    link.textContent = doc.name;
+                    link.setAttribute('download', doc.name);
+                    link.className = 'text-blue-600 hover:underline';
+                    li.appendChild(link);
+                    const del = document.createElement('button');
+                    del.textContent = 'Delete';
+                    del.className = 'text-red-600 hover:underline ml-4 text-sm';
+                    del.addEventListener('click', function() {
+                        docs.splice(index, 1);
+                        localStorage.setItem('documents', JSON.stringify(docs));
+                        loadAdminDocs();
+                    });
+                    li.appendChild(del);
+                    list.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.className = 'text-gray-500';
+                li.textContent = 'No documents uploaded yet.';
+                list.appendChild(li);
+            }
+        }
+        // File upload handler
+        document.getElementById('document-upload').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+            let docs = [];
+            try {
+                const stored = localStorage.getItem('documents');
+                if (stored) docs = JSON.parse(stored);
+            } catch (e) {
+                docs = [];
+            }
+            // Process each file asynchronously
+            files.forEach(function(file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    docs.push({ name: file.name, data: evt.target.result });
+                    localStorage.setItem('documents', JSON.stringify(docs));
+                    loadAdminDocs();
+                };
+                reader.readAsDataURL(file);
+            });
+            // Reset the input value so the same file can be uploaded again if desired
+            e.target.value = '';
+        });
+        // Initial render
+        loadAdminDocs();
+
+        // -------------------------------------------------------------------
+        // User management
+        const exportUsersBtn = document.getElementById('export-users');
+        const usersMsgEl = document.getElementById('users-msg');
+        const usersTableBody = document.getElementById('users-table-body');
+
+        // Helper to generate a random alphanumeric string for passwords
+        function generateRandomString(length) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Load users from localStorage and render the table
+        function loadUsers() {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            usersTableBody.innerHTML = '';
+            if (!users || users.length === 0) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 10;
+                td.className = 'px-3 py-2 text-gray-500';
+                td.textContent = 'No users have signed up yet.';
+                tr.appendChild(td);
+                usersTableBody.appendChild(tr);
+                return;
+            }
+            users.forEach(function(user, index) {
+                const tr = document.createElement('tr');
+                // Name
+                const nameTd = document.createElement('td');
+                nameTd.className = 'px-3 py-2 whitespace-nowrap';
+                nameTd.textContent = `${user.firstName} ${user.lastName}`;
+                tr.appendChild(nameTd);
+                // Email
+                const emailTd = document.createElement('td');
+                emailTd.className = 'px-3 py-2 whitespace-nowrap';
+                emailTd.textContent = user.email;
+                tr.appendChild(emailTd);
+                // Followers
+                const folTd = document.createElement('td');
+                folTd.className = 'px-3 py-2 whitespace-nowrap';
+                folTd.textContent = user.followersRange;
+                tr.appendChild(folTd);
+                // Niche
+                const nicheTd = document.createElement('td');
+                nicheTd.className = 'px-3 py-2 whitespace-nowrap';
+                nicheTd.textContent = user.niche;
+                tr.appendChild(nicheTd);
+                // Instagram
+                const instaTd = document.createElement('td');
+                instaTd.className = 'px-3 py-2 whitespace-nowrap';
+                instaTd.textContent = user.instagram;
+                tr.appendChild(instaTd);
+                // Newsletter
+                const newsTd = document.createElement('td');
+                newsTd.className = 'px-3 py-2 whitespace-nowrap';
+                newsTd.textContent = user.newsletter ? 'Yes' : 'No';
+                tr.appendChild(newsTd);
+                // Status
+                const statusTd = document.createElement('td');
+                statusTd.className = 'px-3 py-2 whitespace-nowrap capitalize';
+                statusTd.textContent = user.status;
+                tr.appendChild(statusTd);
+                // Login input
+                const loginTd = document.createElement('td');
+                loginTd.className = 'px-3 py-2';
+                const loginInput = document.createElement('input');
+                loginInput.type = 'text';
+                loginInput.value = user.login || '';
+                loginInput.dataset.index = index;
+                loginInput.dataset.field = 'login';
+                loginInput.className = 'border border-gray-300 rounded px-2 py-1 w-28';
+                loginTd.appendChild(loginInput);
+                tr.appendChild(loginTd);
+                // Password input
+                const passTd = document.createElement('td');
+                passTd.className = 'px-3 py-2';
+                const passInput = document.createElement('input');
+                passInput.type = 'text';
+                passInput.value = user.password || '';
+                passInput.dataset.index = index;
+                passInput.dataset.field = 'password';
+                passInput.className = 'border border-gray-300 rounded px-2 py-1 w-28';
+                passTd.appendChild(passInput);
+                tr.appendChild(passTd);
+                // Actions
+                const actionsTd = document.createElement('td');
+                actionsTd.className = 'px-3 py-2 whitespace-nowrap';
+                // Activate/Deactivate button
+                const toggleBtn = document.createElement('button');
+                toggleBtn.textContent = user.status === 'inactive' ? 'Activate' : 'Deactivate';
+                toggleBtn.dataset.action = 'toggleStatus';
+                toggleBtn.dataset.index = index;
+                toggleBtn.className = 'text-blue-600 hover:underline mr-3';
+                actionsTd.appendChild(toggleBtn);
+                // Save credentials button
+                const saveBtn = document.createElement('button');
+                saveBtn.textContent = 'Save';
+                saveBtn.dataset.action = 'saveCred';
+                saveBtn.dataset.index = index;
+                saveBtn.className = 'text-green-600 hover:underline';
+                actionsTd.appendChild(saveBtn);
+
+                // Delete button
+                const delBtn = document.createElement('button');
+                delBtn.textContent = 'Delete';
+                delBtn.dataset.action = 'deleteUser';
+                delBtn.dataset.index = index;
+                delBtn.className = 'text-red-600 hover:underline ml-3';
+                actionsTd.appendChild(delBtn);
+                tr.appendChild(actionsTd);
+                usersTableBody.appendChild(tr);
+            });
+        }
+
+        // Export users to CSV for Excel.  Generates a CSV on the fly and triggers a download.
+        function exportUsersToCSV() {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            if (!users || users.length === 0) {
+                alert('There are no users to export.');
+                return;
+            }
+            let csv = 'ID,First Name,Last Name,Email,Followers Range,Niche,Instagram,Newsletter,Status,Login,Password\n';
+            users.forEach(function(u) {
+                const line = [u.id, u.firstName, u.lastName, u.email, u.followersRange, u.niche, u.instagram, u.newsletter ? 'Yes' : 'No', u.status, u.login, u.password];
+                csv += line.map(function(item) {
+                    // Escape quotes by doubling them and wrap fields containing commas or quotes in quotes
+                    const str = String(item || '').replace(/"/g, '""');
+                    return (/[,\"]/.test(str) ? '"' + str + '"' : str);
+                }).join(',') + '\n';
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'users.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Toggle user status between inactive and active.  When activating, generate login and
+        // password if not already present and simulate an email being sent.  Deactivating
+        // leaves credentials intact but marks the user as inactive.
+        function toggleUserStatus(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            const user = users[index];
+            if (!user) return;
+            if (user.status === 'inactive') {
+                // Generate login & password if missing
+                if (!user.login) user.login = 'user' + Math.floor(1000 + Math.random() * 9000);
+                if (!user.password) user.password = generateRandomString(10);
+                user.status = 'active';
+                // Simulate sending email to user with credentials
+                alert('Activation email sent to ' + user.email + ' with login: ' + user.login + ' and password: ' + user.password + '.');
+            } else {
+                // Deactivate the user (credentials remain so they could be reactivated later)
+                user.status = 'inactive';
+            }
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+            if (usersMsgEl) {
+                usersMsgEl.textContent = 'User status updated.';
+                usersMsgEl.classList.remove('hidden');
+                setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Save login and password changes for a specific user.  Takes values from the input
+        // fields in the table row.
+        function saveUserCredentials(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            const user = users[index];
+            if (!user) return;
+            // Find inputs by dataset index
+            const loginInput = usersTableBody.querySelector('input[data-field="login"][data-index="' + index + '"]');
+            const passInput = usersTableBody.querySelector('input[data-field="password"][data-index="' + index + '"]');
+            user.login = loginInput ? loginInput.value.trim() : user.login;
+            user.password = passInput ? passInput.value.trim() : user.password;
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+            if (usersMsgEl) {
+                usersMsgEl.textContent = 'User credentials updated.';
+                usersMsgEl.classList.remove('hidden');
+                setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Delete a user from the list. Removes the user at the given index
+        // and updates localStorage. Then reloads the user table and shows a success message.
+        function deleteUser(index) {
+            let users = [];
+            try {
+                const stored = localStorage.getItem('users');
+                if (stored) users = JSON.parse(stored);
+            } catch (e) {
+                users = [];
+            }
+            // Remove the user at the index if it exists
+            if (users && index >= 0 && index < users.length) {
+                users.splice(index, 1);
+                localStorage.setItem('users', JSON.stringify(users));
+                loadUsers();
+                if (usersMsgEl) {
+                    usersMsgEl.textContent = 'User removed.';
+                    usersMsgEl.classList.remove('hidden');
+                    setTimeout(() => usersMsgEl.classList.add('hidden'), 2000);
+                }
+            }
+        }
+
+        // Event delegation for user table actions
+        if (usersTableBody) {
+            usersTableBody.addEventListener('click', function(e) {
+                const action = e.target.dataset.action;
+                const index = parseInt(e.target.dataset.index, 10);
+                if (isNaN(index)) return;
+                if (action === 'toggleStatus') {
+                    toggleUserStatus(index);
+                } else if (action === 'saveCred') {
+                    saveUserCredentials(index);
+                } else if (action === 'deleteUser') {
+                    deleteUser(index);
+                }
+            });
+        }
+
+        // Bind export button
+        if (exportUsersBtn) {
+            exportUsersBtn.addEventListener('click', exportUsersToCSV);
+        }
+
+        // Initial load of users table
+        loadUsers();
+
+        // -------------------------------------------------------------------
+        // Footer settings
+        // Grab input fields for footer editing. These correspond to the fields
+        // defined in the markup above. When the admin opens the dashboard, we
+        // populate them with values from localStorage (or leave blank if none
+        // have been saved yet). On save we persist the values back to
+        // localStorage so that the front‑end footer can load them via
+        // auth.js.
+        const footerCompanyField = document.getElementById('footer-company-field');
+        const footerAddressField = document.getElementById('footer-address-field');
+        const footerRegField = document.getElementById('footer-reg-field');
+        const footerEmailField = document.getElementById('footer-email-field');
+        const footerPhoneField = document.getElementById('footer-phone-field');
+        const footerExtraField = document.getElementById('footer-extra-field');
+        const footerInstagramField = document.getElementById('footer-instagram-field');
+        const footerTikTokField = document.getElementById('footer-tiktok-field');
+        const footerYouTubeField = document.getElementById('footer-youtube-field');
+        const saveFooterBtn = document.getElementById('save-footer');
+        const footerMsg = document.getElementById('footer-save-msg');
+
+        function loadFooterSettings() {
+            if (footerCompanyField) footerCompanyField.value = localStorage.getItem('footerCompanyName') || '';
+            if (footerAddressField) footerAddressField.value = localStorage.getItem('footerAddress') || '';
+            if (footerRegField) footerRegField.value = localStorage.getItem('footerRegistration') || '';
+            if (footerEmailField) footerEmailField.value = localStorage.getItem('footerEmail') || '';
+            if (footerPhoneField) footerPhoneField.value = localStorage.getItem('footerPhone') || '';
+            if (footerExtraField) footerExtraField.value = localStorage.getItem('footerExtra') || '';
+            if (footerInstagramField) footerInstagramField.value = localStorage.getItem('footerInstagram') || '';
+            if (footerTikTokField) footerTikTokField.value = localStorage.getItem('footerTikTok') || '';
+            if (footerYouTubeField) footerYouTubeField.value = localStorage.getItem('footerYouTube') || '';
+        }
+
+        loadFooterSettings();
+
+        if (saveFooterBtn) {
+            saveFooterBtn.addEventListener('click', function() {
+                localStorage.setItem('footerCompanyName', footerCompanyField.value || '');
+                localStorage.setItem('footerAddress', footerAddressField.value || '');
+                localStorage.setItem('footerRegistration', footerRegField.value || '');
+                localStorage.setItem('footerEmail', footerEmailField.value || '');
+                localStorage.setItem('footerPhone', footerPhoneField.value || '');
+                localStorage.setItem('footerExtra', footerExtraField.value || '');
+                localStorage.setItem('footerInstagram', footerInstagramField.value || '');
+                localStorage.setItem('footerTikTok', footerTikTokField.value || '');
+                localStorage.setItem('footerYouTube', footerYouTubeField.value || '');
+                if (footerMsg) {
+                    footerMsg.classList.remove('hidden');
+                    setTimeout(() => footerMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
+
+        // ===== Initialize Quill Rich Text Editors for Legal Documents =====
+        // Initialize Quill for Terms & Conditions (EN)
+        var quillLegalTerms = new Quill('#legal-terms-field', {
+            theme: 'snow',
+            placeholder: 'Enter your Terms & Conditions content here... You can paste from Word or any other source.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Cookies Policy (EN)
+        var quillLegalCookies = new Quill('#legal-cookies-field', {
+            theme: 'snow',
+            placeholder: 'Enter your Cookies Policy content here... You can paste from Word or any other source.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Privacy/GDPR (EN)
+        var quillLegalGDPR = new Quill('#legal-gdpr-field', {
+            theme: 'snow',
+            placeholder: 'Enter your Privacy/GDPR content here... You can paste from Word or any other source.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Terms & Conditions (PL)
+        var quillLegalTermsPL = new Quill('#legal-terms-field-pl', {
+            theme: 'snow',
+            placeholder: 'Wpisz treść Regulaminu... Możesz wklejać z Worda lub innego źródła.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Cookies Policy (PL)
+        var quillLegalCookiesPL = new Quill('#legal-cookies-field-pl', {
+            theme: 'snow',
+            placeholder: 'Wpisz treść Polityki Cookies... Możesz wklejać z Worda lub innego źródła.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Initialize Quill for Privacy/RODO (PL)
+        var quillLegalGDPRPL = new Quill('#legal-gdpr-field-pl', {
+            theme: 'snow',
+            placeholder: 'Wpisz treść Polityki Prywatności/RODO... Możesz wklejać z Worda lub innego źródła.',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['link'],
+                    ['blockquote'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // -------------------------------------------------------------------
+        // Legal settings
+        // Use Quill rich text editors for legal pages. These allow the admin to
+        // define the content of the Terms & Conditions, Cookies Policy and
+        // Privacy/GDPR pages with full formatting. On load we populate them from the API.
+        const saveLegalBtn = document.getElementById('save-legal');
+        const legalMsg = document.getElementById('legal-save-msg');
+
+        async function loadLegalSettings() {
+            try {
+                const response = await fetch('/api/legal-content');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (quillLegalTerms) quillLegalTerms.root.innerHTML = data.terms || '';
+                    if (quillLegalCookies) quillLegalCookies.root.innerHTML = data.cookies || '';
+                    if (quillLegalGDPR) quillLegalGDPR.root.innerHTML = data.gdpr || '';
+                }
+            } catch (error) {
+                console.error('Error loading legal settings:', error);
+            }
+        }
+
+        loadLegalSettings();
+
+        if (saveLegalBtn) {
+            saveLegalBtn.addEventListener('click', async function() {
+                try {
+                    const legalData = {
+                        terms: quillLegalTerms ? quillLegalTerms.root.innerHTML || '' : '',
+                        cookies: quillLegalCookies ? quillLegalCookies.root.innerHTML || '' : '',
+                        gdpr: quillLegalGDPR ? quillLegalGDPR.root.innerHTML || '' : ''
+                    };
+                    
+                    // Load existing data to preserve PL content
+                    const existingResponse = await fetch('/api/legal-content');
+                    if (existingResponse.ok) {
+                        const existingData = await existingResponse.json();
+                        legalData.termsPL = existingData.termsPL || '';
+                        legalData.cookiesPL = existingData.cookiesPL || '';
+                        legalData.gdprPL = existingData.gdprPL || '';
+                    }
+                    
+                    const response = await fetch('/api/legal-content', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(legalData)
+                    });
+                    
+                    if (response.ok) {
+                        if (legalMsg) {
+                            legalMsg.classList.remove('hidden');
+                            setTimeout(() => legalMsg.classList.add('hidden'), 2000);
+                        }
+                    } else {
+                        alert('Error saving legal pages. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error saving legal settings:', error);
+                    alert('Error saving legal pages. Please try again.');
+                }
+            });
+        }
+
+        // -------------------------------------------------------------------
+        // Legal settings (PL)
+        // Use Quill rich text editors for Polish legal pages. These allow the admin to
+        // define the content with full formatting. On load we populate them from the API.
+        const saveLegalBtnPL = document.getElementById('save-legal-pl');
+        const legalMsgPL = document.getElementById('legal-save-msg-pl');
+
+        async function loadLegalSettingsPL() {
+            try {
+                const response = await fetch('/api/legal-content');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (quillLegalTermsPL) quillLegalTermsPL.root.innerHTML = data.termsPL || '';
+                    if (quillLegalCookiesPL) quillLegalCookiesPL.root.innerHTML = data.cookiesPL || '';
+                    if (quillLegalGDPRPL) quillLegalGDPRPL.root.innerHTML = data.gdprPL || '';
+                }
+            } catch (error) {
+                console.error('Error loading Polish legal settings:', error);
+            }
+        }
+
+        loadLegalSettingsPL();
+
+        if (saveLegalBtnPL) {
+            saveLegalBtnPL.addEventListener('click', async function() {
+                try {
+                    const legalData = {
+                        termsPL: quillLegalTermsPL ? quillLegalTermsPL.root.innerHTML || '' : '',
+                        cookiesPL: quillLegalCookiesPL ? quillLegalCookiesPL.root.innerHTML || '' : '',
+                        gdprPL: quillLegalGDPRPL ? quillLegalGDPRPL.root.innerHTML || '' : ''
+                    };
+                    
+                    // Load existing data to preserve EN content
+                    const existingResponse = await fetch('/api/legal-content');
+                    if (existingResponse.ok) {
+                        const existingData = await existingResponse.json();
+                        legalData.terms = existingData.terms || '';
+                        legalData.cookies = existingData.cookies || '';
+                        legalData.gdpr = existingData.gdpr || '';
+                    }
+                    
+                    const response = await fetch('/api/legal-content', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(legalData)
+                    });
+                    
+                    if (response.ok) {
+                        if (legalMsgPL) {
+                            legalMsgPL.classList.remove('hidden');
+                            setTimeout(() => legalMsgPL.classList.add('hidden'), 2000);
+                        }
+                    } else {
+                        alert('Błąd podczas zapisywania stron prawnych. Spróbuj ponownie.');
+                    }
+                } catch (error) {
+                    console.error('Error saving Polish legal settings:', error);
+                    alert('Błąd podczas zapisywania stron prawnych. Spróbuj ponownie.');
+                }
+            });
+        }
+
+        // -------------------------------------------------------------------
+        // Navigation Settings - Success Stories Toggle
+        const toggleSuccessStories = document.getElementById('toggle-success-stories');
+        const toggleSuccessStoriesLabel = document.getElementById('toggle-success-stories-label');
+        const navSettingsMsg = document.getElementById('nav-settings-save-msg');
+
+        // Load initial state from localStorage
+        function loadNavigationSettings() {
+            const isVisible = localStorage.getItem('showSuccessStories') !== 'false';
+            if (toggleSuccessStories) {
+                toggleSuccessStories.checked = isVisible;
+                updateToggleLabel(isVisible);
+            }
+        }
+
+        function updateToggleLabel(isVisible) {
+            if (toggleSuccessStoriesLabel) {
+                // Support both EN and PL - check document language
+                const lang = document.documentElement.lang || 'en';
+                if (lang === 'pl') {
+                    toggleSuccessStoriesLabel.textContent = isVisible ? 'Widoczne' : 'Ukryte';
+                } else {
+                    toggleSuccessStoriesLabel.textContent = isVisible ? 'Visible' : 'Hidden';
+                }
+            }
+        }
+
+        // Save state when toggle changes
+        if (toggleSuccessStories) {
+            toggleSuccessStories.addEventListener('change', function() {
+                const isVisible = this.checked;
+                localStorage.setItem('showSuccessStories', isVisible ? 'true' : 'false');
+                updateToggleLabel(isVisible);
+                
+                // Show confirmation message
+                if (navSettingsMsg) {
+                    navSettingsMsg.classList.remove('hidden');
+                    setTimeout(() => navSettingsMsg.classList.add('hidden'), 2000);
+                }
+            });
+        }
+
+        // Initialize navigation settings on page load
+        loadNavigationSettings();
+    });
+    </script>
+    <!-- Load separate admin management script for managing administrator accounts -->
+    <script src="admin-manage.js"></script>
+    <!-- Load Polish translation management script (handles saving and loading of PL content) -->
+    <script src="admin-pl.js"></script>
+</body>
+</html>
