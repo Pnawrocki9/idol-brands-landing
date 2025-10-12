@@ -5,8 +5,7 @@ export default {
     "./landing/**/*.html",
     "./legal/**/*.html",
     "./blog/**/*.html",
-    "./*.js",
-    "./src/**/*.js"
+    "./**/*.js"
   ],
   theme: {
     extend: {},

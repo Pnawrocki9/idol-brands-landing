@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist && node scripts/build-blog.cjs && vite build",
+    "build": "node scripts/build-blog.cjs && vite build",
     "build:blog": "node scripts/build-blog.cjs",
     "preview": "vite preview"
   },
