@@ -1,0 +1,16 @@
+{
+  "name": "Idol Brands",
+  "short_name": "Idol Brands",
+  "description": "Turn your influence into a fashion empire",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
