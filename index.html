@@ -3,10 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idol Brands 2.0 - Turn Your Influence Into a Fashion Empire</title>
+    <title>Idol Brands - Turn Your Influence Into a Fashion Empire</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Turn your influence into a fashion empire. Idol Brands handles everything from design to delivery so you can focus on your story. Join 500+ successful influencers building their fashion brands.">
+    <meta name="keywords" content="influencer fashion brand, creator fashion line, live selling, fashion marketplace, influencer merch, brand building">
+    <link rel="canonical" href="https://idolbrands.com/">
+    
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://idolbrands.com/index.html">
+    <link rel="alternate" hreflang="pl" href="https://idolbrands.com/index-pl.html">
+    <link rel="alternate" hreflang="x-default" href="https://idolbrands.com/index.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://idolbrands.com/">
+    <meta property="og:title" content="Idol Brands - Turn Your Influence Into a Fashion Empire">
+    <meta property="og:description" content="Turn your influence into a fashion empire. Idol Brands handles everything from design to delivery. Join 500+ successful influencers building their fashion brands.">
+    <meta property="og:image" content="https://idolbrands.com/images/hero-market.jpg">
+    <meta property="og:site_name" content="Idol Brands">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="pl_PL">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://idolbrands.com/">
+    <meta name="twitter:title" content="Idol Brands - Turn Your Influence Into a Fashion Empire">
+    <meta name="twitter:description" content="Turn your influence into a fashion empire. Idol Brands handles everything from design to delivery. Join 500+ successful influencers.">
+    <meta name="twitter:image" content="https://idolbrands.com/images/hero-market.jpg">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -224,8 +252,47 @@
     <script src="cookie-consent.js" defer></script>
     
     <script src="cms-sync.js"></script>
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Idol Brands",
+      "url": "https://idolbrands.com",
+      "logo": "https://idolbrands.com/images/logo.png",
+      "description": "Turn your influence into a fashion empire. Complete fashion brand building platform for influencers.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "contact@idolbrands.com"
+      },
+      "sameAs": [
+        "https://instagram.com/idolbrands",
+        "https://tiktok.com/@idolbrands",
+        "https://youtube.com/@idolbrands"
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Idol Brands",
+      "url": "https://idolbrands.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://idolbrands.com/blog.html?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded">Skip to main content</a>
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -633,8 +700,8 @@
                         <p id="home-feature2-desc" class="text-gray-600">We handle everything, you focus on content</p>
                     </div>
                     <div class="text-center">
-                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-chart-line text-white text-3xl"></i>
+                        <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4" role="img" aria-label="Proven results icon">
+                            <i class="fas fa-chart-line text-white text-3xl" aria-hidden="true"></i>
                         </div>
                         <h3 id="home-feature3-title" class="text-xl font-bold text-black mb-2">Proven Results</h3>
                         <p id="home-feature3-desc" class="text-gray-600">Join the 10% who succeed</p>
@@ -757,6 +824,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer: dynamic company & legal info loaded via auth.js -->
     <footer class="bg-black text-white mt-24">
