@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://www.idolbrands.com/</loc></url>
   <url><loc>https://www.idolbrands.com/llms.txt</loc></url>
-  <url><loc>https://www.idolbrands.com/about</loc></url>
-  <url><loc>https://www.idolbrands.com/how-it-works</loc></url>
-  <url><loc>https://www.idolbrands.com/creators</loc></url>
-  <url><loc>https://www.idolbrands.com/fans</loc></url>
-  <url><loc>https://www.idolbrands.com/liveselling</loc></url>
-  <url><loc>https://www.idolbrands.com/operations</loc></url>
-  <url><loc>https://www.idolbrands.com/revenue-share</loc></url>
-  <url><loc>https://www.idolbrands.com/agents</loc></url>
-  <url><loc>https://www.idolbrands.com/kpi-benchmarks</loc></url>
-  <url><loc>https://www.idolbrands.com/drop-playbook</loc></url>
-  <url><loc>https://www.idolbrands.com/about.md</loc></url>
-  <url><loc>https://www.idolbrands.com/how-it-works.md</loc></url>
-  <url><loc>https://www.idolbrands.com/creators.md</loc></url>
-  <url><loc>https://www.idolbrands.com/fans.md</loc></url>
-  <url><loc>https://www.idolbrands.com/liveselling.md</loc></url>
-  <url><loc>https://www.idolbrands.com/operations.md</loc></url>
-  <url><loc>https://www.idolbrands.com/revenue-share.md</loc></url>
-  <url><loc>https://www.idolbrands.com/agents.md</loc></url>
-  <url><loc>https://www.idolbrands.com/kpi-benchmarks.md</loc></url>
-  <url><loc>https://www.idolbrands.com/drop-playbook.md</loc></url>
+  <url><loc>https://www.idolbrands.com/about.html</loc></url>
+  <url><loc>https://www.idolbrands.com/about-pl.html</loc></url>
+  <url><loc>https://www.idolbrands.com/how-it-works.html</loc></url>
+  <url><loc>https://www.idolbrands.com/how-it-works-pl.html</loc></url>
+  <url><loc>https://www.idolbrands.com/success-stories.html</loc></url>
+  <url><loc>https://www.idolbrands.com/success-stories-pl.html</loc></url>
+  <url><loc>https://www.idolbrands.com/blog.html</loc></url>
+  <url><loc>https://www.idolbrands.com/blog-pl.html</loc></url>
   <url>
     <loc>https://www.idolbrands.com/blog.html</loc>
     <changefreq>weekly</changefreq>
@@ -45,33 +33,39 @@
   <!-- GENERATED BLOG POSTS START -->
   <url>
     <loc>https://www.idolbrands.com/blog/the-15m-exit-strategy-build-a-sellable-creator-brand-from-day-one-en.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.idolbrands.com/blog/how-creators-can-avoid-going-broke-before-launching-their-own-product-en.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.idolbrands.com/blog/the-billion-dollar-playbook-7-creator-brands-proving-your-fashion-empire-could-be-six-months-away-en.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.idolbrands.com/blog/strategia-na-15-milionw-jak-twrcy-mog-od-pocztku-budowa-mark-ktr-da-si-sprzeda-pl.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.idolbrands.com/blog/jak-twrcy-mog-nie-zbankrutowa-zanim-wypuszcz-wasny-produkt-pl.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.idolbrands.com/blog/klub-miliarderw-7-marek-twrcw-ktre-udowadniaj-e-twoje-modowe-imperium-moe-powsta-w-6-miesicy-pl.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <!-- GENERATED BLOG POSTS END -->
 </urlset>

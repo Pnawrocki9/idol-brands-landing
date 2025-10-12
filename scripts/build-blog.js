@@ -54,13 +54,14 @@ function generateSlug(title) {
 }
 
 // Generate static HTML for a blog post
-function generatePostHTML(post, isPolish = false) {
+function generatePostHTML(post, isPolish = false, absoluteUrl, altText) {
   const lang = isPolish ? 'pl' : 'en';
   const title = post.title || (isPolish ? 'Bez tytułu' : 'Untitled');
   const content = post.content || '';
   const date = post.date || new Date().toISOString().split('T')[0];
   const description = post.metaDescription || (content ? content.substring(0, 155).replace(/<[^>]*>/g, '') + '...' : '');
   const image = post.img || '/images/hero-market.jpg';
+  const imageAlt = altText || (isPolish ? 'Zdjęcie do artykułu' : 'Article image');
   const featuredSnippet = post.featuredSnippet || '';
   
   const homeLink = isPolish ? 'index-pl.html' : 'index.html';
@@ -104,6 +105,7 @@ function generatePostHTML(post, isPolish = false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title} | Idol Brands Blog</title>
     <meta name="description" content="${description}">
+    <link rel="canonical" href="${absoluteUrl}">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
@@ -111,6 +113,8 @@ function generatePostHTML(post, isPolish = false) {
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
     <meta property="og:image" content="${image}">
+    <meta property="og:image:alt" content="${imageAlt}">
+    <meta property="og:url" content="${absoluteUrl}">
     ${isPolish ? '<meta property="og:locale" content="pl_PL">' : ''}
     
     <!-- Twitter -->
@@ -118,6 +122,7 @@ function generatePostHTML(post, isPolish = false) {
     <meta name="twitter:title" content="${title}">
     <meta name="twitter:description" content="${description}">
     <meta name="twitter:image" content="${image}">
+    <meta name="twitter:image:alt" content="${imageAlt}">
     
     <!-- Robots meta -->
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -164,12 +169,39 @@ function generatePostHTML(post, isPolish = false) {
       "image": "${image}",
       "datePublished": "${date}",
       "dateModified": "${date}",
+      "mainEntityOfPage": "${absoluteUrl}",
       "author": { "@type": "Organization", "name": "Idol Brands" },
       "publisher": {
         "@type": "Organization",
         "name": "Idol Brands",
         "logo": { "@type": "ImageObject", "url": "https://www.idolbrands.com/images/hero-market.jpg" }
       }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.idolbrands.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.idolbrands.com/${isPolish ? 'blog-pl.html' : 'blog.html'}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "${title}",
+          "item": "${absoluteUrl}"
+        }
+      ]
     }
     </script>
 </head>
@@ -196,7 +228,7 @@ function generatePostHTML(post, isPolish = false) {
     <!-- Blog Post Content -->
     <main class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <article id="post-container" class="max-w-4xl mx-auto">
-            ${post.img ? `<img src="${post.img}" alt="${title}" class="w-full h-auto rounded-xl mb-6" loading="eager">` : ''}
+            ${post.img ? `<img src="${post.img}" alt="${imageAlt}" class="w-full h-auto rounded-xl mb-6" loading="eager">` : ''}
             ${date ? `<p class="text-sm text-gray-500 mb-2">${date}</p>` : ''}
             <h1 class="text-4xl font-display font-bold text-black mb-4">${title}</h1>
             ${featuredSnippet ? `
@@ -247,16 +279,23 @@ function generatePostHTML(post, isPolish = false) {
 // Generate all blog posts
 const generatedPosts = [];
 
+// Helper to add hreflang alternate link tags between language variants
+function appendHreflangAlternates(html, enUrl, plUrl) {
+  const linkBlock = `\n    <link rel="alternate" hreflang="en" href="${enUrl}">\n    <link rel="alternate" hreflang="pl" href="${plUrl}">\n    <link rel="alternate" hreflang="x-default" href="${enUrl}">\n`;
+  return html.replace('</head>', `${linkBlock}</head>`);
+}
+
 // English posts
 postsEN.forEach((post, index) => {
   const slug = generateSlug(post.title || `post-${index}`);
   const filename = `${slug}-en.html`;
   const filepath = path.join(blogDir, filename);
-  const html = generatePostHTML(post, false);
+  const url = `https://www.idolbrands.com/blog/${filename}`;
+  const html = generatePostHTML(post, false, url, post.imageAlt || post.imgAlt || post.title || 'Idol Brands Blog image');
   
   fs.writeFileSync(filepath, html, 'utf-8');
   generatedPosts.push({
-    url: `https://www.idolbrands.com/blog/${filename}`,
+    url,
     lang: 'en',
     slug: slug
   });
@@ -268,11 +307,12 @@ postsPL.forEach((post, index) => {
   const slug = generateSlug(post.title || `post-${index}`);
   const filename = `${slug}-pl.html`;
   const filepath = path.join(blogDir, filename);
-  const html = generatePostHTML(post, true);
+  const url = `https://www.idolbrands.com/blog/${filename}`;
+  const html = generatePostHTML(post, true, url, post.imageAlt || post.imgAlt || post.title || 'Obraz wpisu na blogu Idol Brands');
   
   fs.writeFileSync(filepath, html, 'utf-8');
   generatedPosts.push({
-    url: `https://www.idolbrands.com/blog/${filename}`,
+    url,
     lang: 'pl',
     slug: slug
   });
@@ -286,15 +326,53 @@ let sitemap = fs.readFileSync(sitemapPath, 'utf-8');
 // Remove old blog post entries if they exist
 sitemap = sitemap.replace(/  <!-- GENERATED BLOG POSTS START -->[\s\S]*?<!-- GENERATED BLOG POSTS END -->\n/g, '');
 
-// Generate new sitemap entries
-const sitemapEntries = generatedPosts.map(post => `  <url>
-    <loc>${post.url}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`).join('\n');
+// Generate new sitemap entries with hreflang alternates and lastmod
+const today = new Date().toISOString().split('T')[0];
+const slugGroups = generatedPosts.reduce((map, p) => {
+  if (!map[p.slug]) map[p.slug] = {};
+  map[p.slug][p.lang] = p.url;
+  return map;
+}, {});
+
+const sitemapEntries = Object.entries(slugGroups).map(([slug, langs]) => {
+  const enUrl = langs.en;
+  const plUrl = langs.pl;
+  if (enUrl && plUrl) {
+    return `  <url>
+    <loc>${enUrl}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}" />
+    <xhtml:link rel="alternate" hreflang="pl" href="${plUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${enUrl}" />
+  </url>
+  <url>
+    <loc>${plUrl}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}" />
+    <xhtml:link rel="alternate" hreflang="pl" href="${plUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${enUrl}" />
+  </url>`;
+  }
+  const onlyUrl = enUrl || plUrl;
+  return `  <url>
+    <loc>${onlyUrl}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+}).join('\n');
 
 // Insert before closing </urlset>
-const sitemapWithPosts = sitemap.replace(
+// Ensure namespace for xhtml links
+let sitemapDoc = sitemap;
+if (!/xmlns:xhtml/.test(sitemapDoc)) {
+  sitemapDoc = sitemapDoc.replace('<urlset', '<urlset xmlns:xhtml="http://www.w3.org/1999/xhtml"');
+}
+const sitemapWithPosts = sitemapDoc.replace(
   '</urlset>',
   `  <!-- GENERATED BLOG POSTS START -->
 ${sitemapEntries}
@@ -305,7 +383,7 @@ ${sitemapEntries}
 fs.writeFileSync(sitemapPath, sitemapWithPosts, 'utf-8');
 console.log(`✓ Updated sitemap.xml with ${generatedPosts.length} blog posts`);
 
-// Generate redirects for SEO-friendly URLs
+// Generate redirects for SEO-friendly URLs and hreflang reciprocity
 const redirectsPath = path.join(__dirname, '..', '_redirects');
 let redirects = '';
 
@@ -327,6 +405,15 @@ const newRedirects = [
     const slug = generateSlug(post.title || `post-${index}`);
     return `/blog/${slug}-pl /blog/${slug}-pl.html 200`;
   }),
+  // Language alternates
+  ...postsEN.map((post, index) => {
+    const slug = generateSlug(post.title || `post-${index}`);
+    return `/blog/${slug}-pl.html /blog/${slug}-pl.html 200`;
+  }),
+  ...postsPL.map((post, index) => {
+    const slug = generateSlug(post.title || `post-${index}`);
+    return `/blog/${slug}-en.html /blog/${slug}-en.html 200`;
+  }),
   '# Keep old query-param URLs working',
   ...postsEN.map((post, index) => {
     const slug = generateSlug(post.title || `post-${index}`);
@@ -342,6 +429,76 @@ const newRedirects = [
 redirects = newRedirects + '\n' + redirects;
 fs.writeFileSync(redirectsPath, redirects, 'utf-8');
 console.log('✓ Updated _redirects with SEO-friendly URLs');
+
+// Post-process to inject hreflang alternates for matching EN/PL pairs
+try {
+  const enFiles = postsEN.map((post, i) => ({ slug: generateSlug(post.title || `post-${i}`), file: path.join(blogDir, `${generateSlug(post.title || `post-${i}`)}-en.html`) }));
+  const plFiles = postsPL.map((post, i) => ({ slug: generateSlug(post.title || `post-${i}`), file: path.join(blogDir, `${generateSlug(post.title || `post-${i}`)}-pl.html`) }));
+  const slugToPl = new Map(plFiles.map(x => [x.slug, x.file]));
+  const slugToEn = new Map(enFiles.map(x => [x.slug, x.file]));
+  for (const { slug, file } of enFiles) {
+    const plFile = slugToPl.get(slug);
+    if (plFile && fs.existsSync(file) && fs.existsSync(plFile)) {
+      const enUrl = `https://www.idolbrands.com/blog/${slug}-en.html`;
+      const plUrl = `https://www.idolbrands.com/blog/${slug}-pl.html`;
+      const enHtml = fs.readFileSync(file, 'utf-8');
+      const plHtml = fs.readFileSync(plFile, 'utf-8');
+      fs.writeFileSync(file, appendHreflangAlternates(enHtml, enUrl, plUrl), 'utf-8');
+      fs.writeFileSync(plFile, appendHreflangAlternates(plHtml, enUrl, plUrl), 'utf-8');
+    }
+  }
+  console.log('✓ Injected hreflang alternates for EN/PL post pairs');
+} catch (e) {
+  console.warn('⚠️ Failed to inject hreflang alternates', e);
+}
+
+// Generate RSS feed (Atom-compatible)
+try {
+  const items = [];
+  postsEN.forEach((post, i) => {
+    const slug = generateSlug(post.title || `post-${i}`);
+    const url = `https://idolbrands.com/blog/${slug}-en.html`;
+    items.push({
+      title: post.title || 'Untitled',
+      url,
+      description: (post.metaDescription || '').toString(),
+      date: post.date || today
+    });
+  });
+  postsPL.forEach((post, i) => {
+    const slug = generateSlug(post.title || `post-${i}`);
+    const url = `https://idolbrands.com/blog/${slug}-pl.html`;
+    items.push({
+      title: post.title || 'Bez tytułu',
+      url,
+      description: (post.metaDescription || '').toString(),
+      date: post.date || today
+    });
+  });
+  items.sort((a,b) => (b.date || '').localeCompare(a.date || ''));
+  const latest = items.slice(0, 30);
+  const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Idol Brands Blog</title>
+    <link>https://idolbrands.com/blog.html</link>
+    <description>Fashion industry insights and creator brand building tips</description>
+    <language>en</language>
+    ${latest.map(it => `
+    <item>
+      <title>${it.title.replace(/&/g,'&amp;')}</title>
+      <link>${it.url}</link>
+      <guid>${it.url}</guid>
+      <pubDate>${new Date(it.date).toUTCString()}</pubDate>
+      <description><![CDATA[${it.description}]]></description>
+    </item>`).join('')}
+  </channel>
+</rss>`;
+  fs.writeFileSync(path.join(__dirname, '..', 'feed.xml'), feed, 'utf-8');
+  console.log('✓ Generated RSS feed.xml');
+} catch (e) {
+  console.warn('⚠️ Failed to generate feed.xml', e);
+}
 
 console.log('\n✅ Blog static generation complete!');
 console.log(`   Generated ${postsEN.length + postsPL.length} static HTML pages`);

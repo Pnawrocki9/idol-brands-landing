@@ -2,3 +2,5 @@ User-agent: *
 Disallow: /*.md$
 Allow: /
 Sitemap: https://www.idolbrands.com/sitemap.xml
+# Hints for faster discovery
+Host: idolbrands.com
