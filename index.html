@@ -37,8 +37,8 @@
     <meta name="twitter:image" content="https://idolbrands.com/images/hero-market.jpg">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -1562,21 +1562,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Error handling for Chrome extension compatibility -->
     <script>
-    // Suppress Chrome extension runtime errors
-    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.lastError) {
-        // Clear the last error to prevent console spam
-        chrome.runtime.lastError;
-    }
-    
-    // Handle unhandled promise rejections gracefully
+    // Handle unhandled promise rejections and runtime errors gracefully
     window.addEventListener('unhandledrejection', function(event) {
         // Suppress errors related to Chrome extensions
         if (event.reason && event.reason.message && 
             (event.reason.message.includes('Extension context invalidated') ||
-             event.reason.message.includes('message port closed'))) {
+             event.reason.message.includes('message port closed') ||
+             event.reason.message.includes('The message port closed before a response was received'))) {
             event.preventDefault();
+            return;
         }
     });
+    
+    // Override console.error to filter Chrome extension errors
+    const originalError = console.error;
+    console.error = function() {
+        const args = Array.from(arguments);
+        const message = args.join(' ');
+        
+        // Filter out Chrome extension-related errors
+        if (message.includes('runtime.lastError') || 
+            message.includes('message port closed') ||
+            message.includes('Extension context invalidated')) {
+            return;
+        }
+        
+        originalError.apply(console, args);
+    };
     </script>
 
 </body>
