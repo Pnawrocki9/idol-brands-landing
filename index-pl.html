@@ -916,27 +916,38 @@
             }
         });
 
-        // Initialize Vanta.js background
-        VANTA.BIRDS({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            backgroundColor: 0xf8f9fa,
-            color1: 0x000000,
-            color2: 0x333333,
-            birdSize: 1.20,
-            wingSpan: 20.00,
-            speedLimit: 4.00,
-            separation: 20.00,
-            alignment: 20.00,
-            cohesion: 20.00,
-            quantity: 3.00
-        });
+        // Initialize Vanta.js background - wait for library to load
+        function initVanta() {
+            if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined') {
+                VANTA.BIRDS({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    backgroundColor: 0xf8f9fa,
+                    color1: 0x000000,
+                    color2: 0x333333,
+                    birdSize: 1.20,
+                    wingSpan: 20.00,
+                    speedLimit: 4.00,
+                    separation: 20.00,
+                    alignment: 20.00,
+                    cohesion: 20.00,
+                    quantity: 3.00
+                });
+            }
+        }
+        
+        // Wait for window load to ensure all deferred scripts are loaded
+        if (document.readyState === 'complete') {
+            initVanta();
+        } else {
+            window.addEventListener('load', initVanta);
+        }
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
