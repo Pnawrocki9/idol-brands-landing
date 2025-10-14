@@ -1319,6 +1319,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
     import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getAnalytics, logEvent, setAnalyticsCollectionEnabled } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
 
     const firebaseConfig = {
       apiKey: "AIzaSyDvFEcH-YXhKb7gFkSnBobaj4B3b7-_VqY",
@@ -1332,10 +1333,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+    
+    // Disable analytics by default until consent is given
+    setAnalyticsCollectionEnabled(analytics, false);
+    
+    // Listen for cookie consent changes
+    document.addEventListener('cookieConsentUpdated', function(event) {
+        const consent = event.detail;
+        if (consent && consent.analytics) {
+            // Enable Firebase Analytics when user consents
+            setAnalyticsCollectionEnabled(analytics, true);
+            logEvent(analytics, 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_path: window.location.pathname
+            });
+            console.log('Firebase Analytics enabled with consent');
+        } else {
+            // Disable if consent is withdrawn
+            setAnalyticsCollectionEnabled(analytics, false);
+            console.log('Firebase Analytics disabled');
+        }
+    });
     
     window.firestoreDB = db;
     window.firestoreAddDoc = addDoc;
     window.firestoreCollection = collection;
+    window.firebaseAnalytics = analytics;
     </script>
 
     <!-- Consent validation script for waiting list form -->

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Firebase Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+        <h1 class="text-3xl font-bold mb-6">🧪 Test Firebase Analytics</h1>
+        
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-3">Status Konfiguracji</h2>
+            <div id="status-checks" class="space-y-2">
+                <div class="flex items-center gap-2">
+                    <span id="check-gtag" class="text-2xl">⏳</span>
+                    <span>Google Tag (gtag.js) załadowany</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="check-firebase" class="text-2xl">⏳</span>
+                    <span>Firebase Analytics zainicjalizowany</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="check-consent" class="text-2xl">⏳</span>
+                    <span>Cookie Consent dostępny</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="check-consent-given" class="text-2xl">⏳</span>
+                    <span>Zgoda na Analytics udzielona</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-3">Zarządzanie Zgodą</h2>
+            <div class="flex gap-4">
+                <button id="accept-btn" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+                    ✅ Zaakceptuj Analytics
+                </button>
+                <button id="reject-btn" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700">
+                    ❌ Odrzuć Analytics
+                </button>
+                <button id="clear-btn" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">
+                    🗑️ Wyczyść Cookies
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-3">Testuj Zdarzenia</h2>
+            <div class="flex gap-4 mb-4">
+                <button id="test-pageview" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                    📄 Wyślij Page View
+                </button>
+                <button id="test-custom" class="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700">
+                    🎯 Wyślij Custom Event
+                </button>
+            </div>
+            <div class="bg-gray-100 p-4 rounded">
+                <h3 class="font-semibold mb-2">Sprawdź w DevTools:</h3>
+                <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Network → szukaj żądań do <code>google-analytics.com/g/collect</code></li>
+                    <li>Network → szukaj żądań do <code>firebaselogging-pa.googleapis.com</code></li>
+                    <li>Console → sprawdź logi z Firebase Analytics</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-3">Logi</h2>
+            <div id="logs" class="bg-black text-green-400 p-4 rounded font-mono text-sm h-64 overflow-y-auto">
+                <div>Czekam na akcje...</div>
+            </div>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded p-4">
+            <h3 class="font-semibold mb-2">📝 Jak przetestować na głównej stronie:</h3>
+            <ol class="list-decimal list-inside space-y-1 text-sm">
+                <li>Otwórz <a href="index.html" class="text-blue-600 underline">index.html</a> w nowej karcie</li>
+                <li>Otwórz DevTools (F12) → Network</li>
+                <li>Zaakceptuj cookies</li>
+                <li>Szukaj żądań do Google Analytics</li>
+                <li>Sprawdź Google Analytics Real-Time po ~10 minutach</li>
+            </ol>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAnalytics, logEvent, setAnalyticsCollectionEnabled } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvFEcH-YXhKb7gFkSnBobaj4B3b7-_VqY",
+            authDomain: "idol-brands.firebaseapp.com",
+            projectId: "idol-brands",
+            storageBucket: "idol-brands.firebasestorage.app",
+            messagingSenderId: "764493539637",
+            appId: "1:764493539637:web:e9a6a71ce9b36d73f1c47c",
+            measurementId: "G-V3K8KE25ZW"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        
+        // Start with analytics disabled
+        setAnalyticsCollectionEnabled(analytics, false);
+
+        // Logging function
+        function addLog(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                info: 'text-green-400',
+                success: 'text-lime-400',
+                warning: 'text-yellow-400',
+                error: 'text-red-400'
+            };
+            logs.innerHTML += `<div class="${colors[type]}">[${timestamp}] ${message}</div>`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // Check status
+        function checkStatus() {
+            // Check gtag
+            const gtagCheck = document.getElementById('check-gtag');
+            if (typeof window.gtag === 'function') {
+                gtagCheck.textContent = '✅';
+                addLog('gtag.js jest dostępny', 'success');
+            } else {
+                gtagCheck.textContent = '❌';
+                addLog('gtag.js NIE jest dostępny', 'error');
+            }
+
+            // Check Firebase
+            const firebaseCheck = document.getElementById('check-firebase');
+            if (analytics) {
+                firebaseCheck.textContent = '✅';
+                addLog('Firebase Analytics zainicjalizowany', 'success');
+            } else {
+                firebaseCheck.textContent = '❌';
+                addLog('Firebase Analytics NIE zainicjalizowany', 'error');
+            }
+
+            // Check cookie consent
+            const consentCheck = document.getElementById('check-consent');
+            const cookies = document.cookie.split(';');
+            const consentCookie = cookies.find(c => c.includes('idol_brands_cookie_consent'));
+            
+            if (consentCookie) {
+                consentCheck.textContent = '✅';
+                const consent = JSON.parse(decodeURIComponent(consentCookie.split('=')[1]));
+                addLog('Cookie consent znaleziony: ' + JSON.stringify(consent), 'info');
+                
+                // Check if analytics consent is given
+                const consentGivenCheck = document.getElementById('check-consent-given');
+                if (consent.analytics) {
+                    consentGivenCheck.textContent = '✅';
+                    addLog('Zgoda na Analytics UDZIELONA', 'success');
+                    // Enable analytics if consent is given
+                    setAnalyticsCollectionEnabled(analytics, true);
+                } else {
+                    consentGivenCheck.textContent = '❌';
+                    addLog('Zgoda na Analytics NIEUDZIELONA', 'warning');
+                }
+            } else {
+                consentCheck.textContent = '⚠️';
+                addLog('Brak cookie consent', 'warning');
+                document.getElementById('check-consent-given').textContent = '⚠️';
+            }
+        }
+
+        // Accept analytics
+        document.getElementById('accept-btn').addEventListener('click', () => {
+            const consent = {
+                necessary: true,
+                analytics: true,
+                marketing: false,
+                timestamp: Date.now()
+            };
+            
+            // Save to cookie
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 365);
+            document.cookie = `idol_brands_cookie_consent=${JSON.stringify(consent)};expires=${expiryDate.toUTCString()};path=/;SameSite=Lax`;
+            
+            // Enable analytics
+            setAnalyticsCollectionEnabled(analytics, true);
+            
+            // Update gtag consent mode
+            if (typeof window.gtag === 'function') {
+                window.gtag('consent', 'update', { 'analytics_storage': 'granted' });
+            }
+            
+            addLog('Analytics WŁĄCZONY (zgoda udzielona)', 'success');
+            checkStatus();
+            
+            // Send page view
+            logEvent(analytics, 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_path: window.location.pathname
+            });
+            addLog('Wysłano zdarzenie page_view', 'success');
+        });
+
+        // Reject analytics
+        document.getElementById('reject-btn').addEventListener('click', () => {
+            const consent = {
+                necessary: true,
+                analytics: false,
+                marketing: false,
+                timestamp: Date.now()
+            };
+            
+            // Save to cookie
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 365);
+            document.cookie = `idol_brands_cookie_consent=${JSON.stringify(consent)};expires=${expiryDate.toUTCString()};path=/;SameSite=Lax`;
+            
+            // Disable analytics
+            setAnalyticsCollectionEnabled(analytics, false);
+            
+            // Update gtag consent mode
+            if (typeof window.gtag === 'function') {
+                window.gtag('consent', 'update', { 'analytics_storage': 'denied' });
+            }
+            
+            addLog('Analytics WYŁĄCZONY (zgoda odrzucona)', 'warning');
+            checkStatus();
+        });
+
+        // Clear cookies
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            document.cookie = 'idol_brands_cookie_consent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            addLog('Cookies wyczyszczone', 'info');
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        });
+
+        // Test page view
+        document.getElementById('test-pageview').addEventListener('click', () => {
+            try {
+                logEvent(analytics, 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
+                addLog('✅ Wysłano zdarzenie: page_view', 'success');
+                addLog('Sprawdź Network → firebaselogging-pa.googleapis.com', 'info');
+            } catch (error) {
+                addLog('❌ Błąd: ' + error.message, 'error');
+            }
+        });
+
+        // Test custom event
+        document.getElementById('test-custom').addEventListener('click', () => {
+            try {
+                logEvent(analytics, 'test_custom_event', {
+                    test_parameter: 'test_value',
+                    timestamp: Date.now()
+                });
+                addLog('✅ Wysłano zdarzenie: test_custom_event', 'success');
+                addLog('Sprawdź Network → firebaselogging-pa.googleapis.com', 'info');
+            } catch (error) {
+                addLog('❌ Błąd: ' + error.message, 'error');
+            }
+        });
+
+        // Initial check
+        setTimeout(checkStatus, 500);
+    </script>
+</body>
+</html>
