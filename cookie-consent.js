@@ -323,35 +323,24 @@ class CookieConsent {
     }
 
     loadGoogleAnalytics() {
-        // Load GA4 only once and only when needed
-        if (this.analyticsLoaded || typeof window.gtag === 'function') {
-            this.analyticsLoaded = true;
-            return;
-        }
-
-        // Prepare dataLayer and gtag function
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function gtag(){ window.dataLayer.push(arguments); };
-
-        // Insert GA4 script tag
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${this.gaMeasurementId}`;
-        document.head.appendChild(script);
-
-        // Initialise GA4 and send config (page_view)
-        window.gtag('js', new Date());
-        window.gtag('config', this.gaMeasurementId);
-
+        // GA4 is now loaded early with consent mode denied
+        // This function is kept for backward compatibility but does nothing
+        // since GA is already loaded in the page head
         this.analyticsLoaded = true;
     }
 
     enableAnalytics() {
-        // Example: Enable Google Analytics
-        // Load GA if not present and update consent state
-        this.loadGoogleAnalytics();
+        // Update consent mode to granted
         if (typeof window.gtag === 'function') {
-            window.gtag('consent', 'update', { 'analytics_storage': 'granted' });
+            window.gtag('consent', 'update', { 
+                'analytics_storage': 'granted'
+            });
+            
+            // Send page_view event now that consent is granted
+            window.gtag('event', 'page_view', {
+                'page_location': window.location.href,
+                'page_title': document.title
+            });
         }
         console.log('Analytics cookies enabled');
     }
