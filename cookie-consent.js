@@ -8,6 +8,10 @@ class CookieConsent {
     constructor() {
         this.cookieName = 'idol_brands_cookie_consent';
         this.cookieExpiry = 365; // days
+        // Google Analytics 4 measurement ID
+        // Note: kept here so we don't have to duplicate inline tags on every page
+        this.gaMeasurementId = 'G-V3K8KE25ZW';
+        this.analyticsLoaded = false;
         this.translations = {
             en: {
                 title: 'Cookie Consent',
@@ -318,15 +322,45 @@ class CookieConsent {
         document.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
     }
 
+    loadGoogleAnalytics() {
+        // Load GA4 only once and only when needed
+        if (this.analyticsLoaded || typeof window.gtag === 'function') {
+            this.analyticsLoaded = true;
+            return;
+        }
+
+        // Prepare dataLayer and gtag function
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+
+        // Insert GA4 script tag
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${this.gaMeasurementId}`;
+        document.head.appendChild(script);
+
+        // Initialise GA4 and send config (page_view)
+        window.gtag('js', new Date());
+        window.gtag('config', this.gaMeasurementId);
+
+        this.analyticsLoaded = true;
+    }
+
     enableAnalytics() {
         // Example: Enable Google Analytics
-        // window.gtag && window.gtag('consent', 'update', {'analytics_storage': 'granted'});
+        // Load GA if not present and update consent state
+        this.loadGoogleAnalytics();
+        if (typeof window.gtag === 'function') {
+            window.gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        }
         console.log('Analytics cookies enabled');
     }
 
     disableAnalytics() {
         // Example: Disable Google Analytics
-        // window.gtag && window.gtag('consent', 'update', {'analytics_storage': 'denied'});
+        if (typeof window.gtag === 'function') {
+            window.gtag('consent', 'update', { 'analytics_storage': 'denied' });
+        }
         console.log('Analytics cookies disabled');
     }
 
