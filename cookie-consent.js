@@ -318,8 +318,13 @@ class CookieConsent {
             this.disableMarketing();
         }
         
-        // Dispatch event for other scripts to listen to
+        // Dispatch event for other scripts to listen to (including Firebase)
         document.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
+        
+        // Also dispatch immediately on window for late-loading scripts
+        setTimeout(() => {
+            document.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
+        }, 100);
     }
 
     loadGoogleAnalytics() {
