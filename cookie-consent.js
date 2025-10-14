@@ -319,26 +319,46 @@ class CookieConsent {
     }
 
     enableAnalytics() {
-        // Example: Enable Google Analytics
-        // window.gtag && window.gtag('consent', 'update', {'analytics_storage': 'granted'});
+        // Enable Google Analytics with Consent Mode
+        if (window.gtag) {
+            window.gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+            });
+        }
         console.log('Analytics cookies enabled');
     }
 
     disableAnalytics() {
-        // Example: Disable Google Analytics
-        // window.gtag && window.gtag('consent', 'update', {'analytics_storage': 'denied'});
+        // Disable Google Analytics with Consent Mode
+        if (window.gtag) {
+            window.gtag('consent', 'update', {
+                'analytics_storage': 'denied'
+            });
+        }
         console.log('Analytics cookies disabled');
     }
 
     enableMarketing() {
-        // Example: Enable marketing pixels
-        // window.gtag && window.gtag('consent', 'update', {'ad_storage': 'granted'});
+        // Enable marketing pixels with Consent Mode
+        if (window.gtag) {
+            window.gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted'
+            });
+        }
         console.log('Marketing cookies enabled');
     }
 
     disableMarketing() {
-        // Example: Disable marketing pixels
-        // window.gtag && window.gtag('consent', 'update', {'ad_storage': 'denied'});
+        // Disable marketing pixels with Consent Mode
+        if (window.gtag) {
+            window.gtag('consent', 'update', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied'
+            });
+        }
         console.log('Marketing cookies disabled');
     }
 
