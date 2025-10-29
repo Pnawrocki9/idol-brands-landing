@@ -868,18 +868,29 @@
       "referrer": "direct",
       "ip": "2a02:a317:21ee:4080:15d6:1b84:8a3b:5196, 63.178.178.160",
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+    },
+    {
+      "necessary": true,
+      "analytics": true,
+      "marketing": true,
+      "language": "pl",
+      "timestamp": 1761738220915,
+      "url": "https://idolbrands.com/how-it-works-pl",
+      "referrer": "direct",
+      "ip": "80.238.97.62, 3.120.21.226",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 OPR/122.0.0.0"
     }
   ],
   "stats": {
-    "total": 79,
-    "accepted": 76,
+    "total": 80,
+    "accepted": 77,
     "rejected": 3,
     "customized": 0,
-    "analytics": 76,
-    "marketing": 76,
+    "analytics": 77,
+    "marketing": 77,
     "byLanguage": {
       "en": 73,
-      "pl": 6
+      "pl": 7
     },
     "byDate": {
       "2025-10-05": 15,
@@ -896,7 +907,7 @@
       "2025-10-21": 1,
       "2025-10-23": 2,
       "2025-10-28": 1,
-      "2025-10-29": 1
+      "2025-10-29": 2
     }
   }
 }
