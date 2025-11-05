@@ -934,17 +934,28 @@
       "referrer": "https://www.linkedin.com/",
       "ip": "46.112.205.3, 3.72.28.210",
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+    },
+    {
+      "necessary": true,
+      "analytics": false,
+      "marketing": false,
+      "language": "en",
+      "timestamp": 1762363938136,
+      "url": "https://idolbrands.com/how-it-works",
+      "referrer": "direct",
+      "ip": "185.129.32.2, 63.177.138.6",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1"
     }
   ],
   "stats": {
-    "total": 85,
+    "total": 86,
     "accepted": 82,
-    "rejected": 3,
+    "rejected": 4,
     "customized": 0,
     "analytics": 82,
     "marketing": 82,
     "byLanguage": {
-      "en": 78,
+      "en": 79,
       "pl": 7
     },
     "byDate": {
@@ -966,7 +977,7 @@
       "2025-10-30": 1,
       "2025-10-31": 1,
       "2025-11-02": 1,
-      "2025-11-05": 1
+      "2025-11-05": 2
     }
   }
 }
