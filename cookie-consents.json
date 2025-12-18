@@ -1242,17 +1242,28 @@
       "referrer": "https://www.google.com/",
       "ip": "2a00:f41:1c2a:d92c:307e:b8ff:fed5:75fb, 3.126.24.127",
       "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "necessary": true,
+      "analytics": true,
+      "marketing": true,
+      "language": "en",
+      "timestamp": 1766020933338,
+      "url": "https://idolbrands.com/index.html",
+      "referrer": "https://www.google.com/",
+      "ip": "45.58.143.194, 35.159.104.41",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36"
     }
   ],
   "stats": {
-    "total": 113,
-    "accepted": 104,
+    "total": 114,
+    "accepted": 105,
     "rejected": 9,
     "customized": 0,
-    "analytics": 104,
-    "marketing": 104,
+    "analytics": 105,
+    "marketing": 105,
     "byLanguage": {
-      "en": 101,
+      "en": 102,
       "pl": 12
     },
     "byDate": {
@@ -1285,7 +1296,8 @@
       "2025-11-24": 6,
       "2025-11-28": 1,
       "2025-12-08": 1,
-      "2025-12-16": 1
+      "2025-12-16": 1,
+      "2025-12-18": 1
     }
   }
 }
