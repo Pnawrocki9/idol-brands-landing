@@ -1286,18 +1286,29 @@
       "referrer": "direct",
       "ip": "2a09:bac3:4fb8:2f0::4b:a8, 63.181.186.142",
       "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.1 Mobile/15E148 Safari/604.1"
+    },
+    {
+      "necessary": true,
+      "analytics": true,
+      "marketing": true,
+      "language": "pl",
+      "timestamp": 1768696293369,
+      "url": "https://idolbrands.com/login-pl.html",
+      "referrer": "https://idolbrands.com/your-documents-pl?gtm_latency=1",
+      "ip": "66.249.87.10",
+      "userAgent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.7499.192 Mobile Safari/537.36"
     }
   ],
   "stats": {
-    "total": 117,
-    "accepted": 108,
+    "total": 118,
+    "accepted": 109,
     "rejected": 9,
     "customized": 0,
-    "analytics": 108,
-    "marketing": 108,
+    "analytics": 109,
+    "marketing": 109,
     "byLanguage": {
       "en": 104,
-      "pl": 13
+      "pl": 14
     },
     "byDate": {
       "2025-10-05": 15,
@@ -1332,7 +1343,8 @@
       "2025-12-16": 1,
       "2025-12-18": 2,
       "2025-12-23": 1,
-      "2025-12-28": 1
+      "2025-12-28": 1,
+      "2026-01-18": 1
     }
   }
 }
